@@ -1,15 +1,75 @@
 {
  "schema": 1,
- "updated": "2026-10-11T14:28:15Z",
+ "updated": "2026-10-11T15:04:01Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
-   "run_id": 38146972943,
+   "run_id": 38149613592,
+   "pr": 1268,
+   "commit": "2fb568383dc992d1a320ab2df8af082e5efdfa10",
+   "branch": "codex/ktrace-target-providers",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592",
+   "created_at": "2026-10-11T15:02:17Z",
+   "updated_at": "2026-10-11T15:02:53Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38149381697,
+   "pr": 1268,
+   "commit": "ec7e6def09c80cb63c59b77c2ab409ca87e551d3",
+   "branch": "codex/ktrace-target-providers",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149381697",
+   "created_at": "2026-10-11T14:58:59Z",
+   "updated_at": "2026-10-11T15:02:34Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38147840935,
+   "pr": 1267,
+   "commit": "5e37c8339e2c3fd44820268d3e50cad99451e6d0",
+   "branch": "qiangpan/sageattn2_2",
+   "event": "pull_request",
+   "title": "[Runtime] Report GPU last-level cache size from KFD",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38147840935",
+   "created_at": "2026-10-11T14:36:00Z",
+   "updated_at": "2026-10-11T14:36:00Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
+  {
+   "run_id": 38147837059,
    "pr": 1266,
+   "commit": "8a7c45acfbf3ec423e0cdd8b51c68762be05da1a",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38147837059",
+   "created_at": "2026-10-11T14:35:57Z",
+   "updated_at": "2026-10-11T14:35:57Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
+  {
+   "run_id": 38146972943,
+   "pr": null,
    "commit": "cc5b93c6c8418bfca9b6e2b38fc8a3e6a8f4631b",
    "branch": "qiangpan/sageattn2_1",
    "event": "pull_request",
-   "title": "[Dialect][ROCDL] Add RDNA4 (gfx1200/gfx1201) integer WMMA and an INT4 GEMM",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
    "status": "completed",
    "conclusion": "action_required",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146972943",
@@ -25,13 +85,41 @@
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532",
    "created_at": "2026-10-11T14:13:14Z",
-   "updated_at": "2026-10-11T14:15:11Z",
+   "updated_at": "2026-10-11T14:36:20Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T14:36:45Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532/job/114494889018"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-11T14:36:36Z",
+     "completed_at": "2026-10-11T14:54:59Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532/job/114494889037"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-11T14:36:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532/job/114494889068"
+    }
+   ]
   },
   {
    "run_id": 38146269326,
@@ -1615,150 +1703,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38044066744/job/114194711059"
     }
    ]
-  },
-  {
-   "run_id": 38043154105,
-   "pr": 1258,
-   "commit": "76139bfbb3d46c3fa4bd9230432accaa5c3ee4a6",
-   "branch": "xudong/fix-zip2by-guide",
-   "event": "pull_request",
-   "title": "[fix] Build the zipped_divide guide from the tiler shape",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38043154105",
-   "created_at": "2026-10-10T09:56:21Z",
-   "updated_at": "2026-10-10T11:23:05Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T10:41:07Z",
-     "completed_at": "2026-10-10T11:22:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38043154105/job/114191384429"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T10:21:13Z",
-     "completed_at": "2026-10-10T11:23:05Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38043154105/job/114191384458"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T10:20:58Z",
-     "completed_at": "2026-10-10T10:44:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38043154105/job/114191384468"
-    }
-   ]
-  },
-  {
-   "run_id": 38040903718,
-   "pr": 1217,
-   "commit": "9d79ceca49f1de990023e6a6b08dcc68a5ad8493",
-   "branch": "feat/conv3d-align-aiter",
-   "event": "pull_request",
-   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38040903718",
-   "created_at": "2026-10-10T09:18:06Z",
-   "updated_at": "2026-10-10T10:13:36Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T09:47:59Z",
-     "completed_at": "2026-10-10T10:13:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38040903718/job/114183770681"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T09:35:47Z",
-     "completed_at": "2026-10-10T10:13:05Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38040903718/job/114183770727"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T09:36:26Z",
-     "completed_at": "2026-10-10T10:13:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38040903718/job/114183770761"
-    }
-   ]
-  },
-  {
-   "run_id": 38039565451,
-   "pr": 1258,
-   "commit": "7b0b58c8d47abe07908b7a0db3ac8908882a8cc1",
-   "branch": "xudong/fix-zip2by-guide",
-   "event": "pull_request",
-   "title": "[fix] Build the zipped_divide guide from the tiler shape",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38039565451",
-   "created_at": "2026-10-10T08:55:28Z",
-   "updated_at": "2026-10-10T09:56:52Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T09:14:36Z",
-     "completed_at": "2026-10-10T09:56:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38039565451/job/114180045594"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T09:36:17Z",
-     "completed_at": "2026-10-10T09:56:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38039565451/job/114180045605"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T09:14:22Z",
-     "completed_at": "2026-10-10T09:47:52Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38039565451/job/114180045627"
-    }
-   ]
-  },
-  {
-   "run_id": 38039281095,
-   "pr": 1258,
-   "commit": "72906b951f8e299e03d6e3ae5fffd184b7fb5113",
-   "branch": "xudong/fix-zip2by-guide",
-   "event": "pull_request",
-   "title": "[fix] Build the zipped_divide guide from the tiler shape",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38039281095",
-   "created_at": "2026-10-10T08:50:31Z",
-   "updated_at": "2026-10-10T08:55:34Z",
-   "actor": "xudoyuan",
-   "jobs": []
   }
  ]
 }
