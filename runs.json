@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T19:11:47Z",
+ "updated": "2026-10-11T19:17:09Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -72,11 +72,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T18:23:39Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310/job/114541264712"
+     "completed_at": "2026-10-11T19:15:22Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310/job/114541264712",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -96,20 +99,20 @@
    "branch": "fix/gemm-a16w16-hti-wave-sync",
    "event": "pull_request",
    "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM reads its first and last stages",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116",
    "created_at": "2026-10-11T17:56:12Z",
-   "updated_at": "2026-10-11T18:23:06Z",
+   "updated_at": "2026-10-11T19:15:29Z",
    "actor": "jhinpan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T18:23:06Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T19:15:28Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116/job/114538164586"
     },
     {
