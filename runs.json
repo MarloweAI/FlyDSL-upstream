@@ -1,8 +1,66 @@
 {
  "schema": 1,
- "updated": "2026-10-11T09:34:34Z",
+ "updated": "2026-10-11T10:27:43Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38131873491,
+   "pr": 1263,
+   "commit": "952ac8ec6c39f4348f93eeab4f69b44b89ef6ef8",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add scoped ktrace usage and CUDA Graph replay",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131873491",
+   "created_at": "2026-10-11T10:25:05Z",
+   "updated_at": "2026-10-11T10:26:29Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38131087439,
+   "pr": 1265,
+   "commit": "5be48764fc7632852a2cd90023c235bfac66255d",
+   "branch": "codex/qwen38-inferencemax-mono-pr",
+   "event": "pull_request",
+   "title": "Add FlyDSL Qwen3.8 hyperconnection decode kernels",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439",
+   "created_at": "2026-10-11T10:11:58Z",
+   "updated_at": "2026-10-11T10:25:20Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-11T10:25:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740316"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T10:25:42Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740318"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T10:25:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740338"
+    }
+   ]
+  },
   {
    "run_id": 38127530772,
    "pr": 1264,
@@ -10,19 +68,19 @@
    "branch": "fix/gfx1250-fp8-tile-check",
    "event": "pull_request",
    "title": "[Bugfix][gfx1250] Reject FP8 and A8W4 GEMM tiles that issue no WMMA",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38127530772",
    "created_at": "2026-10-11T09:12:18Z",
-   "updated_at": "2026-10-11T09:23:58Z",
+   "updated_at": "2026-10-11T10:25:53Z",
    "actor": "jhinpan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T09:23:58Z",
+     "started_at": "2026-10-11T10:25:53Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38127530772/job/114436939801"
     },
@@ -38,10 +96,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-11T09:23:58Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-11T09:41:38Z",
+     "completed_at": "2026-10-11T09:57:07Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38127530772/job/114436939857"
     }
    ]
@@ -63,19 +121,19 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-11T09:17:03Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T09:52:43Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114435625112"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T09:26:30Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T09:41:32Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114435625151"
     },
     {
@@ -115,11 +173,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T09:04:18Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053241/job/114433341184"
+     "completed_at": "2026-10-11T10:07:55Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053241/job/114433341184",
+     "machine": "gbt350-odcdh1-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -1639,67 +1700,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38007224532/job/114420907361"
     }
    ]
-  },
-  {
-   "run_id": 38003061127,
-   "pr": 1253,
-   "commit": "4bf7d2dc55461368f4bb3da318ee78ed8e6a7509",
-   "branch": "fix/mxfp8-test-quant-e8m0-roundup",
-   "event": "pull_request",
-   "title": "[Bugfix][Test] Round MXFP8 E8M0 scales up in the test quantizers",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38003061127",
-   "created_at": "2026-10-09T23:10:17Z",
-   "updated_at": "2026-10-10T01:28:08Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T00:15:59Z",
-     "completed_at": "2026-10-10T01:28:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38003061127/job/114068709123"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-09T23:22:38Z",
-     "completed_at": "2026-10-09T23:39:25Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38003061127/job/114068709147"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-09T23:22:54Z",
-     "completed_at": "2026-10-10T00:33:27Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38003061127/job/114068709200",
-     "machine": "gbt350-odcdh2-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38002264506,
-   "pr": null,
-   "commit": "7fd2b32a7199b1ee9df9125f9d6ac644caeebb72",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38002264506",
-   "created_at": "2026-10-09T23:00:55Z",
-   "updated_at": "2026-10-09T23:00:55Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
