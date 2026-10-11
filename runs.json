@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T02:16:03Z",
+ "updated": "2026-10-11T03:43:39Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -25,19 +25,19 @@
    "branch": "codex/s-buffer-load-api-20261010",
    "event": "pull_request",
    "title": "[DSL] Expose scalar buffer load API",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892",
    "created_at": "2026-10-11T01:25:09Z",
-   "updated_at": "2026-10-11T01:52:15Z",
+   "updated_at": "2026-10-11T02:55:33Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T01:52:14Z",
+     "started_at": "2026-10-11T02:55:32Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439221"
     },
@@ -53,11 +53,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T01:52:41Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439295"
+     "completed_at": "2026-10-11T02:41:53Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439295",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
