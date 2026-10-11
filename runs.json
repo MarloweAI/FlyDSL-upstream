@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T01:50:49Z",
+ "updated": "2026-10-11T02:12:31Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -25,13 +25,41 @@
    "branch": "codex/s-buffer-load-api-20261010",
    "event": "pull_request",
    "title": "[DSL] Expose scalar buffer load API",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892",
    "created_at": "2026-10-11T01:25:09Z",
-   "updated_at": "2026-10-11T01:27:16Z",
+   "updated_at": "2026-10-11T01:52:15Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-11T01:52:14Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439221"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-11T01:52:35Z",
+     "completed_at": "2026-10-11T02:07:36Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439232"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T01:52:41Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38101767892/job/114363439295"
+    }
+   ]
   },
   {
    "run_id": 38100029967,
@@ -59,11 +87,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T01:10:36Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38100029967/job/114356468173"
+     "completed_at": "2026-10-11T02:03:24Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38100029967/job/114356468173",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -248,11 +279,11 @@
    "branch": "xudong/fix-zip2by-guide",
    "event": "pull_request",
    "title": "[fix] Build the zipped_divide guide from the tiler shape",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153",
    "created_at": "2026-10-10T15:45:09Z",
-   "updated_at": "2026-10-11T01:10:39Z",
+   "updated_at": "2026-10-11T02:11:30Z",
    "actor": "xudoyuan",
    "jobs": [
     {
@@ -267,10 +298,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T01:10:39Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T02:11:29Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153/job/114255157584"
     },
     {
