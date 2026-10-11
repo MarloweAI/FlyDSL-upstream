@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T08:01:52Z",
+ "updated": "2026-10-11T08:37:02Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -1502,11 +1502,11 @@
    "branch": "perf/gfx1250-gemm-kernarg-preload",
    "event": "pull_request",
    "title": "[Perf][gfx1250] Preload the kernel arguments of the BF16 and A8W8 GEMMs",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38007224532",
    "created_at": "2026-10-10T00:01:46Z",
-   "updated_at": "2026-10-11T07:52:11Z",
+   "updated_at": "2026-10-11T08:35:27Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -1521,18 +1521,18 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-11T07:52:11Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-11T08:16:18Z",
+     "completed_at": "2026-10-11T08:34:22Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38007224532/job/114420907300"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T07:52:11Z",
+     "started_at": "2026-10-11T08:35:26Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38007224532/job/114420907361"
     }
