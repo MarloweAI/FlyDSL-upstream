@@ -523,6 +523,17 @@ def _run_smoke(mode, M, **kwargs):
     _run_case(mode, M, smoke["N"], smoke["K"], *smoke["tile"], *smoke["warps"], smoke["num_buffers"], **kwargs)
 
 
+@pytest.mark.parametrize("tile_m, tile_n, tile_k, m_warp, n_warp", [(128, 128, 64, 2, 2), (128, 128, 128, 16, 1)])
+@pytest.mark.parametrize("mode", sorted(_MODES))
+def test_gemm_rejects_tiles_off_the_wmma_shape(mode, tile_m, tile_n, tile_k, m_warp, n_warp):
+    """tile_k below the 128-deep WMMA, or 8 rows per warp, used to compile to a kernel that stores zeros."""
+    _require_gpu()
+    cfg = _MODES[mode]
+    _c, make_args, _ref, _tol = cfg["build"](128, 256, 512, tile_m, tile_n, tile_k, m_warp, n_warp, 2)
+    with pytest.raises(ValueError, match="not WMMA-aligned"):
+        flyc.compile(cfg["launch"], *make_args(torch.cuda.current_stream()))
+
+
 _RAGGED_M_VALUES = [1, 2, 5, 15, 16, 17, 33, 63, 65, 100, 127, 128, 129, 191, 200, 255, 256, 257, 384, 500, 1000, 2048]
 
 
