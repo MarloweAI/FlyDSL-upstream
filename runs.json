@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-11T13:36:31Z",
+ "updated": "2026-10-11T13:59:21Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38145275234,
+   "pr": 1263,
+   "commit": "890160c0adf1539ad627400dd463db4affe3e34f",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38145275234",
+   "created_at": "2026-10-11T13:58:06Z",
+   "updated_at": "2026-10-11T13:58:07Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38145256834,
+   "pr": 1263,
+   "commit": "838d2c005dfdb1f0246833d4efae99740857f201",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38145256834",
+   "created_at": "2026-10-11T13:57:48Z",
+   "updated_at": "2026-10-11T13:58:07Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38143557908,
    "pr": 1263,
@@ -10,17 +40,45 @@
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908",
    "created_at": "2026-10-11T13:32:05Z",
-   "updated_at": "2026-10-11T13:34:18Z",
+   "updated_at": "2026-10-11T13:57:59Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-11T13:53:00Z",
+     "completed_at": "2026-10-11T13:57:48Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225070"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-11T13:53:21Z",
+     "completed_at": "2026-10-11T13:57:58Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225080"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-11T13:53:29Z",
+     "completed_at": "2026-10-11T13:57:51Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225095"
+    }
+   ]
   },
   {
    "run_id": 38143533477,
-   "pr": null,
+   "pr": 1263,
    "commit": "3e48c13c5c29375901c5546ccc2a751397f46c8e",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -35,7 +93,7 @@
   },
   {
    "run_id": 38141657170,
-   "pr": null,
+   "pr": 1263,
    "commit": "3e48c13c5c29375901c5546ccc2a751397f46c8e",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -78,7 +136,7 @@
   },
   {
    "run_id": 38141639512,
-   "pr": null,
+   "pr": 1263,
    "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -93,7 +151,7 @@
   },
   {
    "run_id": 38138323563,
-   "pr": null,
+   "pr": 1263,
    "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -108,7 +166,7 @@
   },
   {
    "run_id": 38138322942,
-   "pr": null,
+   "pr": 1263,
    "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -215,7 +273,7 @@
   },
   {
    "run_id": 38134556702,
-   "pr": null,
+   "pr": 1263,
    "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -258,7 +316,7 @@
   },
   {
    "run_id": 38134556120,
-   "pr": null,
+   "pr": 1263,
    "commit": "f5783cf0d9eff5fb480eff8cf22c1c3c18dc06e2",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -273,7 +331,7 @@
   },
   {
    "run_id": 38132059875,
-   "pr": null,
+   "pr": 1263,
    "commit": "f5783cf0d9eff5fb480eff8cf22c1c3c18dc06e2",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -316,7 +374,7 @@
   },
   {
    "run_id": 38131873491,
-   "pr": null,
+   "pr": 1263,
    "commit": "952ac8ec6c39f4348f93eeab4f69b44b89ef6ef8",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -587,7 +645,7 @@
   },
   {
    "run_id": 38103009555,
-   "pr": null,
+   "pr": 1263,
    "commit": "ba57c57ec4f633b83fde3409c6c5c98103342a24",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -1728,67 +1786,6 @@
    "created_at": "2026-10-10T05:54:53Z",
    "updated_at": "2026-10-10T05:54:53Z",
    "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38027713895,
-   "pr": 1256,
-   "commit": "bb298cf2d58d4c16d30fdb1223441af2b4c6ea90",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38027713895",
-   "created_at": "2026-10-10T05:30:10Z",
-   "updated_at": "2026-10-10T08:19:10Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T06:51:05Z",
-     "completed_at": "2026-10-10T08:19:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38027713895/job/114149034107"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T06:13:14Z",
-     "completed_at": "2026-10-10T07:35:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38027713895/job/114149034123",
-     "machine": "gbt350-odcdh2-b02-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T06:12:15Z",
-     "completed_at": "2026-10-10T06:32:11Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38027713895/job/114149034139"
-    }
-   ]
-  },
-  {
-   "run_id": 38027537467,
-   "pr": 1256,
-   "commit": "1c25ffcec759053bec0f02ec71d6f7a1ad05bc98",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38027537467",
-   "created_at": "2026-10-10T05:26:59Z",
-   "updated_at": "2026-10-10T05:28:29Z",
-   "actor": "coderfeli",
    "jobs": []
   }
  ]
