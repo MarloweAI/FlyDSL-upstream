@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T15:04:01Z",
+ "updated": "2026-10-11T15:30:13Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "codex/ktrace-target-providers",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592",
    "created_at": "2026-10-11T15:02:17Z",
-   "updated_at": "2026-10-11T15:02:53Z",
+   "updated_at": "2026-10-11T15:13:59Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T15:14:30Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519771"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-11T15:13:59Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519830"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-11T15:14:22Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519864"
+    }
+   ]
   },
   {
    "run_id": 38149381697,
@@ -85,20 +113,20 @@
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532",
    "created_at": "2026-10-11T14:13:14Z",
-   "updated_at": "2026-10-11T14:36:20Z",
+   "updated_at": "2026-10-11T15:14:33Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-11T14:36:45Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T15:07:47Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532/job/114494889018"
     },
     {
@@ -113,9 +141,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T14:36:20Z",
+     "started_at": "2026-10-11T15:14:32Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532/job/114494889068"
     }
