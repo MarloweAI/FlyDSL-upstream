@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-11T12:03:54Z",
+ "updated": "2026-10-11T12:13:08Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38138323563,
+   "pr": 1263,
+   "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add scoped ktrace usage and CUDA Graph replay",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38138323563",
+   "created_at": "2026-10-11T12:11:26Z",
+   "updated_at": "2026-10-11T12:11:43Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38138322942,
+   "pr": null,
+   "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add scoped ktrace usage and CUDA Graph replay",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38138322942",
+   "created_at": "2026-10-11T12:11:25Z",
+   "updated_at": "2026-10-11T12:11:27Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38134760890,
    "pr": 1262,
@@ -10,11 +40,11 @@
    "branch": "codex/cleanup-kernel-ir-aiter-20261010",
    "event": "pull_request",
    "title": "[Kernel] Clean low-level IR across FlyDSL kernels",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760890",
    "created_at": "2026-10-11T11:13:18Z",
-   "updated_at": "2026-10-11T11:24:38Z",
+   "updated_at": "2026-10-11T12:02:59Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -38,9 +68,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T11:24:38Z",
+     "started_at": "2026-10-11T12:02:58Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760890/job/114458263435"
     }
@@ -91,16 +121,16 @@
   },
   {
    "run_id": 38134556702,
-   "pr": 1263,
+   "pr": null,
    "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add scoped ktrace usage and CUDA Graph replay",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702",
    "created_at": "2026-10-11T11:09:55Z",
-   "updated_at": "2026-10-11T11:25:17Z",
+   "updated_at": "2026-10-11T12:11:43Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -124,10 +154,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-11T11:25:17Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T12:11:42Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702/job/114457743137"
     }
    ]
@@ -1755,36 +1785,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38016833647",
    "created_at": "2026-10-10T02:24:15Z",
    "updated_at": "2026-10-10T02:24:15Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38016410764,
-   "pr": null,
-   "commit": "82bb94100fcb3cdc8eef685c358d05ada43ce1b0",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38016410764",
-   "created_at": "2026-10-10T02:17:19Z",
-   "updated_at": "2026-10-10T02:17:19Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38015671459,
-   "pr": null,
-   "commit": "25fb84b69aac8b5435ac0cf2dbed9d4679c768f5",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38015671459",
-   "created_at": "2026-10-10T02:05:30Z",
-   "updated_at": "2026-10-10T02:05:30Z",
    "actor": "dimitri91209",
    "jobs": []
   }
