@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-11T14:00:44Z",
+ "updated": "2026-10-11T14:14:38Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38146292532,
+   "pr": 1263,
+   "commit": "ec7e6def09c80cb63c59b77c2ab409ca87e551d3",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532",
+   "created_at": "2026-10-11T14:13:14Z",
+   "updated_at": "2026-10-11T14:13:30Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38146269326,
+   "pr": 1263,
+   "commit": "890160c0adf1539ad627400dd463db4affe3e34f",
+   "branch": "codex/ktrace-usage-graph",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146269326",
+   "created_at": "2026-10-11T14:12:53Z",
+   "updated_at": "2026-10-11T14:13:21Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38145275234,
    "pr": 1263,
@@ -10,17 +40,17 @@
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38145275234",
    "created_at": "2026-10-11T13:58:06Z",
-   "updated_at": "2026-10-11T13:58:29Z",
+   "updated_at": "2026-10-11T14:13:11Z",
    "actor": "coderfeli",
    "jobs": []
   },
   {
    "run_id": 38145256834,
-   "pr": null,
+   "pr": 1263,
    "commit": "838d2c005dfdb1f0246833d4efae99740857f201",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -35,7 +65,7 @@
   },
   {
    "run_id": 38143557908,
-   "pr": null,
+   "pr": 1263,
    "commit": "838d2c005dfdb1f0246833d4efae99740857f201",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -78,7 +108,7 @@
   },
   {
    "run_id": 38143533477,
-   "pr": null,
+   "pr": 1263,
    "commit": "3e48c13c5c29375901c5546ccc2a751397f46c8e",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -93,7 +123,7 @@
   },
   {
    "run_id": 38141657170,
-   "pr": null,
+   "pr": 1263,
    "commit": "3e48c13c5c29375901c5546ccc2a751397f46c8e",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -136,7 +166,7 @@
   },
   {
    "run_id": 38141639512,
-   "pr": null,
+   "pr": 1263,
    "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -151,7 +181,7 @@
   },
   {
    "run_id": 38138323563,
-   "pr": null,
+   "pr": 1263,
    "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -166,7 +196,7 @@
   },
   {
    "run_id": 38138322942,
-   "pr": null,
+   "pr": 1263,
    "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -273,7 +303,7 @@
   },
   {
    "run_id": 38134556702,
-   "pr": null,
+   "pr": 1263,
    "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -316,7 +346,7 @@
   },
   {
    "run_id": 38134556120,
-   "pr": null,
+   "pr": 1263,
    "commit": "f5783cf0d9eff5fb480eff8cf22c1c3c18dc06e2",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -331,7 +361,7 @@
   },
   {
    "run_id": 38132059875,
-   "pr": null,
+   "pr": 1263,
    "commit": "f5783cf0d9eff5fb480eff8cf22c1c3c18dc06e2",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -374,7 +404,7 @@
   },
   {
    "run_id": 38131873491,
-   "pr": null,
+   "pr": 1263,
    "commit": "952ac8ec6c39f4348f93eeab4f69b44b89ef6ef8",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -645,7 +675,7 @@
   },
   {
    "run_id": 38103009555,
-   "pr": null,
+   "pr": 1263,
    "commit": "ba57c57ec4f633b83fde3409c6c5c98103342a24",
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
@@ -1757,36 +1787,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38035582527/job/114168401037"
     }
    ]
-  },
-  {
-   "run_id": 38032187896,
-   "pr": null,
-   "commit": "337786dd525f1c2b4ebd2c5472c9ebc848dbe81e",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38032187896",
-   "created_at": "2026-10-10T06:48:04Z",
-   "updated_at": "2026-10-10T06:48:04Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38029117501,
-   "pr": null,
-   "commit": "f8c290189ebec6888fab1a65a01d3855cb5669a5",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38029117501",
-   "created_at": "2026-10-10T05:54:53Z",
-   "updated_at": "2026-10-10T05:54:53Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
