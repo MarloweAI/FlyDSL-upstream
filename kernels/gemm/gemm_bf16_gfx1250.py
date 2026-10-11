@@ -43,8 +43,12 @@ def launch_gemm_bf16(
     cluster_n: Constexpr[int] = 1,
     tdm_balance: Constexpr[int] = 0,
     wmma_b2b: Constexpr[int] = 0,
+    static_k: Constexpr[int] = 0,
 ):
-    """Requires N % tile_n == 0 and K % tile_k == 0; M is clamped per tile."""
+    """Requires N % tile_n == 0 and K % tile_k == 0; M is clamped per tile.
+
+    static_k > 0 compiles K in and must equal K. With 16-row tiles the K loop is then fully unrolled.
+    """
     WMMA_M = WMMA_N = 16
     WMMA_K = 32
     WAVE = 32
@@ -68,6 +72,12 @@ def launch_gemm_bf16(
         raise ValueError(f"tile ({tile_m},{tile_n},{tile_k}) / warps ({m_warp},{n_warp}) not WMMA-aligned")
     if K_WS < 2:
         raise ValueError(f"tile_k={tile_k} needs at least 2 WMMA K-steps to hide the LDS reads")
+    if static_k and (static_k % tile_k or static_k // tile_k < num_buffers - 1):
+        raise ValueError(
+            f"static_k={static_k} must be a multiple of tile_k={tile_k} with at least {num_buffers - 1} tiles"
+        )
+    # Unrolling saves the loop overhead that decode tiles cannot hide; on larger tiles the longer code was slower.
+    UNROLL_K = bool(static_k) and tile_m == WMMA_M
 
     LDS_PAD = 16  # keeps consecutive rows 4 dwords apart -> conflict-free b128 reads
     LDS_ROW = KB + LDS_PAD
@@ -92,7 +102,10 @@ def launch_gemm_bf16(
     ):
         if const_expr(wmma_b2b):
             rocdl.disable_xdl_arb_stall()
-        K_TILES = i32_k // tile_k
+        if const_expr(static_k):
+            K_TILES = static_k // tile_k
+        else:
+            K_TILES = i32_k // tile_k
         lda_b = fx.Int64(i32_lda) * EB  # global row strides in bytes
         ldb_b = fx.Int64(i32_ldb) * EB
         ldc64 = fx.Int64(i32_ldc)
@@ -241,12 +254,20 @@ def launch_gemm_bf16(
         for i in range_constexpr(num_buffers - 1):
             issue(i, i)
         n_steady = K_TILES - (num_buffers - 1)
-        for kt in range(n_steady):
+
+        def steady_ktile(kt):
             buf = _bidx(_buf_ptr(kt % num_buffers))
             pipeline_fence(outstanding=TDM_PW * (num_buffers - 2), use_cluster=False)
             compute_ktile(buf, kt + (num_buffers - 1))
             if const_expr(use_cluster) and kt % num_buffers == num_buffers - 1:
                 cluster.cluster_barrier()
+
+        if const_expr(UNROLL_K):
+            for kt in range_constexpr(n_steady):
+                steady_ktile(kt)
+        else:
+            for kt in range(n_steady):
+                steady_ktile(kt)
         for j in range_constexpr(num_buffers - 1):
             kt = n_steady + j
             buf = _bidx(_buf_ptr(kt % num_buffers))

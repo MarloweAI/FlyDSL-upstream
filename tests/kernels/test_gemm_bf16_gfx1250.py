@@ -67,8 +67,9 @@ def _build_case(
     const_val=None,
     tdm_balance=0,
     wmma_b2b=0,
+    static_k=None,
 ):
-    """Inputs, a make_args(stream) thunk, the f32 reference, and tolerances."""
+    """Inputs, a make_args(stream) thunk, the f32 reference, and tolerances. static_k=None leaves the default."""
     if (N // tile_n) % cluster_n:
         raise ValueError(f"cluster_n={cluster_n} needs N/tile_n={N // tile_n} to be a multiple of it")
     dt = _DT[dtype]
@@ -82,7 +83,7 @@ def _build_case(
     ref = torch.matmul(a.float(), b.float().T)
 
     def make_args(stream, c=c, a=a, b=b):
-        return (
+        args = (
             flyc.from_c_void_p(fx.Uint8, c.data_ptr()),
             flyc.from_c_void_p(fx.Uint8, a.data_ptr()),
             flyc.from_c_void_p(fx.Uint8, b.data_ptr()),
@@ -105,6 +106,7 @@ def _build_case(
             tdm_balance,
             wmma_b2b,
         )
+        return args if static_k is None else (*args, static_k)
 
     # bf16/f16 inputs with f32 accumulation: error grows with sqrt(K).
     tol = (2e-2, 2e-2 * math.sqrt(K))
@@ -159,6 +161,25 @@ _CASES = [
 @pytest.mark.parametrize("M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers", _CASES)
 def test_gemm_bf16(M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers):
     _run_case(M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers)
+
+
+@pytest.mark.parametrize(
+    "M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers",
+    [
+        (1, 256, 1024, 16, 128, 128, 1, 2, 3),  # 16-row tile: the K loop is unrolled
+        (17, 512, 2048, 16, 64, 256, 1, 2, 4),  # ragged M, unrolled
+        (129, 512, 1024, 128, 128, 128, 2, 2, 2),  # larger tile: K compiled in, loop kept
+    ],
+)
+def test_gemm_static_k(M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers):
+    _run_case(M, N, K, tile_m, tile_n, tile_k, m_warp, n_warp, num_buffers, static_k=K)
+
+
+def test_gemm_static_k_rejects_partial_tiles():
+    _require_gfx1250()
+    *_, make_args, _ref, _tol = _build_case(16, 256, 1024, 16, 128, 128, 1, 2, 2, static_k=1000)
+    with pytest.raises(ValueError, match="static_k"):
+        flyc.compile(launch_gemm_bf16, *make_args(torch.cuda.current_stream()))
 
 
 @pytest.mark.parametrize("dtype", ["bf16", "f16"])
