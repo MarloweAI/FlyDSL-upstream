@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-11T19:17:09Z",
+ "updated": "2026-10-11T19:23:54Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38167724466,
+   "pr": 1223,
+   "commit": "794a88ae22969739b7cc3b1287eaba2c46882ed1",
+   "branch": "gfx120x-overhaul-ops-fa-etc",
+   "event": "pull_request",
+   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38167724466",
+   "created_at": "2026-10-11T19:22:15Z",
+   "updated_at": "2026-10-11T19:22:15Z",
+   "actor": "dimitri91209",
+   "jobs": []
+  },
   {
    "run_id": 38164888810,
    "pr": 1271,
@@ -140,7 +155,7 @@
   },
   {
    "run_id": 38160754972,
-   "pr": 1223,
+   "pr": null,
    "commit": "cbb1cf8c0c9feb93596d2dbc2b597599f96c4c62",
    "branch": "gfx120x-overhaul-ops-fa-etc",
    "event": "pull_request",
@@ -830,20 +845,20 @@
    "branch": "fix/gfx1250-a8w8-n-tail",
    "event": "pull_request",
    "title": "[Test][gfx1250] State the FP8 GEMM shape contract and check that stores stay inside N",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613",
    "created_at": "2026-10-11T07:56:11Z",
-   "updated_at": "2026-10-11T18:53:06Z",
+   "updated_at": "2026-10-11T19:22:13Z",
    "actor": "jhinpan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-11T18:53:06Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T19:22:13Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114547500891"
     },
     {
@@ -1593,52 +1608,6 @@
      "started_at": "2026-10-10T14:29:34Z",
      "completed_at": "2026-10-10T14:33:07Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38058436881/job/114235529281"
-    }
-   ]
-  },
-  {
-   "run_id": 38051040337,
-   "pr": 1260,
-   "commit": "38db12dbdf63416f7befe597bf07f152bed15cd5",
-   "branch": "pr/feat-core-algebra",
-   "event": "pull_request",
-   "title": "[DSL] Add a category independent cute algebra framework",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38051040337",
-   "created_at": "2026-10-10T12:11:09Z",
-   "updated_at": "2026-10-10T15:52:10Z",
-   "actor": "sjfeng1999",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T14:29:45Z",
-     "completed_at": "2026-10-10T15:52:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38051040337/job/114212028684"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T12:23:12Z",
-     "completed_at": "2026-10-10T13:38:42Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38051040337/job/114212028700",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T13:10:21Z",
-     "completed_at": "2026-10-10T13:27:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38051040337/job/114212028754"
     }
    ]
   }
