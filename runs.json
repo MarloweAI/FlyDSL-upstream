@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-11T02:12:31Z",
+ "updated": "2026-10-11T02:16:03Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -68,20 +68,20 @@
    "branch": "codex/cleanup-kernel-ir-aiter-20261010",
    "event": "pull_request",
    "title": "[Kernel] Clean low-level IR across FlyDSL kernels",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38100029967",
    "created_at": "2026-10-11T00:54:46Z",
-   "updated_at": "2026-10-11T01:18:41Z",
+   "updated_at": "2026-10-11T02:14:35Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T01:18:41Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T02:14:35Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38100029967/job/114356468085"
     },
     {
