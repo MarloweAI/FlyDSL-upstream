@@ -10,6 +10,7 @@ Two paths:
   - Scalar path (f32 or N < 8): guarded elementwise copies.
 """
 
+import functools
 import math
 
 import flydsl.compiler as flyc
@@ -65,6 +66,7 @@ WIDE_ROW_BLOCK_THREADS = 512
 # only pays off once input plus output stop fitting in it; below that it throws
 # away reuse the cache would have served. The two policies measure as a tie at
 # 1.125x LLC and streaming wins outright past it, uniformly across row widths.
+KERNARG_PRELOAD_COUNT = 16
 LLC_BYTES = 256 * 1024 * 1024
 NT_MIN_WORKING_SET = LLC_BYTES * 9 // 8
 
@@ -90,6 +92,26 @@ def _quant_dtype_max(dtype_str: str) -> float:
     raise ValueError(f"unsupported quant dtype: {dtype_str!r} (expected 'i8' or 'int8')")
 
 
+def _preload_kernel_args(build):
+    """On gfx1250 the returned launcher asks for its kernel arguments in SGPRs at launch.
+
+    A decode-sized RMSNorm takes about 2 us, and loading its arguments from memory was a fifth of that. It only pays
+    when every argument fits: fused add RMSNorm still loaded one from memory and got slower, so it does not use this.
+    """
+
+    @functools.wraps(build)
+    def wrapped(*args, **kwargs):
+        launcher = build(*args, **kwargs)
+        if get_rocm_arch() == "gfx1250":
+            launcher.compile_hints.setdefault("llvm_options", {})[
+                "amdgpu-kernarg-preload-count"
+            ] = KERNARG_PRELOAD_COUNT
+        return launcher
+
+    return wrapped
+
+
+@_preload_kernel_args
 def build_rmsnorm_module(
     N: int,
     dtype_str: str,

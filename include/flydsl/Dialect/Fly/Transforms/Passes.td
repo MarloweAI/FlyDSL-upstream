@@ -34,6 +34,22 @@ def FlyRewriteFuncSignaturePass : Pass<"fly-rewrite-func-signature"> {
   ];
 }
 
+def FlyFlattenKernelArgsPass : Pass<"fly-flatten-kernel-args", "ModuleOp"> {
+  let summary = "Pass the fields of struct kernel arguments as separate arguments";
+  let description = [{
+    Replaces every LLVM struct argument of a `gpu.func` kernel with its fields (nested structs flattened in field
+    order), rebuilds the struct at the kernel entry, and passes the fields at every `gpu.launch_func`. AMDGPU kernel
+    argument preloading stops at the first aggregate argument, so the dynamic layouts that
+    `fly-rewrite-func-signature` packs into structs kept every later argument in memory. Host function signatures do
+    not change.
+  }];
+
+  let dependentDialects = [
+    "gpu::GPUDialect",
+    "LLVM::LLVMDialect"
+  ];
+}
+
 def FlyCanonicalizePass : Pass<"fly-canonicalize"> {
   let summary = "Canonicalize Pattern";
   let description = [{

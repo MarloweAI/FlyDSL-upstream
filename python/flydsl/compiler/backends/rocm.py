@@ -69,8 +69,12 @@ class RocmBackend(BaseBackend):
             "wave64": "true" if get_warp_size(chip) == 64 else "false",
         }
 
+        # Kernel argument preloading stops at the first struct argument, so a kernel that asks for it gets its struct
+        # arguments passed field by field.
+        flatten = bool((compile_hints.get("llvm_options") or {}).get("amdgpu-kernarg-preload-count"))
         pre_binary_fragments = [
             "fly-rewrite-func-signature",
+            *(["fly-flatten-kernel-args"] if flatten else []),
             "fly-canonicalize",
             "fly-rocdl-expand-ops",
             "fly-layout-lowering",
