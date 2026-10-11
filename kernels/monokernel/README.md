@@ -7,6 +7,11 @@ kernels. Model ownership is explicit:
   references.
 - `k3/` contains Kimi-K3 MLA/KDA state handling, AttnRes, latent-MoE logic,
   staged baselines, and benchmark tools.
+- `qwen38/` contains gfx950 FlyDSL kernels for Qwen3.8 Flash-Next's decode
+  hyper-connection: grouped norm, low-rank down/up with gated mean, and
+  injection with residual update. The ATOM adapter dispatches 1–16 BF16
+  tokens for mix and 1–128 for combine. This is a component specialization,
+  not a complete decoder layer.
 
 Reusable contracts and primitives stay at this package root. `config.py`,
 `layout.py`, `ops.py`, `packing.py`, `reference.py`, `runtime.py`, and

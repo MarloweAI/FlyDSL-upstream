@@ -16,6 +16,7 @@ This module provides access to ROCm-specific GPU operations including:
 
 from ..._mlir.dialects.rocdl import *  # noqa: F401,F403
 from ..meta import dsl_loc_tracing
+from ..typing import BFloat16, Float32, Int32, Vector
 from . import cdna3 as cdna3
 from . import cdna4 as cdna4
 from . import cdna5 as cdna5
@@ -63,6 +64,7 @@ __all__ = [
     "sched_vmem",
     "sched_dsrd",
     "sched_dswr",
+    "dot2_bf16",
 ]
 
 # Keep references to ODS-generated builders so we can wrap them without losing access.
@@ -80,6 +82,7 @@ _ods_cluster_load_async_to_lds_b128 = cluster_load_async_to_lds_b128
 _ods_s_wait_asynccnt = s_wait_asynccnt
 _ods_readfirstlane = readfirstlane
 _ods_ballot = ballot
+_ods_fdot2_f32_bf16 = fdot2_f32_bf16
 _ods_readlane = readlane
 _ods_mfma_f32_32x32x8f16 = globals().get("mfma_f32_32x32x8f16", None)
 _ods_mfma_f32_32x32x8bf16_1k = globals().get("mfma_f32_32x32x8bf16_1k", None)
@@ -104,6 +107,15 @@ mask_dswr = 0x200
 
 _ods_sched_barrier = globals().get("sched_barrier")
 _ods_sched_group_barrier = globals().get("sched_group_barrier")
+
+
+@dsl_loc_tracing
+def dot2_bf16(a: Int32, b: Int32, acc: Float32) -> Float32:
+    """Accumulate two packed BF16 products in FP32."""
+    lhs = Vector.from_elements([a], Int32).bitcast(BFloat16)
+    rhs = Vector.from_elements([b], Int32).bitcast(BFloat16)
+    return Float32(_ods_fdot2_f32_bf16(Float32.ir_type, lhs, rhs, acc.ir_value()).result)
+
 
 _SCHED_MASK_INT_TO_KW = {
     0x000: "none",
