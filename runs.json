@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-11T14:16:18Z",
+ "updated": "2026-10-11T14:28:15Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38146972943,
+   "pr": 1266,
+   "commit": "cc5b93c6c8418bfca9b6e2b38fc8a3e6a8f4631b",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add RDNA4 (gfx1200/gfx1201) integer WMMA and an INT4 GEMM",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146972943",
+   "created_at": "2026-10-11T14:23:22Z",
+   "updated_at": "2026-10-11T14:23:22Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
   {
    "run_id": 38146292532,
    "pr": 1263,
@@ -10,11 +25,11 @@
    "branch": "codex/ktrace-usage-graph",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146292532",
    "created_at": "2026-10-11T14:13:14Z",
-   "updated_at": "2026-10-11T14:14:36Z",
+   "updated_at": "2026-10-11T14:15:11Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -262,11 +277,11 @@
    "branch": "codex/s-buffer-load-api-20261010",
    "event": "pull_request",
    "title": "[DSL] Expose scalar buffer load API",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432",
    "created_at": "2026-10-11T11:13:17Z",
-   "updated_at": "2026-10-11T13:26:35Z",
+   "updated_at": "2026-10-11T14:26:37Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -293,10 +308,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-11T13:26:34Z",
-     "completed_at": null,
+     "completed_at": "2026-10-11T14:26:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432/job/114458976672"
     }
    ]
@@ -1744,49 +1759,6 @@
    "updated_at": "2026-10-10T08:55:34Z",
    "actor": "xudoyuan",
    "jobs": []
-  },
-  {
-   "run_id": 38035582527,
-   "pr": 1069,
-   "commit": "00457e1713d16d31a3ef1646e3b7a28e074b64de",
-   "branch": "feature/qwenimage-vae-conv-tests",
-   "event": "pull_request",
-   "title": "[Flydsl] Qwen-Image conv3d 3x3 opt",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38035582527",
-   "created_at": "2026-10-10T07:46:34Z",
-   "updated_at": "2026-10-10T10:52:02Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-10T08:05:43Z",
-     "completed_at": "2026-10-10T08:06:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38035582527/job/114168401021"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T08:05:34Z",
-     "completed_at": "2026-10-10T08:35:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38035582527/job/114168401023"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T09:14:32Z",
-     "completed_at": "2026-10-10T10:52:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38035582527/job/114168401037"
-    }
-   ]
   }
  ]
 }
