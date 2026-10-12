@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-12T15:11:38Z",
+ "updated": "2026-10-12T15:35:35Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38268885807,
+   "pr": 1278,
+   "commit": "931f9f1a6c77c06fc160143765fe4d010915ca0a",
+   "branch": "codex/fix-compile-optional-null",
+   "event": "pull_request",
+   "title": "[Bugfix][JIT] Keep initial launches with optional null pointers",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807",
+   "created_at": "2026-10-12T15:15:21Z",
+   "updated_at": "2026-10-12T15:27:17Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T15:30:28Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777733"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T15:27:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777847"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-12T15:27:17Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777900"
+    }
+   ]
+  },
   {
    "run_id": 38266582119,
    "pr": null,
@@ -14,9 +57,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119",
    "created_at": "2026-10-12T14:56:37Z",
-   "updated_at": "2026-10-12T14:58:48Z",
+   "updated_at": "2026-10-12T15:28:06Z",
    "actor": "solinzby1",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T15:28:05Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925079"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T15:13:25Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925106"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-12T15:13:18Z",
+     "completed_at": "2026-10-12T15:30:24Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925134"
+    }
+   ]
   },
   {
    "run_id": 38257824955,
@@ -1701,52 +1772,6 @@
      "started_at": "2026-10-11T12:02:58Z",
      "completed_at": "2026-10-11T13:34:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760890/job/114458263435"
-    }
-   ]
-  },
-  {
-   "run_id": 38134760432,
-   "pr": 1261,
-   "commit": "f2ada8d290f4b19bece5a30240d34c949ac4e490",
-   "branch": "codex/s-buffer-load-api-20261010",
-   "event": "pull_request",
-   "title": "[DSL] Expose scalar buffer load API",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432",
-   "created_at": "2026-10-11T11:13:17Z",
-   "updated_at": "2026-10-11T14:26:37Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T11:38:58Z",
-     "completed_at": "2026-10-11T11:56:59Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432/job/114458976622"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T11:29:07Z",
-     "completed_at": "2026-10-11T12:26:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432/job/114458976627",
-     "machine": "smci350-rck-g03-b17-12",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T13:26:34Z",
-     "completed_at": "2026-10-11T14:26:33Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432/job/114458976672"
     }
    ]
   }
