@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-12T04:10:56Z",
+ "updated": "2026-10-12T04:51:49Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38205357781,
+   "pr": 1268,
+   "commit": "9f28cc3aa0671112a1931c65aa301ce1e6e43d4f",
+   "branch": "codex/ktrace-target-providers",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38205357781",
+   "created_at": "2026-10-12T04:49:37Z",
+   "updated_at": "2026-10-12T04:50:30Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38203801874,
+   "pr": 1274,
+   "commit": "3e99a75e9945d15e3b75f25423a048ec0fdcd511",
+   "branch": "jli/schedule_bank_upstream_oldllvm_waitalu",
+   "event": "pull_request",
+   "title": "[opt] add schedule bank api and wait alu optimization",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38203801874",
+   "created_at": "2026-10-12T04:26:39Z",
+   "updated_at": "2026-10-12T04:28:39Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38200630695,
    "pr": 1268,
@@ -10,38 +40,38 @@
    "branch": "codex/ktrace-target-providers",
    "event": "pull_request",
    "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200630695",
    "created_at": "2026-10-12T03:39:46Z",
-   "updated_at": "2026-10-12T04:00:36Z",
+   "updated_at": "2026-10-12T04:50:06Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-12T03:56:14Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T04:32:16Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200630695/job/114656287246"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T03:58:36Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T04:16:26Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200630695/job/114656287249"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-12T04:00:36Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T04:50:05Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200630695/job/114656287273"
     }
    ]
@@ -87,11 +117,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T03:38:13Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051/job/114652565341"
+     "completed_at": "2026-10-12T04:44:08Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051/job/114652565341",
+     "machine": "gbt350-odcdh1-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -1497,36 +1530,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38090185244",
    "created_at": "2026-10-10T22:06:49Z",
    "updated_at": "2026-10-10T22:06:49Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38089974739,
-   "pr": null,
-   "commit": "0307673ebd83d2e1c8ed6b6d64b2135176e65d26",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38089974739",
-   "created_at": "2026-10-10T22:03:29Z",
-   "updated_at": "2026-10-10T22:03:29Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38089860990,
-   "pr": null,
-   "commit": "e1626d8ee88b552ddc0bbf540089950e7ac760fd",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38089860990",
-   "created_at": "2026-10-10T22:01:42Z",
-   "updated_at": "2026-10-10T22:01:42Z",
    "actor": "dimitri91209",
    "jobs": []
   }
