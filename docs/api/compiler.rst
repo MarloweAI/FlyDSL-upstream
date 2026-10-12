@@ -172,9 +172,14 @@ initialization/load/unload functions, and embedded ABI metadata. When
 symbol.
 
 Passing live device arguments to ``flyc.compile`` preserves its normal initial
-launch. For an offline or CPU-only build host, use null pointer wrappers created
+launch, including when other pointer arguments are null to disable optional
+inputs. For an offline or CPU-only build host, use null pointer wrappers created
 with ``flyc.from_c_void_p`` (or compatible non-device tensor placeholders) and
 set the target architecture explicitly, for example with ``ARCH=gfx950``.
+Null pointers suppress the initial launch only when no live device buffers are
+present. Non-device tensor placeholders still suppress execution even alongside
+device buffers. ``COMPILE_ONLY=1`` explicitly disables execution for all argument
+combinations and returns ``None`` instead of a callable.
 Export currently supports tensor, pointer, scalar, structure, and stream
 arguments whose lowered types have a supported C ABI. Unsupported launchers
 report the export error when ``export_to_c`` is called.

@@ -85,6 +85,23 @@ def _scale_kernel(X: fx.Pointer, n: fx.Int32, factor: fx.Constexpr[float]):
 
 
 @flyc.jit
+def add_one_optional(X: fx.Pointer, optional: fx.Pointer, stream: fx.Stream):
+    """The optional buffer is disabled, as with attention scales or sinks."""
+    _add_one_kernel(X, fx.Int32(1)).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
+
+
+@flyc.kernel
+def _tensor_add_one_kernel(X: fx.Tensor):
+    if fx.thread_idx.x == 0:
+        X[0] = X[0] + 1.0
+
+
+@flyc.jit
+def tensor_add_one_optional(X: fx.Tensor, optional: fx.Pointer, stream: fx.Stream):
+    _tensor_add_one_kernel(X).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
+
+
+@flyc.jit
 def add_one_then_scale(X: fx.Pointer, n: fx.Int32, factor: fx.Constexpr[float] = 2.0):
     """Two kernel launches, implicit stream."""
     grid = ((n + 63) // 64, 1, 1)
@@ -514,6 +531,9 @@ class TestExportCompile:
 
         tensor = flyc.from_dlpack(CpuDlpackSource())
         _aot_view(tensor_add, tensor, tensor, tensor)
+
+        # A non-null pointer cannot make a CPU tensor safe to execute.
+        _aot_view(tensor_add_one_optional, torch.empty(1), _ptr(1), fx.Stream(None))
 
     def test_placeholder_detection_does_not_duck_type_user_arguments(self):
         from flydsl.compiler.jit_function import _is_compile_placeholder
@@ -1003,6 +1023,40 @@ def _export_and_load(tmp_path, compiled, name, lib_name=None):
 @needs_gpu
 @needs_cc
 class TestEndToEnd:
+    @pytest.mark.parametrize("argument_kind", ["pointer", "torch", "wrapped_torch", "dlpack"])
+    @pytest.mark.parametrize("null_optional", [False, True])
+    def test_compile_with_optional_pointer_launches_once(self, argument_kind, null_optional, monkeypatch):
+        stream = torch.cuda.Stream()
+        with torch.cuda.stream(stream):
+            value = torch.zeros(1, device="cuda")
+            optional = _ptr() if null_optional else _ptr(value.data_ptr())
+            launcher = add_one_optional if argument_kind == "pointer" else tensor_add_one_optional
+            if argument_kind == "pointer":
+                data = _ptr(value.data_ptr())
+            elif argument_kind == "torch":
+                data = value
+            elif argument_kind == "wrapped_torch":
+                data = flyc.from_torch_tensor(value)
+            else:
+                data = flyc.from_dlpack(value)
+            args = (data, optional, fx.Stream(stream))
+
+            with monkeypatch.context() as compile_only:
+                compile_only.setenv("COMPILE_ONLY", "1")
+                assert flyc.compile(launcher, *args) is None
+            stream.synchronize()
+            assert value.item() == 0
+
+            # Both a first compile and an artifact-cache hit must launch once.
+            # Use a kwarg too, so default/keyword binding cannot hide an input.
+            for expected in (1, 2):
+                compiled = flyc.compile(launcher, *args[:-1], stream=args[-1])
+                stream.synchronize()
+                assert value.item() == expected
+            compiled(*args)
+            stream.synchronize()
+            assert value.item() == 3
+
     def test_flyc_compile_result_can_export(self, tmp_path, monkeypatch):
         n = 256
         x = torch.randn(n, device="cuda")

@@ -1170,10 +1170,27 @@ def _build_call_state(sig, args_tuple, artifact):
     return _call_state_from_spec(_build_call_spec(sig, args_tuple), artifact)
 
 
-def _is_compile_placeholder(value) -> bool:
+def _has_live_device_argument(value) -> bool:
+    """Recognize device buffers without querying or initializing a runtime."""
+    if isinstance(value, PointerJitArg):
+        return value.pointer.value is not None
+    if isinstance(value, TorchTensorJitArg):
+        return value.torch_tensor.device.type == "cuda"
+    if isinstance(value, DLTensorJitArg):
+        return bool(value.dladaptor.data_ptr) and value.dladaptor.address_space == 1
+
+    from ..expr.struct import _runtime_fields, is_struct_type
+
+    if is_struct_type(type(value)):
+        return any(_has_live_device_argument(field_value) for _name, field_value in _runtime_fields(value))
+    constructor, _dsl_type = JitArgumentRegistry.get(type(value))
+    return constructor is TorchTensorJitArg and value.device.type == "cuda"
+
+
+def _is_compile_placeholder(value, *, allow_null_pointers=False) -> bool:
     """Return whether ``value`` can specialize compilation but not be launched."""
     if isinstance(value, PointerJitArg):
-        return value.pointer.value is None
+        return value.pointer.value is None and not allow_null_pointers
     if isinstance(value, TorchTensorJitArg):
         return value.torch_tensor.device.type != "cuda"
     if isinstance(value, DLTensorJitArg):
@@ -1182,7 +1199,10 @@ def _is_compile_placeholder(value) -> bool:
     from ..expr.struct import _runtime_fields, is_struct_type
 
     if is_struct_type(type(value)):
-        return any(_is_compile_placeholder(field_value) for _name, field_value in _runtime_fields(value))
+        return any(
+            _is_compile_placeholder(field_value, allow_null_pointers=allow_null_pointers)
+            for _name, field_value in _runtime_fields(value)
+        )
     constructor, _dsl_type = JitArgumentRegistry.get(type(value))
     return constructor is TorchTensorJitArg and value.device.type != "cuda"
 
@@ -1776,9 +1796,9 @@ def jit(func: Optional[Callable] = None) -> JitFunction:
 class CompiledFunction:
     """Pre-compiled callable returned by ``flyc.compile()``.
 
-    Calls remain positional-only. Null pointers and non-device tensors defer
-    runtime initialization until the first call, allowing CPU-only compilation
-    and :meth:`export_to_c` without retracing the launcher.
+    Calls remain positional-only. Placeholder-only arguments and non-device
+    tensors defer runtime initialization until the first call, allowing CPU-only
+    compilation and :meth:`export_to_c` without retracing the launcher.
     """
 
     __slots__ = (
@@ -1893,9 +1913,10 @@ def _compile_impl(func, *args, **kwargs) -> Optional[CompiledFunction]:
             compiled_fn(c, a, b, sa, sb, M, N, stream)
 
     Compilation arguments may be positional or keyword arguments. Live device
-    arguments retain the existing initial launch. Null pointer wrappers and
-    non-device tensors are treated as compile placeholders, which keeps the
-    compile/export path independent of a device runtime. The returned
+    arguments retain the existing initial launch, including when optional pointer
+    arguments are null. Null pointer wrappers without any live device buffers,
+    and non-device tensors, are treated as compile placeholders, which keeps
+    the compile/export path independent of a device runtime. The returned
     :class:`CompiledFunction` keeps its existing positional-only fast path.
 
     Constexpr values are baked in at compile time and ignored on subsequent
@@ -1914,7 +1935,13 @@ def _compile_impl(func, *args, **kwargs) -> Optional[CompiledFunction]:
     sig = jf._sig
     bound = sig.bind(*bind_args, **kwargs)
     bound.apply_defaults()
-    compile_only = any(_is_compile_placeholder(value) for value in bound.arguments.values())
+    # Optional null pointers (scales, sinks, etc.) must not suppress the first
+    # launch when actual device buffers are present. Preserve offline export
+    # for all-placeholder calls; non-device tensors still prohibit dispatch.
+    has_device_args = any(_has_live_device_argument(value) for value in bound.arguments.values())
+    compile_only = any(
+        _is_compile_placeholder(value, allow_null_pointers=has_device_args) for value in bound.arguments.values()
+    )
     if compile_only:
         jf._compile_only(*args, **kwargs)
     else:
