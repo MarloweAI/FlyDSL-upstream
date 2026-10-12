@@ -153,7 +153,7 @@ other test here.
   2-GPU gates under them (`tests/unit/test_monokernel_ipc_host.py`,
   `tests/kernels/test_dispatch_combine_2gpu.py`) exist precisely because of that.
 
-### Gotcha: which tree you are actually testing
+### Gotcha 1: which tree you are actually testing
 
 `import flydsl` resolves to `build-fly/python_packages/flydsl/`, the staged build
 output -- not `python/flydsl/`. Editing the source tree and re-running pytest
@@ -170,3 +170,39 @@ ln -s "${PWD}/build-fly/python_packages/flydsl/_mlir" $RT/flydsl/_mlir
 export PYTHONPATH="$RT:${PWD}/build-fly/python_packages:${PWD}"
 # now break something under $RT/flydsl and re-run the test
 ```
+
+### Gotcha 2: a warm JIT cache makes IR-inspecting tests fail
+
+Tests that assert on generated IR -- `tests/unit/test_kernel_known_block_size.py`,
+`tests/unit/test_fastmath_context.py`, `tests/kernels/test_softmax_autotune.py`,
+`tests/extension/random/test_random.py` -- read IR that is only produced on a cache
+miss. Run the suite twice in a row locally and the second run fails ~19 of them
+against a cache the first run filled, with no source change in between:
+
+```
+cold cache:  2 failed, 6020 passed in 1584s
+warm cache: 22 failed, 6000 passed in  217s   # same commit
+```
+
+CI never sees this, since each job starts in a fresh container. Locally, clear the
+cache (or disable it) before trusting a full-suite result:
+
+```bash
+rm -rf ~/.flydsl/cache                # or: export FLYDSL_RUNTIME_CACHE_DIR=$(mktemp -d)
+export FLYDSL_RUNTIME_ENABLE_CACHE=0  # alternative: skip the disk cache entirely
+```
+
+### Gotcha 3: a failed HIP call can take down the rest of the session
+
+Some HIP failures leave the context unusable for the whole process, not just the
+call that failed. `hipIpcOpenMemHandle` on a handle the same process exported is
+one: it returns `hipErrorInvalidContext`, and every later
+`torch.*(device="cuda")` in that pytest session then raises "HIP error: invalid
+device context". A test doing this passes alone and in its own file, and only
+shows up as an unrelated test failing later in the full suite.
+
+If a test you did not touch starts failing on a plain CUDA allocation, suspect an
+earlier test in the same session rather than your own change, and bisect by running
+the suspect file first. `tests/kernels/test_moe_gemm.py` documents the same hazard
+for the memory-unsafe mxfp4 kernels, which is why they are marked `run=False`
+rather than merely `xfail`.
