@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-12T06:40:32Z",
+ "updated": "2026-10-12T06:58:54Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38214984659,
+   "pr": 1266,
+   "commit": "360d0b63daad87f48ba9564ad1b6d2d744770134",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38214984659",
+   "created_at": "2026-10-12T06:55:49Z",
+   "updated_at": "2026-10-12T06:55:49Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
+  {
+   "run_id": 38214773210,
+   "pr": null,
+   "commit": "598a568e7aec5840559bd80f2efe46e9f07d7ab1",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38214773210",
+   "created_at": "2026-10-12T06:53:22Z",
+   "updated_at": "2026-10-12T06:53:22Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
   {
    "run_id": 38213524890,
    "pr": 1274,
@@ -14,7 +44,7 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38213524890",
    "created_at": "2026-10-12T06:38:36Z",
-   "updated_at": "2026-10-12T06:39:10Z",
+   "updated_at": "2026-10-12T06:40:58Z",
    "actor": "jli-melchior",
    "jobs": []
   },
@@ -35,7 +65,7 @@
   },
   {
    "run_id": 38212843919,
-   "pr": 1266,
+   "pr": null,
    "commit": "99812cdc969b77f7735cc9b264d447c99b5a3ce7",
    "branch": "qiangpan/sageattn2_1",
    "event": "pull_request",
@@ -55,20 +85,20 @@
    "branch": "jli/bump-llvm-0906",
    "event": "pull_request",
    "title": "[llvm] bump llvm to 1df311a6",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38206317558",
    "created_at": "2026-10-12T05:03:33Z",
-   "updated_at": "2026-10-12T05:58:03Z",
+   "updated_at": "2026-10-12T06:57:39Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T05:58:02Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T06:57:38Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38206317558/job/114674309666"
     },
     {
@@ -1593,36 +1623,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38094223976",
    "created_at": "2026-10-10T23:12:40Z",
    "updated_at": "2026-10-10T23:12:40Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38094048182,
-   "pr": null,
-   "commit": "c89435581bba0a8b81fc3d805a6f834a0d858e39",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38094048182",
-   "created_at": "2026-10-10T23:09:44Z",
-   "updated_at": "2026-10-10T23:09:44Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38093673716,
-   "pr": null,
-   "commit": "2cb8eb414d7e63b48d465b479874a973532d34cd",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38093673716",
-   "created_at": "2026-10-10T23:03:20Z",
-   "updated_at": "2026-10-10T23:03:20Z",
    "actor": "dimitri91209",
    "jobs": []
   }
