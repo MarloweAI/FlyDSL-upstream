@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-12T06:58:54Z",
+ "updated": "2026-10-12T07:09:35Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -40,13 +40,41 @@
    "branch": "jli/schedule_bank_upstream_oldllvm_waitalu",
    "event": "pull_request",
    "title": "[opt] add schedule bank api and wait alu optimization",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38213524890",
    "created_at": "2026-10-12T06:38:36Z",
-   "updated_at": "2026-10-12T06:40:58Z",
+   "updated_at": "2026-10-12T07:04:25Z",
    "actor": "jli-melchior",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-12T07:04:25Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38213524890/job/114699946970"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T07:04:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38213524890/job/114699946991"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T07:05:03Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38213524890/job/114699947035"
+    }
+   ]
   },
   {
    "run_id": 38213480828,
