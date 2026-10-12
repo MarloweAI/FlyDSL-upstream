@@ -1389,6 +1389,18 @@ def test_moe_gemm_2stage(
     topk_vals, topk_ids = torch.topk(score, k=topk, dim=1)
     topk_weights = torch.softmax(topk_vals, dim=1).to(torch.float32)
 
+    # Default routing + comparison knobs for test stability:
+    # - Use torch routing (no aiter dependency for sorting).
+    # - Only compare aiter for fp8, and only when explicitly requested.
+    # These must be resolved BEFORE build_routing_buffers: passing moe_sort_mode=None
+    # into it falls through to aiter's moe_sorting, which defeats the "no aiter
+    # dependency" intent above and hard-fails the whole test whenever the installed
+    # aiter's moe_sorting signature differs from this tree's expectation.
+    if moe_sort_mode is None:
+        moe_sort_mode = "torch"
+    if compare_aiter_ck is None:
+        compare_aiter_ck = False
+
     routing = build_routing_buffers(
         topk_ids=topk_ids,
         topk_weights=topk_weights,
@@ -1397,14 +1409,6 @@ def test_moe_gemm_2stage(
         tile_m=tile_m,
         moe_sort_mode=moe_sort_mode,
     )
-
-    # Default routing + comparison knobs for test stability:
-    # - Use torch routing (no aiter dependency for sorting).
-    # - Only compare aiter for fp8, and only when explicitly requested.
-    if moe_sort_mode is None:
-        moe_sort_mode = "torch"
-    if compare_aiter_ck is None:
-        compare_aiter_ck = False
 
     if in_dtype in ("fp4", "a8w4", "a16w4", "int4_bf16"):
         # a4w4 / a8w4 drive the fused mxfp_moe pipeline (device-side fp4 re-quant).
