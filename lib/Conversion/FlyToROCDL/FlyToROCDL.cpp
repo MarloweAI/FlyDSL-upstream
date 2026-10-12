@@ -961,8 +961,7 @@ public:
     auto asmOp = LLVM::InlineAsmOp::create(
         rewriter, op.getLoc(), type, /*operands=*/ValueRange{adaptor.getValue()},
         /*asm_string=*/StringRef(""), /*constraints=*/StringRef(constraints),
-        /*has_side_effects=*/true, /*is_align_stack=*/false,
-        LLVM::tailcallkind::TailCallKind::None,
+        /*has_side_effects=*/true, /*is_align_stack=*/false, LLVM::tailcallkind::TailCallKind::None,
         /*asm_dialect=*/asmDialectAttr,
         /*operand_attrs=*/ArrayAttr());
 
@@ -972,8 +971,7 @@ public:
       std::string attrName = ("fly.pinned_" + prefix + "gprs").str();
       SmallVector<int64_t> indices;
       if (auto existing = gpuFunc->getAttrOfType<DenseI64ArrayAttr>(attrName))
-        indices.append(existing.asArrayRef().begin(),
-                       existing.asArrayRef().end());
+        indices.append(existing.asArrayRef().begin(), existing.asArrayRef().end());
       for (int64_t i = 0; i < numRegs; ++i)
         indices.push_back(index + i);
       gpuFunc->setAttr(attrName, rewriter.getDenseI64ArrayAttr(indices));
@@ -1089,8 +1087,7 @@ public:
 // attributes into amdgpu-reserved-{v,s,a}gprs LLVM passthrough entries.
 // ---------------------------------------------------------------------------
 class FlyPinRegisterReservePass
-    : public mlir::impl::FlyPinRegisterReservePassBase<
-          FlyPinRegisterReservePass> {
+    : public mlir::impl::FlyPinRegisterReservePassBase<FlyPinRegisterReservePass> {
 public:
   using FlyPinRegisterReservePassBase::FlyPinRegisterReservePassBase;
 
@@ -1104,8 +1101,7 @@ public:
       size_t origSize = passthroughAttrs.size();
 
       auto emitReserved = [&](StringRef discardable, StringRef llvmAttr) {
-        auto pinned =
-            func->getAttrOfType<DenseI64ArrayAttr>(discardable);
+        auto pinned = func->getAttrOfType<DenseI64ArrayAttr>(discardable);
         if (!pinned || pinned.empty())
           return;
         SmallVector<int64_t> indices(pinned.asArrayRef());
