@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-12T05:57:42Z",
+ "updated": "2026-10-12T06:17:33Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,19 +10,19 @@
    "branch": "jli/bump-llvm-0906",
    "event": "pull_request",
    "title": "[llvm] bump llvm to 1df311a6",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38206317558",
    "created_at": "2026-10-12T05:03:33Z",
-   "updated_at": "2026-10-12T05:21:08Z",
+   "updated_at": "2026-10-12T05:58:03Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-12T05:21:08Z",
+     "started_at": "2026-10-12T05:58:02Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38206317558/job/114674309666"
     },
@@ -81,11 +81,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T05:07:03Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38205357781/job/114671105559"
+     "completed_at": "2026-10-12T06:13:24Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38205357781/job/114671105559",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -96,11 +99,11 @@
    "branch": "jli/schedule_bank_upstream_oldllvm_waitalu",
    "event": "pull_request",
    "title": "[opt] add schedule bank api and wait alu optimization",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38203801874",
    "created_at": "2026-10-12T04:26:39Z",
-   "updated_at": "2026-10-12T05:07:08Z",
+   "updated_at": "2026-10-12T06:16:03Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -118,10 +121,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T05:07:07Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T06:16:02Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38203801874/job/114667931205"
     },
     {
