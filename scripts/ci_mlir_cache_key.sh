@@ -21,6 +21,10 @@ INPUTS=(
   thirdparty/llvm-build-info.json
   scripts/build_llvm.sh
 )
+# Include all LLVM patches in the cache key.
+for p in "${TREE_ROOT}"/thirdparty/llvm-*.patch; do
+  [ -f "$p" ] && INPUTS+=("${p#"${TREE_ROOT}/"}")
+done
 
 # Each patch's name and contents, sorted so every tree hashes alike. Their order
 # lives in llvm-build-info.json, hashed above.
