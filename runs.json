@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-12T15:35:35Z",
+ "updated": "2026-10-12T16:18:36Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,38 +10,38 @@
    "branch": "codex/fix-compile-optional-null",
    "event": "pull_request",
    "title": "[Bugfix][JIT] Keep initial launches with optional null pointers",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807",
    "created_at": "2026-10-12T15:15:21Z",
-   "updated_at": "2026-10-12T15:27:17Z",
+   "updated_at": "2026-10-12T16:16:30Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T15:30:28Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T15:46:13Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777733"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-12T15:27:52Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T16:02:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777847"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-12T15:27:17Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-12T15:51:27Z",
+     "completed_at": "2026-10-12T16:16:30Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777900"
     }
    ]
@@ -72,11 +72,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T15:13:25Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925106"
+     "completed_at": "2026-10-12T16:03:47Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925106",
+     "machine": "smci350-rck-g03-d07-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
