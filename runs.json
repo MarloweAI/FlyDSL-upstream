@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-11T21:29:23Z",
+ "updated": "2026-10-12T01:18:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38183036005,
+   "pr": 1272,
+   "commit": "76f40e1c1fc502351ba51b40361d4a8c9ba2fd18",
+   "branch": "rdmma-benchmark",
+   "event": "pull_request",
+   "title": "[Benchmark] fix rdna gemm benchmark option",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38183036005",
+   "created_at": "2026-10-11T23:06:44Z",
+   "updated_at": "2026-10-11T23:06:44Z",
+   "actor": "ppppqp",
+   "jobs": []
+  },
+  {
+   "run_id": 38181821344,
+   "pr": null,
+   "commit": "9e4ca31b73c304d62bfab63f2ac2bfc1751edf9d",
+   "branch": "rdmma-benchmark",
+   "event": "pull_request",
+   "title": "[Benchmark] fix rdna gemm benchmark option",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38181821344",
+   "created_at": "2026-10-11T22:47:39Z",
+   "updated_at": "2026-10-11T22:47:39Z",
+   "actor": "ppppqp",
+   "jobs": []
+  },
   {
    "run_id": 38173931359,
    "pr": 1223,
@@ -1440,92 +1470,6 @@
    "updated_at": "2026-10-10T15:38:55Z",
    "actor": "coderfeli",
    "jobs": []
-  },
-  {
-   "run_id": 38063054453,
-   "pr": 1261,
-   "commit": "20f5aaab183236a239b2cb9f520035eb24c1ec55",
-   "branch": "codex/s-buffer-load-api-20261010",
-   "event": "pull_request",
-   "title": "[DSL] Expose scalar buffer load API",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38063054453",
-   "created_at": "2026-10-10T15:18:12Z",
-   "updated_at": "2026-10-11T01:02:53Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-11T00:33:46Z",
-     "completed_at": "2026-10-11T01:02:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38063054453/job/114350293310"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T15:51:48Z",
-     "completed_at": "2026-10-10T16:07:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38063054453/job/114350293889"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T16:07:29Z",
-     "completed_at": "2026-10-10T17:21:08Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38063054453/job/114350294004"
-    }
-   ]
-  },
-  {
-   "run_id": 38061747512,
-   "pr": 1262,
-   "commit": "84f86799f79a0629dece11218557a809523e92aa",
-   "branch": "codex/cleanup-kernel-ir-aiter-20261010",
-   "event": "pull_request",
-   "title": "[Kernel] Clean low-level IR across FlyDSL kernels",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38061747512",
-   "created_at": "2026-10-10T14:58:43Z",
-   "updated_at": "2026-10-10T15:37:21Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T15:32:34Z",
-     "completed_at": "2026-10-10T15:37:12Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38061747512/job/114247855752"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T15:32:44Z",
-     "completed_at": "2026-10-10T15:37:20Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38061747512/job/114247855786"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-10T15:32:11Z",
-     "completed_at": "2026-10-10T15:37:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38061747512/job/114247855792"
-    }
-   ]
   }
  ]
 }
