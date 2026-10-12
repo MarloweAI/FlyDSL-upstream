@@ -1,8 +1,152 @@
 {
  "schema": 1,
- "updated": "2026-10-12T01:18:29Z",
+ "updated": "2026-10-12T03:40:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38200458907,
+   "pr": 1268,
+   "commit": "878413fb673d2fb14e3d3965b0e6ebd4486b698e",
+   "branch": "codex/ktrace-target-providers",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200458907",
+   "created_at": "2026-10-12T03:37:07Z",
+   "updated_at": "2026-10-12T03:38:37Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38199462051,
+   "pr": null,
+   "commit": "e78227e73a78c5577572a3dbdbb7c686b5808e6b",
+   "branch": "main",
+   "event": "push",
+   "title": "[DSL] Expose scalar buffer load API (#1261)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051",
+   "created_at": "2026-10-12T03:21:56Z",
+   "updated_at": "2026-10-12T03:37:32Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:38:29Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051/job/114652565339"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:38:13Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051/job/114652565341"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:37:31Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38199462051/job/114652565356"
+    }
+   ]
+  },
+  {
+   "run_id": 38196764932,
+   "pr": 1188,
+   "commit": "d6bad0ef0635b1afb1ef731be406c638cc5bb435",
+   "branch": "feat/hack-ut-asm-multi-kernel",
+   "event": "pull_request",
+   "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932",
+   "created_at": "2026-10-12T02:41:18Z",
+   "updated_at": "2026-10-12T03:02:24Z",
+   "actor": "Phil-amd",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-12T02:57:56Z",
+     "completed_at": "2026-10-12T03:22:08Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932/job/114644411425"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:02:23Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932/job/114644411428"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T02:58:01Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932/job/114644411538"
+    }
+   ]
+  },
+  {
+   "run_id": 38196502574,
+   "pr": 1190,
+   "commit": "1b1aa91eb0cea5c88d8f1be5b655a2e787d3099b",
+   "branch": "phil/llvm-extensions-v1",
+   "event": "pull_request",
+   "title": "[llvm] Add support for custom LLVM extensions",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574",
+   "created_at": "2026-10-12T02:37:21Z",
+   "updated_at": "2026-10-12T03:22:18Z",
+   "actor": "Phil-amd",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:03:13Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310312"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-12T03:22:17Z",
+     "completed_at": "2026-10-12T03:38:17Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310349"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-12T03:02:35Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310367"
+    }
+   ]
+  },
   {
    "run_id": 38183036005,
    "pr": 1272,
@@ -115,11 +259,11 @@
    "branch": "perf/kernarg-flatten-struct-args",
    "event": "pull_request",
    "title": "[Perf][Compiler] Flatten struct kernel arguments when they are preloaded, and preload the gfx1250 RMSNorm",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810",
    "created_at": "2026-10-11T18:41:44Z",
-   "updated_at": "2026-10-11T18:52:59Z",
+   "updated_at": "2026-10-12T02:58:07Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -146,9 +290,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-11T18:52:59Z",
+     "started_at": "2026-10-12T02:58:06Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810/job/114547603768"
     }
@@ -1112,7 +1256,7 @@
   },
   {
    "run_id": 38101767892,
-   "pr": 1261,
+   "pr": null,
    "commit": "0251edf985cbb3615c9bc868cf072623c671798f",
    "branch": "codex/s-buffer-load-api-20261010",
    "event": "pull_request",
@@ -1350,125 +1494,6 @@
    "created_at": "2026-10-10T17:56:25Z",
    "updated_at": "2026-10-10T17:56:25Z",
    "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38072241748,
-   "pr": null,
-   "commit": "c582d7196ba68e46fb4f1cd94c75058efe028ff5",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38072241748",
-   "created_at": "2026-10-10T17:33:43Z",
-   "updated_at": "2026-10-10T17:33:43Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38064874153,
-   "pr": 1258,
-   "commit": "5575a5e436e712452a0958a02c01ab038b5d34c2",
-   "branch": "xudong/fix-zip2by-guide",
-   "event": "pull_request",
-   "title": "[fix] Build the zipped_divide guide from the tiler shape",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153",
-   "created_at": "2026-10-10T15:45:09Z",
-   "updated_at": "2026-10-11T02:11:30Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T16:26:09Z",
-     "completed_at": "2026-10-10T16:43:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153/job/114255157578"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T01:10:39Z",
-     "completed_at": "2026-10-11T02:11:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153/job/114255157584"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T16:09:59Z",
-     "completed_at": "2026-10-10T17:09:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064874153/job/114255157646",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38064618967,
-   "pr": 1262,
-   "commit": "924428e58bf85d5f7c4a420c56a6f1032cb086e8",
-   "branch": "codex/cleanup-kernel-ir-aiter-20261010",
-   "event": "pull_request",
-   "title": "[Kernel] Clean low-level IR across FlyDSL kernels",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064618967",
-   "created_at": "2026-10-10T15:41:20Z",
-   "updated_at": "2026-10-10T17:07:35Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T16:08:01Z",
-     "completed_at": "2026-10-10T16:26:01Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064618967/job/114254645376"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-10T16:10:11Z",
-     "completed_at": "2026-10-10T17:07:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064618967/job/114254645419"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-10T16:07:26Z",
-     "completed_at": "2026-10-10T16:38:50Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064618967/job/114254645499"
-    }
-   ]
-  },
-  {
-   "run_id": 38064328834,
-   "pr": 1262,
-   "commit": "72185bac19f09e683ea215357eb51c39e7480bc7",
-   "branch": "codex/cleanup-kernel-ir-aiter-20261010",
-   "event": "pull_request",
-   "title": "[Kernel] Clean low-level IR across FlyDSL kernels",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38064328834",
-   "created_at": "2026-10-10T15:36:59Z",
-   "updated_at": "2026-10-10T15:38:55Z",
-   "actor": "coderfeli",
    "jobs": []
   }
  ]
