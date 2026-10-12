@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-12T03:50:05Z",
+ "updated": "2026-10-12T03:54:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -111,11 +111,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T02:58:01Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932/job/114644411538"
+     "completed_at": "2026-10-12T03:50:57Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196764932/job/114644411538",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -274,11 +277,11 @@
    "branch": "perf/kernarg-flatten-struct-args",
    "event": "pull_request",
    "title": "[Perf][Compiler] Flatten struct kernel arguments when they are preloaded, and preload the gfx1250 RMSNorm",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810",
    "created_at": "2026-10-11T18:41:44Z",
-   "updated_at": "2026-10-12T02:58:07Z",
+   "updated_at": "2026-10-12T03:53:23Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -305,10 +308,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T02:58:06Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T03:53:22Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810/job/114547603768"
     }
    ]
