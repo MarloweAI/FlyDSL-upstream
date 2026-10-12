@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-12T11:53:27Z",
+ "updated": "2026-10-12T11:55:33Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -117,20 +117,20 @@
    "branch": "main",
    "event": "push",
    "title": "[llvm] Add support for custom LLVM extensions (#1190)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971",
    "created_at": "2026-10-12T09:30:48Z",
-   "updated_at": "2026-10-12T10:50:06Z",
+   "updated_at": "2026-10-12T11:53:37Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T10:46:18Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T11:53:36Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971/job/114764807324"
     },
     {
