@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-12T14:29:08Z",
+ "updated": "2026-10-12T14:59:27Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38266582119,
+   "pr": null,
+   "commit": "45b7613eb5eb325f11732b190cb42f70ee9238cf",
+   "branch": "main",
+   "event": "push",
+   "title": "support scale nonshuffle (#1275)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119",
+   "created_at": "2026-10-12T14:56:37Z",
+   "updated_at": "2026-10-12T14:58:12Z",
+   "actor": "solinzby1",
+   "jobs": []
+  },
   {
    "run_id": 38257824955,
    "pr": null,
@@ -10,29 +25,29 @@
    "branch": "main",
    "event": "push",
    "title": "[DSL][Ktrace] Add experiment ktrace capture with target providers (#1\u2026",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955",
    "created_at": "2026-10-12T13:44:37Z",
-   "updated_at": "2026-10-12T14:00:30Z",
+   "updated_at": "2026-10-12T14:57:45Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-12T14:00:30Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T14:56:37Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916741"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-12T14:01:08Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T14:57:44Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916870"
     },
     {
@@ -501,7 +516,7 @@
   },
   {
    "run_id": 38217700479,
-   "pr": 1275,
+   "pr": null,
    "commit": "ea87bf01d788e67454ca438fa4b39c40a3d45f1a",
    "branch": "mxf8_nonshuffle",
    "event": "pull_request",
@@ -1729,49 +1744,6 @@
      "started_at": "2026-10-11T13:26:34Z",
      "completed_at": "2026-10-11T14:26:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134760432/job/114458976672"
-    }
-   ]
-  },
-  {
-   "run_id": 38134556702,
-   "pr": null,
-   "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
-   "branch": "codex/ktrace-usage-graph",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702",
-   "created_at": "2026-10-11T11:09:55Z",
-   "updated_at": "2026-10-11T12:11:43Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T11:21:58Z",
-     "completed_at": "2026-10-11T11:38:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702/job/114457743089"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-11T11:22:32Z",
-     "completed_at": "2026-10-11T11:51:25Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702/job/114457743098"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-11T11:25:17Z",
-     "completed_at": "2026-10-11T12:11:42Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38134556702/job/114457743137"
     }
    ]
   }
