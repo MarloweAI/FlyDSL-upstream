@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-12T13:03:18Z",
+ "updated": "2026-10-12T13:08:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38253316960,
+   "pr": 1277,
+   "commit": "ca68702a2e47853698af680a66d2a41e336a99f8",
+   "branch": "test/vllm-kernel-coverage",
+   "event": "pull_request",
+   "title": "[Test] Cover the FlyDSL kernels vLLM depends on",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253316960",
+   "created_at": "2026-10-12T13:05:55Z",
+   "updated_at": "2026-10-12T13:07:22Z",
+   "actor": "zhiding512",
+   "jobs": []
+  },
+  {
+   "run_id": 38253273674,
+   "pr": 1276,
+   "commit": "e70a9b4f3c250ddaf39b5ad6811d221b8900ed13",
+   "branch": "jli/pinreg-v2",
+   "event": "pull_request",
+   "title": "[compiler] pin register use reservedregs method",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253273674",
+   "created_at": "2026-10-12T13:05:32Z",
+   "updated_at": "2026-10-12T13:07:02Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38247864229,
    "pr": 1268,
@@ -29,10 +59,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T12:43:32Z",
-     "completed_at": null,
+     "completed_at": "2026-10-12T13:02:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38247864229/job/114816226110"
     },
     {
@@ -1680,67 +1710,6 @@
      "started_at": "2026-10-11T10:42:09Z",
      "completed_at": "2026-10-11T11:00:03Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38132059875/job/114450358966"
-    }
-   ]
-  },
-  {
-   "run_id": 38131873491,
-   "pr": null,
-   "commit": "952ac8ec6c39f4348f93eeab4f69b44b89ef6ef8",
-   "branch": "codex/ktrace-usage-graph",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131873491",
-   "created_at": "2026-10-11T10:25:05Z",
-   "updated_at": "2026-10-11T10:26:29Z",
-   "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38131087439,
-   "pr": 1265,
-   "commit": "5be48764fc7632852a2cd90023c235bfac66255d",
-   "branch": "codex/qwen38-inferencemax-mono-pr",
-   "event": "pull_request",
-   "title": "Add FlyDSL Qwen3.8 hyperconnection decode kernels",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439",
-   "created_at": "2026-10-11T10:11:58Z",
-   "updated_at": "2026-10-11T12:27:52Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T10:51:08Z",
-     "completed_at": "2026-10-11T12:27:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740316"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T10:25:42Z",
-     "completed_at": "2026-10-11T10:41:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740318"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T10:25:51Z",
-     "completed_at": "2026-10-11T11:16:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38131087439/job/114447740338",
-     "machine": "smci350-rck-g03-b20-03",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
