@@ -107,3 +107,66 @@ This switch is independent of `RUN_TESTS_FULL`, which continues to control
 ## MLIR FileCheck tests
 
 `tests/mlir/**/*.mlir` checks are driven by **`scripts/run_tests.sh`** (FileCheck + `fly-opt`), not by pytest. Tiering for those may be documented in parallel in this README as the RFC rollout continues; see RFC open questions.
+
+## Downstream consumer coverage
+
+vLLM and ATOM author their own FlyDSL kernels. Those kernels are not in this
+repository, so a change here can break them while this repo's CI stays green.
+Three different mechanisms cover that risk, and which one applies depends on
+where the kernel's source lives.
+
+| Where the kernel lives | Covered by | Example |
+|---|---|---|
+| This repo (`kernels/`) | ordinary tests under `tests/kernels/` | `moe_2stage_a16wmix` -> `tests/kernels/test_moe_gemm.py` |
+| aiter (`aiter.ops.flydsl.*`) | aiter's own `op_tests/`, run from `.github/workflows/flydsl.yaml` | GDN prefill -> `op_tests/test_gated_delta_rule.py` |
+| vLLM itself | `tests/unit/test_downstream_api_contract.py` | TurboQuant / UltraQuant decode, DeepSeek-V4.1 mono |
+
+### `tests/unit/test_downstream_api_contract.py`
+
+vLLM's own kernels reach past the documented DSL into compiler, runtime and raw
+MLIR-binding internals (`flydsl.utils.smem_allocator`, `flydsl.expr.typing.
+as_ir_value`, `flydsl.compiler.ast_rewriter.ASTRewriter`, `flydsl._mlir.ir` and
+`_mlir.dialects.{scf,llvm}`, ...). That file freezes exactly those symbols and
+signatures.
+
+**If you rename, move, or re-sign anything in `python/flydsl/` and that test goes
+red, the change is about to break vLLM.** It is not a veto: update the downstream
+repository and that file in the same change. The file lists the downstream call
+sites it mirrors, so the blast radius is visible without leaving this repo.
+
+`flydsl.utils.smem_allocator` is the case to watch. It is marked legacy and warns
+on use, and nothing under `kernels/` or `tests/` imports it any more -- but three
+vLLM paged-decode kernels do. Removing it per the deprecation plan would fail no
+other test here.
+
+### Coverage this repo does not have
+
+- **The vLLM-side kernels themselves** (`tq_decode`, `tq_decode_gqa6`,
+  `ultraquant_decode_hd256`, the DeepSeek-V4.1 `mono` layer). Their source is in
+  vLLM; only the API contract above protects them from this side.
+- **`flydsl_fp8_mqa_logits`**, and the aiter MoE `op_tests`. See the
+  `[CI] Run aiter's FlyDSL GDN op_tests in the PR gate` commit message for why
+  each one is not wired yet.
+- **Multi-GPU paths by default.** `MegaMoEV2`, allreduce, monokernel GLM-5/Kimi-K3
+  and dispatch/combine at 8 ranks are all `multi_gpu`, which `scripts/run_tests.sh`
+  deselects and which CI runs only on a label-triggered job. The single-GPU and
+  2-GPU gates under them (`tests/unit/test_monokernel_ipc_host.py`,
+  `tests/kernels/test_dispatch_combine_2gpu.py`) exist precisely because of that.
+
+### Gotcha: which tree you are actually testing
+
+`import flydsl` resolves to `build-fly/python_packages/flydsl/`, the staged build
+output -- not `python/flydsl/`. Editing the source tree and re-running pytest
+without rebuilding tests the **old** code, silently. `kernels/` is imported from
+the repo root and does not have this problem.
+
+To check that a test really fails when the thing it guards is broken, build an
+overlay rather than editing the staged copy:
+
+```bash
+RT=/tmp/fly-overlay; rm -rf $RT; mkdir -p $RT/flydsl
+cp -r python/flydsl/. $RT/flydsl/
+ln -s "${PWD}/build-fly/python_packages/flydsl/_mlir" $RT/flydsl/_mlir
+export PYTHONPATH="$RT:${PWD}/build-fly/python_packages:${PWD}"
+# now break something under $RT/flydsl and re-run the test
+```
