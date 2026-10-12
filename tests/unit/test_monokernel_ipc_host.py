@@ -176,23 +176,13 @@ def test_allocate_uncached_zeroes_memory_it_did_not_get_clean():
         ipc.free_device_memory(second)
 
 
-@pytest.mark.l2_device
-@pytest.mark.rocm_lower
-def test_failed_hip_calls_surface_as_runtime_error_naming_the_operation():
-    """Opening a handle exported by this same process/device is not a supported
-    peer mapping. Whether HIP rejects it or allows it, the wrapper must not leak a
-    raw status code or a null pointer."""
-    import torch
-
-    from kernels.monokernel import ipc
-
-    tensor = torch.zeros(1024, dtype=torch.int32, device="cuda")
-    handle = ipc.get_ipc_handle(ipc.get_allocation_base(tensor.data_ptr()))
-
-    try:
-        mapped = ipc.open_ipc_handle(handle)
-    except RuntimeError as exc:
-        assert str(exc).startswith("hipIpcOpenMemHandle failed: "), exc
-    else:
-        assert mapped != 0
-        ipc.close_ipc_handle(mapped)
+# NOTE: there is deliberately no test that opens a handle this process exported
+# itself. hipIpcOpenMemHandle rejects that with hipErrorInvalidContext and leaves
+# the HIP context unusable for the rest of the process: every later
+# torch.*(device="cuda") in the same pytest session then raises
+# "HIP error: invalid device context". An earlier revision of this file did exactly
+# that and took tests/unit/test_multi_stream_launch.py down with it in the full
+# suite, while passing when run alone. The error-wrapping path it was meant to
+# cover is already exercised by
+# test_check_hip_error_is_a_noop_on_success_and_names_the_operation_on_failure,
+# which drives check() with a non-zero status and changes no HIP state.
