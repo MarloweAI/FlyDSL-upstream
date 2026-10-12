@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-12T11:30:56Z",
+ "updated": "2026-10-12T11:53:27Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38244236170,
+   "pr": 1268,
+   "commit": "1c81f20fab0d74528cde048ea835248027e251b6",
+   "branch": "codex/ktrace-target-providers",
+   "event": "pull_request",
+   "title": "[DSL][Runtime] Add ktrace capture with target providers",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38244236170",
+   "created_at": "2026-10-12T11:41:05Z",
+   "updated_at": "2026-10-12T11:47:36Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38233297674,
    "pr": 1243,
@@ -10,11 +25,11 @@
    "branch": "jli/bump-llvm-0906",
    "event": "pull_request",
    "title": "[llvm] bump llvm to 1df311a6",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674",
    "created_at": "2026-10-12T09:58:07Z",
-   "updated_at": "2026-10-12T11:10:02Z",
+   "updated_at": "2026-10-12T11:51:02Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -38,11 +53,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-12T10:53:58Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674/job/114771500446"
+     "completed_at": "2026-10-12T11:51:01Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674/job/114771500446",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -1698,49 +1716,6 @@
      "started_at": "2026-10-11T09:41:38Z",
      "completed_at": "2026-10-11T09:57:07Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38127530772/job/114436939857"
-    }
-   ]
-  },
-  {
-   "run_id": 38123053613,
-   "pr": 1229,
-   "commit": "2fd1236663ba7c47e82f22ca6dee5a9b1ae2d4c7",
-   "branch": "fix/gfx1250-a8w8-n-tail",
-   "event": "pull_request",
-   "title": "[Test][gfx1250] State the FP8 GEMM shape contract and check that stores stay inside N",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613",
-   "created_at": "2026-10-11T07:56:11Z",
-   "updated_at": "2026-10-11T19:22:13Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-11T18:53:06Z",
-     "completed_at": "2026-10-11T19:22:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114547500891"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T09:26:30Z",
-     "completed_at": "2026-10-11T09:41:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114547501523"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T09:24:34Z",
-     "completed_at": "2026-10-11T11:00:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38123053613/job/114547501567"
     }
    ]
   }
