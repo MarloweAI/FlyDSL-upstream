@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-13T05:55:33Z",
+ "updated": "2026-10-13T06:32:13Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38354686645,
+   "pr": 1283,
+   "commit": "141d284dcf362ecd807aaf23cc9b28a1d8d8bbf9",
+   "branch": "codex/lazy-aot-compile-hotpath",
+   "event": "workflow_dispatch",
+   "title": "Fly DSL test",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38354686645",
+   "created_at": "2026-10-13T06:04:13Z",
+   "updated_at": "2026-10-13T06:19:05Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:19:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38354686645/job/115158985645"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:19:45Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38354686645/job/115158985669"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:19:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38354686645/job/115158985673"
+    }
+   ]
+  },
   {
    "run_id": 38353727038,
    "pr": 1256,
@@ -14,9 +57,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38353727038",
    "created_at": "2026-10-13T05:53:27Z",
-   "updated_at": "2026-10-13T05:54:30Z",
+   "updated_at": "2026-10-13T06:19:53Z",
    "actor": "james-huang09",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:19:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38353727038/job/115156376327"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:10:30Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38353727038/job/115156376342"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T06:10:37Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38353727038/job/115156376353"
+    }
+   ]
   },
   {
    "run_id": 38350013805,
@@ -205,11 +276,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313",
    "created_at": "2026-10-13T03:35:13Z",
-   "updated_at": "2026-10-13T05:22:23Z",
+   "updated_at": "2026-10-13T06:30:04Z",
    "actor": "huizzhan",
    "jobs": [
     {
@@ -233,10 +304,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T05:22:23Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T06:30:03Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981966"
     }
    ]
@@ -1916,21 +1987,6 @@
    "created_at": "2026-10-11T14:58:59Z",
    "updated_at": "2026-10-11T15:02:34Z",
    "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38147840935,
-   "pr": null,
-   "commit": "5e37c8339e2c3fd44820268d3e50cad99451e6d0",
-   "branch": "qiangpan/sageattn2_2",
-   "event": "pull_request",
-   "title": "[Runtime] Report GPU last-level cache size from KFD",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38147840935",
-   "created_at": "2026-10-11T14:36:00Z",
-   "updated_at": "2026-10-11T14:36:00Z",
-   "actor": "qiangpan2",
    "jobs": []
   }
  ]
