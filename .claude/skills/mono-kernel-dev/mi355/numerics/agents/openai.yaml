@@ -1,4 +1,0 @@
-interface:
-  display_name: "MI355 Mono-Kernel Numerics"
-  short_description: "Validate quantization, routing, and state contracts"
-  default_prompt: "Use $mi355-mono-kernel-numerics to work through the current mono-kernel task and its next evidence-based action."

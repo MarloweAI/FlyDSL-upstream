@@ -1,4 +1,0 @@
-interface:
-  display_name: "MI355 Mono-Kernel ATOM Integration"
-  short_description: "Integrate mono-kernels into ATOM decode and MTP"
-  default_prompt: "Use $mi355-mono-kernel-atom to work through the current mono-kernel task and its next evidence-based action."

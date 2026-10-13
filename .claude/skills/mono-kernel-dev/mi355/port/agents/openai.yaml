@@ -1,4 +1,0 @@
-interface:
-  display_name: "MI355 Mono-Kernel Bring-up"
-  short_description: "Bring up new-model low-concurrency mono-kernels"
-  default_prompt: "Use $mi355-mono-kernel-port to work through the current mono-kernel task and its next evidence-based action."
