@@ -146,6 +146,10 @@ compiles a ``@flyc.jit`` launcher for one argument signature and returns a
 same signature, and ``Constexpr`` values remain fixed to the specialization
 used at compile time.
 
+Calls to the returned ``CompiledFunction`` dispatch directly without constructing
+or looking up a JIT cache key. ``flyc.compile`` itself uses the existing JIT
+specialization cache.
+
 The same compiled specialization can be exported as a position-independent
 host object with a generated C header:
 
@@ -170,6 +174,10 @@ declares the packed entry point, typed inline call helpers, module
 initialization/load/unload functions, and embedded ABI metadata. When
 ``function_prefix`` is omitted, ``file_name`` is also used as the exported C
 symbol.
+
+The lowered IR is parsed and its export ABI validated on the first
+``export_to_c`` call. Each ``CompiledFunction`` keeps its own argument metadata
+for that export without retaining the example tensors passed to ``compile``.
 
 Passing live device arguments to ``flyc.compile`` preserves its normal initial
 launch, including when other pointer arguments are null to disable optional

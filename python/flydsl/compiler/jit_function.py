@@ -1195,6 +1195,8 @@ def _is_compile_placeholder(value, *, allow_null_pointers=False) -> bool:
         return value.torch_tensor.device.type != "cuda"
     if isinstance(value, DLTensorJitArg):
         return not value.dladaptor.data_ptr or value.dladaptor.address_space != 1
+    if isinstance(value, Stream):
+        return False
 
     from ..expr.struct import _runtime_fields, is_struct_type
 
@@ -1559,7 +1561,7 @@ class JitFunction:
         """Compile one specialization without creating an engine or running it."""
         return self._compile_or_execute(args, kwargs, execute=False)
 
-    def _compile_or_execute(self, args, kwargs, *, execute: bool):
+    def _compile_or_execute(self, args, kwargs, *, execute: bool, return_compiled: bool = False):
         if ir.Context.current is not None:
             return self.func(*args, **kwargs)
 
@@ -1584,6 +1586,15 @@ class JitFunction:
 
         args_tuple = tuple(bound.arguments.values())
 
+        if return_compiled:
+            # Inspect the already-resolved arguments. Optional null pointers
+            # must not suppress live launches; CPU/placeholder-only inputs
+            # still compile without creating a runtime.
+            has_device_args = any(_has_live_device_argument(value) for value in args_tuple)
+            execute = not any(
+                _is_compile_placeholder(value, allow_null_pointers=has_device_args) for value in args_tuple
+            )
+
         if execute:
             from ..runtime.device_runtime import ensure_compile_runtime_pairing_from_env
 
@@ -1592,9 +1603,12 @@ class JitFunction:
         # Fast path: reuse pre-built CallState (no ctypes alloc, no DLPack)
         call_state = self._call_state_cache.get(cache_key)
         if call_state is not None:
-            if not execute or env.compile.compile_only:
+            if env.compile.compile_only:
                 return None
-            return call_state(args_tuple)
+            result = call_state(args_tuple) if execute else None
+            if return_compiled:
+                return self._make_compiled_function(cache_key, bound, call_state)
+            return result
 
         from ..expr import ktrace as _ktrace
         from ..expr.ktrace_common import EventNameConflict, name_assignment_lock
@@ -1631,11 +1645,14 @@ class JitFunction:
                 self._mem_cache[cache_key] = cached_func
 
         if cached_func is not None and accept_cached(cached_func):
-            if not execute or env.compile.compile_only:
+            if env.compile.compile_only:
                 return None
+            if not execute:
+                return self._make_compiled_function(cache_key, bound, None) if return_compiled else None
             state = _build_call_state(sig, args_tuple, cached_func)
             self._call_state_cache[cache_key] = state
-            return state(args_tuple)
+            result = state(args_tuple)
+            return self._make_compiled_function(cache_key, bound, state) if return_compiled else result
 
         if run_only:
             cdir = getattr(self.cache_manager, "cache_dir", None)
@@ -1710,15 +1727,28 @@ class JitFunction:
                             log().warning(f"Failed to write compile cache: {e}")
 
         # OUTSIDE lock: engine init + kernel launch
-        if not execute or env.compile.compile_only:
+        if env.compile.compile_only:
             return None
+        if not execute:
+            return self._make_compiled_function(cache_key, bound, None) if return_compiled else None
 
         # The in-process CompiledArtifact cache above owns the ExecutionEngine/
         # code object, so the function pointer remains valid even when disk
         # cache is off.
         state = _build_call_state(sig, args_tuple, compiled_func)
         self._call_state_cache[cache_key] = state
-        return state(args_tuple)
+        result = state(args_tuple)
+        return self._make_compiled_function(cache_key, bound, state) if return_compiled else result
+
+    def _make_compiled_function(self, cache_key, bound, call_state):
+        """Reuse this dispatch's cache lookup and ABI; never prepare export IR here."""
+        artifact = self._mem_cache[cache_key]
+        compiled = CompiledFunction(call_state, artifact)
+        if call_state is None:
+            compiled._call_spec = _build_call_spec(self._sig, tuple(bound.arguments.values()))
+        compiled._backend = self._backend_target.backend
+        compiled._aot_spec, compiled._aot_error = _prepare_aot_signature(self, bound, artifact)
+        return compiled
 
 
 def _ensure_stream_arg(jit_args: list) -> bool:
@@ -1810,6 +1840,7 @@ class CompiledFunction:
         "_keepalive",
         "_aot_compiled",
         "_aot_error",
+        "_aot_spec",
     )
 
     def __init__(self, call_state, keepalive):
@@ -1821,6 +1852,7 @@ class CompiledFunction:
         self._keepalive = keepalive  # prevent GC of CompiledArtifact / ExecutionEngine
         self._aot_compiled = None
         self._aot_error = None
+        self._aot_spec = None
 
     def __call__(self, *args):
         state = self._call_state
@@ -1850,34 +1882,37 @@ class CompiledFunction:
         system runtime libraries when linked into an executable or shared
         library; it does not require FlyDSL or Python at deployment time.
         Host export currently requires 64-bit little-endian Linux ELF tools.
+        Export IR and ABI validation are prepared lazily on the first export.
         """
-        if self._aot_error is not None:
-            error_type, message = self._aot_error
-            raise error_type(message)
-        if self._aot_compiled is None:
-            raise RuntimeError("flyc.compile(): no AOT export artifact is available")
-        self._aot_compiled._export_to_c(file_path, file_name, function_prefix)
+        self._get_aot_compiled()._export_to_c(file_path, file_name, function_prefix)
+
+    def _get_aot_compiled(self):
+        """Parse and validate export IR once, only when an export is requested."""
+        with self._call_lock:
+            if self._aot_error is not None:
+                error_type, message = self._aot_error
+                raise error_type(message)
+            if self._aot_compiled is None:
+                if self._aot_spec is None:
+                    raise RuntimeError("flyc.compile(): no AOT export artifact is available")
+                from ._aot import _aot_from_jit_artifact
+
+                abi_spec, target = self._aot_spec
+                self._aot_compiled = _aot_from_jit_artifact(
+                    self._keepalive, abi_spec=abi_spec, backend=target.backend, arch=target.arch
+                )
+            return self._aot_compiled
 
 
-def _prepare_aot_export(jf, sig, bound, artifact):
+def _prepare_aot_signature(jf, bound, artifact):
+    """Snapshot this callable's ABI without retaining buffers or parsing IR."""
     if getattr(artifact, "_ktrace_traced", False):
         return None, (NotImplementedError, "ktrace-instrumented kernels cannot be exported to C")
     try:
-        param_names, jit_args, _dsl_types, _constexpr_values = convert_to_jit_arguments(sig, bound)
-        has_user_stream = _ensure_stream_arg(jit_args)
-        from ._aot import _aot_from_jit_artifact
+        from ._aot import _snapshot_abi
 
-        target = jf._backend_target
-        compiled = _aot_from_jit_artifact(
-            artifact,
-            sig=sig,
-            param_names=param_names,
-            jit_args=jit_args,
-            has_user_stream=has_user_stream,
-            backend=target.backend,
-            arch=target.arch,
-        )
-        return compiled, None
+        abi_spec = _snapshot_abi(jf._sig, bound.arguments)
+        return (abi_spec, jf._backend_target), None
     except Exception as exc:
         error_type = (
             type(exc) if isinstance(exc, (TypeError, ValueError, NotImplementedError, RuntimeError)) else RuntimeError
@@ -1931,51 +1966,7 @@ def _compile_impl(func, *args, **kwargs) -> Optional[CompiledFunction]:
     if bound_self is not None:
         args = (bound_self, *args)
 
-    bound_self, bind_args = jf._split_self(args)
-    sig = jf._sig
-    bound = sig.bind(*bind_args, **kwargs)
-    bound.apply_defaults()
-    # Optional null pointers (scales, sinks, etc.) must not suppress the first
-    # launch when actual device buffers are present. Preserve offline export
-    # for all-placeholder calls; non-device tensors still prohibit dispatch.
-    has_device_args = any(_has_live_device_argument(value) for value in bound.arguments.values())
-    compile_only = any(
-        _is_compile_placeholder(value, allow_null_pointers=has_device_args) for value in bound.arguments.values()
-    )
-    if compile_only:
-        jf._compile_only(*args, **kwargs)
-    else:
-        jf(*args, **kwargs)
-    if env.compile.compile_only:
-        return None
-
-    owner_cls = type(bound_self) if bound_self is not None else None
-    cache_key = jf._build_full_cache_key(bound.arguments, owner_cls=owner_cls, bound_self=bound_self)
-    args_tuple = tuple(bound.arguments.values())
-
-    # Look up the CompiledArtifact.  We must hold a direct reference to it
-    # because it owns the ExecutionEngine and GPU code objects — if it gets
-    # GC'd, the function pointer inside CallState becomes dangling.
-    artifact = jf._mem_cache.get(cache_key)
-    if artifact is None:
-        # Cache disabled — retrieve from _last_compiled (set unconditionally
-        # by __call__).  This does not alter __call__'s caching semantics.
-        last = jf._last_compiled
-        if last is not None and last[0] == cache_key:
-            artifact = last[1]
-    if artifact is None:
-        raise RuntimeError("flyc.compile(): compilation succeeded but no cached artifact found.")
-
-    call_state = jf._call_state_cache.get(cache_key)
-    call_spec = _build_call_spec(sig, args_tuple)
-
-    aot_compiled, aot_error = _prepare_aot_export(jf, sig, bound, artifact)
-    compiled = CompiledFunction(call_state, artifact)
-    compiled._call_spec = call_spec
-    compiled._backend = jf._backend_target.backend
-    compiled._aot_compiled = aot_compiled
-    compiled._aot_error = aot_error
-    return compiled
+    return jf._compile_or_execute(args, kwargs, execute=True, return_compiled=True)
 
 
 class CompileCallable:
