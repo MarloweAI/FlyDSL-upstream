@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-13T11:55:54Z",
+ "updated": "2026-10-13T12:03:21Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -1110,21 +1110,24 @@
    "branch": "jli/fix-waves-per-eu",
    "event": "pull_request",
    "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882",
    "created_at": "2026-10-13T02:40:47Z",
-   "updated_at": "2026-10-13T10:45:16Z",
+   "updated_at": "2026-10-13T12:01:35Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T10:45:15Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115241977147"
+     "completed_at": "2026-10-13T12:01:35Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115241977147",
+     "machine": "gbt350-odcdh1-b04-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
