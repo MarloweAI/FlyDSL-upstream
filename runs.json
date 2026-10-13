@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-13T07:28:22Z",
+ "updated": "2026-10-13T07:30:25Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38362852846,
+   "pr": 1278,
+   "commit": "f393681f55ad7aa2258ea2217e9cb03048bfec9f",
+   "branch": "codex/fix-compile-optional-null",
+   "event": "pull_request",
+   "title": "[Bugfix][JIT] Keep initial launches with optional null pointers",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846",
+   "created_at": "2026-10-13T07:28:22Z",
+   "updated_at": "2026-10-13T07:28:56Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38362765300,
+   "pr": 1284,
+   "commit": "ea47b4ac847389615b166fbc8345f6beeb8bef59",
+   "branch": "xudong/make-tile-modes-list",
+   "event": "pull_request",
+   "title": "[fix] Make make_tile treat every argument list as modes",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300",
+   "created_at": "2026-10-13T07:27:31Z",
+   "updated_at": "2026-10-13T07:27:55Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
   {
    "run_id": 38362516611,
    "pr": 1284,
@@ -10,11 +40,11 @@
    "branch": "xudong/make-tile-modes-list",
    "event": "pull_request",
    "title": "[fix] Make make_tile treat every argument list as modes",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362516611",
    "created_at": "2026-10-13T07:25:09Z",
-   "updated_at": "2026-10-13T07:26:54Z",
+   "updated_at": "2026-10-13T07:27:33Z",
    "actor": "xudoyuan",
    "jobs": []
   },
@@ -78,7 +108,7 @@
   },
   {
    "run_id": 38354686645,
-   "pr": 1283,
+   "pr": null,
    "commit": "141d284dcf362ecd807aaf23cc9b28a1d8d8bbf9",
    "branch": "codex/lazy-aot-compile-hotpath",
    "event": "workflow_dispatch",
@@ -1958,36 +1988,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116/job/114538164617"
     }
    ]
-  },
-  {
-   "run_id": 38160754972,
-   "pr": null,
-   "commit": "cbb1cf8c0c9feb93596d2dbc2b597599f96c4c62",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38160754972",
-   "created_at": "2026-10-11T17:42:17Z",
-   "updated_at": "2026-10-11T17:42:17Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38160561002,
-   "pr": null,
-   "commit": "4f47faf8e311e6558b4a5decbf296cfed6d47e6b",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38160561002",
-   "created_at": "2026-10-11T17:39:29Z",
-   "updated_at": "2026-10-11T17:39:29Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
