@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-13T09:43:13Z",
+ "updated": "2026-10-13T09:45:33Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "pending",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38378036291",
    "created_at": "2026-10-13T09:40:44Z",
-   "updated_at": "2026-10-13T09:40:45Z",
+   "updated_at": "2026-10-13T09:42:29Z",
    "actor": "huizzhan",
    "jobs": []
   },
@@ -221,20 +221,20 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745",
    "created_at": "2026-10-13T08:39:40Z",
-   "updated_at": "2026-10-13T09:40:46Z",
+   "updated_at": "2026-10-13T09:41:47Z",
    "actor": "huizzhan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T09:29:12Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T09:41:47Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577300"
     },
     {
