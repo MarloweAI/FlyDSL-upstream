@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-13T08:21:15Z",
+ "updated": "2026-10-13T08:42:50Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38370773745,
+   "pr": 1217,
+   "commit": "10c97c9bb0ce390bdb0f24565c5d50d04d4c8b00",
+   "branch": "feat/conv3d-align-aiter",
+   "event": "pull_request",
+   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745",
+   "created_at": "2026-10-13T08:39:40Z",
+   "updated_at": "2026-10-13T08:40:49Z",
+   "actor": "huizzhan",
+   "jobs": []
+  },
   {
    "run_id": 38368425696,
    "pr": 1188,
@@ -10,11 +25,11 @@
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
    "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696",
    "created_at": "2026-10-13T08:19:02Z",
-   "updated_at": "2026-10-13T08:19:02Z",
+   "updated_at": "2026-10-13T08:27:39Z",
    "actor": "Phil-amd",
    "jobs": []
   },
@@ -25,13 +40,41 @@
    "branch": "codex/fix-compile-optional-null",
    "event": "pull_request",
    "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530",
    "created_at": "2026-10-13T08:12:56Z",
-   "updated_at": "2026-10-13T08:15:45Z",
+   "updated_at": "2026-10-13T08:30:18Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:30:17Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530/job/115203323000"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:40:54Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530/job/115203323060"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:41:16Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530/job/115203323195"
+    }
+   ]
   },
   {
    "run_id": 38367198629,
@@ -40,13 +83,41 @@
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
    "title": "[Debug] Make FLYDSL_DEBUG_DUMP_ASM write the final ISA",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629",
    "created_at": "2026-10-13T08:08:01Z",
-   "updated_at": "2026-10-13T08:10:11Z",
+   "updated_at": "2026-10-13T08:27:07Z",
    "actor": "Phil-amd",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:27:07Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133230"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:27:07Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133415"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:27:36Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133475"
+    }
+   ]
   },
   {
    "run_id": 38365268727,
@@ -55,38 +126,38 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727",
    "created_at": "2026-10-13T07:50:34Z",
-   "updated_at": "2026-10-13T08:07:36Z",
+   "updated_at": "2026-10-13T08:40:49Z",
    "actor": "huizzhan",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T08:19:12Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T08:40:34Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905100"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T08:07:36Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T08:39:41Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905119"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T08:08:17Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T08:40:48Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905151"
     }
    ]
@@ -1965,21 +2036,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38171892762",
    "created_at": "2026-10-11T20:21:51Z",
    "updated_at": "2026-10-11T20:21:51Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38169748832,
-   "pr": null,
-   "commit": "874543317111c1b7763f2f4f1459d9104498bda7",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38169748832",
-   "created_at": "2026-10-11T19:51:05Z",
-   "updated_at": "2026-10-11T19:51:05Z",
    "actor": "dimitri91209",
    "jobs": []
   }
