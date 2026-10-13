@@ -1,0 +1,4 @@
+interface:
+  display_name: "MI355 Mono-Kernel Scheduling"
+  short_description: "Design persistent scheduling, reuse, and synchronization"
+  default_prompt: "Use $mi355-mono-kernel-schedule to work through the current mono-kernel task and its next evidence-based action."

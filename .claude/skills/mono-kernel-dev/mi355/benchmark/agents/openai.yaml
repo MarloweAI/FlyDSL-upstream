@@ -1,0 +1,4 @@
+interface:
+  display_name: "MI355 Mono-Kernel Benchmarking"
+  short_description: "Measure mono-kernel gains with scoped evidence"
+  default_prompt: "Use $mi355-mono-kernel-benchmark to work through the current mono-kernel task and its next evidence-based action."
