@@ -6,20 +6,20 @@ These self-contained GLM/K3/DSV4 extracts preserve observations and their limits
 
 ## GLM: a slower standalone stage improves the fused kernel
 
-**Observation and change.** Native TP4 latency jumped at total rows `T = conc × seq = 10`. Comparing neighboring shapes exposed a fully unrolled 90-unit down-projection body. The candidate replaced it with nine runtime groups of ten, preserving per-wave token/slot/K contribution order, task ownership, rounding, LDS layout, and epochs. The group size was specific to this mapping.
+**Context.** Native TP4 showed a latency jump at total rows `T = conc × seq = 10`. Its fully unrolled 90-unit down-projection body incurred private memory and VGPR spills in the fused kernel.
 
-In the fused kernel, private-segment allocation fell from 464/476 bytes per thread to zero and VGPR spill metadata from 115/118 to zero for indexer off/on. SGPR spill metadata remained. Isolated down became 2–5 µs slower, while the fused layer improved.
+**Change.** Replace full unrolling with nine runtime groups of ten, preserving per-wave contribution order, task ownership, rounding, LDS layout, and epochs. This grouping was specific to the existing mapping.
 
-**Evidence.** Baseline [8fcbe497](https://github.com/ROCm/FlyDSL/commit/8fcbe4971dd0ff7ca70bee50d10ec32017bc5792) → candidate [464ff5d0](https://github.com/ROCm/FlyDSL/commit/464ff5d0e622352a080c44834538f3dff1240914). Representative conc2/seq5 hot-layer HIP graph timing, in µs/layer, uses the median of rank medians followed by the median over both allocation orders:
+**Measurements.** Conc2/seq5 hot-layer HIP graph timing: median of rank medians, then median over both allocation orders. Durations are µs/layer; private-segment sizes are bytes/thread.
 
-| Indexer | Baseline | Candidate |
-|---|---:|---:|
-| off | 169.348 | 127.148 |
-| on | 226.550 | 184.364 |
+| Indexer | Before → after, µs | Latency reduction | Private segment |
+|---|---:|---:|---:|
+| off | 169.348 → 127.148 | 24.92% | 464 → 0 |
+| on | 226.550 → 184.364 | 18.62% | 476 → 0 |
 
-Both conc2/seq5 and conc1/seq10 passed affected output/intermediate/cache checks and 256-replay trials; isolated down checks also passed. Eight unaffected specializations retained identical device code and resources.
+VGPR spill metadata fell from 115/118 to zero; SGPR spill metadata remained. Affected outputs/state and 256-replay trials passed for conc2/seq5 and conc1/seq10.
 
-**Decision and limits.** Accept the improvement at the reported boundary despite the standalone slowdown. This supports an interaction with fused code generation/resources. Dynamic MFMA work was unchanged; no dynamic scratch traffic was collected, so the speedup is not quantitatively attributable to spill removal alone. These rank-median timings do not establish slowest-rank request or full-model latency. Use [profiling](profiling.md) only to resolve a remaining causal question, and select the next experiment from the new fused critical path.
+**Interpretation.** Standalone down became 2–5 µs slower while the fused layer improved: evaluate the generated code and performance at the target fusion boundary. Dynamic MFMA work was unchanged. Dynamic scratch traffic was not measured, so the gain cannot be assigned entirely to spill removal. These rank-median measurements do not establish request-completion or full-model latency.
 
 <a id="resident"></a>
 

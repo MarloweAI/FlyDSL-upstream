@@ -21,3 +21,8 @@ Keep all three sibling directories under `mi355` when copying the package so
 cross-skill links continue to resolve. Model configuration and runtime tensors
 come from the target project; optimization cases are included in the package.
 Framework integration and serving validation are outside this suite's scope.
+
+Keep optimization cases concise and self-contained: context, the change,
+measurements, and limits. References must resolve within this package or point
+to formal documentation; do not reference PRs, commits, or external source
+snapshots.
