@@ -27,7 +27,14 @@ from ..expr.typing import Constexpr, Stream
 from ..runtime._libraries import _find_aot_runtime_archive
 from ..utils._elf import _defined_global_symbols, _global_symbols
 from .backends import _get_backend_class
-from .jit_argument import MemRefJitArg, PointerJitArg, is_type_param_annotation
+from .jit_argument import (
+    DLTensorJitArg,
+    MemRefJitArg,
+    PointerJitArg,
+    TorchTensorJitArg,
+    _LayoutPlan,
+    is_type_param_annotation,
+)
 from .jit_function import _create_mlir_context
 from .protocol import c_abi_spec
 
@@ -230,6 +237,19 @@ def _group_width(widths: List[int], what: str, name: str) -> Optional[int]:
     return widths[0]
 
 
+def _snapshot_c_abi_types(jit_arg):
+    """Read built-in tensor storage types without generating dispatch fillers."""
+    # Subclasses and other arguments keep their protocol path so export still
+    # validates their actual packing contract, including custom overrides.
+    if type(jit_arg) in (TorchTensorJitArg, DLTensorJitArg):
+        types = [ctypes.c_void_p]
+        if jit_arg.is_layout_dynamic:
+            plan = _LayoutPlan(jit_arg.shape_dyn_indices, jit_arg.stride_dyn_indices, bool(jit_arg.use_32bit_stride))
+            types.append(plan.buf_ctype)
+        return types
+    return [ctype for ctype, _fill in c_abi_spec(jit_arg)]
+
+
 def _snapshot_abi(sig, resolved_args):
     """Describe this call's resolved arguments without retaining example buffers."""
     pending = []  # (arg_index, arg_name, semantic slot, ctypes type used by JIT dispatch)
@@ -240,7 +260,7 @@ def _snapshot_abi(sig, resolved_args):
         jit_arg = resolved_args[name]
         streams += isinstance(jit_arg, Stream)
         semantic = _semantic_slots(name, jit_arg)
-        ctypes_seq = [ct for ct, _fill in c_abi_spec(jit_arg)]
+        ctypes_seq = _snapshot_c_abi_types(jit_arg)
         if len(ctypes_seq) != len(semantic):
             raise NotImplementedError(
                 f"flyc.compile: argument {name!r} ({type(jit_arg).__name__}) packs {len(ctypes_seq)} C ABI slots, "
