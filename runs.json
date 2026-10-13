@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-13T06:46:05Z",
+ "updated": "2026-10-13T06:54:49Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38358605475,
+   "pr": 1264,
+   "commit": "38fffe7a56fbbe38119cd974afd21113037dab7b",
+   "branch": "fix/gfx1250-fp8-tile-check",
+   "event": "pull_request",
+   "title": "[Bugfix][gfx1250] Reject FP8 and A8W4 GEMM tiles that issue no WMMA, and test that stores stay inside N",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475",
+   "created_at": "2026-10-13T06:46:17Z",
+   "updated_at": "2026-10-13T06:48:54Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
   {
    "run_id": 38354686645,
    "pr": 1283,
@@ -1973,21 +1988,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519864"
     }
    ]
-  },
-  {
-   "run_id": 38149381697,
-   "pr": null,
-   "commit": "ec7e6def09c80cb63c59b77c2ab409ca87e551d3",
-   "branch": "codex/ktrace-target-providers",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149381697",
-   "created_at": "2026-10-11T14:58:59Z",
-   "updated_at": "2026-10-11T15:02:34Z",
-   "actor": "coderfeli",
-   "jobs": []
   }
  ]
 }
