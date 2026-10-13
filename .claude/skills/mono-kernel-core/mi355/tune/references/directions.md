@@ -2,6 +2,14 @@
 
 First determine whether latency is dominated by repeated computation, delayed dependencies, inefficient persistent execution, memory access, or work imbalance across ranks and workgroups. Use theoretical bounds to prioritize experiments. Useful FLOPs differ from issued MFMA instructions, logical bytes differ from HBM transactions, and low-concurrency inference can be dependency-limited. Match the data type, instruction mode, and hardware scope when constructing a roofline model; do not assume a fixed fraction of peak is attainable.
 
+<a id="shape-cliff"></a>
+
+## Investigate an abrupt latency change between shapes
+
+Confirm the jump with matched measurements. Check dispatch changes, actual task counts including padding and tail rounds, precision, and the parallel plan. If these do not explain it, compare the abnormal shape with nearby controls using the [combined code-object inspection](../../dev/references/design.md). Examine generated loops and unrolling in both standalone and fused variants.
+
+If longer unrolling or live ranges coincide with new private memory or spills, test a smaller unroll group or bounded loop. Preserve contribution order, ownership, rounding, and synchronization obligations. Predict the code/resource change; fewer static MFMA sites inside a loop do not imply less dynamic work. Validate affected numerics, uninstrumented latency at the target fusion boundary, and neighboring specializations. The [GLM example](cases.md#shape-cliff) shows why standalone speed and static spill metadata alone cannot decide the result.
+
 ## Reduce repeated work while preserving parallelism
 
 <a id="reuse"></a>
