@@ -1,20 +1,66 @@
 {
  "schema": 1,
- "updated": "2026-10-13T08:42:50Z",
+ "updated": "2026-10-13T08:49:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38371354078,
+   "pr": 1280,
+   "commit": "b6a188e245f70ce0883e9d723cd4abb147776340",
+   "branch": "mi355-mono-kernel-skill",
+   "event": "pull_request",
+   "title": "[Doc] Add MI355 mono-kernel development skills",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38371354078",
+   "created_at": "2026-10-13T08:44:38Z",
+   "updated_at": "2026-10-13T08:46:55Z",
+   "actor": "james-huang09",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T08:46:51Z",
+     "completed_at": "2026-10-13T08:46:53Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38371354078/job/115209502144",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T08:46:51Z",
+     "completed_at": "2026-10-13T08:46:53Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38371354078/job/115209502224"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T08:46:51Z",
+     "completed_at": "2026-10-13T08:46:54Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38371354078/job/115209502291"
+    }
+   ]
+  },
   {
    "run_id": 38370773745,
    "pr": 1217,
    "commit": "10c97c9bb0ce390bdb0f24565c5d50d04d4c8b00",
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
-   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "queued",
+   "title": "Align bf16 implicit Conv3d with aiter",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745",
    "created_at": "2026-10-13T08:39:40Z",
-   "updated_at": "2026-10-13T08:40:49Z",
+   "updated_at": "2026-10-13T08:42:01Z",
    "actor": "huizzhan",
    "jobs": []
   },
@@ -25,13 +71,41 @@
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
    "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696",
    "created_at": "2026-10-13T08:19:02Z",
-   "updated_at": "2026-10-13T08:27:39Z",
+   "updated_at": "2026-10-13T08:41:55Z",
    "actor": "Phil-amd",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:41:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802801"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:41:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802831"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:41:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802932"
+    }
+   ]
   },
   {
    "run_id": 38367741530,
@@ -125,7 +199,7 @@
    "commit": "407c9a89e5afb1d2e6066218e87b13e030ed4688",
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
-   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
+   "title": "Align bf16 implicit Conv3d with aiter",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727",
@@ -599,7 +673,7 @@
    "commit": "633b23cb67a87866f1500f4d7ef74660b5b78ccb",
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
-   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
+   "title": "Align bf16 implicit Conv3d with aiter",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313",
@@ -642,7 +716,7 @@
    "commit": "81369854484f363925631d5ce6999f0b229e7b8c",
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
-   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
+   "title": "Align bf16 implicit Conv3d with aiter",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38340345146",
@@ -2021,21 +2095,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38173562260",
    "created_at": "2026-10-11T20:45:45Z",
    "updated_at": "2026-10-11T20:45:45Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38171892762,
-   "pr": null,
-   "commit": "e8929483056103fd4a2ab74233887c6dcf73b257",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38171892762",
-   "created_at": "2026-10-11T20:21:51Z",
-   "updated_at": "2026-10-11T20:21:51Z",
    "actor": "dimitri91209",
    "jobs": []
   }
