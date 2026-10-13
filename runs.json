@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-13T07:11:13Z",
+ "updated": "2026-10-13T07:28:22Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38362516611,
+   "pr": 1284,
+   "commit": "3c625f444d56761ea60ed29ddf6259de7694a698",
+   "branch": "xudong/make-tile-modes-list",
+   "event": "pull_request",
+   "title": "[fix] Make make_tile treat every argument list as modes",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362516611",
+   "created_at": "2026-10-13T07:25:09Z",
+   "updated_at": "2026-10-13T07:26:54Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
+  {
+   "run_id": 38362163106,
+   "pr": 1284,
+   "commit": "69fe84bc677f52e309c63547611c3653ea37b7eb",
+   "branch": "xudong/make-tile-modes-list",
+   "event": "pull_request",
+   "title": "[fix] Make make_tile treat every argument list as modes",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362163106",
+   "created_at": "2026-10-13T07:21:42Z",
+   "updated_at": "2026-10-13T07:26:26Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
   {
    "run_id": 38358605475,
    "pr": 1264,
@@ -29,9 +59,9 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T07:08:44Z",
+     "started_at": "2026-10-13T07:09:57Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382309"
     },
@@ -1958,67 +1988,6 @@
    "updated_at": "2026-10-11T17:39:29Z",
    "actor": "dimitri91209",
    "jobs": []
-  },
-  {
-   "run_id": 38153382929,
-   "pr": 1109,
-   "commit": "23950268246a6c8adcbddf472d93e94cc1183c15",
-   "branch": "feat/rocdl-cvt-f32-fp8",
-   "event": "pull_request",
-   "title": "[DSL] Expose F32_FP8 conversion from packed_i32",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38153382929",
-   "created_at": "2026-10-11T15:56:35Z",
-   "updated_at": "2026-10-11T15:56:35Z",
-   "actor": "big-yellow-duck",
-   "jobs": []
-  },
-  {
-   "run_id": 38149613592,
-   "pr": null,
-   "commit": "2fb568383dc992d1a320ab2df8af082e5efdfa10",
-   "branch": "codex/ktrace-target-providers",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592",
-   "created_at": "2026-10-11T15:02:17Z",
-   "updated_at": "2026-10-11T18:55:15Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T15:14:30Z",
-     "completed_at": "2026-10-11T16:06:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519771",
-     "machine": "smci350-rck-g03-b20-03",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:08:07Z",
-     "completed_at": "2026-10-11T18:55:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519830"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T15:14:22Z",
-     "completed_at": "2026-10-11T15:31:33Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38149613592/job/114502519864"
-    }
-   ]
   }
  ]
 }
