@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-13T09:27:30Z",
+ "updated": "2026-10-13T09:33:56Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -56,13 +56,41 @@
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
    "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38373277088",
    "created_at": "2026-10-13T09:00:47Z",
-   "updated_at": "2026-10-13T09:16:01Z",
+   "updated_at": "2026-10-13T09:30:04Z",
    "actor": "Phil-amd",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T09:30:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38373277088/job/115226932512"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T09:30:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38373277088/job/115226932727"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T09:30:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38373277088/job/115226932734"
+    }
+   ]
   },
   {
    "run_id": 38373179227,
@@ -173,9 +201,9 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T08:56:37Z",
+     "started_at": "2026-10-13T09:29:12Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577300"
     },
@@ -191,9 +219,9 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T08:56:37Z",
+     "started_at": "2026-10-13T09:30:49Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577420"
     }
@@ -311,20 +339,23 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T09:08:47Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T09:30:39Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133415"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T08:27:36Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133475"
+     "completed_at": "2026-10-13T09:28:47Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629/job/115202133475",
+     "machine": "smci350-rck-g03-f12-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -421,20 +452,20 @@
    "branch": "xudong/make-tile-modes-list",
    "event": "pull_request",
    "title": "[fix] Make make_tile treat every argument list as modes",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300",
    "created_at": "2026-10-13T07:27:31Z",
-   "updated_at": "2026-10-13T07:53:46Z",
+   "updated_at": "2026-10-13T09:31:21Z",
    "actor": "xudoyuan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T07:46:42Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T09:31:20Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248057"
     },
     {
