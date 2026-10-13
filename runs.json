@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-13T03:46:14Z",
+ "updated": "2026-10-13T04:24:36Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38343354437,
+   "pr": 1266,
+   "commit": "1fa436740cf6a26332faa567d359d9f119d83dd6",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38343354437",
+   "created_at": "2026-10-13T03:47:21Z",
+   "updated_at": "2026-10-13T03:47:21Z",
+   "actor": "qiangpan2",
+   "jobs": []
+  },
   {
    "run_id": 38342409313,
    "pr": 1217,
@@ -10,13 +25,41 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313",
    "created_at": "2026-10-13T03:35:13Z",
-   "updated_at": "2026-10-13T03:37:21Z",
+   "updated_at": "2026-10-13T03:51:04Z",
    "actor": "huizzhan",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T03:51:40Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981929"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T03:51:25Z",
+     "completed_at": "2026-10-13T04:21:11Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981951"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T03:51:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981966"
+    }
+   ]
   },
   {
    "run_id": 38340345146,
@@ -87,10 +130,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T02:55:11Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T03:47:57Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115105763684"
     },
     {
@@ -111,39 +154,42 @@
    "branch": "jli/pinreg-v2",
    "event": "pull_request",
    "title": "[compiler] pin register use reservedregs method",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451",
    "created_at": "2026-10-13T02:38:15Z",
-   "updated_at": "2026-10-13T03:24:55Z",
+   "updated_at": "2026-10-13T04:23:15Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T03:24:54Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T03:45:05Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935480"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T03:21:44Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T04:23:14Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935487"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T02:57:24Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935775"
+     "completed_at": "2026-10-13T04:15:53Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935775",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -902,7 +948,7 @@
   },
   {
    "run_id": 38214984659,
-   "pr": 1266,
+   "pr": null,
    "commit": "360d0b63daad87f48ba9564ad1b6d2d744770134",
    "branch": "qiangpan/sageattn2_1",
    "event": "pull_request",
@@ -1821,49 +1867,6 @@
    "updated_at": "2026-10-11T13:58:07Z",
    "actor": "coderfeli",
    "jobs": []
-  },
-  {
-   "run_id": 38143557908,
-   "pr": null,
-   "commit": "838d2c005dfdb1f0246833d4efae99740857f201",
-   "branch": "codex/ktrace-usage-graph",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908",
-   "created_at": "2026-10-11T13:32:05Z",
-   "updated_at": "2026-10-11T13:57:59Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-11T13:53:00Z",
-     "completed_at": "2026-10-11T13:57:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225070"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-11T13:53:21Z",
-     "completed_at": "2026-10-11T13:57:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225080"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-11T13:53:29Z",
-     "completed_at": "2026-10-11T13:57:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38143557908/job/114486225095"
-    }
-   ]
   }
  ]
 }
