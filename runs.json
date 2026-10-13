@@ -1,8 +1,69 @@
 {
  "schema": 1,
- "updated": "2026-10-13T01:14:34Z",
+ "updated": "2026-10-13T02:40:05Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38337823451,
+   "pr": 1276,
+   "commit": "be6888a6d9a584205f262d3bd8e9c096ac64a2aa",
+   "branch": "jli/pinreg-v2",
+   "event": "pull_request",
+   "title": "[compiler] pin register use reservedregs method",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451",
+   "created_at": "2026-10-13T02:38:15Z",
+   "updated_at": "2026-10-13T02:38:36Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 38337673182,
+   "pr": 1280,
+   "commit": "2f9b0e5216e04e6327e2d1a26287aac21defa72c",
+   "branch": "mi355-mono-kernel-skill",
+   "event": "pull_request",
+   "title": "[Doc] Add MI355 mono-kernel development skills",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337673182",
+   "created_at": "2026-10-13T02:36:21Z",
+   "updated_at": "2026-10-13T02:38:21Z",
+   "actor": "james-huang09",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T02:38:17Z",
+     "completed_at": "2026-10-13T02:38:20Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337673182/job/115101709328",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T02:38:18Z",
+     "completed_at": "2026-10-13T02:38:21Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337673182/job/115101709362"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T02:38:18Z",
+     "completed_at": "2026-10-13T02:38:20Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337673182/job/115101709382"
+    }
+   ]
+  },
   {
    "run_id": 38296255581,
    "pr": 1279,
@@ -1745,36 +1806,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38141639512",
    "created_at": "2026-10-11T13:03:08Z",
    "updated_at": "2026-10-11T13:03:41Z",
-   "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38138323563,
-   "pr": null,
-   "commit": "80260870f65d547d85f9c73d6f4313cff8e6afa4",
-   "branch": "codex/ktrace-usage-graph",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38138323563",
-   "created_at": "2026-10-11T12:11:26Z",
-   "updated_at": "2026-10-11T12:13:06Z",
-   "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38138322942,
-   "pr": null,
-   "commit": "29485d53dc3da9ba45aeb8e73b12968a8b91ca76",
-   "branch": "codex/ktrace-usage-graph",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38138322942",
-   "created_at": "2026-10-11T12:11:25Z",
-   "updated_at": "2026-10-11T12:11:27Z",
    "actor": "coderfeli",
    "jobs": []
   }
