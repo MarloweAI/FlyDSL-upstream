@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-13T09:40:55Z",
+ "updated": "2026-10-13T09:43:13Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38378036291,
+   "pr": 1217,
+   "commit": "b4ddfd0631a41ec3d44703cf63883c2c392f593c",
+   "branch": "feat/conv3d-align-aiter",
+   "event": "pull_request",
+   "title": "Align bf16 implicit Conv3d with aiter",
+   "status": "pending",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38378036291",
+   "created_at": "2026-10-13T09:40:44Z",
+   "updated_at": "2026-10-13T09:40:45Z",
+   "actor": "huizzhan",
+   "jobs": []
+  },
+  {
+   "run_id": 38377819316,
+   "pr": 1188,
+   "commit": "45a3ea1f073599fd1eb617b27159b034aea5d123",
+   "branch": "feat/hack-ut-asm-multi-kernel",
+   "event": "pull_request",
+   "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38377819316",
+   "created_at": "2026-10-13T09:38:55Z",
+   "updated_at": "2026-10-13T09:40:28Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38375960159,
    "pr": 1280,
@@ -56,11 +86,11 @@
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
    "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38373277088",
    "created_at": "2026-10-13T09:00:47Z",
-   "updated_at": "2026-10-13T09:30:04Z",
+   "updated_at": "2026-10-13T09:38:57Z",
    "actor": "Phil-amd",
    "jobs": [
     {
@@ -191,11 +221,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745",
    "created_at": "2026-10-13T08:39:40Z",
-   "updated_at": "2026-10-13T08:56:37Z",
+   "updated_at": "2026-10-13T09:40:46Z",
    "actor": "huizzhan",
    "jobs": [
     {
@@ -210,19 +240,19 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T08:56:37Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T09:40:45Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577390"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-13T09:30:49Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T09:41:04Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577420"
     }
    ]
@@ -2160,67 +2190,6 @@
      "bench_skipped": "host MI350 != MI355"
     }
    ]
-  },
-  {
-   "run_id": 38196502574,
-   "pr": 1190,
-   "commit": "1b1aa91eb0cea5c88d8f1be5b655a2e787d3099b",
-   "branch": "phil/llvm-extensions-v1",
-   "event": "pull_request",
-   "title": "[llvm] Add support for custom LLVM extensions",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574",
-   "created_at": "2026-10-12T02:37:21Z",
-   "updated_at": "2026-10-12T04:09:44Z",
-   "actor": "Phil-amd",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T03:03:13Z",
-     "completed_at": "2026-10-12T03:59:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310312"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T03:22:17Z",
-     "completed_at": "2026-10-12T03:38:17Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310349"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T03:02:35Z",
-     "completed_at": "2026-10-12T04:09:43Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38196502574/job/114645310367",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38183036005,
-   "pr": 1272,
-   "commit": "76f40e1c1fc502351ba51b40361d4a8c9ba2fd18",
-   "branch": "rdmma-benchmark",
-   "event": "pull_request",
-   "title": "[Benchmark] fix rdna gemm benchmark option",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38183036005",
-   "created_at": "2026-10-11T23:06:44Z",
-   "updated_at": "2026-10-11T23:06:44Z",
-   "actor": "ppppqp",
-   "jobs": []
   }
  ]
 }
