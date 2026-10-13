@@ -1,8 +1,66 @@
 {
  "schema": 1,
- "updated": "2026-10-13T05:01:13Z",
+ "updated": "2026-10-13T05:55:33Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38353727038,
+   "pr": 1256,
+   "commit": "464ff5d0e622352a080c44834538f3dff1240914",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38353727038",
+   "created_at": "2026-10-13T05:53:27Z",
+   "updated_at": "2026-10-13T05:54:30Z",
+   "actor": "james-huang09",
+   "jobs": []
+  },
+  {
+   "run_id": 38350013805,
+   "pr": 1256,
+   "commit": "8fcbe4971dd0ff7ca70bee50d10ec32017bc5792",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805",
+   "created_at": "2026-10-13T05:10:03Z",
+   "updated_at": "2026-10-13T05:54:08Z",
+   "actor": "james-huang09",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-13T05:36:14Z",
+     "completed_at": "2026-10-13T05:54:07Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070455"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-13T05:24:43Z",
+     "completed_at": "2026-10-13T05:54:00Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070523"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T05:22:09Z",
+     "completed_at": "2026-10-13T05:46:57Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070595"
+    }
+   ]
+  },
   {
    "run_id": 38348945443,
    "pr": 1280,
@@ -147,11 +205,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313",
    "created_at": "2026-10-13T03:35:13Z",
-   "updated_at": "2026-10-13T03:51:04Z",
+   "updated_at": "2026-10-13T05:22:23Z",
    "actor": "huizzhan",
    "jobs": [
     {
@@ -175,9 +233,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T03:51:04Z",
+     "started_at": "2026-10-13T05:22:23Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981966"
     }
@@ -1872,36 +1930,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38147840935",
    "created_at": "2026-10-11T14:36:00Z",
    "updated_at": "2026-10-11T14:36:00Z",
-   "actor": "qiangpan2",
-   "jobs": []
-  },
-  {
-   "run_id": 38147837059,
-   "pr": null,
-   "commit": "8a7c45acfbf3ec423e0cdd8b51c68762be05da1a",
-   "branch": "qiangpan/sageattn2_1",
-   "event": "pull_request",
-   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38147837059",
-   "created_at": "2026-10-11T14:35:57Z",
-   "updated_at": "2026-10-11T14:35:57Z",
-   "actor": "qiangpan2",
-   "jobs": []
-  },
-  {
-   "run_id": 38146972943,
-   "pr": null,
-   "commit": "cc5b93c6c8418bfca9b6e2b38fc8a3e6a8f4631b",
-   "branch": "qiangpan/sageattn2_1",
-   "event": "pull_request",
-   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38146972943",
-   "created_at": "2026-10-11T14:23:22Z",
-   "updated_at": "2026-10-11T14:23:22Z",
    "actor": "qiangpan2",
    "jobs": []
   }
