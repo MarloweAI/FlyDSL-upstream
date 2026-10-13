@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-13T12:03:21Z",
+ "updated": "2026-10-13T12:34:47Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -20,11 +20,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T11:21:40Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38388007006/job/115269835968"
+     "completed_at": "2026-10-13T12:17:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38388007006/job/115269835968",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -53,11 +56,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation\u2026",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38382097153",
    "created_at": "2026-10-13T10:15:22Z",
-   "updated_at": "2026-10-13T11:23:56Z",
+   "updated_at": "2026-10-13T12:33:00Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -72,20 +75,23 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T11:23:55Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T12:32:59Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38382097153/job/115250823865"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T11:03:44Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38382097153/job/115250823940"
+     "completed_at": "2026-10-13T12:07:26Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38382097153/job/115250823940",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
