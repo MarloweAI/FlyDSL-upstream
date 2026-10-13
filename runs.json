@@ -1,8 +1,81 @@
 {
  "schema": 1,
- "updated": "2026-10-13T07:37:20Z",
+ "updated": "2026-10-13T08:16:52Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38367741530,
+   "pr": 1278,
+   "commit": "de2a74803d9b0164742bce39bdf74286bd6ab55e",
+   "branch": "codex/fix-compile-optional-null",
+   "event": "pull_request",
+   "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530",
+   "created_at": "2026-10-13T08:12:56Z",
+   "updated_at": "2026-10-13T08:14:23Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38367198629,
+   "pr": 1286,
+   "commit": "2d01385aed7958bed8f566ff70e3d198e45e8980",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[Debug] Make FLYDSL_DEBUG_DUMP_ASM write the final ISA",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629",
+   "created_at": "2026-10-13T08:08:01Z",
+   "updated_at": "2026-10-13T08:10:11Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
+  {
+   "run_id": 38365268727,
+   "pr": 1217,
+   "commit": "407c9a89e5afb1d2e6066218e87b13e030ed4688",
+   "branch": "feat/conv3d-align-aiter",
+   "event": "pull_request",
+   "title": "feat(conv3d): align bf16 implicit GEMM with aiter #5370",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727",
+   "created_at": "2026-10-13T07:50:34Z",
+   "updated_at": "2026-10-13T08:07:36Z",
+   "actor": "huizzhan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:07:36Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905100"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:07:36Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905119"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T08:08:17Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905151"
+    }
+   ]
+  },
   {
    "run_id": 38362852846,
    "pr": 1278,
@@ -10,13 +83,41 @@
    "branch": "codex/fix-compile-optional-null",
    "event": "pull_request",
    "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846",
    "created_at": "2026-10-13T07:28:22Z",
-   "updated_at": "2026-10-13T07:30:14Z",
+   "updated_at": "2026-10-13T08:14:23Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-13T07:46:41Z",
+     "completed_at": "2026-10-13T08:14:22Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846/job/115187084288"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-13T07:45:51Z",
+     "completed_at": "2026-10-13T08:12:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846/job/115187084341"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-13T07:45:51Z",
+     "completed_at": "2026-10-13T08:12:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846/job/115187084349"
+    }
+   ]
   },
   {
    "run_id": 38362765300,
@@ -29,9 +130,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300",
    "created_at": "2026-10-13T07:27:31Z",
-   "updated_at": "2026-10-13T07:29:26Z",
+   "updated_at": "2026-10-13T07:53:46Z",
    "actor": "xudoyuan",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T07:46:42Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248057"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T07:53:45Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248144"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-13T07:44:19Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248172"
+    }
+   ]
   },
   {
    "run_id": 38362516611,
@@ -70,37 +199,40 @@
    "branch": "fix/gfx1250-fp8-tile-check",
    "event": "pull_request",
    "title": "[Bugfix][gfx1250] Reject FP8 and A8W4 GEMM tiles that issue no WMMA, and test that stores stay inside N",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475",
    "created_at": "2026-10-13T06:46:17Z",
-   "updated_at": "2026-10-13T07:08:44Z",
+   "updated_at": "2026-10-13T07:44:52Z",
    "actor": "jhinpan",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T07:30:47Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T07:53:41Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382284"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T07:09:57Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382309"
+     "completed_at": "2026-10-13T08:05:48Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382309",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T07:08:44Z",
+     "started_at": "2026-10-13T07:44:52Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382353"
     }
@@ -1850,144 +1982,6 @@
    "updated_at": "2026-10-11T19:22:15Z",
    "actor": "dimitri91209",
    "jobs": []
-  },
-  {
-   "run_id": 38164888810,
-   "pr": 1271,
-   "commit": "3358761bae4c7b36d034248a3af524542b7fec62",
-   "branch": "perf/kernarg-flatten-struct-args",
-   "event": "pull_request",
-   "title": "[Perf][Compiler] Flatten struct kernel arguments when they are preloaded, and preload the gfx1250 RMSNorm",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810",
-   "created_at": "2026-10-11T18:41:44Z",
-   "updated_at": "2026-10-12T03:53:23Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T19:10:37Z",
-     "completed_at": "2026-10-11T19:27:25Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810/job/114547603730"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:55:06Z",
-     "completed_at": "2026-10-11T19:47:06Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810/job/114547603739",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T02:58:06Z",
-     "completed_at": "2026-10-12T03:53:22Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38164888810/job/114547603768"
-    }
-   ]
-  },
-  {
-   "run_id": 38162747310,
-   "pr": 1270,
-   "commit": "b040015c16ed5194d34dc949ddcd4e762cd3039f",
-   "branch": "perf/gfx1250-bf16-static-k",
-   "event": "pull_request",
-   "title": "[Perf][gfx1250] Add static_k to the BF16 GEMM and unroll the K loop of decode tiles",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310",
-   "created_at": "2026-10-11T18:11:07Z",
-   "updated_at": "2026-10-11T19:42:27Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:53:31Z",
-     "completed_at": "2026-10-11T19:42:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310/job/114541264706"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:23:39Z",
-     "completed_at": "2026-10-11T19:15:22Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310/job/114541264712",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:24:43Z",
-     "completed_at": "2026-10-11T18:40:11Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38162747310/job/114541264790"
-    }
-   ]
-  },
-  {
-   "run_id": 38161710116,
-   "pr": 1269,
-   "commit": "03c693464c8ec0be66e82790471cacbe8591621b",
-   "branch": "fix/gemm-a16w16-hti-wave-sync",
-   "event": "pull_request",
-   "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM reads its first and last stages",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116",
-   "created_at": "2026-10-11T17:56:12Z",
-   "updated_at": "2026-10-11T19:15:29Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:23:06Z",
-     "completed_at": "2026-10-11T19:15:28Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116/job/114538164586"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:08:13Z",
-     "completed_at": "2026-10-11T19:00:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116/job/114538164597",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-11T18:07:57Z",
-     "completed_at": "2026-10-11T18:24:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38161710116/job/114538164617"
-    }
-   ]
   }
  ]
 }
