@@ -529,8 +529,9 @@ class TestExportCompile:
         tensor = flyc.from_dlpack(CpuDlpackSource())
         _aot_view(tensor_add, tensor, tensor, tensor)
 
-        # A non-null pointer cannot make a CPU tensor safe to execute.
-        _aot_view(tensor_add_one_optional, torch.empty(1), _ptr(1), fx.Stream(None))
+        # A non-null pointer cannot make a CPU tensor safe to execute, even
+        # when another test has changed PyTorch's default device to CUDA.
+        _aot_view(tensor_add_one_optional, torch.empty(1, device="cpu"), _ptr(1), fx.Stream(None))
 
     def test_placeholder_detection_does_not_duck_type_user_arguments(self):
         from flydsl.compiler.jit_function import _is_compile_placeholder
