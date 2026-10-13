@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-13T08:16:52Z",
+ "updated": "2026-10-13T08:21:15Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38368425696,
+   "pr": 1188,
+   "commit": "3da88e0bce0a7859de4bf684b619d106483d60de",
+   "branch": "feat/hack-ut-asm-multi-kernel",
+   "event": "pull_request",
+   "title": "[Script][Debug] Inject hand-edited assembly into a JIT cache entry",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696",
+   "created_at": "2026-10-13T08:19:02Z",
+   "updated_at": "2026-10-13T08:19:02Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38367741530,
    "pr": 1278,
@@ -10,11 +25,11 @@
    "branch": "codex/fix-compile-optional-null",
    "event": "pull_request",
    "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367741530",
    "created_at": "2026-10-13T08:12:56Z",
-   "updated_at": "2026-10-13T08:14:23Z",
+   "updated_at": "2026-10-13T08:15:45Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -50,9 +65,9 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-13T08:07:36Z",
+     "started_at": "2026-10-13T08:19:12Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905100"
     },
@@ -145,10 +160,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-13T07:53:45Z",
-     "completed_at": null,
+     "completed_at": "2026-10-13T08:19:07Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248144"
     },
     {
@@ -1965,21 +1980,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38169748832",
    "created_at": "2026-10-11T19:51:05Z",
    "updated_at": "2026-10-11T19:51:05Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38167724466,
-   "pr": null,
-   "commit": "794a88ae22969739b7cc3b1287eaba2c46882ed1",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38167724466",
-   "created_at": "2026-10-11T19:22:15Z",
-   "updated_at": "2026-10-11T19:22:15Z",
    "actor": "dimitri91209",
    "jobs": []
   }
