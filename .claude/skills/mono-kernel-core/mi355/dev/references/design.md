@@ -50,4 +50,6 @@ Derive packer and reader offsets together from co-consumed fragments; check the 
 
 Inspect workgroup geometry, vector and scalar register (VGPR/SGPR) usage, LDS allocation, private-segment size, spill metadata, code size, generated load/wait/MFMA sequences, and runtime occupancy for both standalone and fused code objects. The fused resource footprint is not necessarily the sum or maximum of the standalone footprints. Shorter source-level lifetimes may not reduce register allocation, and LDS declared in one branch can affect the entire kernel.
 
+Convert these measurements into the [MI355X residency and throughput budget](hardware.md). Identify the binding resource and task rounds before choosing a tile, register target, or buffer count; a lower non-limiting resource does not by itself increase residency.
+
 Resolve coverage errors in the mapping before changing the scheduler. If persistent execution regresses, use N/P/F to isolate the cost before extending fusion. If longer live ranges offset the benefit of overlap, compare a smaller fused subgraph, fewer buffers, or a different tile. Follow [persistent design](persistent.md) for synchronization and forward progress, and [optimization mechanisms](../../tune/references/directions.md) for tuning choices.

@@ -9,7 +9,8 @@ Use hardware performance counters (PMC), Advanced Thread Trace (ATT), and timing
 | Repeated expert computation | Fewer issued tasks and MFMA instructions, as predicted from actual routes | Task counts, device instruction counts, and PMC |
 | Repeated quantization or operand preparation | Unchanged MFMA count with fewer preparation and LDS operations | Quantizer ISA, LDS instruction counts, and consumer timing |
 | Serialized producer | Similar work with earlier readiness of dependent stages | Task mapping and completion markers |
-| Resource-limited occupancy | A change in resident workgroups or scratch usage | Compiled code object, runtime occupancy, then dynamic scratch and wait behavior |
+| Resource-limited occupancy | More resident workgroups/waves after the binding allocation tier changes | [Hardware budget](../../dev/references/hardware.md), compiled allocation, and runtime occupancy |
+| Spill overhead | Less dynamic scratch traffic or shorter dependent waits, possibly at unchanged occupancy | Spill metadata and ISA, then dynamic traffic and matched wait behavior |
 | Exposed memory latency | Higher stall cycles per execution, or additional scattered loads | ATT call sites, ISA, and applicable cache and traffic counters |
 | Rank or communication imbalance | The latest partial result, return, or merge determines completion | Work distribution and completion times across ranks |
 

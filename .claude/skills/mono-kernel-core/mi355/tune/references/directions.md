@@ -1,6 +1,6 @@
 # Select a kernel optimization
 
-First determine whether latency is dominated by repeated computation, delayed dependencies, inefficient persistent execution, memory access, or work imbalance across ranks and workgroups. Use theoretical bounds to prioritize experiments. Useful FLOPs differ from issued MFMA instructions, logical bytes differ from HBM transactions, and low-concurrency inference can be dependency-limited. Match the data type, instruction mode, and hardware scope when constructing a roofline model; do not assume a fixed fraction of peak is attainable.
+Start with the [MI355X hardware budget](../../dev/references/hardware.md): allocated resources and resident workers, task rounds, exact instruction throughput, traffic by memory level, and the serial dependency path. Use the binding limit to select among repeated-work removal, earlier readiness, persistent execution, memory access, and work balancing. Reuse valid bounds; refine uncertain terms only when they can change the choice.
 
 <a id="shape-cliff"></a>
 
