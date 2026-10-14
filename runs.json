@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-14T10:57:53Z",
+ "updated": "2026-10-14T11:09:34Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -197,11 +197,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel][gfx1250] Support K tails in the BF16 GEMM (#1230)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877",
    "created_at": "2026-10-14T09:12:21Z",
-   "updated_at": "2026-10-14T09:47:16Z",
+   "updated_at": "2026-10-14T11:07:27Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -216,11 +216,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T09:34:24Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782726956"
+     "completed_at": "2026-10-14T11:07:26Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782726956",
+     "machine": "gbt350-odcdh1-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
