@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T06:33:15Z",
+ "updated": "2026-10-14T06:46:59Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38522893371,
+   "pr": 1289,
+   "commit": "7040ecb3b8f2092de33343b76635b7779e114f44",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371",
+   "created_at": "2026-10-14T06:33:18Z",
+   "updated_at": "2026-10-14T06:36:24Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38522473045,
    "pr": 1289,
@@ -2235,21 +2250,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217186249",
    "created_at": "2026-10-12T07:20:26Z",
    "updated_at": "2026-10-12T07:20:26Z",
-   "actor": "qiangpan2",
-   "jobs": []
-  },
-  {
-   "run_id": 38216800815,
-   "pr": null,
-   "commit": "f069660fc83fa57e19881c5527ed47e179d2d939",
-   "branch": "qiangpan/sageattn2_2",
-   "event": "pull_request",
-   "title": "[Runtime] Report GPU last-level cache size from KFD",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38216800815",
-   "created_at": "2026-10-12T07:16:12Z",
-   "updated_at": "2026-10-12T07:16:12Z",
    "actor": "qiangpan2",
    "jobs": []
   }
