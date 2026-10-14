@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-14T15:33:41Z",
+ "updated": "2026-10-14T16:03:05Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38594219922,
+   "pr": 1294,
+   "commit": "c4c2a44e1e4565288bc971b55e2e556a64eafa9d",
+   "branch": "fix/index-normalization",
+   "event": "pull_request",
+   "title": "[Bugfix] Handle Numeric conversion recursively",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594219922",
+   "created_at": "2026-10-14T15:59:42Z",
+   "updated_at": "2026-10-14T15:59:42Z",
+   "actor": "ppppqp",
+   "jobs": []
+  },
+  {
+   "run_id": 38594102347,
+   "pr": 971,
+   "commit": "9a91e05498ccb57b97faf26c9e49a814a1b8468e",
+   "branch": "gfx1250/gemm-opt-0805",
+   "event": "pull_request",
+   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594102347",
+   "created_at": "2026-10-14T15:58:53Z",
+   "updated_at": "2026-10-14T16:00:24Z",
+   "actor": "aoli26",
+   "jobs": []
+  },
+  {
+   "run_id": 38594007900,
+   "pr": null,
+   "commit": "0ed99903abea6468f80fe3f8b13bc72bc9b67b17",
+   "branch": "fix/index-normalization",
+   "event": "pull_request",
+   "title": "[Bugfix] Handle Numeric conversion recursively",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594007900",
+   "created_at": "2026-10-14T15:58:13Z",
+   "updated_at": "2026-10-14T15:58:13Z",
+   "actor": "ppppqp",
+   "jobs": []
+  },
   {
    "run_id": 38586336598,
    "pr": 1288,
@@ -59,11 +104,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T14:37:55Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515536"
+     "completed_at": "2026-10-14T15:40:37Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515536",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -102,10 +150,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T14:38:10Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T15:50:58Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751405"
     },
     {
@@ -2019,141 +2067,6 @@
      "started_at": "2026-10-13T05:22:23Z",
      "completed_at": "2026-10-13T06:30:03Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38342409313/job/115119981966"
-    }
-   ]
-  },
-  {
-   "run_id": 38340345146,
-   "pr": 1217,
-   "commit": "81369854484f363925631d5ce6999f0b229e7b8c",
-   "branch": "feat/conv3d-align-aiter",
-   "event": "pull_request",
-   "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38340345146",
-   "created_at": "2026-10-13T03:09:20Z",
-   "updated_at": "2026-10-13T03:35:33Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T03:33:57Z",
-     "completed_at": "2026-10-13T03:35:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38340345146/job/115115669955"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T03:33:21Z",
-     "completed_at": "2026-10-13T03:35:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38340345146/job/115115670032"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T03:33:21Z",
-     "completed_at": "2026-10-13T03:35:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38340345146/job/115115670082"
-    }
-   ]
-  },
-  {
-   "run_id": 38338028882,
-   "pr": 1184,
-   "commit": "08cd73b96773c94fc01210f01a04616635485a3b",
-   "branch": "jli/fix-waves-per-eu",
-   "event": "pull_request",
-   "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882",
-   "created_at": "2026-10-13T02:40:47Z",
-   "updated_at": "2026-10-13T12:01:35Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T10:45:15Z",
-     "completed_at": "2026-10-13T12:01:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115241977147",
-     "machine": "gbt350-odcdh1-b04-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T02:54:10Z",
-     "completed_at": "2026-10-13T03:24:44Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115241978448"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T02:55:11Z",
-     "completed_at": "2026-10-13T03:47:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38338028882/job/115241978659"
-    }
-   ]
-  },
-  {
-   "run_id": 38337823451,
-   "pr": 1276,
-   "commit": "be6888a6d9a584205f262d3bd8e9c096ac64a2aa",
-   "branch": "jli/pinreg-v2",
-   "event": "pull_request",
-   "title": "[compiler] pin register use reservedregs method",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451",
-   "created_at": "2026-10-13T02:38:15Z",
-   "updated_at": "2026-10-13T04:23:15Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T03:24:54Z",
-     "completed_at": "2026-10-13T03:45:05Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935480"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T03:21:44Z",
-     "completed_at": "2026-10-13T04:23:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935487"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T02:57:24Z",
-     "completed_at": "2026-10-13T04:15:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337823451/job/115105935775",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
