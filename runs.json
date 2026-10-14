@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-14T07:43:42Z",
+ "updated": "2026-10-14T07:48:10Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38530235463,
+   "pr": null,
+   "commit": "88f1969db5d36f76c472011327aca10aacfbff74",
+   "branch": "main",
+   "event": "push",
+   "title": "[Skills] Add review-pr: advisory PR review adapted from aiter and ATO\u2026",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38530235463",
+   "created_at": "2026-10-14T07:43:48Z",
+   "updated_at": "2026-10-14T07:46:17Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-14T07:46:12Z",
+     "completed_at": "2026-10-14T07:46:16Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38530235463/job/115740876569",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-14T07:46:12Z",
+     "completed_at": "2026-10-14T07:46:16Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38530235463/job/115740876612"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-14T07:46:12Z",
+     "completed_at": "2026-10-14T07:46:16Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38530235463/job/115740876639"
+    }
+   ]
+  },
   {
    "run_id": 38529861230,
    "pr": 1286,
@@ -14,7 +60,7 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230",
    "created_at": "2026-10-14T07:40:26Z",
-   "updated_at": "2026-10-14T07:41:39Z",
+   "updated_at": "2026-10-14T07:43:01Z",
    "actor": "Phil-amd",
    "jobs": []
   },
@@ -1684,7 +1730,7 @@
   },
   {
    "run_id": 38296255581,
-   "pr": 1279,
+   "pr": null,
    "commit": "e72d14f694eea6befd53fc16da552cf4f9bc6a92",
    "branch": "skills/review-pr-aiter-atom",
    "event": "pull_request",
@@ -2145,52 +2191,6 @@
      "machine": "smci350-rck-g03-b20-03",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38230368971,
-   "pr": null,
-   "commit": "bdf7749d8e00fe317db6d2170e9c7b2eb0f772a0",
-   "branch": "main",
-   "event": "push",
-   "title": "[llvm] Add support for custom LLVM extensions (#1190)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971",
-   "created_at": "2026-10-12T09:30:48Z",
-   "updated_at": "2026-10-12T11:53:37Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:46:18Z",
-     "completed_at": "2026-10-12T11:53:36Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971/job/114764807324"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:18:43Z",
-     "completed_at": "2026-10-12T11:23:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971/job/114764807347",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:50:06Z",
-     "completed_at": "2026-10-12T11:09:49Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971/job/114764807348"
     }
    ]
   }
