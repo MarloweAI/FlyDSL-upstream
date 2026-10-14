@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T11:28:40Z",
+ "updated": "2026-10-14T12:01:19Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38557879740,
+   "pr": 1292,
+   "commit": "ceae284a326e530016a5c892e645af908abd9c90",
+   "branch": "pr/feat-core-categories",
+   "event": "pull_request",
+   "title": "[Core] Add four concrete layout categories",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38557879740",
+   "created_at": "2026-10-14T11:37:29Z",
+   "updated_at": "2026-10-14T11:58:39Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 38549410909,
    "pr": 1292,
@@ -35,11 +50,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T10:35:15Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818/job/115807064144"
+     "completed_at": "2026-10-14T11:35:54Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818/job/115807064144",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -2201,49 +2219,6 @@
      "started_at": "2026-10-12T15:13:18Z",
      "completed_at": "2026-10-12T15:30:24Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925134"
-    }
-   ]
-  },
-  {
-   "run_id": 38257824955,
-   "pr": null,
-   "commit": "6f8014a24b1f53e25fa28564a262f4cb53c6651a",
-   "branch": "main",
-   "event": "push",
-   "title": "[DSL][Ktrace] Add experiment ktrace capture with target providers (#1\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955",
-   "created_at": "2026-10-12T13:44:37Z",
-   "updated_at": "2026-10-12T14:57:45Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T14:00:30Z",
-     "completed_at": "2026-10-12T14:56:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916741"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T14:01:08Z",
-     "completed_at": "2026-10-12T14:57:44Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916870"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T14:06:05Z",
-     "completed_at": "2026-10-12T14:26:11Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916882"
     }
    ]
   }
