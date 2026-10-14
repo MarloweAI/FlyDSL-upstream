@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-14T06:49:21Z",
+ "updated": "2026-10-14T07:25:53Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38527933016,
+   "pr": 1286,
+   "commit": "e3fb962dc618b291eaff1e63f77c332b5074a7e4",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38527933016",
+   "created_at": "2026-10-14T07:22:46Z",
+   "updated_at": "2026-10-14T07:24:23Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
+  {
+   "run_id": 38525744675,
+   "pr": 1286,
+   "commit": "a9748bd277696a0cff9ed47b40575cef045be337",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38525744675",
+   "created_at": "2026-10-14T07:01:52Z",
+   "updated_at": "2026-10-14T07:23:52Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38522893371,
    "pr": 1289,
@@ -10,13 +40,41 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371",
    "created_at": "2026-10-14T06:33:18Z",
-   "updated_at": "2026-10-14T06:36:24Z",
+   "updated_at": "2026-10-14T07:02:19Z",
    "actor": "jli-melchior",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-14T07:02:58Z",
+     "completed_at": "2026-10-14T07:21:52Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725695887"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-14T07:02:19Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725695964"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T07:02:39Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725696076"
+    }
+   ]
   },
   {
    "run_id": 38522473045,
@@ -40,38 +98,41 @@
    "branch": "migrate-kernels-tiled-tdm",
    "event": "pull_request",
    "title": "Migrate kernels tiled tdm",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527",
    "created_at": "2026-10-14T06:08:19Z",
-   "updated_at": "2026-10-14T06:20:13Z",
+   "updated_at": "2026-10-14T07:02:51Z",
    "actor": "xudoyuan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T06:20:50Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350084"
+     "completed_at": "2026-10-14T07:20:42Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350084",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-14T06:20:13Z",
+     "started_at": "2026-10-14T07:02:50Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350094"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T06:20:43Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T06:48:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350170"
     }
    ]
@@ -820,7 +881,7 @@
    "commit": "2d01385aed7958bed8f566ff70e3d198e45e8980",
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
-   "title": "[Debug] Make FLYDSL_DEBUG_DUMP_ASM write the final ISA",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
    "status": "completed",
    "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38367198629",
@@ -2194,64 +2255,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38225474794/job/114752793782"
     }
    ]
-  },
-  {
-   "run_id": 38217700479,
-   "pr": null,
-   "commit": "ea87bf01d788e67454ca438fa4b39c40a3d45f1a",
-   "branch": "mxf8_nonshuffle",
-   "event": "pull_request",
-   "title": "support scale nonshuffle",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217700479",
-   "created_at": "2026-10-12T07:25:59Z",
-   "updated_at": "2026-10-12T08:46:25Z",
-   "actor": "solinzby1",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T08:09:24Z",
-     "completed_at": "2026-10-12T08:31:21Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217700479/job/114719593474"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T08:08:50Z",
-     "completed_at": "2026-10-12T08:44:56Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217700479/job/114719593560"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T08:09:41Z",
-     "completed_at": "2026-10-12T08:46:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217700479/job/114719593563"
-    }
-   ]
-  },
-  {
-   "run_id": 38217186249,
-   "pr": 1267,
-   "commit": "29c95ab4957df46c65b376d152fa50e3e35247c4",
-   "branch": "qiangpan/sageattn2_2",
-   "event": "pull_request",
-   "title": "[Runtime] Report GPU last-level cache size from KFD",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38217186249",
-   "created_at": "2026-10-12T07:20:26Z",
-   "updated_at": "2026-10-12T07:20:26Z",
-   "actor": "qiangpan2",
-   "jobs": []
   }
  ]
 }
