@@ -1,8 +1,109 @@
 {
  "schema": 1,
- "updated": "2026-10-14T12:41:40Z",
+ "updated": "2026-10-14T15:01:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38583251480,
+   "pr": 1292,
+   "commit": "8e135248d341378eeaad659a3b5df68ac825c321",
+   "branch": "pr/feat-core-categories",
+   "event": "pull_request",
+   "title": "[Core] Add four concrete layout categories",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38583251480",
+   "created_at": "2026-10-14T14:44:44Z",
+   "updated_at": "2026-10-14T14:49:35Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38579578405,
+   "pr": null,
+   "commit": "dc58ce2ee2a8d5bb5e3908486498502ecfd965ec",
+   "branch": "main",
+   "event": "push",
+   "title": "[fix] Make make_tile treat every argument list as modes (#1284)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405",
+   "created_at": "2026-10-14T14:20:05Z",
+   "updated_at": "2026-10-14T14:37:16Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:37:16Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515507"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:37:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515536"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:37:16Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914516035"
+    }
+   ]
+  },
+  {
+   "run_id": 38579266788,
+   "pr": 1192,
+   "commit": "6241b66da45501567e96c8f91a1309293154c4a9",
+   "branch": "add-security-scanning",
+   "event": "pull_request",
+   "title": "chore: add security scanning workflows",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788",
+   "created_at": "2026-10-14T14:18:01Z",
+   "updated_at": "2026-10-14T14:38:11Z",
+   "actor": "haribabug",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:36:56Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751324"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:38:10Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751405"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T14:36:09Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751560"
+    }
+   ]
+  },
   {
    "run_id": 38557879740,
    "pr": 1292,
@@ -40,11 +141,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818",
    "created_at": "2026-10-14T10:17:13Z",
-   "updated_at": "2026-10-14T10:34:28Z",
+   "updated_at": "2026-10-14T14:36:43Z",
    "actor": "huizzhan",
    "jobs": [
     {
@@ -62,9 +163,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-14T10:34:28Z",
+     "started_at": "2026-10-14T14:36:42Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818/job/115807064225"
     },
@@ -610,10 +711,10 @@
    "event": "pull_request",
    "title": "[Feat] Support warp exchange with layout",
    "status": "completed",
-   "conclusion": "action_required",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518170348",
    "created_at": "2026-10-14T05:43:32Z",
-   "updated_at": "2026-10-14T05:43:32Z",
+   "updated_at": "2026-10-14T14:59:18Z",
    "actor": "ppppqp",
    "jobs": []
   },
@@ -625,10 +726,10 @@
    "event": "pull_request",
    "title": "[Feat] Support warp exchange with layout",
    "status": "completed",
-   "conclusion": "action_required",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518017962",
    "created_at": "2026-10-14T05:41:51Z",
-   "updated_at": "2026-10-14T05:41:51Z",
+   "updated_at": "2026-10-14T14:59:18Z",
    "actor": "ppppqp",
    "jobs": []
   },
@@ -640,10 +741,10 @@
    "event": "pull_request",
    "title": "[Feat] Support warp exchange with layout",
    "status": "completed",
-   "conclusion": "action_required",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38517923614",
    "created_at": "2026-10-14T05:40:47Z",
-   "updated_at": "2026-10-14T05:40:47Z",
+   "updated_at": "2026-10-14T14:59:18Z",
    "actor": "ppppqp",
    "jobs": []
   },
@@ -1520,7 +1621,7 @@
   },
   {
    "run_id": 38362516611,
-   "pr": 1284,
+   "pr": null,
    "commit": "3c625f444d56761ea60ed29ddf6259de7694a698",
    "branch": "xudong/make-tile-modes-list",
    "event": "pull_request",
@@ -1535,7 +1636,7 @@
   },
   {
    "run_id": 38362163106,
-   "pr": 1284,
+   "pr": null,
    "commit": "69fe84bc677f52e309c63547611c3653ea37b7eb",
    "branch": "xudong/make-tile-modes-list",
    "event": "pull_request",
@@ -2084,141 +2185,6 @@
      "started_at": "2026-10-13T02:38:18Z",
      "completed_at": "2026-10-13T02:38:20Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38337673182/job/115101709382"
-    }
-   ]
-  },
-  {
-   "run_id": 38296255581,
-   "pr": null,
-   "commit": "e72d14f694eea6befd53fc16da552cf4f9bc6a92",
-   "branch": "skills/review-pr-aiter-atom",
-   "event": "pull_request",
-   "title": "[Skills] Add review-pr: advisory PR review adapted from aiter and ATOM",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38296255581",
-   "created_at": "2026-10-12T19:13:56Z",
-   "updated_at": "2026-10-12T19:16:04Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T19:16:00Z",
-     "completed_at": "2026-10-12T19:16:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38296255581/job/114968528704",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T19:16:00Z",
-     "completed_at": "2026-10-12T19:16:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38296255581/job/114968528777"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T19:16:00Z",
-     "completed_at": "2026-10-12T19:16:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38296255581/job/114968528874"
-    }
-   ]
-  },
-  {
-   "run_id": 38268885807,
-   "pr": null,
-   "commit": "931f9f1a6c77c06fc160143765fe4d010915ca0a",
-   "branch": "codex/fix-compile-optional-null",
-   "event": "pull_request",
-   "title": "[Bugfix][JIT] Restore compile launches and defer C export preparation",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807",
-   "created_at": "2026-10-12T15:15:21Z",
-   "updated_at": "2026-10-12T16:16:30Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T15:30:28Z",
-     "completed_at": "2026-10-12T15:46:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777733"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-12T15:27:52Z",
-     "completed_at": "2026-10-12T16:02:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777847"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-12T15:51:27Z",
-     "completed_at": "2026-10-12T16:16:30Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38268885807/job/114882777900"
-    }
-   ]
-  },
-  {
-   "run_id": 38266582119,
-   "pr": null,
-   "commit": "45b7613eb5eb325f11732b190cb42f70ee9238cf",
-   "branch": "main",
-   "event": "push",
-   "title": "support scale nonshuffle (#1275)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119",
-   "created_at": "2026-10-12T14:56:37Z",
-   "updated_at": "2026-10-12T16:28:27Z",
-   "actor": "solinzby1",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T15:28:05Z",
-     "completed_at": "2026-10-12T16:28:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925079"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T15:13:25Z",
-     "completed_at": "2026-10-12T16:03:47Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925106",
-     "machine": "smci350-rck-g03-d07-31",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T15:13:18Z",
-     "completed_at": "2026-10-12T15:30:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38266582119/job/114876925134"
     }
    ]
   }
