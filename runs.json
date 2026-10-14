@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-14T07:37:42Z",
+ "updated": "2026-10-14T07:43:42Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38529861230,
+   "pr": 1286,
+   "commit": "49fa4f72033a22956c978c0a815467c9113fd029",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230",
+   "created_at": "2026-10-14T07:40:26Z",
+   "updated_at": "2026-10-14T07:41:39Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
+  {
+   "run_id": 38529539299,
+   "pr": 1276,
+   "commit": "9815f7a75bc3ef29de2195ec61d56a81a8ccb0b4",
+   "branch": "jli/pinreg-v2",
+   "event": "pull_request",
+   "title": "[compiler] pin register use reservedregs method",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529539299",
+   "created_at": "2026-10-14T07:37:30Z",
+   "updated_at": "2026-10-14T07:39:41Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38529299982,
    "pr": 1286,
@@ -10,11 +40,11 @@
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
    "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529299982",
    "created_at": "2026-10-14T07:35:19Z",
-   "updated_at": "2026-10-14T07:36:31Z",
+   "updated_at": "2026-10-14T07:41:08Z",
    "actor": "Phil-amd",
    "jobs": []
   },
@@ -2163,67 +2193,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38230368971/job/114764807348"
     }
    ]
-  },
-  {
-   "run_id": 38229731903,
-   "pr": 1274,
-   "commit": "97609064643d696e636d078677c17ebc1e5b2c35",
-   "branch": "jli/schedule_bank_upstream_oldllvm_waitalu",
-   "event": "pull_request",
-   "title": "[opt] add schedule bank api and wait alu optimization",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229731903",
-   "created_at": "2026-10-12T09:24:56Z",
-   "updated_at": "2026-10-12T10:44:59Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T09:44:58Z",
-     "completed_at": "2026-10-12T10:44:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229731903/job/114752425241"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T09:43:49Z",
-     "completed_at": "2026-10-12T10:08:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229731903/job/114752425370"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T09:43:57Z",
-     "completed_at": "2026-10-12T10:33:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229731903/job/114752425373",
-     "machine": "smci350-rck-g03-f12-31",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38229516337,
-   "pr": 1274,
-   "commit": "1d51693750ec1a97464f32439582d322356835d6",
-   "branch": "jli/schedule_bank_upstream_oldllvm_waitalu",
-   "event": "pull_request",
-   "title": "[opt] add schedule bank api and wait alu optimization",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229516337",
-   "created_at": "2026-10-12T09:22:52Z",
-   "updated_at": "2026-10-12T09:24:57Z",
-   "actor": "jli-melchior",
-   "jobs": []
   }
  ]
 }
