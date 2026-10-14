@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-14T16:18:32Z",
+ "updated": "2026-10-14T16:29:32Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -40,13 +40,41 @@
    "branch": "gfx1250/gemm-opt-0805",
    "event": "pull_request",
    "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38595465692",
    "created_at": "2026-10-14T16:08:12Z",
-   "updated_at": "2026-10-14T16:10:42Z",
+   "updated_at": "2026-10-14T16:24:05Z",
    "actor": "aoli26",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T16:24:34Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38595465692/job/115968748100"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-14T16:24:42Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38595465692/job/115968748198"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-14T16:24:05Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38595465692/job/115968748227"
+    }
+   ]
   },
   {
    "run_id": 38594219922,
@@ -130,20 +158,20 @@
    "branch": "main",
    "event": "push",
    "title": "[fix] Make make_tile treat every argument list as modes (#1284)",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405",
    "created_at": "2026-10-14T14:20:05Z",
-   "updated_at": "2026-10-14T14:37:16Z",
+   "updated_at": "2026-10-14T16:27:25Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-14T14:37:16Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-14T16:25:53Z",
+     "completed_at": "2026-10-14T16:27:24Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515507"
     },
     {
