@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T10:22:15Z",
+ "updated": "2026-10-14T10:34:02Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38549410909,
+   "pr": 1292,
+   "commit": "bebd1f4c65b19cbb8b43b12b7551f9abb2955656",
+   "branch": "pr/feat-core-categories",
+   "event": "pull_request",
+   "title": "[Core] Add four concrete layout categories",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38549410909",
+   "created_at": "2026-10-14T10:25:01Z",
+   "updated_at": "2026-10-14T10:27:55Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 38548493818,
    "pr": 1217,
@@ -10,11 +25,11 @@
    "branch": "feat/conv3d-align-aiter",
    "event": "pull_request",
    "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818",
    "created_at": "2026-10-14T10:17:13Z",
-   "updated_at": "2026-10-14T10:19:47Z",
+   "updated_at": "2026-10-14T10:20:58Z",
    "actor": "huizzhan",
    "jobs": []
   },
@@ -111,20 +126,20 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38541359724",
    "created_at": "2026-10-14T09:18:17Z",
-   "updated_at": "2026-10-14T10:00:54Z",
+   "updated_at": "2026-10-14T10:31:41Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-14T09:47:03Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T10:31:40Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38541359724/job/115784455426"
     },
     {
@@ -2195,52 +2210,6 @@
      "started_at": "2026-10-12T14:06:05Z",
      "completed_at": "2026-10-12T14:26:11Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38257824955/job/114846916882"
-    }
-   ]
-  },
-  {
-   "run_id": 38253751516,
-   "pr": 1276,
-   "commit": "53a4ce6d50d466740ce88c19d04e2a75c37bb3e6",
-   "branch": "jli/pinreg-v2",
-   "event": "pull_request",
-   "title": "[compiler] pin register use reservedregs method",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253751516",
-   "created_at": "2026-10-12T13:09:45Z",
-   "updated_at": "2026-10-12T15:07:12Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T14:01:14Z",
-     "completed_at": "2026-10-12T15:00:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253751516/job/114842360451"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T13:49:50Z",
-     "completed_at": "2026-10-12T14:05:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253751516/job/114842360470"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T13:53:32Z",
-     "completed_at": "2026-10-12T15:07:11Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38253751516/job/114842360509",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
