@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-14T09:06:26Z",
+ "updated": "2026-10-14T09:34:25Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38541359724,
+   "pr": 1289,
+   "commit": "d0d0e6ebb7c7adf79226c31e704266caa8c5d85f",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38541359724",
+   "created_at": "2026-10-14T09:18:17Z",
+   "updated_at": "2026-10-14T09:20:47Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 38540633877,
+   "pr": null,
+   "commit": "3bbef7215377a7a8db2c827e5342379a9338b694",
+   "branch": "main",
+   "event": "push",
+   "title": "[Kernel][gfx1250] Support K tails in the BF16 GEMM (#1230)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877",
+   "created_at": "2026-10-14T09:12:21Z",
+   "updated_at": "2026-10-14T09:15:02Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38536337136,
    "pr": 1217,
@@ -20,9 +50,9 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-14T08:53:54Z",
+     "started_at": "2026-10-14T09:17:17Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136/job/115766857618"
     },
@@ -109,20 +139,23 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T08:45:59Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T09:16:58Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230/job/115745651841"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T07:59:46Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230/job/115745651872"
+     "completed_at": "2026-10-14T09:14:18Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230/job/115745651872",
+     "machine": "gbt350-odcdh2-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -2158,95 +2191,6 @@
      "started_at": "2026-10-12T13:20:35Z",
      "completed_at": "2026-10-12T14:27:13Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38247864229/job/114816226268"
-    }
-   ]
-  },
-  {
-   "run_id": 38244236170,
-   "pr": null,
-   "commit": "1c81f20fab0d74528cde048ea835248027e251b6",
-   "branch": "codex/ktrace-target-providers",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38244236170",
-   "created_at": "2026-10-12T11:41:05Z",
-   "updated_at": "2026-10-12T12:16:30Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T12:13:06Z",
-     "completed_at": "2026-10-12T12:16:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38244236170/job/114804895610"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T12:12:03Z",
-     "completed_at": "2026-10-12T12:16:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38244236170/job/114804895615"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-12T12:11:32Z",
-     "completed_at": "2026-10-12T12:15:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38244236170/job/114804895633"
-    }
-   ]
-  },
-  {
-   "run_id": 38233297674,
-   "pr": 1243,
-   "commit": "f05e32a8f37d67c1096821359ca8de28b1949db0",
-   "branch": "jli/bump-llvm-0906",
-   "event": "pull_request",
-   "title": "[llvm] bump llvm to 1df311a6",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674",
-   "created_at": "2026-10-12T09:58:07Z",
-   "updated_at": "2026-10-12T11:51:02Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:56:14Z",
-     "completed_at": "2026-10-12T11:29:03Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674/job/114771500400"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T11:10:02Z",
-     "completed_at": "2026-10-12T11:21:27Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674/job/114771500444"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:53:58Z",
-     "completed_at": "2026-10-12T11:51:01Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38233297674/job/114771500446",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
