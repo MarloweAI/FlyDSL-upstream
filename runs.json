@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T07:34:59Z",
+ "updated": "2026-10-14T07:37:42Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38529299982,
+   "pr": 1286,
+   "commit": "b6faefaab890f5e3ed5f0d62c33eb1fc4093c6ed",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529299982",
+   "created_at": "2026-10-14T07:35:19Z",
+   "updated_at": "2026-10-14T07:36:31Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38528864922,
    "pr": 1286,
@@ -10,11 +25,11 @@
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
    "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38528864922",
    "created_at": "2026-10-14T07:31:19Z",
-   "updated_at": "2026-10-14T07:32:57Z",
+   "updated_at": "2026-10-14T07:36:02Z",
    "actor": "Phil-amd",
    "jobs": []
   },
@@ -2208,21 +2223,6 @@
    "created_at": "2026-10-12T09:22:52Z",
    "updated_at": "2026-10-12T09:24:57Z",
    "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 38229235689,
-   "pr": null,
-   "commit": "47f3c8c5c6c4825fb495f8ccb39a099afdb8da80",
-   "branch": "main",
-   "event": "push",
-   "title": "[fix] Use the tiler itself as the zipped_divide guide (#1258)",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38229235689",
-   "created_at": "2026-10-12T09:20:17Z",
-   "updated_at": "2026-10-12T09:30:50Z",
-   "actor": "xudoyuan",
    "jobs": []
   }
  ]
