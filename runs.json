@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-14T09:43:25Z",
+ "updated": "2026-10-14T09:49:05Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -50,9 +50,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-14T09:37:28Z",
+     "started_at": "2026-10-14T09:47:03Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38541359724/job/115784455426"
     },
@@ -83,19 +83,19 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel][gfx1250] Support K tails in the BF16 GEMM (#1230)",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877",
    "created_at": "2026-10-14T09:12:21Z",
-   "updated_at": "2026-10-14T09:33:16Z",
+   "updated_at": "2026-10-14T09:47:16Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-14T09:33:16Z",
+     "started_at": "2026-10-14T09:47:15Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782726840"
     },
@@ -154,10 +154,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-14T09:38:40Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T09:42:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136/job/115766857792"
     }
    ]
@@ -215,11 +215,11 @@
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
    "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230",
    "created_at": "2026-10-14T07:40:26Z",
-   "updated_at": "2026-10-14T08:54:31Z",
+   "updated_at": "2026-10-14T09:46:58Z",
    "actor": "Phil-amd",
    "jobs": [
     {
@@ -246,10 +246,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T08:54:30Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T09:46:58Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38529861230/job/115745651885"
     }
    ]
