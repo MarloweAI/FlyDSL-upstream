@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T18:39:01Z",
+ "updated": "2026-10-14T21:29:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38632199933,
+   "pr": 1240,
+   "commit": "477b7037c05a2241643858f23417491589726261",
+   "branch": "bugfix-e8m0-stream-and-tests",
+   "event": "pull_request",
+   "title": "[Bugfix] Shared numerics, streams, and tests",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38632199933",
+   "created_at": "2026-10-14T20:27:18Z",
+   "updated_at": "2026-10-14T20:27:18Z",
+   "actor": "dimitri91209",
+   "jobs": []
+  },
   {
    "run_id": 38596162184,
    "pr": 1194,
@@ -2026,21 +2041,6 @@
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38348634996",
    "created_at": "2026-10-13T04:53:21Z",
-   "updated_at": "2026-10-13T04:53:29Z",
-   "actor": "qiangpan2",
-   "jobs": []
-  },
-  {
-   "run_id": 38348513247,
-   "pr": 1281,
-   "commit": "1c91a514b93e1ede37ceebdb3dd1276e47613b1b",
-   "branch": "qiangpan/sageattn2_prefill",
-   "event": "pull_request",
-   "title": "[Kernel][Attention] Add SageAttention2 gfx120 dense prefill",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38348513247",
-   "created_at": "2026-10-13T04:51:51Z",
    "updated_at": "2026-10-13T04:53:29Z",
    "actor": "qiangpan2",
    "jobs": []
