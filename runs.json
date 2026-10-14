@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-14T07:25:53Z",
+ "updated": "2026-10-14T07:34:59Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38528864922,
+   "pr": 1286,
+   "commit": "40e964d24f6f04f80c70ed5ac88ebb60a94e634a",
+   "branch": "fix/dump-asm-final-isa",
+   "event": "pull_request",
+   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38528864922",
+   "created_at": "2026-10-14T07:31:19Z",
+   "updated_at": "2026-10-14T07:32:57Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38527933016,
    "pr": 1286,
@@ -10,11 +25,11 @@
    "branch": "fix/dump-asm-final-isa",
    "event": "pull_request",
    "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38527933016",
    "created_at": "2026-10-14T07:22:46Z",
-   "updated_at": "2026-10-14T07:24:23Z",
+   "updated_at": "2026-10-14T07:32:34Z",
    "actor": "Phil-amd",
    "jobs": []
   },
@@ -68,10 +83,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-14T07:02:39Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T07:25:25Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725696076"
     }
    ]
@@ -2209,52 +2224,6 @@
    "updated_at": "2026-10-12T09:30:50Z",
    "actor": "xudoyuan",
    "jobs": []
-  },
-  {
-   "run_id": 38225474794,
-   "pr": 1275,
-   "commit": "4f2b474eac4063bb2766f0fe49f6d3d3128d8cb5",
-   "branch": "mxf8_nonshuffle",
-   "event": "pull_request",
-   "title": "support scale nonshuffle",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38225474794",
-   "created_at": "2026-10-12T08:44:55Z",
-   "updated_at": "2026-10-12T10:55:39Z",
-   "actor": "solinzby1",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T09:45:15Z",
-     "completed_at": "2026-10-12T10:53:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38225474794/job/114752793723",
-     "machine": "gbt350-odcdh2-b02-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:09:05Z",
-     "completed_at": "2026-10-12T10:28:08Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38225474794/job/114752793771"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-12T10:14:36Z",
-     "completed_at": "2026-10-12T10:55:38Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38225474794/job/114752793782"
-    }
-   ]
   }
  ]
 }
