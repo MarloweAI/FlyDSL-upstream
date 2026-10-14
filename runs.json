@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-13T18:41:41Z",
+ "updated": "2026-10-14T01:01:12Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38471459399,
+   "pr": 1287,
+   "commit": "4a96963da64d89363bdd119315d235154205ca18",
+   "branch": "ci/fix-sglang-nightly-setup",
+   "event": "pull_request",
+   "title": "[CI] Fix the SGLang nightly setup after sgl-kernel moved into sglang.kernels.aot",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38471459399",
+   "created_at": "2026-10-13T21:33:06Z",
+   "updated_at": "2026-10-13T21:50:17Z",
+   "actor": "jhinpan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T21:50:37Z",
+     "completed_at": "2026-10-13T22:08:11Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38471459399/job/115558449314"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-13T21:50:47Z",
+     "completed_at": "2026-10-13T22:49:42Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38471459399/job/115558449329",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-13T21:50:17Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38471459399/job/115558449393"
+    }
+   ]
+  },
   {
    "run_id": 38388007006,
    "pr": 1256,
@@ -2240,21 +2286,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200630695/job/114656287273"
     }
    ]
-  },
-  {
-   "run_id": 38200458907,
-   "pr": null,
-   "commit": "878413fb673d2fb14e3d3965b0e6ebd4486b698e",
-   "branch": "codex/ktrace-target-providers",
-   "event": "pull_request",
-   "title": "[DSL][Runtime] Add ktrace capture with target providers",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38200458907",
-   "created_at": "2026-10-12T03:37:07Z",
-   "updated_at": "2026-10-12T03:38:37Z",
-   "actor": "coderfeli",
-   "jobs": []
   }
  ]
 }
