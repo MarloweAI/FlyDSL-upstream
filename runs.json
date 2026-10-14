@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-14T11:09:34Z",
+ "updated": "2026-10-14T11:28:40Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -53,10 +53,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T10:53:37Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T11:15:49Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38548493818/job/115807064378"
     }
    ]
@@ -111,30 +111,33 @@
    "branch": "fix/issue-1211-fp8-structural-conversion",
    "event": "pull_request",
    "title": "[Fix] Bitcast small floats across converted ops in convert-fly-to-rocdl",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38543263346",
    "created_at": "2026-10-14T09:33:51Z",
-   "updated_at": "2026-10-14T10:36:07Z",
+   "updated_at": "2026-10-14T11:25:47Z",
    "actor": "Phil-amd",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T10:35:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-14T11:24:55Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38543263346/job/115798114665"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-14T10:20:07Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38543263346/job/115798114728"
+     "completed_at": "2026-10-14T11:25:46Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38543263346/job/115798114728",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
