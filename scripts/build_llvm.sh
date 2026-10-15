@@ -62,15 +62,15 @@ PY_EOF
         esac
     done <<< "${LLVM_PATCH_LIST}"
 else
-    # Custom entry: derive paths from the entry name + branch suffix.
-    LLVM_SRC_DIR="${LLVM_SRC_DIR:-$BASE_DIR/llvm-project-${LLVM_SOURCE}}"
+    # Custom entry: use the same directory layout as upstream so CI paths stay
+    # consistent (llvm-project/, build-flydsl/, mlir_install/, mlir_install.tgz).
+    LLVM_SRC_DIR="${LLVM_SRC_DIR:-$BASE_DIR/llvm-project}"
     _custom_json=$(python3 -c "import json; c=json.load(open('${LLVM_BUILD_INFO}'))['${LLVM_SOURCE}']; print(c['repository']); print(c['branch'])")
     LLVM_REMOTE="${LLVM_REMOTE:-$(echo "$_custom_json" | sed -n '1p')}"
     LLVM_REF="${LLVM_REF:-$(echo "$_custom_json" | sed -n '2p')}"
-    _branch_suffix=$(echo "${LLVM_REF}" | sed 's|.*/||; s/_/-/g')
-    LLVM_BUILD_DIR="${LLVM_BUILD_DIR:-$LLVM_SRC_DIR/build-flydsl-${_branch_suffix}}"
-    LLVM_INSTALL_DIR="${LLVM_INSTALL_DIR:-$LLVM_SRC_DIR/mlir_install-${_branch_suffix}}"
-    LLVM_INSTALL_TGZ="${LLVM_INSTALL_TGZ:-$LLVM_SRC_DIR/mlir_install-${_branch_suffix}.tgz}"
+    LLVM_BUILD_DIR="${LLVM_BUILD_DIR:-$LLVM_SRC_DIR/build-flydsl}"
+    LLVM_INSTALL_DIR="${LLVM_INSTALL_DIR:-$LLVM_SRC_DIR/mlir_install}"
+    LLVM_INSTALL_TGZ="${LLVM_INSTALL_TGZ:-$LLVM_SRC_DIR/mlir_install.tgz}"
 fi
 
 
