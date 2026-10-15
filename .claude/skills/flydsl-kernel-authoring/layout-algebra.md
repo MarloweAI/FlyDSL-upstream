@@ -1,26 +1,24 @@
 # Layout algebra
 
-Contents:
+- [Core Types](#core-types)
+- [Construction](#construction)
+- [Coordinate Mapping](#coordinate-mapping)
+- [Query Operations](#query-operations)
+- [Layout Algebra Operations](#layout-algebra-operations)
+- [Product Operations (Combine Layouts)](#product-operations-combine-layouts)
+- [Divide Operations (Partition Layouts)](#divide-operations-partition-layouts)
+- [Structural Operations](#structural-operations)
 
-- Core Types
-- Construction
-- Coordinate Mapping
-- Query Operations
-- Layout Algebra Operations
-- Product Operations (Combine Layouts)
-- Divide Operations (Partition Layouts)
-- Structural Operations
+## Core Types
 
-## 2. Layout System (Core Abstraction)
-
-### Core Types
 | Type | Description | Example |
 |------|-------------|---------|
 | `!fly.int_tuple` | Integer tuple (can be nested) | `(8, 16)`, `(8, (4, 2))` |
 | `!fly.layout` | (Shape, Stride) pair | `(8, 16):(1, 8)` (col-major) |
 | `!fly.memref` | Memory reference with layout | Typed pointer + layout info |
 
-### Construction
+## Construction
+
 ```python
 import flydsl.expr as fx
 
@@ -29,19 +27,24 @@ stride = fx.make_stride(1, 8)             # IntTuple (1, 8)
 layout = fx.make_layout(shape, stride)    # Layout (8,16):(1,8)
 
 # Shorthand with Python tuples
+
 layout = fx.make_layout((8, 16), (1, 8))
 
 # Coordinates
+
 coord = fx.make_coord(i, j)
 
 # Nested shapes for hierarchical tiling
+
 shape_nested = fx.make_shape(9, (4, 8))   # (9, (4, 8))
 
 # Identity layout
+
 identity = fx.make_identity_layout((M, N))
 ```
 
-### Coordinate Mapping
+## Coordinate Mapping
+
 The fundamental operation maps logical coordinates to physical memory indices.
 
 **Formula**: `Index = sum(coord_i * stride_i)`
@@ -56,7 +59,8 @@ s = fx.size(layout)                # Total element count (product of shape)
 - `crd2idx((3, 5), layout)` = `3*1 + 5*8` = 43
 - `idx2crd(43, layout)` = `(43 % 8, 43 / 8)` = `(3, 5)`
 
-### Query Operations
+## Query Operations
+
 ```python
 fx.size(layout)           # Total element count
 fx.get_shape(layout)      # Extract shape IntTuple
@@ -65,24 +69,30 @@ fx.get(int_tuple, i)      # Get i-th element
 fx.rank(int_tuple)        # Number of top-level modes
 ```
 
-### Layout Algebra Operations
+## Layout Algebra Operations
 
-#### Composition: `fx.composition(A, B)`
+### Composition: `fx.composition(A, B)`
+
 Compose two layouts: `result(x) = A(B(x))`. Used to apply permutations or tile coordinate mappings.
 
-#### Complement: `fx.complement(tiler, target_size)`
+### Complement: `fx.complement(tiler, target_size)`
+
 Compute remaining modes not covered by tiler, up to target_size. Internal building block for divides.
 
-#### Coalesce: `fx.coalesce(layout)`
+### Coalesce: `fx.coalesce(layout)`
+
 Simplify layout by merging adjacent modes. Preserves mapping but flattens structure.
 
-#### Right Inverse: `fx.right_inverse(layout)`
+### Right Inverse: `fx.right_inverse(layout)`
+
 Compute right inverse of layout mapping.
 
-#### Recast: `fx.recast_layout(layout, old_bits, new_bits)`
+### Recast: `fx.recast_layout(layout, old_bits, new_bits)`
+
 Adjust layout for type width change (e.g., FP16->FP8).
 
-### Product Operations (Combine Layouts)
+## Product Operations (Combine Layouts)
+
 Products combine two layouts to create a larger layout:
 
 ```python
@@ -94,7 +104,8 @@ fx.tiled_product(layout, tiler)     # Hierarchical tiled structure
 fx.flat_product(layout, tiler)      # Flattened result
 ```
 
-### Divide Operations (Partition Layouts)
+## Divide Operations (Partition Layouts)
+
 Divides split a layout by a divisor, creating tile + rest dimensions:
 
 ```python
@@ -104,7 +115,8 @@ fx.tiled_divide(layout, divisor)    # Hierarchical tiled division
 fx.flat_divide(layout, divisor)     # Flattened division
 ```
 
-### Structural Operations
+## Structural Operations
+
 ```python
 fx.select(int_tuple, indices=[0, 2])      # Pick specific modes
 fx.group(int_tuple, begin=1, end=3)        # Group modes into nested tuple

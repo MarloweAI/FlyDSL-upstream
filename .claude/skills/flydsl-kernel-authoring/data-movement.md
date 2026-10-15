@@ -1,21 +1,11 @@
 # Data movement, LDS, matrix math, and reductions
 
-Contents:
+- [Data Movement Patterns](#data-movement-patterns)
+- [Shared Memory (LDS)](#shared-memory-lds)
+- [MFMA Integration (Matrix Math)](#mfma-integration-matrix-math)
+- [Reduction Patterns](#reduction-patterns)
 
-- Layout-Based Copy (Preferred for Element-wise Kernels)
-- Vectorized Loads (Wide Copies)
-- TiledCopy Abstraction (for 2D Copies)
-- Buffer Load/Store
-- Copy Atom Types
-- SharedAllocator Pattern (preferred for new kernels)
-- LDS Capacity
-- Available MFMA Instructions
-- gfx1250 WMMA (wave32)
-- GEMM Pattern (Preshuffle)
-- Warp Reduction (AMD wave64)
-- Block Reduction
-
-## 4. Data Movement Patterns
+## Data Movement Patterns
 
 ### Layout-Based Copy (Preferred for Element-wise Kernels)
 
@@ -50,6 +40,7 @@ def my_kernel(A: fx.Tensor, B: fx.Tensor, BLOCK_DIM: fx.Constexpr[int]):
 ```
 
 ### Vectorized Loads (Wide Copies)
+
 ```python
 VEC_WIDTH = 4
 copy_bits = VEC_WIDTH * 32   # 128 bits
@@ -58,37 +49,47 @@ copyAtom = fx.make_copy_atom(fx.UniversalCopy(copy_bits), fx.Float32)
 rA = fx.make_rmem_tensor(VEC_WIDTH, fx.Float32)
 
 # Divide for VEC_WIDTH elements per thread
+
 tA = fx.logical_divide(tA, fx.make_layout(VEC_WIDTH, 1))
 fx.copy(copyAtom, fx.slice(tA, (None, tid)), rA)
 
 # Load/store as vectors
+
 vec = fx.memref_load_vec(rA)     # Load vector from register memref
 fx.memref_store_vec(vec, rA)     # Store vector to register memref
 ```
 
 ### TiledCopy Abstraction (for 2D Copies)
+
 ```python
 # Define thread and value layouts
+
 thr_layout = fx.make_layout((4, 1), (1, 1))    # 4 threads
 val_layout = fx.make_layout((1, 8), (1, 1))    # 8 values per thread
 
 # Create copy atom
+
 copy_atom = fx.make_copy_atom(fx.rocdl.BufferCopy128b(), fx.Float32)
 
 # Build tiled copy from the TV layout. Use make_layout_tv -- a bare
+
 # raked_product is NOT equivalent: make_layout_tv additionally derives the
+
 # TV mapping via composition(right_inverse(layout_mn), ...).
+
 tile_mn, tv_layout = fx.make_layout_tv(thr_layout, val_layout)
 tiled_copy = fx.make_tiled_copy(copy_atom, tv_layout, tile_mn)
 # fx.make_tiled_copy_tv(copy_atom, thr_layout, val_layout) is the one-call form.
 
 # Get this thread's slice and partition
+
 thr_copy = tiled_copy.get_slice(tid)
 partition_src = thr_copy.partition_S(src_tensor)
 partition_dst = thr_copy.partition_D(dst_tensor)
 frag = fx.make_fragment_like(partition_src)
 
 # Execute copy: src -> fragment -> dst
+
 fx.copy(copy_atom, partition_src, frag)
 fx.copy(copy_atom, frag, partition_dst)
 ```
@@ -109,6 +110,7 @@ Legacy raw intrinsics (`create_buffer_resource` / `buffer_load` / `buffer_store`
 `kernels/common/buffer_ops.py` (moved out of `flydsl.expr` in #880); use the buffer-resource view above when migrating them.
 
 ### Copy Atom Types
+
 | Type | Bits | Usage |
 |------|------|-------|
 | `fx.UniversalCopy32b()` | 32 | 1x f32 element copy |
@@ -133,14 +135,14 @@ fx.copy(atom, g2d, lds2d)                                        # Global → LD
 fx.rocdl.tdm_ops.tensor_wait(0)                                  # await async DMA
 fx.copy(atom, g2d, lds2d, imm_offset=k_tile * k_stride_bytes)    # K-loop tile bump
 # imm_offset is atom state, so it must go through fx.copy -- copy_atom_call
+
 # takes no **kwargs and cannot carry it.
+
 ```
 
 ---
 
-
-
-## 5. Shared Memory (LDS)
+## Shared Memory (LDS)
 
 ### SharedAllocator Pattern (preferred for new kernels)
 
@@ -175,6 +177,7 @@ recommended and warns when used — allocate through `fx.SharedAllocator()` over
 `@fx.struct` storage layout and build each `.view(...)` at the top of the kernel.
 
 ### LDS Capacity
+
 | Architecture | GPU | LDS per CU |
 |---|---|---|
 | gfx942 | MI300X | 64 KB |
@@ -182,9 +185,7 @@ recommended and warns when used — allocate through `fx.SharedAllocator()` over
 
 ---
 
-
-
-## 6. MFMA Integration (Matrix Math)
+## MFMA Integration (Matrix Math)
 
 ### Available MFMA Instructions
 
@@ -240,6 +241,7 @@ fx.gemm(mma, frag_C, frag_A, frag_B, frag_C)
 ```
 
 ### GEMM Pattern (Preshuffle)
+
 The preshuffle GEMM pattern in `kernels/gemm/preshuffle_gemm.py`:
 1. B matrix is pre-shuffled to layout: (N/16, K/64, 4, 16, kpack_bytes)
 2. A tiles loaded from global to LDS with XOR16 swizzle for bank-conflict avoidance
@@ -249,11 +251,10 @@ The preshuffle GEMM pattern in `kernels/gemm/preshuffle_gemm.py`:
 
 ---
 
-
-
-## 7. Reduction Patterns
+## Reduction Patterns
 
 ### Warp Reduction (AMD wave64)
+
 XOR-shuffle-based intra-wave reduction:
 ```python
 width_i32 = fx.Int32(64)
@@ -264,6 +265,7 @@ for sh in [32, 16, 8, 4, 2, 1]:
 ```
 
 ### Block Reduction
+
 1. Intra-wave XOR shuffle (shifts: 32, 16, 8, 4, 2, 1)
 2. Lane 0 writes per-wave partial to LDS
 3. `gpu.barrier()`

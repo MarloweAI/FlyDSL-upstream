@@ -1,14 +1,7 @@
 # Kernel recipes
 
-Contents:
+## Element-wise Kernel Template
 
-- Element-wise Kernel Template
-- Element-wise Kernel Cookbook (GPU-Verified)
-- Naive GEMM Template (for understanding, not performance)
-
-## 8. Common Patterns and Recipes
-
-### Element-wise Kernel Template
 ```python
 @flyc.kernel
 def elementwise_kernel(In: fx.Tensor, Out: fx.Tensor, BLOCK: fx.Constexpr[int], VEC: fx.Constexpr[int]):
@@ -31,34 +24,41 @@ def elementwise_kernel(In: fx.Tensor, Out: fx.Tensor, BLOCK: fx.Constexpr[int], 
     fx.copy(copy, rOut, fx.slice(tOut, (None, tid)))
 ```
 
-### Element-wise Kernel Cookbook (GPU-Verified)
+## Element-wise Kernel Cookbook (GPU-Verified)
+
 All recipes below follow the same vectorized copy_atom pattern (256 threads, vec_width=4, 128-bit loads).
 Only the compute section between `memref_load_vec` and `memref_store_vec` differs.
 
 ```python
 # --- Scale: C = A * scalar ---
+
 vA = Vec(fx.memref_load_vec(rA))
 scale = Vec.filled(vec_width, 2.0, fx.Float32)
 vC = vA * scale
 
 # --- Multiply: C = A * B ---
+
 vC = Vec(fx.memref_load_vec(rA)) * Vec(fx.memref_load_vec(rB))
 
 # --- FMA: D = A * B + C ---
+
 vAB = Vec(fx.memref_load_vec(rA)) * Vec(fx.memref_load_vec(rB))
 vD = vAB + Vec(fx.memref_load_vec(rC))
 
 # --- ReLU: C = max(A, 0) ---
+
 vA = Vec(fx.memref_load_vec(rA))
 zero_vec = Vec.filled(vec_width, 0.0, fx.Float32)
 vC = fx.max(vA, zero_vec)
 
 # --- Abs: C = |A| ---
+
 vC = abs(fx.memref_load_vec(rA))        # or fx.absf(...); memref_load_vec already
                                         # returns a Vector, so no Vec() wrap needed
 ```
 
-### Naive GEMM Template (for understanding, not performance)
+## Naive GEMM Template (for understanding, not performance)
+
 ```python
 @flyc.kernel
 def naive_gemm(A: fx.Tensor, B: fx.Tensor, C: fx.Tensor,

@@ -51,7 +51,7 @@ assume imports of `flydsl.compiler as flyc`, `flydsl.expr as fx`, and
    epilogue uses. Match MMA/WMMA atoms to the architecture and dtype. See
    [data-movement.md](data-movement.md).
 5. Handle tails explicitly or state and enforce divisibility requirements.
-   The compact [recipes](recipes.md) show the main data path; they are not
+   The compact [examples](examples.md) show the main data path; they are not
    general masked-tail implementations.
 6. Compare with a PyTorch or CPU reference on representative and boundary shapes,
    including supported dtypes and non-contiguous inputs if promised. Run the
@@ -81,5 +81,5 @@ assume imports of `flydsl.compiler as flyc`, `flydsl.expr as fx`, and
 | [layout-algebra.md](layout-algebra.md) | Constructing, composing, dividing, or querying layouts |
 | [kernel-language.md](kernel-language.md) | Choosing types, control flow, vectors, or loop-carried values |
 | [data-movement.md](data-movement.md) | Partitioning copies, allocating LDS, selecting matrix atoms, or reducing |
-| [recipes.md](recipes.md) | Adapting an elementwise or educational GEMM skeleton |
+| [examples.md](examples.md) | Adapting an elementwise or educational GEMM skeleton |
 | [runtime.md](runtime.md) | Running tests, inspecting IR/debug info, autotuning, or diagnosing compiler errors |

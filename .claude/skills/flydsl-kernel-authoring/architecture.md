@@ -1,14 +1,9 @@
 # Architecture and compilation
 
-Contents:
-
-- Pipeline
-- Key Passes
-- Key Source Paths
-
-## 1. Architecture and Compilation
+## Architecture and Compilation
 
 ### Pipeline
+
 ```
 Python (@flyc.kernel/@flyc.jit)
   -> AST Rewriting (for/if -> scf.for/scf.if)
@@ -18,6 +13,7 @@ Python (@flyc.kernel/@flyc.jit)
 ```
 
 ### Key Passes
+
 Pipeline is built by `RocmBackend._pipeline_parts()` and split into three stages — see `docs/architecture_guide.md` §3 for the per-pass table. Highlights:
 1. `fly-rewrite-func-signature` - Rewrite DSL types at function / SCF boundaries to packed LLVM structs
 2. `fly-layout-lowering` - Lower layout algebra (`fly.crd2idx`, partitions, divides) to arithmetic
@@ -26,6 +22,7 @@ Pipeline is built by `RocmBackend._pipeline_parts()` and split into three stages
 5. `gpu-module-to-binary{format=fatbin}` - Emit HSACO binary via LLVM AMDGPU backend
 
 ### Key Source Paths
+
 - `python/flydsl/compiler/` - JIT compilation (jit_function.py, kernel_function.py)
 - `python/flydsl/expr/` - DSL expression API (primitive.py, derived.py, typing.py)
 - `python/flydsl/expr/primitive.py` - All layout algebra functions
@@ -41,9 +38,7 @@ Pipeline is built by `RocmBackend._pipeline_parts()` and split into three stages
 
 ---
 
-
-
-## 11. Comparison with Triton/Gluon
+## Comparison with Triton/Gluon
 
 | Aspect | FlyDSL | Triton | Gluon |
 |--------|--------|--------|-------|

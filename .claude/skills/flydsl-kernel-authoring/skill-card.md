@@ -6,8 +6,8 @@ Authors and reviews FlyDSL kernels with explicit layout algebra, data movement, 
 
 ## Owner
 
-AMD / ROCm FlyDSL maintainers ([ROCm/FlyDSL](https://github.com/ROCm/FlyDSL)).
+FlyDSL maintainers (AMD / ROCm)
 
 ## License
 
-Apache-2.0, as provided by the [FlyDSL license](../../../LICENSE).
+Apache-2.0

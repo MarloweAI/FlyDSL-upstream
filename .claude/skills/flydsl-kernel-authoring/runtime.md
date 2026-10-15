@@ -1,25 +1,20 @@
 # Runtime, debugging, and tuning
 
-Contents:
+- [Environment and Debugging](#environment-and-debugging)
+- [Troubleshooting](#troubleshooting)
+- [Running Kernels](#running-kernels)
 
-- IR Dump
-- Key Environment Variables
-- Disk Cache Invalidation
-- Source-to-Assembly Debug Info
-- Autotune Module
-- Common Issues
-- Locally
-- On a remote host or container
-
-## 9. Environment and Debugging
+## Environment and Debugging
 
 ### IR Dump
+
 ```bash
 FLYDSL_DUMP_IR=1 FLYDSL_DUMP_DIR=./dumps python my_kernel.py
 ```
 Produces numbered `.mlir` files per pipeline stage plus `final_isa.s`.
 
 ### Key Environment Variables
+
 | Variable | Default | Description |
 |---|---|---|
 | `FLYDSL_DUMP_IR` | false | Dump IR at each stage |
@@ -30,6 +25,7 @@ Produces numbered `.mlir` files per pipeline stage plus `final_isa.s`.
 | `ARCH` | auto-detect | Override GPU architecture |
 
 ### Disk Cache Invalidation
+
 The JIT disk cache auto-invalidates when kernel source or closure values change. Set `FLYDSL_RUNTIME_ENABLE_CACHE=0` only when modifying C++ passes or non-closure helper functions:
 ```bash
 FLYDSL_RUNTIME_ENABLE_CACHE=0 python my_kernel.py  # or: rm -rf ~/.flydsl/cache
@@ -113,9 +109,7 @@ Pass raw `torch.Tensor` objects instead.
 
 ---
 
-
-
-## 10. Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -144,9 +138,7 @@ Pass raw `torch.Tensor` objects instead.
 
 ---
 
-
-
-## 12. Running Kernels
+## Running Kernels
 
 ### Locally
 
