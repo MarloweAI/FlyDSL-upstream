@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-15T00:50:00Z",
+ "updated": "2026-10-15T00:58:56Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38662552410,
+   "pr": 1289,
+   "commit": "379ad73e205796ceec34d8a41f5b465c85c28070",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410",
+   "created_at": "2026-10-15T00:53:07Z",
+   "updated_at": "2026-10-15T00:55:32Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38661897389,
    "pr": 1289,
@@ -1968,49 +1983,6 @@
      "machine": "smci350-rck-g03-b17-12",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38350013805,
-   "pr": 1256,
-   "commit": "8fcbe4971dd0ff7ca70bee50d10ec32017bc5792",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805",
-   "created_at": "2026-10-13T05:10:03Z",
-   "updated_at": "2026-10-13T05:54:08Z",
-   "actor": "james-huang09",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T05:36:14Z",
-     "completed_at": "2026-10-13T05:54:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070455"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T05:24:43Z",
-     "completed_at": "2026-10-13T05:54:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070523"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T05:22:09Z",
-     "completed_at": "2026-10-13T05:46:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38350013805/job/115143070595"
     }
    ]
   }
