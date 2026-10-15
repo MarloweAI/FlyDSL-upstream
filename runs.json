@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-15T03:10:59Z",
+ "updated": "2026-10-15T03:23:48Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38675817604,
+   "pr": null,
+   "commit": "5ce3fbe3a33241f31f9330b44376d6ccd93a219a",
+   "branch": "main",
+   "event": "push",
+   "title": "[Tool][Debug] Inject hand-edited assembly into a JIT cache entry (deb\u2026",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604",
+   "created_at": "2026-10-15T03:21:15Z",
+   "updated_at": "2026-10-15T03:21:31Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38675724784,
+   "pr": null,
+   "commit": "a878bea1c809b91d776850e13f751069ced9ced0",
+   "branch": "main",
+   "event": "push",
+   "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization (#\u2026",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675724784",
+   "created_at": "2026-10-15T03:20:11Z",
+   "updated_at": "2026-10-15T03:21:31Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 38675320088,
+   "pr": 1296,
+   "commit": "a32ced990d9cac9fb3d5c85e1ad68e1843cff5c6",
+   "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
+   "event": "pull_request",
+   "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675320088",
+   "created_at": "2026-10-15T03:15:31Z",
+   "updated_at": "2026-10-15T03:18:07Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38672400957,
    "pr": 1296,
@@ -44,10 +89,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-15T02:57:14Z",
-     "completed_at": null,
+     "completed_at": "2026-10-15T03:17:34Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215463"
     },
     {
@@ -1130,7 +1175,7 @@
   },
   {
    "run_id": 38502960089,
-   "pr": 1184,
+   "pr": null,
    "commit": "a3f0aaf762838de4c5e93331faf871371874b565",
    "branch": "jli/fix-waves-per-eu",
    "event": "pull_request",
@@ -1145,7 +1190,7 @@
   },
   {
    "run_id": 38499881515,
-   "pr": 1184,
+   "pr": null,
    "commit": "a1a39fa6fca59156da12ae7cdb66e7d3d8c6d94d",
    "branch": "jli/fix-waves-per-eu",
    "event": "pull_request",
@@ -1372,7 +1417,7 @@
   },
   {
    "run_id": 38377819316,
-   "pr": 1188,
+   "pr": null,
    "commit": "45a3ea1f073599fd1eb617b27159b034aea5d123",
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
@@ -1464,7 +1509,7 @@
   },
   {
    "run_id": 38373277088,
-   "pr": 1188,
+   "pr": null,
    "commit": "5cb4d86783c319a9f7eeb00acad1074b33b30ed0",
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
@@ -1642,7 +1687,7 @@
   },
   {
    "run_id": 38368425696,
-   "pr": 1188,
+   "pr": null,
    "commit": "3da88e0bce0a7859de4bf684b619d106483d60de",
    "branch": "feat/hack-ut-asm-multi-kernel",
    "event": "pull_request",
@@ -1904,82 +1949,6 @@
      "machine": "gbt350-odcdh1-b08-1",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38362516611,
-   "pr": null,
-   "commit": "3c625f444d56761ea60ed29ddf6259de7694a698",
-   "branch": "xudong/make-tile-modes-list",
-   "event": "pull_request",
-   "title": "[fix] Make make_tile treat every argument list as modes",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362516611",
-   "created_at": "2026-10-13T07:25:09Z",
-   "updated_at": "2026-10-13T07:27:33Z",
-   "actor": "xudoyuan",
-   "jobs": []
-  },
-  {
-   "run_id": 38362163106,
-   "pr": null,
-   "commit": "69fe84bc677f52e309c63547611c3653ea37b7eb",
-   "branch": "xudong/make-tile-modes-list",
-   "event": "pull_request",
-   "title": "[fix] Make make_tile treat every argument list as modes",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362163106",
-   "created_at": "2026-10-13T07:21:42Z",
-   "updated_at": "2026-10-13T07:26:26Z",
-   "actor": "xudoyuan",
-   "jobs": []
-  },
-  {
-   "run_id": 38358605475,
-   "pr": 1264,
-   "commit": "38fffe7a56fbbe38119cd974afd21113037dab7b",
-   "branch": "fix/gfx1250-fp8-tile-check",
-   "event": "pull_request",
-   "title": "[Bugfix][gfx1250] Reject FP8 and A8W4 GEMM tiles that issue no WMMA, and test that stores stay inside N",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475",
-   "created_at": "2026-10-13T06:46:17Z",
-   "updated_at": "2026-10-13T09:32:34Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:30:47Z",
-     "completed_at": "2026-10-13T07:53:41Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382284"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:09:57Z",
-     "completed_at": "2026-10-13T08:05:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382309",
-     "machine": "smci350-rck-g03-f19-31",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:44:52Z",
-     "completed_at": "2026-10-13T09:32:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38358605475/job/115174382353"
     }
    ]
   }
