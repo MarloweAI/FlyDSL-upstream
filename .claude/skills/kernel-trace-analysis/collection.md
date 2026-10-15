@@ -1,10 +1,9 @@
 # ATT and PMC collection
 
-Contents:
-
-- Kernel discovery
-- ATT configuration and collection
-- PMC collection for cache and HBM metrics
+- [Step 1: Kernel Discovery](#step-1-kernel-discovery)
+- [Step 2: Configure input.yaml](#step-2-configure-inputyaml)
+- [Step 3: Collect ATT Trace](#step-3-collect-att-trace)
+- [PMC collection for cache and HBM metrics](#pmc-collection-for-cache-and-hbm-metrics)
 
 ## Step 1: Kernel Discovery
 
@@ -91,7 +90,6 @@ ui_output_agent_<PID>_dispatch_<N>/
 ```
 
 ---
-
 
 ## PMC collection for cache and HBM metrics
 

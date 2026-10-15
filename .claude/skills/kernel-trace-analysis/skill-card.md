@@ -6,8 +6,8 @@ Analyzes AMD GPU instruction stalls and memory counters to produce evidence-base
 
 ## Owner
 
-AMD / ROCm FlyDSL maintainers ([ROCm/FlyDSL](https://github.com/ROCm/FlyDSL)).
+FlyDSL maintainers (AMD / ROCm)
 
 ## License
 
-Apache-2.0, as provided by the [FlyDSL license](../../../LICENSE).
+Apache-2.0

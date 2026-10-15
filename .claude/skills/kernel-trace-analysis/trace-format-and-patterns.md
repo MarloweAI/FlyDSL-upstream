@@ -1,11 +1,6 @@
 # Trace format and stall patterns
 
-Contents:
 
-- code.json field reference
-- snapshots.json: resolving source paths
-- Stall type classification
-- Common hotspot patterns
 
 ### code.json field reference
 
@@ -50,12 +45,14 @@ unchanged either way.
 
 ```python
 # BAD: load and MFMA alternate — only 1 MFMA of hiding time
+
 for k_step in range_constexpr(QKHELOOP * 2):
     if k_step % 2 == 0:
         v_data = buffer_ops.buffer_load(...)   # stall_rate ~92%
     acc = rocdl.mfma_f32_16x16x32_fp8_fp8(...)
 
 # GOOD: batch all loads before the MFMA loop
+
 for td in range_constexpr(TLOOP):
     v_prefetch[td] = [buffer_ops.buffer_load(...) for _ in range_constexpr(QKHELOOP)]
 
@@ -69,23 +66,27 @@ for td in range_constexpr(TLOOP):
 
 ```python
 # BAD: all loads back-to-back, no compute interleaved
+
 for td in range_constexpr(TLOOP):
     for qkhe in range_constexpr(QKHELOOP):
         k4 = buffer_ops.buffer_load(k_rsrc, ka_dw, ...)   # queue fills up
 
 # GOOD: prefetch next tile's K loads during current tile's MFMA computation
+
 ```
 
 #### Pattern 3: LDS prob reads immediately before PV MFMA → lgkmcnt stall
 
 ```python
 # BAD: LDS reads and MFMA in same loop
+
 for vhe in ...:
     for vt in ...:
         p_i64 = lds_read(...)    # issued here
         tmp = mfma(v_i64, p_i64, ...)   # immediately consumed → lgkmcnt stall
 
 # GOOD: batch all LDS reads first, then all MFMAs
+
 for vhe in ...:
     for vt in ...:
         p_i64s.append(lds_read(...))    # all LDS reads issued first
@@ -99,13 +100,16 @@ for vhe in ...:
 
 ```python
 # BAD: scale load and usage separated by only TLOOP MFMAs
+
 for td in range_constexpr(TLOOP):
     k_scale = buffer_ops.buffer_load(ks_rsrc, ...)   # issued here
 # ... small compute gap ...
     result = acc * k_scale   # used too soon → stall
 
 # GOOD: issue scale loads at the very beginning of the block,
+
 # before K loads, to maximise latency hiding distance
+
 ```
 
 #### Pattern 5: Hotspot attributed to kernel entry line

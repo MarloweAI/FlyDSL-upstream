@@ -17,8 +17,7 @@ existing artifacts when supplied; collect a new trace only when the task needs i
 ## Prerequisites
 
 - Offline analysis needs Python 3.10+ and the standard library; no GPU, ROCm
-  installation, container, or FlyDSL checkout is needed. The eval fixtures are
-  synthetic and exercise this mode only.
+  installation, container, or FlyDSL checkout is needed.
 - Collection defaults to Linux with ROCm 7.2, `rocprofv3`, matching aqlprofile and
   rocprof-trace-decoder, and an AMD Instinct MI300X (`gfx942`) or MI350 (`gfx950`).
   Confirm `/opt/rocm/.info/version`, `rocprofv3 --version`, and the actual GPU.
@@ -31,18 +30,26 @@ existing artifacts when supplied; collect a new trace only when the task needs i
   source mapping. Check `HIP_VISIBLE_DEVICES`, `ROCR_VISIBLE_DEVICES`, and `ARCH`;
   do not use `HSA_OVERRIDE_GFX_VERSION` to disguise an unsupported architecture.
 
-## Locate the analyzers
+## Inputs
 
-Set `FLYDSL_TRACE_SKILL_DIR` to the absolute directory containing this SKILL.md
-as resolved by the agent's skill loader. This is the installed skill directory,
-not the workload checkout or current working directory. Paths below are quoted
-so installations containing spaces work.
+| Argument | Behavior |
+| --- | --- |
+| `<CMD>` | Profile a command, for example `python bench_pa.py --batch 32` |
+| `--dir <path>` | Analyze an existing dispatch directory and skip collection |
+| `--topk N` | Show the top N hotspots; default 15 |
+
+Use the supplied command or dispatch directory. These arguments select the
+workflow; pass `--topk` through to the hotspot analyzer.
+
+## Bundled analyzers
+
+Resolve scripts relative to this SKILL.md, independently of the workload's
+working directory. In the commands below, `SKILL_DIR` is that absolute directory.
 
 - Run [scripts/hotspot_analyzer.py](scripts/hotspot_analyzer.py) for ATT stalls,
   source context, and resource estimates.
 - Run [scripts/pmc_l2_analyzer.py](scripts/pmc_l2_analyzer.py) for PMC L2 hit rate,
-  partial read fraction, and estimated HBM over-fetch. Both use only Python's
-  standard library; use these implementations rather than regenerating analyzers.
+  partial read fraction, and estimated HBM over-fetch.
 
 ## Analyze an existing trace
 
@@ -55,8 +62,8 @@ so installations containing spaces work.
 3. Run the reports:
 
 ```bash
-python "$FLYDSL_TRACE_SKILL_DIR/scripts/hotspot_analyzer.py" <dispatch_dir> --kernel <kernel_name> --topk 15 --mode both
-python "$FLYDSL_TRACE_SKILL_DIR/scripts/hotspot_analyzer.py" <dispatch_dir> --kernel <kernel_name> --topk 5 --mode src --detail --context 4
+python "$SKILL_DIR/scripts/hotspot_analyzer.py" <dispatch_dir> --kernel <kernel_name> --topk 15 --mode both
+python "$SKILL_DIR/scripts/hotspot_analyzer.py" <dispatch_dir> --kernel <kernel_name> --topk 5 --mode src --detail --context 4
 ```
 
 4. Rank source lines by stall cycles, then inspect the associated instructions.
@@ -73,7 +80,7 @@ For PMC CSVs, supply the intended kernel, ideal read bytes **per dispatch** in
 decimal GB, and the EA channel scaling appropriate to the measured counters:
 
 ```bash
-python "$FLYDSL_TRACE_SKILL_DIR/scripts/pmc_l2_analyzer.py" <l2.csv> <ea.csv> --kernel <kernel_name> --ideal-gb <GB_per_dispatch> --ea-channels 2
+python "$SKILL_DIR/scripts/pmc_l2_analyzer.py" <l2.csv> <ea.csv> --kernel <kernel_name> --ideal-gb <GB_per_dispatch> --ea-channels 2
 ```
 
 The analyzer combines dispatch IDs across files. Only combine complementary

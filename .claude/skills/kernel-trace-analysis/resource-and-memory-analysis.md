@@ -1,11 +1,6 @@
 # Resource and memory analysis
 
-Contents:
 
-- Register pressure check (architecture-aware)
-- L2 / HBM efficiency analysis (PMC, not ATT)
-- MFMA latency reference (cycles = pipeline depth)
-- MFMA dependency NOPs (CDNA4, from ISA reference Table 38)
 
 ### Register pressure check (architecture-aware)
 
@@ -78,10 +73,10 @@ When the ATT hotspots are dominated by `VMEM-load` at high stall rate (e.g.
 insufficient overlap. This alone does not prove HBM bandwidth saturation;
 ATT has no cache counters.
 Capture matching PMC counter groups and analyze with
-`${FLYDSL_TRACE_SKILL_DIR}/scripts/pmc_l2_analyzer.py`:
+`${SKILL_DIR}/scripts/pmc_l2_analyzer.py`:
 
 ```bash
-python "$FLYDSL_TRACE_SKILL_DIR/scripts/pmc_l2_analyzer.py" \
+python "$SKILL_DIR/scripts/pmc_l2_analyzer.py" \
     /tmp/pmc_out/pass_1/pmc_l2_counter_collection.csv \
     /tmp/pmc_ea_out/pass_1/pmc_ea_counter_collection.csv \
     --kernel <kernel> --ideal-gb <bytes_per_dispatch_GB> --ea-channels 2
