@@ -43,9 +43,9 @@
       "prompt": "Profile my FlyDSL benchmark with rocprofv3 on MI300X, collect ATT with Python source mappings, and identify the top instruction stalls."
     },
     {
-      "id": "flydsl-trace-negative-kernel-authoring",
+      "id": "flydsl-trace-negative-triton-kernel",
       "skill_should_trigger": false,
-      "prompt": "Write a FlyDSL vector-add kernel using layout algebra and copy atoms. I have no performance trace."
+      "prompt": "Write a Triton vector-add kernel using tl.load and tl.store for NVIDIA A100. I have no performance trace."
     },
     {
       "id": "flydsl-trace-negative-application-timeline",
