@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-15T14:53:51Z",
+ "updated": "2026-10-15T15:33:14Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -25,13 +25,41 @@
    "branch": "skills/catalog-kernel-authoring",
    "event": "pull_request",
    "title": "Add catalog entry point for the existing kernel authoring skill",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270",
    "created_at": "2026-10-15T14:50:18Z",
-   "updated_at": "2026-10-15T14:52:29Z",
+   "updated_at": "2026-10-15T15:03:34Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-15T15:03:33Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770527"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-15T15:04:12Z",
+     "completed_at": "2026-10-15T15:22:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770535"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-15T15:04:45Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770765"
+    }
+   ]
   },
   {
    "run_id": 38753140638,
@@ -145,20 +173,20 @@
    "branch": "gfx1250/gemm-opt-0805",
    "event": "pull_request",
    "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38722836138",
    "created_at": "2026-10-15T10:48:13Z",
-   "updated_at": "2026-10-15T11:30:28Z",
+   "updated_at": "2026-10-15T15:31:06Z",
    "actor": "aoli26",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-15T11:30:28Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-15T15:04:33Z",
+     "completed_at": "2026-10-15T15:31:05Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38722836138/job/116397924585"
     },
     {
