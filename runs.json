@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-15T04:49:29Z",
+ "updated": "2026-10-15T06:47:23Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38691709359,
+   "pr": 1289,
+   "commit": "554bc53bfc1f26ea9d5f4dabda79662e53e15278",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359",
+   "created_at": "2026-10-15T06:19:17Z",
+   "updated_at": "2026-10-15T06:43:49Z",
+   "actor": "jli-melchior",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-15T06:44:41Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733199"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-15T06:43:49Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733223"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-15T06:44:30Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733258"
+    }
+   ]
+  },
   {
    "run_id": 38676605709,
    "pr": 1289,
@@ -1931,49 +1974,6 @@
      "machine": "smci350-rck-g03-f12-31",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38365268727,
-   "pr": 1217,
-   "commit": "407c9a89e5afb1d2e6066218e87b13e030ed4688",
-   "branch": "feat/conv3d-align-aiter",
-   "event": "pull_request",
-   "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727",
-   "created_at": "2026-10-13T07:50:34Z",
-   "updated_at": "2026-10-13T08:40:49Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:19:12Z",
-     "completed_at": "2026-10-13T08:40:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905100"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:07:36Z",
-     "completed_at": "2026-10-13T08:39:41Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905119"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:08:17Z",
-     "completed_at": "2026-10-13T08:40:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38365268727/job/115194905151"
     }
    ]
   }
