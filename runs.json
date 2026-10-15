@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-15T14:41:54Z",
+ "updated": "2026-10-15T14:53:51Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38754974153,
+   "pr": 1223,
+   "commit": "35c56681d7ed8bc6c90fcb81a2e3226e044bfd77",
+   "branch": "gfx120x-overhaul-ops-fa-etc",
+   "event": "pull_request",
+   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754974153",
+   "created_at": "2026-10-15T14:50:22Z",
+   "updated_at": "2026-10-15T14:50:22Z",
+   "actor": "dimitri91209",
+   "jobs": []
+  },
+  {
+   "run_id": 38754964270,
+   "pr": 1298,
+   "commit": "99f77c35ad3f0b783eb3c89e9cdf87d534c57e81",
+   "branch": "skills/catalog-kernel-authoring",
+   "event": "pull_request",
+   "title": "Add catalog entry point for the existing kernel authoring skill",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270",
+   "created_at": "2026-10-15T14:50:18Z",
+   "updated_at": "2026-10-15T14:52:29Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 38753140638,
    "pr": 1299,
@@ -25,17 +55,17 @@
    "branch": "skills/catalog-kernel-authoring",
    "event": "pull_request",
    "title": "Add catalog entry point for the existing kernel authoring skill",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38752987573",
    "created_at": "2026-10-15T14:37:01Z",
-   "updated_at": "2026-10-15T14:38:47Z",
+   "updated_at": "2026-10-15T14:51:57Z",
    "actor": "coderfeli",
    "jobs": []
   },
   {
    "run_id": 38744674874,
-   "pr": 1223,
+   "pr": null,
    "commit": "301c0879a40f271b98f4e6e5a676b2f969cfcbec",
    "branch": "gfx120x-overhaul-ops-fa-etc",
    "event": "pull_request",
@@ -1605,67 +1635,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38508183086/job/115676192487"
     }
    ]
-  },
-  {
-   "run_id": 38503108302,
-   "pr": 1184,
-   "commit": "e0f297903b230c70b26c755228f03dd20ab6b7c4",
-   "branch": "jli/fix-waves-per-eu",
-   "event": "pull_request",
-   "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38503108302",
-   "created_at": "2026-10-14T02:50:11Z",
-   "updated_at": "2026-10-14T05:54:09Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T04:11:10Z",
-     "completed_at": "2026-10-14T05:54:08Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38503108302/job/115663749642"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T03:24:40Z",
-     "completed_at": "2026-10-14T04:22:41Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38503108302/job/115663749645",
-     "machine": "smci350-rck-g03-b17-12",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T03:24:33Z",
-     "completed_at": "2026-10-14T03:46:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38503108302/job/115663749764"
-    }
-   ]
-  },
-  {
-   "run_id": 38502960089,
-   "pr": null,
-   "commit": "a3f0aaf762838de4c5e93331faf871371874b565",
-   "branch": "jli/fix-waves-per-eu",
-   "event": "pull_request",
-   "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38502960089",
-   "created_at": "2026-10-14T02:48:28Z",
-   "updated_at": "2026-10-14T02:50:12Z",
-   "actor": "jli-melchior",
-   "jobs": []
   }
  ]
 }
