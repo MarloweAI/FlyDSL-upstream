@@ -111,15 +111,15 @@ func.func @pyir_composition_static() -> !fly.layout<(3, 5) : (19, 51)> {
 }
 
 // CHECK-LABEL: @pyir_composition_with_tuple
-func.func @pyir_composition_with_tuple() -> !fly.layout<2 : 1> {
+func.func @pyir_composition_with_tuple() -> !fly.layout<(2) : (1)> {
   %as = fly.static : !fly.int_tuple<(4)>
   %ad = fly.static : !fly.int_tuple<(1)>
   %a = fly.make_layout(%as, %ad) : (!fly.int_tuple<(4)>, !fly.int_tuple<(1)>) -> !fly.layout<(4) : (1)>
   %bs = fly.static : !fly.int_tuple<(2)>
   %bd = fly.static : !fly.int_tuple<(1)>
   %b = fly.make_layout(%bs, %bd) : (!fly.int_tuple<(2)>, !fly.int_tuple<(1)>) -> !fly.layout<(2) : (1)>
-  %result = fly.composition(%a, %b) : (!fly.layout<(4) : (1)>, !fly.layout<(2) : (1)>) -> !fly.layout<2 : 1>
-  return %result : !fly.layout<2 : 1>
+  %result = fly.composition(%a, %b) : (!fly.layout<(4) : (1)>, !fly.layout<(2) : (1)>) -> !fly.layout<(2) : (1)>
+  return %result : !fly.layout<(2) : (1)>
 }
 
 // CHECK-LABEL: @pyir_complement_rank1
@@ -162,20 +162,20 @@ func.func @test_slice_nested_composed_outer_updates_nearest_offset(
 
 // CHECK-LABEL: @composition_tiler_shorter_than_layout
 func.func @composition_tiler_shorter_than_layout(%layout: !fly.layout<(12, 6, 5) : (1, 16, 128)>)
-    -> !fly.layout<(4, 3) : (1, 16)> {
+    -> !fly.layout<((4), (3)) : ((1), (16))> {
   %tiler = fly.static : !fly.tile<[(4) : (1)|(3) : (1)]>
   // CHECK: fly.composition
-  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|(3) : (1)]>) -> !fly.layout<(4, 3) : (1, 16)>
-  return %result : !fly.layout<(4, 3) : (1, 16)>
+  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|(3) : (1)]>) -> !fly.layout<((4), (3)) : ((1), (16))>
+  return %result : !fly.layout<((4), (3)) : ((1), (16))>
 }
 
 // CHECK-LABEL: @composition_tiler_matches_layout_rank
 func.func @composition_tiler_matches_layout_rank(%layout: !fly.layout<(12, 6, 5) : (1, 16, 128)>)
-    -> !fly.layout<(4, 3, 5) : (1, 16, 128)> {
+    -> !fly.layout<((4), (3), (5)) : ((1), (16), (128))> {
   %tiler = fly.static : !fly.tile<[(4) : (1)|(3) : (1)|(5) : (1)]>
   // CHECK: fly.composition
-  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|(3) : (1)|(5) : (1)]>) -> !fly.layout<(4, 3, 5) : (1, 16, 128)>
-  return %result : !fly.layout<(4, 3, 5) : (1, 16, 128)>
+  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|(3) : (1)|(5) : (1)]>) -> !fly.layout<((4), (3), (5)) : ((1), (16), (128))>
+  return %result : !fly.layout<((4), (3), (5)) : ((1), (16), (128))>
 }
 
 // A `*` mode is covered by the tiler but not composed: it keeps its layout mode
@@ -183,20 +183,20 @@ func.func @composition_tiler_matches_layout_rank(%layout: !fly.layout<(12, 6, 5)
 
 // CHECK-LABEL: @composition_tiler_trailing_skip
 func.func @composition_tiler_trailing_skip(%layout: !fly.layout<(12, 6, 5) : (1, 16, 128)>)
-    -> !fly.layout<(4, 6) : (1, 16)> {
+    -> !fly.layout<((4), 6) : ((1), 16)> {
   %tiler = fly.static : !fly.tile<[(4) : (1)|*]>
   // CHECK: fly.composition
-  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|*]>) -> !fly.layout<(4, 6) : (1, 16)>
-  return %result : !fly.layout<(4, 6) : (1, 16)>
+  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[(4) : (1)|*]>) -> !fly.layout<((4), 6) : ((1), 16)>
+  return %result : !fly.layout<((4), 6) : ((1), 16)>
 }
 
 // CHECK-LABEL: @composition_tiler_leading_skip
 func.func @composition_tiler_leading_skip(%layout: !fly.layout<(12, 6, 5) : (1, 16, 128)>)
-    -> !fly.layout<(12, 3) : (1, 16)> {
+    -> !fly.layout<(12, (3)) : (1, (16))> {
   %tiler = fly.static : !fly.tile<[*|(3) : (1)]>
   // CHECK: fly.composition
-  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[*|(3) : (1)]>) -> !fly.layout<(12, 3) : (1, 16)>
-  return %result : !fly.layout<(12, 3) : (1, 16)>
+  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<[*|(3) : (1)]>) -> !fly.layout<(12, (3)) : (1, (16))>
+  return %result : !fly.layout<(12, (3)) : (1, (16))>
 }
 
 // CHECK-LABEL: @composition_tiler_int_modes
@@ -212,11 +212,11 @@ func.func @composition_tiler_int_modes(%layout: !fly.layout<(12, 6, 5) : (1, 16,
 
 // CHECK-LABEL: @composition_leaf_layout_tiler
 func.func @composition_leaf_layout_tiler(%layout: !fly.layout<(12, 6, 5) : (1, 16, 128)>)
-    -> !fly.layout<4 : 1> {
+    -> !fly.layout<(4) : (1)> {
   %tiler = fly.static : !fly.tile<(4) : (1)>
   // CHECK: fly.composition
-  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<(4) : (1)>) -> !fly.layout<4 : 1>
-  return %result : !fly.layout<4 : 1>
+  %result = fly.composition(%layout, %tiler) : (!fly.layout<(12, 6, 5) : (1, 16, 128)>, !fly.tile<(4) : (1)>) -> !fly.layout<(4) : (1)>
+  return %result : !fly.layout<(4) : (1)>
 }
 
 // CHECK-LABEL: @composition_leaf_int_tiler
