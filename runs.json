@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-15T03:23:48Z",
+ "updated": "2026-10-15T03:25:58Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38675979188,
+   "pr": 1289,
+   "commit": "d0901387d407c17bb6a1556788041096b86d722d",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675979188",
+   "created_at": "2026-10-15T03:23:05Z",
+   "updated_at": "2026-10-15T03:24:24Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38675817604,
    "pr": null,
@@ -10,11 +25,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Tool][Debug] Inject hand-edited assembly into a JIT cache entry (deb\u2026",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604",
    "created_at": "2026-10-15T03:21:15Z",
-   "updated_at": "2026-10-15T03:21:31Z",
+   "updated_at": "2026-10-15T03:23:54Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -70,20 +85,20 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661",
    "created_at": "2026-10-15T02:22:31Z",
-   "updated_at": "2026-10-15T03:08:26Z",
+   "updated_at": "2026-10-15T03:23:54Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-15T03:08:25Z",
-     "completed_at": null,
+     "completed_at": "2026-10-15T03:23:32Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215442"
     },
     {
@@ -98,10 +113,10 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-15T02:57:22Z",
-     "completed_at": null,
+     "completed_at": "2026-10-15T03:23:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215482"
     }
    ]
@@ -1903,52 +1918,6 @@
      "started_at": "2026-10-13T07:45:51Z",
      "completed_at": "2026-10-13T08:12:56Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362852846/job/115187084349"
-    }
-   ]
-  },
-  {
-   "run_id": 38362765300,
-   "pr": 1284,
-   "commit": "ea47b4ac847389615b166fbc8345f6beeb8bef59",
-   "branch": "xudong/make-tile-modes-list",
-   "event": "pull_request",
-   "title": "[fix] Make make_tile treat every argument list as modes",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300",
-   "created_at": "2026-10-13T07:27:31Z",
-   "updated_at": "2026-10-13T09:31:21Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:46:42Z",
-     "completed_at": "2026-10-13T09:31:20Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248057"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:53:45Z",
-     "completed_at": "2026-10-13T08:19:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248144"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-13T07:44:19Z",
-     "completed_at": "2026-10-13T08:52:42Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38362765300/job/115186248172",
-     "machine": "gbt350-odcdh1-b08-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
