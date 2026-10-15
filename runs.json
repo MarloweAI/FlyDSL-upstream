@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-15T18:36:18Z",
+ "updated": "2026-10-15T21:03:25Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38788693633,
+   "pr": 1223,
+   "commit": "21a11efbce31456287f8b9dc03ab69ab817caa03",
+   "branch": "gfx120x-overhaul-ops-fa-etc",
+   "event": "pull_request",
+   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38788693633",
+   "created_at": "2026-10-15T18:48:40Z",
+   "updated_at": "2026-10-15T18:48:40Z",
+   "actor": "dimitri91209",
+   "jobs": []
+  },
   {
    "run_id": 38773529766,
    "pr": 1245,
@@ -48,7 +63,7 @@
   },
   {
    "run_id": 38754974153,
-   "pr": 1223,
+   "pr": null,
    "commit": "35c56681d7ed8bc6c90fcb81a2e3226e044bfd77",
    "branch": "gfx120x-overhaul-ops-fa-etc",
    "event": "pull_request",
@@ -68,20 +83,20 @@
    "branch": "skills/catalog-kernel-authoring",
    "event": "pull_request",
    "title": "Add catalog entry point for the existing kernel authoring skill",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270",
    "created_at": "2026-10-15T14:50:18Z",
-   "updated_at": "2026-10-15T17:16:27Z",
+   "updated_at": "2026-10-15T21:01:38Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-15T17:16:26Z",
-     "completed_at": null,
+     "completed_at": "2026-10-15T21:01:37Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770527"
     },
     {
@@ -1642,21 +1657,6 @@
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518017962",
    "created_at": "2026-10-14T05:41:51Z",
-   "updated_at": "2026-10-14T14:59:18Z",
-   "actor": "ppppqp",
-   "jobs": []
-  },
-  {
-   "run_id": 38517923614,
-   "pr": null,
-   "commit": "a014e266a0c66028e86c9b33627b8ffff0587548",
-   "branch": "feat/coop-exchange-layout",
-   "event": "pull_request",
-   "title": "[Feat] Support warp exchange with layout",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38517923614",
-   "created_at": "2026-10-14T05:40:47Z",
    "updated_at": "2026-10-14T14:59:18Z",
    "actor": "ppppqp",
    "jobs": []
