@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-15T09:34:49Z",
+ "updated": "2026-10-15T10:05:55Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38717333818,
+   "pr": 971,
+   "commit": "266241b571dc4fe0665ab1098c32d44d4fe49e44",
+   "branch": "gfx1250/gemm-opt-0805",
+   "event": "pull_request",
+   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38717333818",
+   "created_at": "2026-10-15T10:02:02Z",
+   "updated_at": "2026-10-15T10:03:47Z",
+   "actor": "aoli26",
+   "jobs": []
+  },
+  {
+   "run_id": 38714180514,
+   "pr": 1297,
+   "commit": "eec9b5d0ea8cc0504a257b57ad420a04ddf9d2ba",
+   "branch": "fix/issue-1273-slp-ordered-reduction-budget",
+   "event": "pull_request",
+   "title": "[llvm] Stop failed SLP ordered reductions from starving the block",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514",
+   "created_at": "2026-10-15T09:36:27Z",
+   "updated_at": "2026-10-15T09:39:15Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38703759091,
    "pr": 1291,
@@ -1882,92 +1912,6 @@
      "started_at": "2026-10-13T08:46:51Z",
      "completed_at": "2026-10-13T08:46:54Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38371354078/job/115209502291"
-    }
-   ]
-  },
-  {
-   "run_id": 38370773745,
-   "pr": 1217,
-   "commit": "10c97c9bb0ce390bdb0f24565c5d50d04d4c8b00",
-   "branch": "feat/conv3d-align-aiter",
-   "event": "pull_request",
-   "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745",
-   "created_at": "2026-10-13T08:39:40Z",
-   "updated_at": "2026-10-13T09:41:47Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T09:29:12Z",
-     "completed_at": "2026-10-13T09:41:47Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577300"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:56:37Z",
-     "completed_at": "2026-10-13T09:40:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577390"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T09:30:49Z",
-     "completed_at": "2026-10-13T09:41:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38370773745/job/115213577420"
-    }
-   ]
-  },
-  {
-   "run_id": 38368425696,
-   "pr": null,
-   "commit": "3da88e0bce0a7859de4bf684b619d106483d60de",
-   "branch": "feat/hack-ut-asm-multi-kernel",
-   "event": "pull_request",
-   "title": "[Tool][Debug] Inject hand-edited assembly into a JIT cache entry",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696",
-   "created_at": "2026-10-13T08:19:02Z",
-   "updated_at": "2026-10-13T09:02:17Z",
-   "actor": "Phil-amd",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:41:55Z",
-     "completed_at": "2026-10-13T09:00:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802801"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:41:55Z",
-     "completed_at": "2026-10-13T09:00:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802831"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-13T08:53:21Z",
-     "completed_at": "2026-10-13T09:02:16Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38368425696/job/115207802932"
     }
    ]
   }
