@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-15T04:47:33Z",
+ "updated": "2026-10-15T04:49:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -68,20 +68,20 @@
    "branch": "main",
    "event": "push",
    "title": "[Tool][Debug] Inject hand-edited assembly into a JIT cache entry (deb\u2026",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604",
    "created_at": "2026-10-15T03:21:15Z",
-   "updated_at": "2026-10-15T04:21:40Z",
+   "updated_at": "2026-10-15T04:46:55Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-15T04:21:40Z",
-     "completed_at": null,
+     "completed_at": "2026-10-15T04:46:54Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604/job/116238759092"
     },
     {
