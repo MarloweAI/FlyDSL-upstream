@@ -15,5 +15,12 @@
       }
     ],
     "extensions": []
+  },
+
+  "custom-upstream-old-vavdst-schedule-gpr": {
+    "repository": "https://github.com/jli-melchior/llvm-project.git",
+    "branch": "jli/gfx1250/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
+    "base": "jli/gfx1250/schedule-bank-upstream-oldllvm-waitalu",
+    "description": "upstream-old + schedule_bank + va_vdst relaxation + schedule vgpr/sgpr/agpr"
   }
 }
