@@ -37,9 +37,9 @@
       "prompt": "Show how to use FlyDSL make_layout_tv, make_tiled_copy and copy atoms to partition a 2D tensor across threads on MI300X."
     },
     {
-      "id": "flydsl-authoring-negative-att",
+      "id": "flydsl-authoring-negative-nvidia-profile",
       "skill_should_trigger": false,
-      "prompt": "Analyze my rocprofv3 code.json and snapshots.json to rank VMEM stall hotspots and suggest a scheduling experiment."
+      "prompt": "Analyze an NVIDIA Nsight Compute .ncu-rep report for a CUDA kernel on an H100 and explain its warp stalls."
     },
     {
       "id": "flydsl-authoring-negative-cuda",
