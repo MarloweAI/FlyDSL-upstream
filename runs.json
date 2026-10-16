@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-16T03:35:42Z",
+ "updated": "2026-10-16T03:38:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38846212914,
+   "pr": 1301,
+   "commit": "9ee21501af03833af50f5621159e3f6f3fec9005",
+   "branch": "skills/copilot-code-review",
+   "event": "pull_request",
+   "title": "[Skills] Add code-review: run review-pr under Copilot code review",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914",
+   "created_at": "2026-10-16T03:34:40Z",
+   "updated_at": "2026-10-16T03:37:07Z",
+   "actor": "zhiding512",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T03:37:04Z",
+     "completed_at": "2026-10-16T03:37:07Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681630"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T03:37:04Z",
+     "completed_at": "2026-10-16T03:37:07Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681656"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T03:37:04Z",
+     "completed_at": "2026-10-16T03:37:06Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681946",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    }
+   ]
+  },
   {
    "run_id": 38841688793,
    "pr": 1300,
@@ -1673,21 +1719,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350170"
     }
    ]
-  },
-  {
-   "run_id": 38518170348,
-   "pr": 1288,
-   "commit": "98f52c0ee3fc29e0b185185324d10345f9360fd9",
-   "branch": "feat/coop-exchange-layout",
-   "event": "pull_request",
-   "title": "[Feat] Support warp exchange with layout",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518170348",
-   "created_at": "2026-10-14T05:43:32Z",
-   "updated_at": "2026-10-14T14:59:18Z",
-   "actor": "ppppqp",
-   "jobs": []
   }
  ]
 }
