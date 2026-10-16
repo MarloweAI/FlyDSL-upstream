@@ -71,6 +71,17 @@ else
     LLVM_BUILD_DIR="${LLVM_BUILD_DIR:-$LLVM_SRC_DIR/build-flydsl}"
     LLVM_INSTALL_DIR="${LLVM_INSTALL_DIR:-$LLVM_SRC_DIR/mlir_install}"
     LLVM_INSTALL_TGZ="${LLVM_INSTALL_TGZ:-$LLVM_SRC_DIR/mlir_install.tgz}"
+
+    REQUIRED_PATCHES=()
+    _custom_patches=$(python3 -c "
+import json, sys
+entry = json.load(open('${LLVM_BUILD_INFO}'))['${LLVM_SOURCE}']
+for p in entry.get('required_patches', []):
+    print(p['file'])
+" 2>/dev/null || true)
+    while IFS= read -r pf; do
+        [ -n "${pf}" ] && REQUIRED_PATCHES+=("${pf}")
+    done <<< "${_custom_patches}"
 fi
 
 
@@ -162,7 +173,8 @@ else
 fi
 
 # Upstream builds: apply required_patches and extensions from llvm-build-info.json.
-# Custom branch builds: the branch already contains all needed changes, skip patching.
+# Custom branch builds: apply required_patches only (the branch carries its own changes,
+# but required_patches fix MLIR/ROCDL bugs that the branch may not include yet).
 if [[ "${LLVM_SOURCE}" == "upstream" ]]; then
     # Replay the series from the pristine pin every run instead of detecting what is
     # already applied: `git apply --reverse --check` cannot tell for a series. Patches
@@ -218,7 +230,25 @@ if [[ "${LLVM_SOURCE}" == "upstream" ]]; then
         fi
     done
 else
-    echo "Skipping upstream patches for --source ${LLVM_SOURCE}"
+    # Custom branch: apply required_patches (skip already-applied ones).
+    if [[ ${#REQUIRED_PATCHES[@]} -gt 0 ]]; then
+        echo "LLVM Required:   ${#REQUIRED_PATCHES[@]}"
+        for patch_name in "${REQUIRED_PATCHES[@]}"; do
+            if [ ! -f "${LLVM_EXT_DIR}/${patch_name}" ]; then
+                echo "Error: llvm-build-info.json lists a file that does not exist: ${patch_name}" >&2
+                echo "       Expected at: ${LLVM_EXT_DIR}/${patch_name}" >&2
+                exit 1
+            fi
+            if git apply --check "${LLVM_EXT_DIR}/${patch_name}" 2>/dev/null; then
+                echo "  applying ${patch_name}"
+                git apply --index "${LLVM_EXT_DIR}/${patch_name}"
+            else
+                echo "  skipping ${patch_name} (already applied or conflicts)"
+            fi
+        done
+    else
+        echo "No required patches for --source ${LLVM_SOURCE}"
+    fi
 fi
 
 LLVM_COMMIT_RESOLVED=$(git rev-parse HEAD)
