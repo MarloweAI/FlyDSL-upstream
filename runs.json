@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T20:13:26Z",
+ "updated": "2026-10-16T21:26:09Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "skills/evals-and-cards",
    "event": "pull_request",
    "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462",
    "created_at": "2026-10-16T20:09:07Z",
-   "updated_at": "2026-10-16T20:12:00Z",
+   "updated_at": "2026-10-16T20:30:35Z",
    "actor": "danielholanda",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T20:31:07Z",
+     "completed_at": "2026-10-16T20:49:59Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616368"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T20:31:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616421"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-16T20:30:35Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616472"
+    }
+   ]
   },
   {
    "run_id": 38960115974,
