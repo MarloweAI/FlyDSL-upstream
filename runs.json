@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-16T09:32:44Z",
+ "updated": "2026-10-16T10:14:27Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38885535775,
+   "pr": 1303,
+   "commit": "3b4e1c91dbcd2d15cf946d13db78f4e39ae26bd6",
+   "branch": "feat/rdna3-gemm-small-tiles",
+   "event": "pull_request",
+   "title": "[Kernel] rdna3 GEMM: serve any M and any N, down to a 16x16 tile",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38885535775",
+   "created_at": "2026-10-16T10:11:09Z",
+   "updated_at": "2026-10-16T10:12:56Z",
+   "actor": "vlluvia",
+   "jobs": []
+  },
+  {
+   "run_id": 38884765543,
+   "pr": 1297,
+   "commit": "f4eb1d30db2a3bda0638c13d8ab35886e202d755",
+   "branch": "fix/issue-1273-slp-ordered-reduction-budget",
+   "event": "pull_request",
+   "title": "[llvm] Stop failed SLP ordered reductions from starving the block",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38884765543",
+   "created_at": "2026-10-16T10:04:21Z",
+   "updated_at": "2026-10-16T10:07:10Z",
+   "actor": "Phil-amd",
+   "jobs": []
+  },
   {
    "run_id": 38874484030,
    "pr": 1302,
@@ -68,11 +98,11 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983",
    "created_at": "2026-10-16T08:05:54Z",
-   "updated_at": "2026-10-16T09:08:53Z",
+   "updated_at": "2026-10-16T10:12:35Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -96,10 +126,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T09:08:52Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T10:12:34Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116881011979"
     }
    ]
@@ -1684,95 +1714,6 @@
      "started_at": "2026-10-14T09:38:12Z",
      "completed_at": "2026-10-14T10:00:10Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38541359724/job/115784455800"
-    }
-   ]
-  },
-  {
-   "run_id": 38540633877,
-   "pr": null,
-   "commit": "3bbef7215377a7a8db2c827e5342379a9338b694",
-   "branch": "main",
-   "event": "push",
-   "title": "[Kernel][gfx1250] Support K tails in the BF16 GEMM (#1230)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877",
-   "created_at": "2026-10-14T09:12:21Z",
-   "updated_at": "2026-10-14T11:07:27Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T09:47:15Z",
-     "completed_at": "2026-10-14T10:40:22Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782726840"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T09:34:24Z",
-     "completed_at": "2026-10-14T11:07:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782726956",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T09:36:38Z",
-     "completed_at": "2026-10-14T10:00:49Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38540633877/job/115782727029"
-    }
-   ]
-  },
-  {
-   "run_id": 38536337136,
-   "pr": 1217,
-   "commit": "81c7e21d506fc80906b046f8dc583370dab2aed9",
-   "branch": "feat/conv3d-align-aiter",
-   "event": "pull_request",
-   "title": "Align bf16 implicit Conv3d with aiter",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136",
-   "created_at": "2026-10-14T08:36:43Z",
-   "updated_at": "2026-10-14T10:19:47Z",
-   "actor": "huizzhan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T09:17:17Z",
-     "completed_at": "2026-10-14T09:36:33Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136/job/115766857618"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-14T08:54:47Z",
-     "completed_at": "2026-10-14T10:19:47Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136/job/115766857625"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-14T09:38:40Z",
-     "completed_at": "2026-10-14T09:42:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38536337136/job/115766857792"
     }
    ]
   }
