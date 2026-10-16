@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-16T06:26:40Z",
+ "updated": "2026-10-16T06:46:23Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38862526827,
+   "pr": 1289,
+   "commit": "8ea27283689d6ca12a78f4271ee95caf533ac002",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38862526827",
+   "created_at": "2026-10-16T06:40:19Z",
+   "updated_at": "2026-10-16T06:42:54Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 38859844362,
    "pr": 1289,
@@ -59,10 +74,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T06:23:05Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T06:43:07Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151/job/116842521853"
     },
     {
@@ -1674,21 +1689,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38527933016",
    "created_at": "2026-10-14T07:22:46Z",
    "updated_at": "2026-10-14T07:32:34Z",
-   "actor": "Phil-amd",
-   "jobs": []
-  },
-  {
-   "run_id": 38525744675,
-   "pr": 1286,
-   "commit": "a9748bd277696a0cff9ed47b40575cef045be337",
-   "branch": "fix/dump-asm-final-isa",
-   "event": "pull_request",
-   "title": "[JIT][Debug] Implement FLYDSL_DEBUG_DUMP_ASM to dump only the final ISA",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38525744675",
-   "created_at": "2026-10-14T07:01:52Z",
-   "updated_at": "2026-10-14T07:23:52Z",
    "actor": "Phil-amd",
    "jobs": []
   }
