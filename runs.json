@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T17:32:41Z",
+ "updated": "2026-10-16T18:31:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "skills/split-kernel-authoring",
    "event": "pull_request",
    "title": "[Skills] Split flydsl-kernel-authoring into reference files",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197",
    "created_at": "2026-10-16T17:28:47Z",
-   "updated_at": "2026-10-16T17:31:30Z",
+   "updated_at": "2026-10-16T17:47:48Z",
    "actor": "danielholanda",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T17:48:42Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115205"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T17:48:24Z",
+     "completed_at": "2026-10-16T18:05:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115214"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-16T17:47:48Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115217"
+    }
+   ]
   },
   {
    "run_id": 38939977098,
@@ -86,11 +114,11 @@
    "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
    "event": "pull_request",
    "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548",
    "created_at": "2026-10-16T10:24:46Z",
-   "updated_at": "2026-10-16T11:00:31Z",
+   "updated_at": "2026-10-16T18:29:04Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -105,10 +133,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-16T11:00:30Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-16T17:48:52Z",
+     "completed_at": "2026-10-16T18:29:04Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548/job/116939989238"
     },
     {
