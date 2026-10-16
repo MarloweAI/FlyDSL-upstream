@@ -358,8 +358,7 @@ static FailureOr<Attribute> parseAddressSpaceAttribute(AsmParser &parser) {
     auto sym = symbolizeAddressSpace(keyword);
     if (sym)
       return Attribute(AddressSpaceAttr::get(parser.getContext(), *sym));
-    parser.emitError(parser.getCurrentLocation(),
-                     "unknown address space keyword '")
+    parser.emitError(parser.getCurrentLocation(), "unknown address space keyword '")
         << keyword << "'";
     return failure();
   }
@@ -370,8 +369,7 @@ static FailureOr<Attribute> parseAddressSpaceAttribute(AsmParser &parser) {
     auto sym = symbolizeAddressSpace(keyword);
     if (sym)
       return Attribute(AddressSpaceAttr::get(parser.getContext(), *sym));
-    parser.emitError(parser.getCurrentLocation(),
-                     "unknown address space keyword '")
+    parser.emitError(parser.getCurrentLocation(), "unknown address space keyword '")
         << keyword << "'";
     return failure();
   }
