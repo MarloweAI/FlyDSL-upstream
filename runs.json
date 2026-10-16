@@ -1,8 +1,81 @@
 {
  "schema": 1,
- "updated": "2026-10-16T04:20:09Z",
+ "updated": "2026-10-16T06:26:40Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38859844362,
+   "pr": 1289,
+   "commit": "fa3c4fe52478fa6a4212e8c75067763ca6fc4842",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38859844362",
+   "created_at": "2026-10-16T06:11:50Z",
+   "updated_at": "2026-10-16T06:25:09Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 38859760276,
+   "pr": 1296,
+   "commit": "b63f9a2f42738e7d1b7ee5b67166e7e58d43799c",
+   "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
+   "event": "pull_request",
+   "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38859760276",
+   "created_at": "2026-10-16T06:10:55Z",
+   "updated_at": "2026-10-16T06:14:34Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 38858976151,
+   "pr": null,
+   "commit": "0653ff888bad3787c759eabeeeefbfa1aa2df50b",
+   "branch": "main",
+   "event": "push",
+   "title": "[fix][CI] Run aiter's install_triton.sh to match aiter's Triton versi\u2026",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151",
+   "created_at": "2026-10-16T06:02:35Z",
+   "updated_at": "2026-10-16T06:22:32Z",
+   "actor": "jli-melchior",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T06:23:14Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151/job/116842521813"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T06:23:05Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151/job/116842521853"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-16T06:22:32Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151/job/116842521962"
+    }
+   ]
+  },
   {
    "run_id": 38846212914,
    "pr": 1301,
@@ -55,7 +128,7 @@
    "commit": "f8ccd7923aa4a3cd512d445815342760049ee889",
    "branch": "jli/fix_ci_bug",
    "event": "pull_request",
-   "title": "[CI] Run aiter's install_triton.sh to match aiter's Triton version",
+   "title": "[fix][CI] Run aiter's install_triton.sh to match aiter's Triton version",
    "status": "completed",
    "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793",
@@ -1618,110 +1691,6 @@
    "updated_at": "2026-10-14T07:23:52Z",
    "actor": "Phil-amd",
    "jobs": []
-  },
-  {
-   "run_id": 38522893371,
-   "pr": 1289,
-   "commit": "7040ecb3b8f2092de33343b76635b7779e114f44",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371",
-   "created_at": "2026-10-14T06:33:18Z",
-   "updated_at": "2026-10-14T08:34:29Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-14T07:02:58Z",
-     "completed_at": "2026-10-14T07:21:52Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725695887"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-14T07:58:29Z",
-     "completed_at": "2026-10-14T08:34:28Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725695964"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-14T07:02:39Z",
-     "completed_at": "2026-10-14T07:25:25Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522893371/job/115725696076"
-    }
-   ]
-  },
-  {
-   "run_id": 38522473045,
-   "pr": 1289,
-   "commit": "8d5b82356fa2e43e3ffcceff2a8710bd73adfd33",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38522473045",
-   "created_at": "2026-10-14T06:29:08Z",
-   "updated_at": "2026-10-14T06:30:47Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 38520458527,
-   "pr": 1238,
-   "commit": "0e7bedaae329f4136081bae25bda575a3ae4aafd",
-   "branch": "migrate-kernels-tiled-tdm",
-   "event": "pull_request",
-   "title": "Migrate kernels tiled tdm",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527",
-   "created_at": "2026-10-14T06:08:19Z",
-   "updated_at": "2026-10-14T07:51:54Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T06:20:50Z",
-     "completed_at": "2026-10-14T07:20:42Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350084",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T07:02:50Z",
-     "completed_at": "2026-10-14T07:51:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350094"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T06:20:43Z",
-     "completed_at": "2026-10-14T06:48:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38520458527/job/115712350170"
-    }
-   ]
   }
  ]
 }
