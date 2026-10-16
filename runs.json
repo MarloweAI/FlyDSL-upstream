@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T03:48:55Z",
+ "updated": "2026-10-16T04:20:09Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -56,20 +56,20 @@
    "branch": "jli/fix_ci_bug",
    "event": "pull_request",
    "title": "[CI] Run aiter's install_triton.sh to match aiter's Triton version",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793",
    "created_at": "2026-10-16T02:41:10Z",
-   "updated_at": "2026-10-16T03:09:47Z",
+   "updated_at": "2026-10-16T04:18:13Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T03:09:46Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T04:18:12Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051337"
     },
     {
@@ -84,11 +84,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T03:00:54Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051393"
+     "completed_at": "2026-10-16T04:02:04Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051393",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
