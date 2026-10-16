@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T20:10:55Z",
+ "updated": "2026-10-16T20:13:26Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -14,7 +14,7 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462",
    "created_at": "2026-10-16T20:09:07Z",
-   "updated_at": "2026-10-16T20:10:01Z",
+   "updated_at": "2026-10-16T20:12:00Z",
    "actor": "danielholanda",
    "jobs": []
   },
@@ -25,13 +25,44 @@
    "branch": "skills/split-kernel-authoring",
    "event": "pull_request",
    "title": "[Skills] Ensure `flydsl-kernel-authoring` follows Anthropic best practices",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974",
    "created_at": "2026-10-16T20:08:56Z",
-   "updated_at": "2026-10-16T20:09:41Z",
+   "updated_at": "2026-10-16T20:12:01Z",
    "actor": "danielholanda",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T20:11:55Z",
+     "completed_at": "2026-10-16T20:11:58Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974/job/117173733777",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T20:11:56Z",
+     "completed_at": "2026-10-16T20:12:00Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974/job/117173733838"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T20:11:56Z",
+     "completed_at": "2026-10-16T20:12:00Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974/job/117173734005"
+    }
+   ]
   },
   {
    "run_id": 38959042373,
