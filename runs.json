@@ -1,11 +1,41 @@
 {
  "schema": 1,
- "updated": "2026-10-16T20:05:25Z",
+ "updated": "2026-10-16T20:10:55Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
-   "run_id": 38959042373,
+   "run_id": 38960138462,
    "pr": 1304,
+   "commit": "88e032f6e762b24cb3d5282242ae89eded326eec",
+   "branch": "skills/evals-and-cards",
+   "event": "pull_request",
+   "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462",
+   "created_at": "2026-10-16T20:09:07Z",
+   "updated_at": "2026-10-16T20:10:01Z",
+   "actor": "danielholanda",
+   "jobs": []
+  },
+  {
+   "run_id": 38960115974,
+   "pr": 1305,
+   "commit": "27d18c12e7bb0ce4eb0bc1f1b5ac4129af8396ae",
+   "branch": "skills/split-kernel-authoring",
+   "event": "pull_request",
+   "title": "[Skills] Ensure `flydsl-kernel-authoring` follows Anthropic best practices",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974",
+   "created_at": "2026-10-16T20:08:56Z",
+   "updated_at": "2026-10-16T20:09:41Z",
+   "actor": "danielholanda",
+   "jobs": []
+  },
+  {
+   "run_id": 38959042373,
+   "pr": null,
    "commit": "b2f5b135c2ad8e35d1a1d6a266b0b7079c593d9e",
    "branch": "skills/evals-and-cards",
    "event": "pull_request",
@@ -20,16 +50,16 @@
   },
   {
    "run_id": 38939983197,
-   "pr": 1305,
+   "pr": null,
    "commit": "27643aea845f729d969a9e25024d8f09fbff272e",
    "branch": "skills/split-kernel-authoring",
    "event": "pull_request",
-   "title": "[Skills] Split flydsl-kernel-authoring into reference files",
-   "status": "queued",
-   "conclusion": null,
+   "title": "[Skills] Ensure `flydsl-kernel-authoring` follows Anthropic best practices",
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197",
    "created_at": "2026-10-16T17:28:47Z",
-   "updated_at": "2026-10-16T17:47:48Z",
+   "updated_at": "2026-10-16T20:08:58Z",
    "actor": "danielholanda",
    "jobs": [
     {
@@ -56,10 +86,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-16T17:47:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T20:08:57Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115217"
     }
    ]
@@ -1692,67 +1722,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914516035"
     }
    ]
-  },
-  {
-   "run_id": 38579266788,
-   "pr": 1192,
-   "commit": "6241b66da45501567e96c8f91a1309293154c4a9",
-   "branch": "add-security-scanning",
-   "event": "pull_request",
-   "title": "chore: add security scanning workflows",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788",
-   "created_at": "2026-10-14T14:18:01Z",
-   "updated_at": "2026-10-14T16:15:49Z",
-   "actor": "haribabug",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T14:36:56Z",
-     "completed_at": "2026-10-14T16:15:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751324",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T14:38:10Z",
-     "completed_at": "2026-10-14T15:50:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751405"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T14:36:09Z",
-     "completed_at": "2026-10-14T15:05:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579266788/job/115913751560"
-    }
-   ]
-  },
-  {
-   "run_id": 38557879740,
-   "pr": 1292,
-   "commit": "ceae284a326e530016a5c892e645af908abd9c90",
-   "branch": "pr/feat-core-categories",
-   "event": "pull_request",
-   "title": "[Core] Add four concrete layout categories",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38557879740",
-   "created_at": "2026-10-14T11:37:29Z",
-   "updated_at": "2026-10-14T11:58:39Z",
-   "actor": "sjfeng1999",
-   "jobs": []
   }
  ]
 }
