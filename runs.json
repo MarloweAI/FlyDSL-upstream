@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T09:01:39Z",
+ "updated": "2026-10-16T09:11:40Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "tdm-relax-inner-span",
    "event": "pull_request",
    "title": "[ROCDL] Gate the TDM tile_dim0 span check on padding",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030",
    "created_at": "2026-10-16T08:33:27Z",
-   "updated_at": "2026-10-16T08:36:09Z",
+   "updated_at": "2026-10-16T09:08:04Z",
    "actor": "xudoyuan",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T09:08:35Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898790943"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-16T09:08:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898790980"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T09:09:26Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898791011"
+    }
+   ]
   },
   {
    "run_id": 38874070008,
@@ -40,11 +68,11 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983",
    "created_at": "2026-10-16T08:05:54Z",
-   "updated_at": "2026-10-16T08:19:25Z",
+   "updated_at": "2026-10-16T09:08:53Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -68,9 +96,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-16T08:19:25Z",
+     "started_at": "2026-10-16T09:08:52Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116881011979"
     }
@@ -144,20 +172,20 @@
    "branch": "pr/feat-core-categories",
    "event": "pull_request",
    "title": "[Core] Add four concrete layout categories",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38865017400",
    "created_at": "2026-10-16T07:05:28Z",
-   "updated_at": "2026-10-16T08:19:49Z",
+   "updated_at": "2026-10-16T09:09:47Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T08:19:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T09:09:46Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38865017400/job/116867339569"
     },
     {
