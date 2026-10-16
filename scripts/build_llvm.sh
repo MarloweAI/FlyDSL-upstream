@@ -73,6 +73,7 @@ else
     LLVM_INSTALL_TGZ="${LLVM_INSTALL_TGZ:-$LLVM_SRC_DIR/mlir_install.tgz}"
 fi
 
+
 LLVM_BUILD_PROFILE="${LLVM_BUILD_PROFILE:-full}"
 
 case "${LLVM_BUILD_PROFILE}" in
@@ -104,6 +105,7 @@ echo "LLVM Profile:   $LLVM_BUILD_PROFILE"
 echo "LLVM Projects:  $LLVM_ENABLE_PROJECTS"
 echo "LLVM Targets:   $LLVM_TARGETS_TO_BUILD"
 echo "LLVM Runtimes:  ${LLVM_ENABLE_RUNTIMES:-<none>}"
+echo "LLVM Patches:   ${LLVM_PATCHES[*]:-(none)}"
 
 # 1. Clone LLVM
 LLVM_REMOTE="${FLYDSL_LLVM_REMOTE:-${LLVM_REMOTE:-https://github.com/llvm/llvm-project.git}}"
