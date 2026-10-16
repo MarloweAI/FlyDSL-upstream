@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-16T18:35:10Z",
+ "updated": "2026-10-16T20:05:25Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38959042373,
+   "pr": 1304,
+   "commit": "b2f5b135c2ad8e35d1a1d6a266b0b7079c593d9e",
+   "branch": "skills/evals-and-cards",
+   "event": "pull_request",
+   "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38959042373",
+   "created_at": "2026-10-16T20:00:17Z",
+   "updated_at": "2026-10-16T20:03:31Z",
+   "actor": "danielholanda",
+   "jobs": []
+  },
   {
    "run_id": 38939983197,
    "pr": 1305,
@@ -20,11 +35,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T17:48:42Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115205"
+     "completed_at": "2026-10-16T18:58:42Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115205",
+     "machine": "gbt350-odcdh1-b04-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -48,7 +66,7 @@
   },
   {
    "run_id": 38939977098,
-   "pr": 1304,
+   "pr": null,
    "commit": "d2d44b7a2d87d60f1be3b3185557315b8cd9a60f",
    "branch": "skills/evals-and-cards",
    "event": "pull_request",
@@ -1733,21 +1751,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38557879740",
    "created_at": "2026-10-14T11:37:29Z",
    "updated_at": "2026-10-14T11:58:39Z",
-   "actor": "sjfeng1999",
-   "jobs": []
-  },
-  {
-   "run_id": 38549410909,
-   "pr": 1292,
-   "commit": "bebd1f4c65b19cbb8b43b12b7551f9abb2955656",
-   "branch": "pr/feat-core-categories",
-   "event": "pull_request",
-   "title": "[Core] Add four concrete layout categories",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38549410909",
-   "created_at": "2026-10-14T10:25:01Z",
-   "updated_at": "2026-10-14T10:48:02Z",
    "actor": "sjfeng1999",
    "jobs": []
   }
