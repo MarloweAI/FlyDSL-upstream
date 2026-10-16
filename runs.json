@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T08:36:36Z",
+ "updated": "2026-10-16T08:58:28Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "tdm-relax-inner-span",
    "event": "pull_request",
    "title": "[ROCDL] Gate the TDM tile_dim0 span check on padding",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030",
    "created_at": "2026-10-16T08:33:27Z",
-   "updated_at": "2026-10-16T08:34:44Z",
+   "updated_at": "2026-10-16T08:36:09Z",
    "actor": "xudoyuan",
    "jobs": []
   },
@@ -50,10 +50,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T08:32:29Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T08:53:15Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116881011773"
     },
     {
@@ -98,21 +98,24 @@
    "branch": "skills/copilot-code-review",
    "event": "pull_request",
    "title": "[Skills] Add code-review: run review-pr under Copilot code review",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38866445408",
    "created_at": "2026-10-16T07:19:07Z",
-   "updated_at": "2026-10-16T07:51:30Z",
+   "updated_at": "2026-10-16T08:56:50Z",
    "actor": "zhiding512",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T07:37:09Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38866445408/job/116866158747"
+     "completed_at": "2026-10-16T08:35:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38866445408/job/116866158747",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -126,10 +129,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T07:51:29Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T08:56:50Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38866445408/job/116866158858"
     }
    ]
@@ -160,11 +163,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T07:40:37Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38865017400/job/116867339666"
+     "completed_at": "2026-10-16T08:36:48Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38865017400/job/116867339666",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -270,10 +276,10 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-16T08:20:34Z",
-     "completed_at": null,
+     "completed_at": "2026-10-16T08:55:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38859760276/job/116880859901"
     }
    ]
