@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T08:02:52Z",
+ "updated": "2026-10-16T08:04:41Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38870542720",
    "created_at": "2026-10-16T07:57:52Z",
-   "updated_at": "2026-10-16T08:01:41Z",
+   "updated_at": "2026-10-16T08:01:49Z",
    "actor": "jli-melchior",
    "jobs": []
   },
