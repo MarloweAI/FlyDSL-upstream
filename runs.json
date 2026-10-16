@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-16T17:30:33Z",
+ "updated": "2026-10-16T17:32:41Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -9,12 +9,12 @@
    "commit": "27643aea845f729d969a9e25024d8f09fbff272e",
    "branch": "skills/split-kernel-authoring",
    "event": "pull_request",
-   "title": "[Skills] Split flydsl-kernel-authoring into reference files and add skillscope CI",
-   "status": "queued",
+   "title": "[Skills] Split flydsl-kernel-authoring into reference files",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197",
    "created_at": "2026-10-16T17:28:47Z",
-   "updated_at": "2026-10-16T17:28:47Z",
+   "updated_at": "2026-10-16T17:31:30Z",
    "actor": "danielholanda",
    "jobs": []
   },
@@ -25,13 +25,44 @@
    "branch": "skills/evals-and-cards",
    "event": "pull_request",
    "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098",
    "created_at": "2026-10-16T17:28:44Z",
-   "updated_at": "2026-10-16T17:29:25Z",
+   "updated_at": "2026-10-16T17:30:59Z",
    "actor": "danielholanda",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T17:30:54Z",
+     "completed_at": "2026-10-16T17:30:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668525"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T17:30:54Z",
+     "completed_at": "2026-10-16T17:30:58Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668670",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T17:30:54Z",
+     "completed_at": "2026-10-16T17:30:56Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668784"
+    }
+   ]
   },
   {
    "run_id": 38937060284,
