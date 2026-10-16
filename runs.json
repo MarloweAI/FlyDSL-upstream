@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-16T00:58:34Z",
+ "updated": "2026-10-16T03:35:42Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38841688793,
+   "pr": 1300,
+   "commit": "f8ccd7923aa4a3cd512d445815342760049ee889",
+   "branch": "jli/fix_ci_bug",
+   "event": "pull_request",
+   "title": "[CI] Run aiter's install_triton.sh to match aiter's Triton version",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793",
+   "created_at": "2026-10-16T02:41:10Z",
+   "updated_at": "2026-10-16T03:09:47Z",
+   "actor": "jli-melchior",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T03:09:46Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051337"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T03:00:46Z",
+     "completed_at": "2026-10-16T03:19:55Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051362"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-16T03:00:54Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38841688793/job/116788051393"
+    }
+   ]
+  },
   {
    "run_id": 38788693633,
    "pr": 1223,
@@ -25,11 +68,11 @@
    "branch": "xinyazhang/file-aotriton-0.14.2-gfx950-port/pr1-shared-fixes",
    "event": "pull_request",
    "title": "[Kernel][FA] Fix ds_read_tr waitcnt hazard and stagger SCC clobber (1/8)",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766",
    "created_at": "2026-10-15T16:59:11Z",
-   "updated_at": "2026-10-15T17:14:57Z",
+   "updated_at": "2026-10-16T03:00:58Z",
    "actor": "xinyazhang",
    "jobs": [
     {
@@ -53,9 +96,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-15T17:15:01Z",
+     "started_at": "2026-10-16T03:00:58Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766/job/116562792101"
     }
@@ -1642,21 +1685,6 @@
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518170348",
    "created_at": "2026-10-14T05:43:32Z",
-   "updated_at": "2026-10-14T14:59:18Z",
-   "actor": "ppppqp",
-   "jobs": []
-  },
-  {
-   "run_id": 38518017962,
-   "pr": null,
-   "commit": "8c181bccdcfa50630e40ab88fc410f88d7fe0473",
-   "branch": "feat/coop-exchange-layout",
-   "event": "pull_request",
-   "title": "[Feat] Support warp exchange with layout",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38518017962",
-   "created_at": "2026-10-14T05:41:51Z",
    "updated_at": "2026-10-14T14:59:18Z",
    "actor": "ppppqp",
    "jobs": []
