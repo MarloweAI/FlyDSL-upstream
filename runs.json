@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-17T06:41:43Z",
+ "updated": "2026-10-17T09:28:54Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39016059513,
+   "pr": 1289,
+   "commit": "1a57d7a444e9e9e534dec936859ab3cecc660871",
+   "branch": "jli/gfx1250-strict",
+   "event": "pull_request",
+   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513",
+   "created_at": "2026-10-17T08:05:27Z",
+   "updated_at": "2026-10-17T08:18:18Z",
+   "actor": "jli-melchior",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-17T08:18:18Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513/job/117350675429"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-17T08:18:46Z",
+     "completed_at": "2026-10-17T08:46:25Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513/job/117350675437"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-17T08:18:53Z",
+     "completed_at": "2026-10-17T09:18:26Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513/job/117350675464",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    }
+   ]
+  },
   {
    "run_id": 38976988236,
    "pr": 1269,
@@ -1768,21 +1814,6 @@
    "created_at": "2026-10-14T15:05:59Z",
    "updated_at": "2026-10-14T15:05:59Z",
    "actor": "ppppqp",
-   "jobs": []
-  },
-  {
-   "run_id": 38583251480,
-   "pr": 1292,
-   "commit": "8e135248d341378eeaad659a3b5df68ac825c321",
-   "branch": "pr/feat-core-categories",
-   "event": "pull_request",
-   "title": "[Core] Add four concrete layout categories",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38583251480",
-   "created_at": "2026-10-14T14:44:44Z",
-   "updated_at": "2026-10-14T15:21:11Z",
-   "actor": "coderfeli",
    "jobs": []
   }
  ]
