@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-16T21:26:09Z",
+ "updated": "2026-10-17T00:18:34Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 38976988236,
+   "pr": 1269,
+   "commit": "c2465f27f6db737c7837aed5414750966436007a",
+   "branch": "fix/gemm-a16w16-hti-wave-sync",
+   "event": "pull_request",
+   "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM reads its first and last stages",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38976988236",
+   "created_at": "2026-10-16T22:38:52Z",
+   "updated_at": "2026-10-16T23:07:11Z",
+   "actor": "jhinpan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T23:07:50Z",
+     "completed_at": "2026-10-17T00:13:59Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38976988236/job/117237333608",
+     "machine": "gbt350-odcdh2-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T23:07:34Z",
+     "completed_at": "2026-10-16T23:26:13Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38976988236/job/117237333692"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-16T23:07:11Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38976988236/job/117237333751"
+    }
+   ]
+  },
   {
    "run_id": 38960138462,
    "pr": 1304,
@@ -10,11 +56,11 @@
    "branch": "skills/evals-and-cards",
    "event": "pull_request",
    "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462",
    "created_at": "2026-10-16T20:09:07Z",
-   "updated_at": "2026-10-16T20:30:35Z",
+   "updated_at": "2026-10-17T00:17:07Z",
    "actor": "danielholanda",
    "jobs": [
     {
@@ -29,19 +75,22 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-16T20:31:55Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616421"
+     "completed_at": "2026-10-16T21:41:41Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616421",
+     "machine": "gbt350-odcdh2-b13-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-16T20:30:35Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-16T23:09:08Z",
+     "completed_at": "2026-10-17T00:17:06Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960138462/job/117181616472"
     }
    ]
@@ -1735,52 +1784,6 @@
    "updated_at": "2026-10-14T15:21:11Z",
    "actor": "coderfeli",
    "jobs": []
-  },
-  {
-   "run_id": 38579578405,
-   "pr": null,
-   "commit": "dc58ce2ee2a8d5bb5e3908486498502ecfd965ec",
-   "branch": "main",
-   "event": "push",
-   "title": "[fix] Make make_tile treat every argument list as modes (#1284)",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405",
-   "created_at": "2026-10-14T14:20:05Z",
-   "updated_at": "2026-10-14T16:27:25Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-14T16:25:53Z",
-     "completed_at": "2026-10-14T16:27:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515507"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T14:37:55Z",
-     "completed_at": "2026-10-14T15:40:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914515536",
-     "machine": "smci350-rck-g03-b17-12",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-14T15:05:53Z",
-     "completed_at": "2026-10-14T15:23:21Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38579578405/job/115914516035"
-    }
-   ]
   }
  ]
 }
