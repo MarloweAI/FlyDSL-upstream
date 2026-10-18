@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-18T12:46:57Z",
+ "updated": "2026-10-18T15:27:15Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39132469049,
+   "pr": 971,
+   "commit": "009581282ceec8de1afd0dc1d63419e1c8228912",
+   "branch": "gfx1250/gemm-opt-0805",
+   "event": "pull_request",
+   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049",
+   "created_at": "2026-10-18T13:38:59Z",
+   "updated_at": "2026-10-18T14:13:05Z",
+   "actor": "aoli26",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-18T14:13:04Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592538"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-18T14:14:53Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592549"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-18T14:13:30Z",
+     "completed_at": "2026-10-18T14:31:18Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592565"
+    }
+   ]
+  },
   {
    "run_id": 39120408010,
    "pr": null,
@@ -1923,21 +1966,6 @@
    "created_at": "2026-10-14T20:27:18Z",
    "updated_at": "2026-10-14T20:27:18Z",
    "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38596162184,
-   "pr": 1194,
-   "commit": "7057d49e83d15a8de1d9af07f483ad3fea411005",
-   "branch": "fix/1176-layout-field-overflow-diagnostic",
-   "event": "pull_request",
-   "title": "[JIT] Actionable diagnostic for dynamic layout field overflow",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38596162184",
-   "created_at": "2026-10-14T16:13:00Z",
-   "updated_at": "2026-10-14T16:13:00Z",
-   "actor": "mustafayildirim",
    "jobs": []
   }
  ]
