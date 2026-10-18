@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-18T09:38:11Z",
+ "updated": "2026-10-18T10:40:22Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39120076177,
+   "pr": null,
+   "commit": "9230ac28185f597a24ddfa5cd6034ad078ba8e49",
+   "branch": "main",
+   "event": "push",
+   "title": "[Skills] Split flydsl-kernel-authoring into reference files (#1305)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120076177",
+   "created_at": "2026-10-18T10:38:53Z",
+   "updated_at": "2026-10-18T10:38:54Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39120014299,
+   "pr": 1266,
+   "commit": "d854c988b8b80ccfa8c1d38f86bb5fedbb8135be",
+   "branch": "qiangpan/sageattn2_1",
+   "event": "pull_request",
+   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120014299",
+   "created_at": "2026-10-18T10:37:55Z",
+   "updated_at": "2026-10-18T10:38:16Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39119975188,
+   "pr": null,
+   "commit": "d00dd71152f67500eeb07acaa3de059a9f877d90",
+   "branch": "main",
+   "event": "push",
+   "title": "[ROCDL] Gate the TDM tile_dim0 span check on padding (#1302)",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39119975188",
+   "created_at": "2026-10-18T10:37:17Z",
+   "updated_at": "2026-10-18T10:38:54Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39107870676,
    "pr": 1296,
@@ -538,7 +583,7 @@
   },
   {
    "run_id": 38874070008,
-   "pr": 1302,
+   "pr": null,
    "commit": "c72e75be9dc1c46890b7582bacf7ea29ed4d64e9",
    "branch": "tdm-relax-inner-span",
    "event": "pull_request",
@@ -1801,51 +1846,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38595465692/job/115968748227"
     }
    ]
-  },
-  {
-   "run_id": 38594219922,
-   "pr": 1294,
-   "commit": "c4c2a44e1e4565288bc971b55e2e556a64eafa9d",
-   "branch": "fix/index-normalization",
-   "event": "pull_request",
-   "title": "[Bugfix] Handle Numeric conversion recursively",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594219922",
-   "created_at": "2026-10-14T15:59:42Z",
-   "updated_at": "2026-10-14T15:59:42Z",
-   "actor": "ppppqp",
-   "jobs": []
-  },
-  {
-   "run_id": 38594102347,
-   "pr": 971,
-   "commit": "9a91e05498ccb57b97faf26c9e49a814a1b8468e",
-   "branch": "gfx1250/gemm-opt-0805",
-   "event": "pull_request",
-   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594102347",
-   "created_at": "2026-10-14T15:58:53Z",
-   "updated_at": "2026-10-14T16:00:24Z",
-   "actor": "aoli26",
-   "jobs": []
-  },
-  {
-   "run_id": 38594007900,
-   "pr": null,
-   "commit": "0ed99903abea6468f80fe3f8b13bc72bc9b67b17",
-   "branch": "fix/index-normalization",
-   "event": "pull_request",
-   "title": "[Bugfix] Handle Numeric conversion recursively",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38594007900",
-   "created_at": "2026-10-14T15:58:13Z",
-   "updated_at": "2026-10-14T15:58:13Z",
-   "actor": "ppppqp",
-   "jobs": []
   }
  ]
 }
