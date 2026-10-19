@@ -17,6 +17,8 @@ $llvmCommit = $buildInfo.upstream.llvm_hash
 $patches = @($buildInfo.upstream.required_patches) + @($buildInfo.upstream.extensions) |
     Where-Object { $_ } |
     ForEach-Object { Join-Path $repoRoot "thirdparty\llvm-extensions\$($_.file)" }
+# Then the Windows-only fixes, which build_llvm.sh and the CI MLIR cache key never see.
+$patches = @($patches) + (Join-Path $repoRoot 'thirdparty\llvm-windows\mlir-ee-coff-reserve-alloc.patch')
 
 if (-not (Test-Path -LiteralPath $LLVMSourceDir)) {
     New-Item -ItemType Directory -Path $LLVMSourceDir | Out-Null

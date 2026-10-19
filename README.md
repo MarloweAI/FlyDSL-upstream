@@ -128,7 +128,7 @@ $basePython = 'C:\path\to\python.exe'
 $env:PYTHONPATH = "C:\fbuild\python_packages;$repo"
 ```
 
-The PowerShell LLVM script builds the revision pinned in `thirdparty/llvm-build-info.json` with the same patch series as `build_llvm.sh`. Windows supports native JIT compilation; AOT export remains Linux ELF-only.
+The PowerShell LLVM script builds the revision pinned in `thirdparty/llvm-build-info.json` with the same patch series as `build_llvm.sh`, then the Windows-only fixes in `thirdparty/llvm-windows/`. Windows supports native JIT compilation; AOT export remains Linux ELF-only.
 
 To package a Windows wheel, build FlyDSL into a directory inside the checkout because `setup.py` requires the embedded MLIR package to be in-tree:
 
