@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-19T09:41:24Z",
+ "updated": "2026-10-19T10:39:11Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39238662557,
+   "pr": 1307,
+   "commit": "a651c2c4e392575e703dc20c7fc3504b13809beb",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238662557",
+   "created_at": "2026-10-19T10:36:29Z",
+   "updated_at": "2026-10-19T10:37:49Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 39238266229,
+   "pr": 1256,
+   "commit": "79a6b9deabd79faabd9962b3035153f3bf93b8fa",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229",
+   "created_at": "2026-10-19T10:33:10Z",
+   "updated_at": "2026-10-19T10:36:15Z",
+   "actor": "james-huang09",
+   "jobs": []
+  },
+  {
+   "run_id": 39238096433,
+   "pr": 1307,
+   "commit": "d921a877d590ec34070652254920c6f668ea69a1",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238096433",
+   "created_at": "2026-10-19T10:31:44Z",
+   "updated_at": "2026-10-19T10:37:23Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39226616827,
    "pr": 1306,
@@ -38,11 +83,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T09:20:08Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982570095"
+     "completed_at": "2026-10-19T10:11:24Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982570095",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -63,11 +111,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T09:25:11Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571851"
+     "completed_at": "2026-10-19T10:21:46Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571851",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -1929,107 +1980,6 @@
      "started_at": "2026-10-15T06:44:30Z",
      "completed_at": "2026-10-15T07:12:30Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733258"
-    }
-   ]
-  },
-  {
-   "run_id": 38676605709,
-   "pr": 1289,
-   "commit": "27b45fcf255b1814971cef3dba6ed0dd39bb5606",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38676605709",
-   "created_at": "2026-10-15T03:30:20Z",
-   "updated_at": "2026-10-15T04:45:08Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:49:00Z",
-     "completed_at": "2026-10-15T04:03:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38676605709/job/116236425433"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:49:09Z",
-     "completed_at": "2026-10-15T04:45:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38676605709/job/116236425473"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:53:54Z",
-     "completed_at": "2026-10-15T04:20:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38676605709/job/116236425549"
-    }
-   ]
-  },
-  {
-   "run_id": 38675979188,
-   "pr": 1289,
-   "commit": "d0901387d407c17bb6a1556788041096b86d722d",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675979188",
-   "created_at": "2026-10-15T03:23:05Z",
-   "updated_at": "2026-10-15T03:30:41Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 38675817604,
-   "pr": null,
-   "commit": "5ce3fbe3a33241f31f9330b44376d6ccd93a219a",
-   "branch": "main",
-   "event": "push",
-   "title": "[Tool][Debug] Inject hand-edited assembly into a JIT cache entry (deb\u2026",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604",
-   "created_at": "2026-10-15T03:21:15Z",
-   "updated_at": "2026-10-15T04:46:55Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T04:21:40Z",
-     "completed_at": "2026-10-15T04:46:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604/job/116238759092"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T04:18:18Z",
-     "completed_at": "2026-10-15T04:40:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604/job/116238759094"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:57:52Z",
-     "completed_at": "2026-10-15T04:32:52Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604/job/116238759112"
     }
    ]
   }
