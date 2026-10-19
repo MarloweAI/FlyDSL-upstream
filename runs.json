@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-19T04:42:31Z",
+ "updated": "2026-10-19T05:18:58Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39203712321,
+   "pr": null,
+   "commit": "7a0530ad97d052ecbf7e4d73ccba2f68bf1a0859",
+   "branch": "main",
+   "event": "push",
+   "title": "Tune bf16 implicit Conv3d (#1217)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203712321",
+   "created_at": "2026-10-19T05:16:46Z",
+   "updated_at": "2026-10-19T05:16:57Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39203592851,
+   "pr": null,
+   "commit": "7c924f15e1b3c02cbe864ee07c363565d04d454b",
+   "branch": "main",
+   "event": "push",
+   "title": "[llvm] bump llvm to 1df311a6 (#1243)",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203592851",
+   "created_at": "2026-10-19T05:15:24Z",
+   "updated_at": "2026-10-19T05:16:57Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39191399334,
    "pr": 1243,
@@ -1364,7 +1394,7 @@
   },
   {
    "run_id": 38752987573,
-   "pr": 1298,
+   "pr": null,
    "commit": "fa7925e69e0abc313aa483084c2c8a3a58adba0d",
    "branch": "skills/catalog-kernel-authoring",
    "event": "pull_request",
@@ -1971,36 +2001,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410/job/116191613375"
     }
    ]
-  },
-  {
-   "run_id": 38661897389,
-   "pr": 1289,
-   "commit": "d3dd535a5243e92539a963b87247f4496685356f",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38661897389",
-   "created_at": "2026-10-15T00:46:07Z",
-   "updated_at": "2026-10-15T00:47:56Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 38651262292,
-   "pr": 1295,
-   "commit": "9eb0d80c5514a8aa8c6c85fd599082ba0ba8d9eb",
-   "branch": "feat/device-assert",
-   "event": "pull_request",
-   "title": "[Debug] Support device assert",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38651262292",
-   "created_at": "2026-10-14T22:59:25Z",
-   "updated_at": "2026-10-14T22:59:25Z",
-   "actor": "ppppqp",
-   "jobs": []
   }
  ]
 }
