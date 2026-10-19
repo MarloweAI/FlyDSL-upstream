@@ -70,6 +70,11 @@ def _resolve_runtime_libs() -> List[str]:
     for lib in libs:
         if not lib.exists():
             raise FileNotFoundError(f"Required JIT runtime library not found: {lib}\nPlease rebuild the project.")
+    if os.name == "nt":
+        # ExecutionEngine's LoadLibraryW ignores os.add_dll_directory paths, so the
+        # HIP dependencies would not resolve; load each library here first.
+        for lib in libs:
+            ctypes.CDLL(str(lib))
     return [str(p) for p in libs]
 
 
@@ -248,7 +253,6 @@ class CompiledArtifact:
         self._engine = None
         self._jit_module = None
         self._func_exe = None
-        self._shared_lib_handles = []
         self._lock = threading.Lock()
         self._ktrace_names: dict = {}
         self._ktrace_traced: bool = False
@@ -333,7 +337,6 @@ class CompiledArtifact:
         self._engine = None
         self._jit_module = None
         self._func_exe = None
-        self._shared_lib_handles = []
         self._lock = threading.Lock()
 
     def _ensure_engine(self):
@@ -349,13 +352,10 @@ class CompiledArtifact:
             ctx = _create_mlir_context()
             with ctx:
                 module = ir.Module.parse(self._ir_text)
-                shared_libs = _resolve_runtime_libs()
-                if os.name == "nt":
-                    self._shared_lib_handles = [ctypes.CDLL(lib) for lib in shared_libs]
                 engine = ExecutionEngine(
                     module,
                     opt_level=3,
-                    shared_libs=shared_libs,
+                    shared_libs=_resolve_runtime_libs(),
                 )
                 engine.initialize()
 

@@ -15,11 +15,8 @@
 #include "hip/hip_runtime.h"
 
 #if defined(_WIN32)
-#if defined(FLYDSL_AOT_RUNTIME_EMBEDDED)
+// FlyJitRuntime exports everything (WINDOWS_EXPORT_ALL_SYMBOLS); there is no AOT runtime.
 #define FLYDSL_RUNTIME_API
-#else
-#define FLYDSL_RUNTIME_API __declspec(dllexport)
-#endif
 #define FLYDSL_RUNTIME_HIDDEN
 #else
 #if defined(FLYDSL_AOT_RUNTIME_EMBEDDED)

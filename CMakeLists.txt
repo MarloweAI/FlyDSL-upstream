@@ -28,10 +28,7 @@ include(TableGen)
 include(AddLLVM)
 include(AddMLIR)
 include(HandleLLVMOptions)
-
-if(UNIX)
-  string(REPLACE "-Wl,-z,defs" "" CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
-endif()
+string(REPLACE "-Wl,-z,defs" "" CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
 include(MLIRDetectPythonEnv)
 mlir_configure_python_dev_packages()
 

@@ -523,8 +523,6 @@ def _write_atomically(path: Path, data: bytes) -> None:
 
 @contextmanager
 def _output_directory_lock(directory: Path):
-    if os.name == "nt":
-        raise NotImplementedError("AOT export emits ELF objects and is supported on Linux only")
     fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC)
     try:
         fcntl.flock(fd, fcntl.LOCK_EX)

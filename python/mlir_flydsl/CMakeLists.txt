@@ -36,11 +36,12 @@ declare_mlir_dialect_python_bindings(
   DIALECT_NAME fly_ktrace
 )
 
-# ELF resolves these dialect symbols through FlyPythonCAPI.so. COFF extensions need
-# explicit import libraries for their C++ dialect methods.
-# COMMON_CAPI_LINK_LIBS keeps FlyPythonCAPI linked into each extension.
-
-set(_fly_extension_link_libs LLVMSupport)
+# NOTE: Do NOT link MLIRFlyDialect/MLIRFlyROCDLDialect here via PRIVATE_LINK_LIBS.
+# These symbols are already provided by FlyPythonCAPI.so (via MLIRCPIFly's transitive
+# dependencies in EMBED_CAPI_LINK_LIBS). Statically linking them here creates DUPLICATE
+# TypeID static variables, causing "storage uniquer isn't initialized" errors at runtime.
+# The COMMON_CAPI_LINK_LIBS FlyPythonCAPI in add_mlir_python_modules ensures _mlirDialectsFly.so
+# links to FlyPythonCAPI.so, which provides all needed symbols.
 
 declare_mlir_python_extension(FlyPythonSources.Core.fly
   MODULE_NAME _mlirDialectsFly
@@ -50,11 +51,11 @@ declare_mlir_python_extension(FlyPythonSources.Core.fly
   SOURCES
     TiledOpTraits.cpp
     FlyExtension.cpp
-  PRIVATE_LINK_LIBS ${_fly_extension_link_libs}
+  PRIVATE_LINK_LIBS
+    LLVMSupport
 )
 
 if(FLYDSL_HAS_ROCDL)
-  set(_fly_rocdl_extension_link_libs ${_fly_extension_link_libs})
   declare_mlir_python_extension(FlyPythonSources.Core.fly_rocdl
     MODULE_NAME _mlirDialectsFlyROCDL
     ADD_TO_PARENT FlyPythonSources
@@ -62,7 +63,8 @@ if(FLYDSL_HAS_ROCDL)
     PYTHON_BINDINGS_LIBRARY nanobind
     SOURCES
       FlyROCDLExtension.cpp
-    PRIVATE_LINK_LIBS ${_fly_rocdl_extension_link_libs}
+    PRIVATE_LINK_LIBS
+      LLVMSupport
   )
 endif()
 
@@ -130,10 +132,6 @@ add_mlir_python_common_capi_library(FlyPythonCAPI
   DECLARED_SOURCES ${MLIRFlyDSLSources}
 )
 
-if(WIN32)
-  set_target_properties(FlyPythonCAPI PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
-endif()
-
 # ---------------------------------------------------------------------------
 # Symbol visibility: prevent LLVM/MLIR internals from leaking out of
 # FlyPythonCAPI.so, which would conflict with ROCm's own LLVM
@@ -178,26 +176,18 @@ add_mlir_python_modules(FlyPythonModules
   MLIR_BINDINGS_PYTHON_NB_DOMAIN "mlir"
   DECLARED_SOURCES "${MLIRFlyDSLSources}"
   COMMON_CAPI_LINK_LIBS
-  FlyPythonCAPI
+    FlyPythonCAPI
 )
 
 if(WIN32)
-  # Multi-config generators append the configuration name to generic output
-  # directories. Keep extensions and their runtime DLLs beside Python packages.
-  add_dependencies(FlyPythonCAPI MLIRFlyDialect MLIRFlyKtraceDialect MLIRFlyROCDLDialect)
+  # Export dialect C++ APIs from this single DLL so all Python extensions share
+  # the same type IDs and storage uniquers.
   target_sources(FlyPythonCAPI PRIVATE
     $<TARGET_OBJECTS:obj.MLIRFlyDialect>
     $<TARGET_OBJECTS:obj.MLIRFlyKtraceDialect>
     $<TARGET_OBJECTS:obj.MLIRFlyROCDLDialect>)
-
-  # Export dialect C++ APIs from this single DLL so all Python extensions share
-  # the same type IDs and storage uniquers.
-  set_target_properties(FlyPythonCAPI PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
   set_property(TARGET FlyPythonCAPI APPEND PROPERTY MLIR_AGGREGATE_EXCLUDE_LIBS
     MLIRIR MLIRSupport MLIRFlyDialect MLIRFlyKtraceDialect MLIRFlyROCDLDialect)
-  get_target_property(_flypython_links FlyPythonCAPI LINK_LIBRARIES)
-  list(FILTER _flypython_links EXCLUDE REGEX "MLIRIR|MLIRSupport")
-  set_property(TARGET FlyPythonCAPI PROPERTY LINK_LIBRARIES "${_flypython_links}")
 
   set(_fly_export_archives MLIRIR MLIRSupport)
   set(_fly_export_objects)
@@ -236,11 +226,12 @@ if(WIN32)
   endforeach()
   target_sources(FlyPythonCAPI PRIVATE ${_fly_export_objects})
 
+  # Multi-config generators append the configuration name to generic output
+  # directories. Keep extensions and their runtime DLLs beside Python packages.
   get_property(_fly_python_targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
   foreach(_target IN LISTS _fly_python_targets)
     if(_target MATCHES "^FlyPythonModules\.extension\." OR
-       _target STREQUAL "FlyPythonCAPI" OR _target STREQUAL "FlyJitRuntime" OR
-       _target STREQUAL "nanobind-mlir")
+       _target STREQUAL "FlyPythonCAPI" OR _target STREQUAL "nanobind-mlir")
       foreach(_config IN LISTS CMAKE_CONFIGURATION_TYPES)
         string(TOUPPER "${_config}" _config_upper)
         set_target_properties(${_target} PROPERTIES

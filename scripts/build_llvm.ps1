@@ -43,24 +43,14 @@ foreach ($patch in $patches) {
     if ($LASTEXITCODE -ne 0) { throw "LLVM patch failed to apply at the pinned revision: $patch" }
 }
 
-$vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
-$vsPath = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Visual Studio C++ build tools were not found' }
-$vsDevCmd = Join-Path $vsPath 'Common7\Tools\VsDevCmd.bat'
-$envLines = & $env:ComSpec /d /s /c "`"$vsDevCmd`" -no_logo -arch=x64 -host_arch=x64 && set"
-if ($LASTEXITCODE -ne 0) { throw 'VsDevCmd failed to initialize the compiler environment' }
-foreach ($line in $envLines) {
-    $equals = $line.IndexOf('=')
-    if ($equals -gt 0) { [Environment]::SetEnvironmentVariable($line.Substring(0, $equals), $line.Substring($equals + 1), 'Process') }
-}
+. (Join-Path $PSScriptRoot 'vs_dev_env.ps1')
 
 & $Python -m pip install 'nanobind==2.12.0' numpy pybind11
 if ($LASTEXITCODE -ne 0) { throw 'Installing isolated LLVM Python build dependencies failed' }
 $nanobindDir = (& $Python -c "import nanobind, pathlib; print(pathlib.Path(nanobind.__file__).parent / 'cmake')").Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Could not locate nanobind CMake files' }
 
-cmake -U Python3_EXECUTABLE -U nanobind_DIR -U MLIR_USE_FALLBACK_TYPE_IDS `
-    -G Ninja -S (Join-Path $LLVMSourceDir 'llvm') -B $LLVMBuildDir `
+cmake -G Ninja -S (Join-Path $LLVMSourceDir 'llvm') -B $LLVMBuildDir `
     "-DCMAKE_C_COMPILER=cl.exe" `
     "-DCMAKE_CXX_COMPILER=cl.exe" `
     "-DLLVM_ENABLE_PROJECTS=mlir;clang;lld" `
@@ -68,7 +58,7 @@ cmake -U Python3_EXECUTABLE -U nanobind_DIR -U MLIR_USE_FALLBACK_TYPE_IDS `
     -DLLVM_ENABLE_RUNTIMES= `
     -DCMAKE_BUILD_TYPE=Release `
     -DCMAKE_CXX_STANDARD=17 `
-    "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /EHsc /DMLIR_USE_FALLBACK_TYPE_IDS=1" `
+    "-DCMAKE_CXX_FLAGS=/DWIN32 /D_WINDOWS /DMLIR_USE_FALLBACK_TYPE_IDS=1" `
     -DLLVM_ENABLE_ASSERTIONS=ON `
     -DLLVM_INSTALL_UTILS=ON `
     -DMLIR_ENABLE_BINDINGS_PYTHON=ON `

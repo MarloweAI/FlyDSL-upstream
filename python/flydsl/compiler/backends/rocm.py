@@ -240,10 +240,7 @@ class RocmBackend(BaseBackend):
         if sys.platform == "win32":
             return [
                 "_mlirDialectsFly*.pyd",
-                "_mlirDialectsFly*.dll",
-                "Fly*.dll",
-                "fly_jit_runtime.dll",
-                "mlir_rocm_runtime.dll",
+                "Fly*.dll",  # also fly_jit_runtime.dll: Windows globs ignore case
                 "_mlirRegisterEverything*.pyd",
             ]
         return [

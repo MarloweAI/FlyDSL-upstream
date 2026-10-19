@@ -3,7 +3,6 @@
 
 import functools
 import os
-import shutil
 import subprocess
 import sys
 from typing import Optional
@@ -11,27 +10,11 @@ from typing import Optional
 _ROCM_AGENT_TIMEOUT_S = int(os.environ.get("FLYDSL_ROCM_AGENT_TIMEOUT", "300"))
 
 
-def _find_rocm_tool(name: str) -> Optional[str]:
-    tool = shutil.which(name)
-    if tool:
-        return tool
-    if sys.platform == "win32":
-        for root in (os.environ.get("ROCM_PATH"), os.environ.get("HIP_PATH")):
-            if root:
-                candidate = os.path.join(root, "bin", name + ".exe")
-                if os.path.isfile(candidate):
-                    return candidate
-    return None
-
-
 def _arch_from_rocm_agent_enumerator() -> Optional[str]:
     """Query rocm_agent_enumerator (standard ROCm tool) for the first GPU arch."""
-    tool = _find_rocm_tool("rocm_agent_enumerator")
-    if tool is None:
-        return None
     try:
         out = subprocess.check_output(
-            [tool, "-name"],
+            ["rocm_agent_enumerator", "-name"],
             text=True,
             timeout=_ROCM_AGENT_TIMEOUT_S,
             stderr=subprocess.DEVNULL,
@@ -52,6 +35,7 @@ def _arch_from_hardware() -> str:
     if arch:
         return arch.split(":", 1)[0]
     if sys.platform == "win32":
+        # Windows has no rocm_agent_enumerator; ask a ROCm torch, else report nothing.
         try:
             import torch
 
@@ -91,19 +75,17 @@ def get_rocm_device_count() -> int:
     Uses the same invocation as :func:`_arch_from_rocm_agent_enumerator`. Returns 0
     when the tool is unavailable or no discrete GPU agents are reported.
     """
-    tool = _find_rocm_tool("rocm_agent_enumerator")
-    if tool is None:
-        if sys.platform == "win32":
-            try:
-                import torch
+    if sys.platform == "win32":
+        # Windows has no rocm_agent_enumerator.
+        try:
+            import torch
 
-                return torch.cuda.device_count()
-            except Exception:
-                return 0
-        return 0
+            return torch.cuda.device_count()
+        except Exception:
+            return 0
     try:
         out = subprocess.check_output(
-            [tool, "-name"],
+            ["rocm_agent_enumerator", "-name"],
             text=True,
             timeout=5,
             stderr=subprocess.DEVNULL,

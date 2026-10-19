@@ -88,7 +88,6 @@ class FileLock:
         while True:
             try:
                 if os.name == "nt":
-                    os.lseek(fd, 0, os.SEEK_SET)
                     msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
                 else:
                     op = fcntl.LOCK_EX if self._exclusive else fcntl.LOCK_SH
@@ -112,7 +111,6 @@ class FileLock:
         if fd is not None:
             try:
                 if os.name == "nt":
-                    os.lseek(fd, 0, os.SEEK_SET)
                     msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
                 else:
                     fcntl.flock(fd, fcntl.LOCK_UN)

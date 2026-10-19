@@ -32,17 +32,7 @@ if (-not (Test-Path -LiteralPath (Join-Path $sdkDevel 'lib\cmake\hip\hip-config.
 $env:ROCM_PATH = $sdkDevel
 $env:HIP_PATH = $sdkDevel
 $env:HIP_PLATFORM = 'amd'
-$env:CMAKE_BUILD_PARALLEL_LEVEL = "$Jobs"
-$vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
-$vsPath = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-if ($LASTEXITCODE -ne 0 -or -not $vsPath) { throw 'Visual Studio C++ build tools were not found' }
-$vsDevCmd = Join-Path $vsPath 'Common7\Tools\VsDevCmd.bat'
-$envLines = & $env:ComSpec /d /s /c "`"$vsDevCmd`" -no_logo -arch=x64 -host_arch=x64 && set"
-if ($LASTEXITCODE -ne 0) { throw 'VsDevCmd failed to initialize the compiler environment' }
-foreach ($line in $envLines) {
-    $equals = $line.IndexOf('=')
-    if ($equals -gt 0) { [Environment]::SetEnvironmentVariable($line.Substring(0, $equals), $line.Substring($equals + 1), 'Process') }
-}
+. (Join-Path $PSScriptRoot 'vs_dev_env.ps1')
 $nanobindDir = (& $Python -c "import nanobind, pathlib; print(pathlib.Path(nanobind.__file__).parent / 'cmake')").Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Could not locate nanobind CMake files' }
 
