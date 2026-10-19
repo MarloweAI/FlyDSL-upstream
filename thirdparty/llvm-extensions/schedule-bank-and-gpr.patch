@@ -4010,7 +4010,7 @@ index 000000000000..ed048ba35ff0
 +
 +attributes #0 = { "amdgpu-flat-work-group-size"="32,32" "amdgpu-waves-per-eu"="1,1" }
 diff --git a/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td b/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
-index c7330dd36af9..15db8e490ab4 100644
+index c7330dd36af9..99eff341a36b 100644
 --- a/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
 +++ b/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
 @@ -812,6 +812,115 @@ def ROCDL_IglpOpt : ROCDL_ConcreteNonMemIntrOp<"iglp.opt", [], 0, [0], ["variant
@@ -4069,7 +4069,7 @@ index c7330dd36af9..15db8e490ab4 100644
 +    int32_t strict = schedOp.getSoftAttr() ? 0 : 1;
 +    auto *fn = llvm::Intrinsic::getOrInsertDeclaration(
 +        moduleTranslation.getLLVMModule(),
-+        llvm::Intrinsic::amdgcn_schedule_}] # intrName # [{,
++        llvm::Intrinsic::amdgcn_sched_}] # intrName # [{,
 +        {value->getType()});
 +    auto *inst = builder.CreateCall(fn,
 +        {value, builder.getInt32(regnum), builder.getInt32(strict)});
