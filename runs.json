@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-19T03:39:01Z",
+ "updated": "2026-10-19T04:11:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,19 +10,19 @@
    "branch": "jli/bump-llvm-0906",
    "event": "pull_request",
    "title": "[llvm] bump llvm to 1df311a6",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334",
    "created_at": "2026-10-19T02:44:46Z",
-   "updated_at": "2026-10-19T03:19:57Z",
+   "updated_at": "2026-10-19T03:51:07Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-19T03:19:56Z",
+     "started_at": "2026-10-19T03:51:07Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334/job/117873226722"
     },
@@ -344,11 +344,11 @@
    "branch": "jli/gfx1250-strict",
    "event": "pull_request",
    "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513",
    "created_at": "2026-10-17T08:05:27Z",
-   "updated_at": "2026-10-19T03:20:29Z",
+   "updated_at": "2026-10-19T04:09:27Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -375,10 +375,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T03:20:29Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T04:09:26Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39016059513/job/117864496826"
     }
    ]
