@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-19T08:53:19Z",
+ "updated": "2026-10-19T09:41:24Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39226616827,
+   "pr": 1306,
+   "commit": "6fc2ca5bd8ef41f3e616392608511a4c06d63a1e",
+   "branch": "mxfp8_perf",
+   "event": "pull_request",
+   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827",
+   "created_at": "2026-10-19T08:58:37Z",
+   "updated_at": "2026-10-19T09:19:01Z",
+   "actor": "solinzby1",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T09:19:23Z",
+     "completed_at": "2026-10-19T09:30:29Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569942"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-19T09:19:01Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569975"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T09:20:08Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982570095"
+    }
+   ]
+  },
   {
    "run_id": 39225557262,
    "pr": null,
@@ -10,13 +53,41 @@
    "branch": "main",
    "event": "push",
    "title": "fix(ci): repair the SGLang nightly setup after sgl-kernel moved (#1287)",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262",
    "created_at": "2026-10-19T08:49:46Z",
-   "updated_at": "2026-10-19T08:51:18Z",
+   "updated_at": "2026-10-19T09:30:36Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T09:25:11Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571851"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T09:25:26Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571913"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-19T09:30:36Z",
+     "completed_at": "2026-10-19T09:38:26Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571943"
+    }
+   ]
   },
   {
    "run_id": 39225434997,
@@ -1961,21 +2032,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675817604/job/116238759112"
     }
    ]
-  },
-  {
-   "run_id": 38675724784,
-   "pr": null,
-   "commit": "a878bea1c809b91d776850e13f751069ced9ced0",
-   "branch": "main",
-   "event": "push",
-   "title": "[fix] Support waves_per_eu min,max range for full VGPR utilization (#\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675724784",
-   "created_at": "2026-10-15T03:20:11Z",
-   "updated_at": "2026-10-15T03:21:31Z",
-   "actor": "coderfeli",
-   "jobs": []
   }
  ]
 }
