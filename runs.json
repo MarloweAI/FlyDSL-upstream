@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T11:12:03Z",
+ "updated": "2026-10-19T11:19:46Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39243667441,
+   "pr": 1307,
+   "commit": "c612b37998053b8cc618d4b83b8c369893808dd8",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39243667441",
+   "created_at": "2026-10-19T11:18:16Z",
+   "updated_at": "2026-10-19T11:18:16Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39242049327,
    "pr": 1308,
@@ -119,10 +134,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T11:00:37Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T11:17:43Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047536"
     },
     {
@@ -204,11 +219,11 @@
    "branch": "main",
    "event": "push",
    "title": "fix(ci): repair the SGLang nightly setup after sgl-kernel moved (#1287)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262",
    "created_at": "2026-10-19T08:49:46Z",
-   "updated_at": "2026-10-19T09:30:36Z",
+   "updated_at": "2026-10-19T11:17:48Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -226,10 +241,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T09:25:26Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T11:17:47Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571913"
     },
     {
@@ -1881,21 +1896,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38719705755",
    "created_at": "2026-10-15T10:21:40Z",
    "updated_at": "2026-10-15T10:21:40Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38718978986,
-   "pr": null,
-   "commit": "51d777ba8206d88f028e2c47b9ca2270fbc0ca00",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38718978986",
-   "created_at": "2026-10-15T10:15:34Z",
-   "updated_at": "2026-10-15T10:15:34Z",
    "actor": "dimitri91209",
    "jobs": []
   }
