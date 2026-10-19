@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-19T10:47:12Z",
+ "updated": "2026-10-19T10:51:11Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39240225131,
+   "pr": 1307,
+   "commit": "8035a2478030c32a15e9be7b623a24b51e4a87bb",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240225131",
+   "created_at": "2026-10-19T10:49:41Z",
+   "updated_at": "2026-10-19T10:50:07Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 39240003879,
+   "pr": 1307,
+   "commit": "2ace59eb6411a2707720f65566dd3bc05ae7e7ea",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240003879",
+   "created_at": "2026-10-19T10:47:48Z",
+   "updated_at": "2026-10-19T10:49:42Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39238662557,
    "pr": 1307,
@@ -1894,92 +1924,6 @@
      "started_at": "2026-10-15T10:07:09Z",
      "completed_at": "2026-10-15T10:30:59Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38703759091/job/116325129100"
-    }
-   ]
-  },
-  {
-   "run_id": 38695994695,
-   "pr": null,
-   "commit": "ff0582e1b30e824f9c0c9fc09f30ffe0b7783f3a",
-   "branch": "pr/feat-core-categories",
-   "event": "pull_request",
-   "title": "[Core] Add four concrete layout categories",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38695994695",
-   "created_at": "2026-10-15T07:01:18Z",
-   "updated_at": "2026-10-15T09:08:50Z",
-   "actor": "sjfeng1999",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T07:45:50Z",
-     "completed_at": "2026-10-15T08:14:47Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38695994695/job/116308512179"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T08:29:16Z",
-     "completed_at": "2026-10-15T09:08:49Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38695994695/job/116308512211"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T07:45:58Z",
-     "completed_at": "2026-10-15T08:24:12Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38695994695/job/116308512357"
-    }
-   ]
-  },
-  {
-   "run_id": 38691709359,
-   "pr": 1289,
-   "commit": "554bc53bfc1f26ea9d5f4dabda79662e53e15278",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359",
-   "created_at": "2026-10-15T06:19:17Z",
-   "updated_at": "2026-10-15T08:21:08Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T06:44:41Z",
-     "completed_at": "2026-10-15T07:20:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733199"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T07:39:55Z",
-     "completed_at": "2026-10-15T08:21:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733223"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T06:44:30Z",
-     "completed_at": "2026-10-15T07:12:30Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38691709359/job/116286733258"
     }
    ]
   }
