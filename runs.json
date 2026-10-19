@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T10:56:47Z",
+ "updated": "2026-10-19T10:59:39Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39241077238,
+   "pr": 1307,
+   "commit": "7c9414eedaf1b7784bae994add20de21b4b6841b",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
+   "created_at": "2026-10-19T10:56:49Z",
+   "updated_at": "2026-10-19T10:58:03Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39240748154,
    "pr": 1307,
@@ -10,11 +25,11 @@
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
    "title": "schedule bank gpr based llvm head",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
    "created_at": "2026-10-19T10:54:04Z",
-   "updated_at": "2026-10-19T10:55:41Z",
+   "updated_at": "2026-10-19T10:57:39Z",
    "actor": "jli-melchior",
    "jobs": []
   },
@@ -1855,49 +1870,6 @@
    "updated_at": "2026-10-15T10:03:47Z",
    "actor": "aoli26",
    "jobs": []
-  },
-  {
-   "run_id": 38714180514,
-   "pr": 1297,
-   "commit": "eec9b5d0ea8cc0504a257b57ad420a04ddf9d2ba",
-   "branch": "fix/issue-1273-slp-ordered-reduction-budget",
-   "event": "pull_request",
-   "title": "[llvm] Stop failed SLP ordered reductions from starving the block",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514",
-   "created_at": "2026-10-15T09:36:27Z",
-   "updated_at": "2026-10-15T12:09:35Z",
-   "actor": "Phil-amd",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T11:31:14Z",
-     "completed_at": "2026-10-15T12:09:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514/job/116364785461"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T10:06:41Z",
-     "completed_at": "2026-10-15T10:23:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514/job/116364785473"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T10:06:49Z",
-     "completed_at": "2026-10-15T10:43:28Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514/job/116364785556"
-    }
-   ]
   }
  ]
 }
