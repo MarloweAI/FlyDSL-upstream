@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T11:35:03Z",
+ "updated": "2026-10-19T12:09:18Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39247037829,
+   "pr": 1307,
+   "commit": "10a73859d0b78cbeef0bdba0166f20d9c2d96097",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39247037829",
+   "created_at": "2026-10-19T11:46:13Z",
+   "updated_at": "2026-10-19T12:07:23Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39243667441,
    "pr": 1307,
@@ -125,11 +140,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T11:00:52Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047486"
+     "completed_at": "2026-10-19T11:58:57Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047486",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -1883,21 +1901,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38722836138/job/116397924615"
     }
    ]
-  },
-  {
-   "run_id": 38719705755,
-   "pr": null,
-   "commit": "735e307c5ec33bc29df9654b3c2e6f7f9502342f",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38719705755",
-   "created_at": "2026-10-15T10:21:40Z",
-   "updated_at": "2026-10-15T10:21:40Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
