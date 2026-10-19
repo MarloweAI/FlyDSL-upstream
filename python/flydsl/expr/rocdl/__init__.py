@@ -109,10 +109,10 @@ mask_dswr = 0x200
 
 _ods_sched_barrier = globals().get("sched_barrier")
 _ods_sched_group_barrier = globals().get("sched_group_barrier")
-_ods_sched_bank = globals().get("schedule_bank")
-_ods_sched_vgpr = globals().get("schedule_vgpr")
-_ods_sched_sgpr = globals().get("schedule_sgpr")
-_ods_sched_agpr = globals().get("schedule_agpr")
+_ods_sched_bank = globals().get("sched_bank")
+_ods_sched_vgpr = globals().get("sched_vgpr")
+_ods_sched_sgpr = globals().get("sched_sgpr")
+_ods_sched_agpr = globals().get("sched_agpr")
 
 _SCHED_MASK_INT_TO_KW = {
     0x000: "none",

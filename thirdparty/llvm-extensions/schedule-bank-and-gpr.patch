@@ -768,7 +768,7 @@ index 000000000000..3a34c7933d6a
 +
 +#endif // LLVM_LIB_TARGET_AMDGPU_AMDGPUSCHEDULEBANK_H
 diff --git a/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp b/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
-index 9176adff039d..da9e48236702 100644
+index 9176adff039d..9093869109a4 100644
 --- a/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
 +++ b/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
 @@ -35,6 +35,7 @@
@@ -1155,12 +1155,10 @@ index 9176adff039d..da9e48236702 100644
      return true;
  
    // Parse FirstKernArgPreloadReg separately, since it's a Register,
-@@ -2641,7 +2635,8 @@ Error AMDGPUCodeGenPassBuilder::addOptimizedRegAlloc(PassManagerWrapper &PMW) {
-   return Base::addOptimizedRegAlloc(PMW);
+@@ -2642,6 +2636,7 @@ Error AMDGPUCodeGenPassBuilder::addOptimizedRegAlloc(PassManagerWrapper &PMW) {
  }
  
--void AMDGPUCodeGenPassBuilder::addPreRegAlloc(PassManagerWrapper &PMW) {
-+void AMDGPUCodeGenPassBuilder::addPreRegAlloc(PassManagerWrapper &PMW) const {
+ void AMDGPUCodeGenPassBuilder::addPreRegAlloc(PassManagerWrapper &PMW) {
 +  addMachineFunctionPass(AMDGPUSchedBankPass(), PMW);
    if (getOptLevel() != CodeGenOptLevel::None)
      addMachineFunctionPass(AMDGPUPrepareAGPRAllocPass(), PMW);

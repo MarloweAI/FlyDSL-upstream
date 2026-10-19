@@ -6,7 +6,7 @@
 """Tests for the rocdl.sched_bank DSL wrapper.
 
 Validates IR emission for strict and soft VGPR bank scheduling hints.
-Requires the custom LLVM build with the rocdl.schedule.bank op; tests
+Requires the custom LLVM build with the rocdl.sched.bank op; tests
 skip when the ODS binding is unavailable.
 """
 
@@ -15,11 +15,11 @@ import pytest
 from flydsl._mlir import ir
 from flydsl._mlir.dialects import func, rocdl
 
-_has_sched_bank = hasattr(rocdl, "schedule_bank") or hasattr(rocdl, "ScheduleBank")
+_has_sched_bank = hasattr(rocdl, "sched_bank") or hasattr(rocdl, "SchedBank")
 
 pytestmark = [
     pytest.mark.l0_backend_agnostic,
-    pytest.mark.skipif(not _has_sched_bank, reason="rocdl.schedule.bank op not available (needs custom LLVM)"),
+    pytest.mark.skipif(not _has_sched_bank, reason="rocdl.sched.bank op not available (needs custom LLVM)"),
 ]
 
 
@@ -54,7 +54,7 @@ def test_sched_bank_strict():
         return sched_bank(x, bank=0)
 
     ir_text = _build_module(build)
-    assert "rocdl.schedule.bank" in ir_text
+    assert "rocdl.sched.bank" in ir_text
     assert "soft" not in ir_text
 
 
@@ -66,7 +66,7 @@ def test_sched_bank_soft():
         return sched_bank(x, bank=2, soft=True)
 
     ir_text = _build_module(build)
-    assert "rocdl.schedule.bank" in ir_text
+    assert "rocdl.sched.bank" in ir_text
     assert "soft" in ir_text
 
 
@@ -91,8 +91,8 @@ def test_sched_bank_all_banks():
             return sched_bank(x, bank=b)
 
         ir_text = _build_module(build)
-        # IR prints as: rocdl.schedule.bank %arg0, <bank_id> : f32
-        assert f"rocdl.schedule.bank %arg0, {bank_id}" in ir_text
+        # IR prints as: rocdl.sched.bank %arg0, <bank_id> : f32
+        assert f"rocdl.sched.bank %arg0, {bank_id}" in ir_text
 
 
 def test_sched_bank_integer_input():
@@ -103,5 +103,5 @@ def test_sched_bank_integer_input():
         return sched_bank(x, bank=3)
 
     ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
-    assert "rocdl.schedule.bank" in ir_text
+    assert "rocdl.sched.bank" in ir_text
     assert "i32" in ir_text
