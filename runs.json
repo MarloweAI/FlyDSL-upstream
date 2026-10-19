@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T06:59:13Z",
+ "updated": "2026-10-19T08:48:19Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39225138654,
+   "pr": null,
+   "commit": "b4071f00bd8afd29a9d68d7247da464af4fb40ec",
+   "branch": "main",
+   "event": "push",
+   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM (#971)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225138654",
+   "created_at": "2026-10-19T08:46:13Z",
+   "updated_at": "2026-10-19T08:46:35Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39207015269,
    "pr": null,
@@ -10,11 +25,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Fix] Bitcast small floats across converted ops in convert-fly-to-roc\u2026",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269",
    "created_at": "2026-10-19T05:55:10Z",
-   "updated_at": "2026-10-19T06:07:21Z",
+   "updated_at": "2026-10-19T08:46:14Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -29,20 +44,23 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-19T06:07:20Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T08:46:13Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211203"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T06:28:14Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211322"
+     "completed_at": "2026-10-19T07:32:57Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211322",
+     "machine": "gbt350-odcdh1-b09-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -1555,7 +1573,7 @@
   },
   {
    "run_id": 38722836138,
-   "pr": 971,
+   "pr": null,
    "commit": "dd2b5871ddb8bf8264569264c3a312cb6dbb9681",
    "branch": "gfx1250/gemm-opt-0805",
    "event": "pull_request",
@@ -1628,7 +1646,7 @@
   },
   {
    "run_id": 38717333818,
-   "pr": 971,
+   "pr": null,
    "commit": "266241b571dc4fe0665ab1098c32d44d4fe49e44",
    "branch": "gfx1250/gemm-opt-0805",
    "event": "pull_request",
@@ -1986,49 +2004,6 @@
    "updated_at": "2026-10-15T03:08:27Z",
    "actor": "jli-melchior",
    "jobs": []
-  },
-  {
-   "run_id": 38670643661,
-   "pr": 1289,
-   "commit": "c1e261090387470caddddaad98b3ad01ee5d6949",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661",
-   "created_at": "2026-10-15T02:22:31Z",
-   "updated_at": "2026-10-15T03:23:54Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-15T03:08:25Z",
-     "completed_at": "2026-10-15T03:23:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215442"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T02:57:14Z",
-     "completed_at": "2026-10-15T03:17:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215463"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-15T02:57:22Z",
-     "completed_at": "2026-10-15T03:23:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215482"
-    }
-   ]
   }
  ]
 }
