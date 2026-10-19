@@ -164,11 +164,12 @@ _CLOSURE_SCALARS = (int, float, bool, str, type(None), tuple, enum.Enum)
 # OS-encoded bytes of each name; mutations to os.environ update it in place.
 # Reading it with pre-encoded keys skips os.environ.get's per-call key encoding,
 # which is ~5x faster on this hot path. Guarded: if the internal layout is
-# absent (non-posix / future CPython) we fall back to the public API. Values go
-# through os.fsdecode so the fast and slow paths — and thus two processes
-# sharing a cache dir — produce byte-for-byte identical keys.
+# absent (future CPython) we fall back to the public API, and on Windows, whose
+# ``_data`` is keyed by upper-cased str, the bytes keys would miss every name.
+# Values go through os.fsdecode so the fast and slow paths — and thus two
+# processes sharing a cache dir — produce byte-for-byte identical keys.
 try:
-    _ENABLE_ENV_FAST_READ = isinstance(os.environ._data, dict)
+    _ENABLE_ENV_FAST_READ = os.name != "nt" and isinstance(os.environ._data, dict)
 except Exception:
     _ENABLE_ENV_FAST_READ = False
 _CACHE_INVALIDATING_ENV_VARS_ENCODED = tuple((n, os.fsencode(n)) for n in _CACHE_INVALIDATING_ENV_VARS)
