@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-19T11:08:14Z",
+ "updated": "2026-10-19T11:12:03Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -25,11 +25,11 @@
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
    "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
    "created_at": "2026-10-19T10:56:49Z",
-   "updated_at": "2026-10-19T10:58:42Z",
+   "updated_at": "2026-10-19T11:10:38Z",
    "actor": "jli-melchior",
    "jobs": []
   },
