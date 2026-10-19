@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-19T08:48:19Z",
+ "updated": "2026-10-19T08:51:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39225557262,
+   "pr": null,
+   "commit": "2ede16ea3a3f5ecc38fd261689e173de89d2993e",
+   "branch": "main",
+   "event": "push",
+   "title": "fix(ci): repair the SGLang nightly setup after sgl-kernel moved (#1287)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262",
+   "created_at": "2026-10-19T08:49:46Z",
+   "updated_at": "2026-10-19T08:49:48Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39225434997,
+   "pr": null,
+   "commit": "c8075ae66efcf65b4966f3d1b236a5c66236d4ba",
+   "branch": "main",
+   "event": "push",
+   "title": "[Core] Add four concrete layout categories (#1292)",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225434997",
+   "created_at": "2026-10-19T08:48:43Z",
+   "updated_at": "2026-10-19T08:49:48Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39225138654,
    "pr": null,
@@ -10,11 +40,11 @@
    "branch": "main",
    "event": "push",
    "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM (#971)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225138654",
    "created_at": "2026-10-19T08:46:13Z",
-   "updated_at": "2026-10-19T08:46:35Z",
+   "updated_at": "2026-10-19T08:49:32Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -1747,7 +1777,7 @@
   },
   {
    "run_id": 38695994695,
-   "pr": 1292,
+   "pr": null,
    "commit": "ff0582e1b30e824f9c0c9fc09f30ffe0b7783f3a",
    "branch": "pr/feat-core-categories",
    "event": "pull_request",
@@ -1945,64 +1975,6 @@
    "created_at": "2026-10-15T03:20:11Z",
    "updated_at": "2026-10-15T03:21:31Z",
    "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38675320088,
-   "pr": 1296,
-   "commit": "a32ced990d9cac9fb3d5c85e1ad68e1843cff5c6",
-   "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
-   "event": "pull_request",
-   "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675320088",
-   "created_at": "2026-10-15T03:15:31Z",
-   "updated_at": "2026-10-15T04:43:34Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:53:48Z",
-     "completed_at": "2026-10-15T04:28:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675320088/job/116237636932"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T03:57:58Z",
-     "completed_at": "2026-10-15T04:43:33Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675320088/job/116237636952"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T04:03:35Z",
-     "completed_at": "2026-10-15T04:18:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38675320088/job/116237637002"
-    }
-   ]
-  },
-  {
-   "run_id": 38672400957,
-   "pr": 1296,
-   "commit": "6078681afc386d95297bc7cf183e02b5d853539b",
-   "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
-   "event": "pull_request",
-   "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38672400957",
-   "created_at": "2026-10-15T02:42:23Z",
-   "updated_at": "2026-10-15T03:08:27Z",
-   "actor": "jli-melchior",
    "jobs": []
   }
  ]
