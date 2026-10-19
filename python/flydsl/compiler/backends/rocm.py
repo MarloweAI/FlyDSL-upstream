@@ -90,6 +90,12 @@ class RocmBackend(BaseBackend):
     @staticmethod
     def detect_target() -> GPUTarget:
         arch = env.compile.arch or get_rocm_arch()
+        if not arch:
+            # Only Windows detects nothing: it has no rocm_agent_enumerator to fall back on.
+            raise RuntimeError(
+                "Could not detect the GPU architecture: no rocm_agent_enumerator and no ROCm torch "
+                "that sees a GPU. Set ARCH to the compile target, for example ARCH=gfx1151."
+            )
         return GPUTarget(backend="rocm", arch=arch, warp_size=get_warp_size(arch))
 
     @classmethod

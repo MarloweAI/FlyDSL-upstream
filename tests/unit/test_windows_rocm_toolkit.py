@@ -153,3 +153,13 @@ def test_missing_sdk_has_actionable_error(rocm, monkeypatch, tmp_path):
 
     with pytest.raises(RuntimeError, match="Could not find ld.lld.exe and AMDGPU bitcode"):
         rocm._windows_rocm_toolkit()
+
+
+def test_undetected_arch_asks_for_arch(rocm, monkeypatch):
+    monkeypatch.setattr(rocm, "env", types.SimpleNamespace(compile=types.SimpleNamespace(arch="")))
+    monkeypatch.setattr(rocm, "get_rocm_arch", lambda: "gfx1151")
+    assert rocm.RocmBackend.detect_target().arch == "gfx1151"
+
+    monkeypatch.setattr(rocm, "get_rocm_arch", lambda: "")
+    with pytest.raises(RuntimeError, match="Set ARCH"):
+        rocm.RocmBackend.detect_target()
