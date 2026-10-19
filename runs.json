@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-19T12:09:18Z",
+ "updated": "2026-10-19T12:12:03Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -191,11 +191,11 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827",
    "created_at": "2026-10-19T08:58:37Z",
-   "updated_at": "2026-10-19T11:00:54Z",
+   "updated_at": "2026-10-19T12:09:44Z",
    "actor": "solinzby1",
    "jobs": [
     {
@@ -210,10 +210,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T11:00:54Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T12:09:43Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569975"
     },
     {
