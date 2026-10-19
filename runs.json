@@ -1,20 +1,35 @@
 {
  "schema": 1,
- "updated": "2026-10-19T10:59:39Z",
+ "updated": "2026-10-19T11:08:14Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39242049327,
+   "pr": 1308,
+   "commit": "57e37b9ad922d368d4846beed1391cc41f8b899e",
+   "branch": "jli/xnack-perf",
+   "event": "pull_request",
+   "title": "[dont merge] [llvm] xnack perf",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39242049327",
+   "created_at": "2026-10-19T11:05:05Z",
+   "updated_at": "2026-10-19T11:06:46Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39241077238,
    "pr": 1307,
    "commit": "7c9414eedaf1b7784bae994add20de21b4b6841b",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
    "created_at": "2026-10-19T10:56:49Z",
-   "updated_at": "2026-10-19T10:58:03Z",
+   "updated_at": "2026-10-19T10:58:42Z",
    "actor": "jli-melchior",
    "jobs": []
   },
@@ -24,7 +39,7 @@
    "commit": "28a3dc7ae54c86c16ed18c04d8ed6b586c777a50",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
@@ -39,7 +54,7 @@
    "commit": "8035a2478030c32a15e9be7b623a24b51e4a87bb",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240225131",
@@ -54,7 +69,7 @@
    "commit": "2ace59eb6411a2707720f65566dd3bc05ae7e7ea",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240003879",
@@ -69,7 +84,7 @@
    "commit": "a651c2c4e392575e703dc20c7fc3504b13809beb",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238662557",
@@ -85,13 +100,41 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229",
    "created_at": "2026-10-19T10:33:10Z",
-   "updated_at": "2026-10-19T10:36:15Z",
+   "updated_at": "2026-10-19T11:00:13Z",
    "actor": "james-huang09",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T11:00:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047486"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T11:00:37Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047536"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-19T11:00:13Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047578"
+    }
+   ]
   },
   {
    "run_id": 39238096433,
@@ -99,7 +142,7 @@
    "commit": "d921a877d590ec34070652254920c6f668ea69a1",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "schedule bank gpr based llvm head",
+   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238096433",
@@ -115,11 +158,11 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827",
    "created_at": "2026-10-19T08:58:37Z",
-   "updated_at": "2026-10-19T09:19:01Z",
+   "updated_at": "2026-10-19T11:00:54Z",
    "actor": "solinzby1",
    "jobs": [
     {
@@ -134,9 +177,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-19T09:19:01Z",
+     "started_at": "2026-10-19T11:00:54Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569975"
     },
@@ -1854,21 +1897,6 @@
    "created_at": "2026-10-15T10:15:34Z",
    "updated_at": "2026-10-15T10:15:34Z",
    "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38717333818,
-   "pr": null,
-   "commit": "266241b571dc4fe0665ab1098c32d44d4fe49e44",
-   "branch": "gfx1250/gemm-opt-0805",
-   "event": "pull_request",
-   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38717333818",
-   "created_at": "2026-10-15T10:02:02Z",
-   "updated_at": "2026-10-15T10:03:47Z",
-   "actor": "aoli26",
    "jobs": []
   }
  ]
