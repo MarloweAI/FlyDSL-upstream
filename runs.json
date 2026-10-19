@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-19T05:58:00Z",
+ "updated": "2026-10-19T06:59:13Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "main",
    "event": "push",
    "title": "[Fix] Bitcast small floats across converted ops in convert-fly-to-roc\u2026",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269",
    "created_at": "2026-10-19T05:55:10Z",
-   "updated_at": "2026-10-19T05:56:25Z",
+   "updated_at": "2026-10-19T06:07:21Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T06:07:38Z",
+     "completed_at": "2026-10-19T06:29:10Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211160"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-19T06:07:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211203"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T06:28:14Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211322"
+    }
+   ]
   },
   {
    "run_id": 39203712321,
