@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-19T14:15:47Z",
+ "updated": "2026-10-19T15:20:48Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,44 @@
    "branch": "refactor/monokernel-flydsl-api-cleanup",
    "event": "pull_request",
    "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985",
    "created_at": "2026-10-19T14:04:40Z",
-   "updated_at": "2026-10-19T14:06:54Z",
+   "updated_at": "2026-10-19T14:17:20Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-19T14:17:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985/job/118111128808"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T14:17:54Z",
+     "completed_at": "2026-10-19T15:15:15Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985/job/118111128888",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T14:17:44Z",
+     "completed_at": "2026-10-19T14:36:15Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985/job/118111129111"
+    }
+   ]
   },
   {
    "run_id": 39261723911,
@@ -68,29 +99,32 @@
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
    "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365",
    "created_at": "2026-10-19T13:21:31Z",
-   "updated_at": "2026-10-19T13:59:31Z",
+   "updated_at": "2026-10-19T15:18:27Z",
    "actor": "xudoyuan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T13:35:19Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480248"
+     "completed_at": "2026-10-19T14:23:29Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480248",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T13:59:31Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T15:18:25Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480326"
     },
     {
@@ -111,11 +145,11 @@
    "branch": "jli/xnack-perf",
    "event": "pull_request",
    "title": "[compiler] [llvm] xnack perf",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918",
    "created_at": "2026-10-19T12:26:23Z",
-   "updated_at": "2026-10-19T13:35:22Z",
+   "updated_at": "2026-10-19T14:41:36Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -133,10 +167,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-19T13:35:22Z",
-     "completed_at": null,
+     "completed_at": "2026-10-19T14:41:35Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918/job/118072532455"
     },
     {
