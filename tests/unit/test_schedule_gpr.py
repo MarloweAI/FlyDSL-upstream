@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2026 FlyDSL Project Contributors
 
-"""Tests for rocdl.schedule_{vgpr,sgpr,agpr} DSL wrappers.
+"""Tests for rocdl.sched_{vgpr,sgpr,agpr} DSL wrappers.
 
 Validates IR emission for exact-register scheduling hints (strict and soft).
 Requires the custom LLVM build with the rocdl.schedule.{vgpr,sgpr,agpr} ops;
@@ -15,9 +15,9 @@ import pytest
 from flydsl._mlir import ir
 from flydsl._mlir.dialects import func, rocdl
 
-_has_schedule_vgpr = hasattr(rocdl, "schedule_vgpr") or hasattr(rocdl, "ScheduleVGPR")
-_has_schedule_sgpr = hasattr(rocdl, "schedule_sgpr") or hasattr(rocdl, "ScheduleSGPR")
-_has_schedule_agpr = hasattr(rocdl, "schedule_agpr") or hasattr(rocdl, "ScheduleAGPR")
+_has_sched_vgpr = hasattr(rocdl, "schedule_vgpr") or hasattr(rocdl, "ScheduleVGPR")
+_has_sched_sgpr = hasattr(rocdl, "schedule_sgpr") or hasattr(rocdl, "ScheduleSGPR")
+_has_sched_agpr = hasattr(rocdl, "schedule_agpr") or hasattr(rocdl, "ScheduleAGPR")
 
 pytestmark = [
     pytest.mark.l0_backend_agnostic,
@@ -47,17 +47,17 @@ def _build_module(build_fn, arg_types=None):
             return str(module)
 
 
-# ── schedule_vgpr ────────────────────────────────────────────────────────
+# ── sched_vgpr ──────────────────────────────────────────────────────────
 
 
-@pytest.mark.skipif(not _has_schedule_vgpr, reason="rocdl.schedule.vgpr op not available (needs custom LLVM)")
-class TestScheduleVGPR:
+@pytest.mark.skipif(not _has_sched_vgpr, reason="rocdl.schedule.vgpr op not available (needs custom LLVM)")
+class TestSchedVGPR:
     def test_strict(self):
-        """Default (strict) schedule_vgpr emits the op without the soft keyword."""
-        from flydsl.expr.rocdl import schedule_vgpr
+        """Default (strict) sched_vgpr emits the op without the soft keyword."""
+        from flydsl.expr.rocdl import sched_vgpr
 
         def build(x):
-            return schedule_vgpr(x, regnum=42)
+            return sched_vgpr(x, regnum=42)
 
         ir_text = _build_module(build)
         assert "rocdl.schedule.vgpr" in ir_text
@@ -65,10 +65,10 @@ class TestScheduleVGPR:
 
     def test_soft(self):
         """soft=True emits the soft keyword in the printed op."""
-        from flydsl.expr.rocdl import schedule_vgpr
+        from flydsl.expr.rocdl import sched_vgpr
 
         def build(x):
-            return schedule_vgpr(x, regnum=42, soft=True)
+            return sched_vgpr(x, regnum=42, soft=True)
 
         ir_text = _build_module(build)
         assert "rocdl.schedule.vgpr" in ir_text
@@ -76,125 +76,125 @@ class TestScheduleVGPR:
 
     def test_identity_type(self):
         """Result type must match the input value type (identity semantics)."""
-        from flydsl.expr.rocdl import schedule_vgpr
+        from flydsl.expr.rocdl import sched_vgpr
 
         def build(x):
-            return schedule_vgpr(x, regnum=100)
+            return sched_vgpr(x, regnum=100)
 
         ir_text = _build_module(build)
         assert "-> f32" in ir_text
 
     def test_regnum_values(self):
         """Various register numbers are accepted."""
-        from flydsl.expr.rocdl import schedule_vgpr
+        from flydsl.expr.rocdl import sched_vgpr
 
         for regnum in [0, 42, 100, 512]:
 
             def build(x, r=regnum):
-                return schedule_vgpr(x, regnum=r)
+                return sched_vgpr(x, regnum=r)
 
             ir_text = _build_module(build)
             assert f"rocdl.schedule.vgpr %arg0, {regnum}" in ir_text
 
     def test_integer_input(self):
-        """schedule_vgpr on an integer-typed value preserves the type."""
-        from flydsl.expr.rocdl import schedule_vgpr
+        """sched_vgpr on an integer-typed value preserves the type."""
+        from flydsl.expr.rocdl import sched_vgpr
 
         def build(x):
-            return schedule_vgpr(x, regnum=0)
+            return sched_vgpr(x, regnum=0)
 
         ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
         assert "rocdl.schedule.vgpr" in ir_text
         assert "i32" in ir_text
 
 
-# ── schedule_sgpr ────────────────────────────────────────────────────────
+# ── sched_sgpr ──────────────────────────────────────────────────────────
 
 
-@pytest.mark.skipif(not _has_schedule_sgpr, reason="rocdl.schedule.sgpr op not available (needs custom LLVM)")
-class TestScheduleSGPR:
+@pytest.mark.skipif(not _has_sched_sgpr, reason="rocdl.schedule.sgpr op not available (needs custom LLVM)")
+class TestSchedSGPR:
     def test_strict(self):
-        from flydsl.expr.rocdl import schedule_sgpr
+        from flydsl.expr.rocdl import sched_sgpr
 
         def build(x):
-            return schedule_sgpr(x, regnum=10)
+            return sched_sgpr(x, regnum=10)
 
         ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
         assert "rocdl.schedule.sgpr" in ir_text
         assert "soft" not in ir_text
 
     def test_soft(self):
-        from flydsl.expr.rocdl import schedule_sgpr
+        from flydsl.expr.rocdl import sched_sgpr
 
         def build(x):
-            return schedule_sgpr(x, regnum=10, soft=True)
+            return sched_sgpr(x, regnum=10, soft=True)
 
         ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
         assert "rocdl.schedule.sgpr" in ir_text
         assert "soft" in ir_text
 
     def test_identity_type(self):
-        from flydsl.expr.rocdl import schedule_sgpr
+        from flydsl.expr.rocdl import sched_sgpr
 
         def build(x):
-            return schedule_sgpr(x, regnum=4)
+            return sched_sgpr(x, regnum=4)
 
         ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
         assert "-> i32" in ir_text
 
     def test_regnum_values(self):
-        from flydsl.expr.rocdl import schedule_sgpr
+        from flydsl.expr.rocdl import sched_sgpr
 
         for regnum in [0, 10, 50, 105]:
 
             def build(x, r=regnum):
-                return schedule_sgpr(x, regnum=r)
+                return sched_sgpr(x, regnum=r)
 
             ir_text = _build_module(build, arg_types=[lambda: ir.IntegerType.get_signless(32)])
             assert f"rocdl.schedule.sgpr %arg0, {regnum}" in ir_text
 
 
-# ── schedule_agpr ────────────────────────────────────────────────────────
+# ── sched_agpr ──────────────────────────────────────────────────────────
 
 
-@pytest.mark.skipif(not _has_schedule_agpr, reason="rocdl.schedule.agpr op not available (needs custom LLVM)")
-class TestScheduleAGPR:
+@pytest.mark.skipif(not _has_sched_agpr, reason="rocdl.schedule.agpr op not available (needs custom LLVM)")
+class TestSchedAGPR:
     def test_strict(self):
-        from flydsl.expr.rocdl import schedule_agpr
+        from flydsl.expr.rocdl import sched_agpr
 
         def build(x):
-            return schedule_agpr(x, regnum=8)
+            return sched_agpr(x, regnum=8)
 
         ir_text = _build_module(build)
         assert "rocdl.schedule.agpr" in ir_text
         assert "soft" not in ir_text
 
     def test_soft(self):
-        from flydsl.expr.rocdl import schedule_agpr
+        from flydsl.expr.rocdl import sched_agpr
 
         def build(x):
-            return schedule_agpr(x, regnum=8, soft=True)
+            return sched_agpr(x, regnum=8, soft=True)
 
         ir_text = _build_module(build)
         assert "rocdl.schedule.agpr" in ir_text
         assert "soft" in ir_text
 
     def test_identity_type(self):
-        from flydsl.expr.rocdl import schedule_agpr
+        from flydsl.expr.rocdl import sched_agpr
 
         def build(x):
-            return schedule_agpr(x, regnum=0)
+            return sched_agpr(x, regnum=0)
 
         ir_text = _build_module(build)
         assert "-> f32" in ir_text
 
     def test_regnum_values(self):
-        from flydsl.expr.rocdl import schedule_agpr
+        from flydsl.expr.rocdl import sched_agpr
 
         for regnum in [0, 8, 128, 255]:
 
             def build(x, r=regnum):
-                return schedule_agpr(x, regnum=r)
+                return sched_agpr(x, regnum=r)
 
             ir_text = _build_module(build)
             assert f"rocdl.schedule.agpr %arg0, {regnum}" in ir_text

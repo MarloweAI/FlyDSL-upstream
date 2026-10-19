@@ -1,29 +1,29 @@
 diff --git a/clang/include/clang/Basic/BuiltinsAMDGPU.td b/clang/include/clang/Basic/BuiltinsAMDGPU.td
-index 794fa517016a..ba7d23faea6e 100644
+index 794fa517016a..98e18e5ed198 100644
 --- a/clang/include/clang/Basic/BuiltinsAMDGPU.td
 +++ b/clang/include/clang/Basic/BuiltinsAMDGPU.td
 @@ -982,6 +982,12 @@ def __builtin_amdgcn_cvt_sr_f16_f32 : AMDGPUBuiltin<"_ExtVector<2, _Float16>(_Ex
  // GFX1250+ only builtins.
  //===----------------------------------------------------------------------===//
  def __builtin_amdgcn_s_cluster_barrier : AMDGPUBuiltin<"void()", [], "gfx1250-insts">;
-+def __builtin_amdgcn_schedule_bank : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking], "gfx1250-insts">;
++def __builtin_amdgcn_sched_bank : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking], "gfx1250-insts">;
 +
 +// Exact GPR register scheduling hints.
-+def __builtin_amdgcn_schedule_vgpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking]>;
-+def __builtin_amdgcn_schedule_sgpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking]>;
-+def __builtin_amdgcn_schedule_agpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking], "mai-insts">;
++def __builtin_amdgcn_sched_vgpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking]>;
++def __builtin_amdgcn_sched_sgpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking]>;
++def __builtin_amdgcn_sched_agpr : AMDGPUBuiltin<"int(int, _Constant int, _Constant bool)", [Const, CustomTypeChecking], "mai-insts">;
  
  def __builtin_amdgcn_flat_prefetch : AMDGPUBuiltin<"void(void const address_space<0> *, _Constant int)", [Const], "vmem-pref-insts">;
  def __builtin_amdgcn_global_prefetch : AMDGPUBuiltin<"void(void const address_space<1> *, _Constant int)", [Const], "vmem-pref-insts">;
 diff --git a/clang/lib/CodeGen/TargetBuiltins/AMDGPU.cpp b/clang/lib/CodeGen/TargetBuiltins/AMDGPU.cpp
-index 667c6508040a..eab83b3eb893 100644
+index 667c6508040a..eea73ae6f502 100644
 --- a/clang/lib/CodeGen/TargetBuiltins/AMDGPU.cpp
 +++ b/clang/lib/CodeGen/TargetBuiltins/AMDGPU.cpp
 @@ -2289,6 +2289,48 @@ Value *CodeGenFunction::EmitAMDGPUBuiltinExpr(unsigned BuiltinID,
    case AMDGPU::BI__builtin_amdgcn_permlane_xor:
      return emitBuiltinWithOneOverloadedType<3>(*this, E,
                                                 Intrinsic::amdgcn_permlane_xor);
-+  case AMDGPU::BI__builtin_amdgcn_schedule_bank: {
++  case AMDGPU::BI__builtin_amdgcn_sched_bank: {
 +    llvm::Value *Val = EmitScalarExpr(E->getArg(0));
 +    llvm::Value *Bank = EmitScalarExpr(E->getArg(1));
 +    llvm::Value *EncodedBank;
@@ -35,13 +35,13 @@ index 667c6508040a..eab83b3eb893 100644
 +      // Default: strict (bank | 4)
 +      EncodedBank = Builder.CreateOr(Bank, Builder.getInt32(4));
 +    }
-+    llvm::Function *F = CGM.getIntrinsic(Intrinsic::amdgcn_schedule_bank,
++    llvm::Function *F = CGM.getIntrinsic(Intrinsic::amdgcn_sched_bank,
 +                                         Val->getType());
 +    return Builder.CreateCall(F, {Val, EncodedBank});
 +  }
-+  case AMDGPU::BI__builtin_amdgcn_schedule_vgpr:
-+  case AMDGPU::BI__builtin_amdgcn_schedule_sgpr:
-+  case AMDGPU::BI__builtin_amdgcn_schedule_agpr: {
++  case AMDGPU::BI__builtin_amdgcn_sched_vgpr:
++  case AMDGPU::BI__builtin_amdgcn_sched_sgpr:
++  case AMDGPU::BI__builtin_amdgcn_sched_agpr: {
 +    llvm::Value *Val = EmitScalarExpr(E->getArg(0));
 +    llvm::Value *RegNum = EmitScalarExpr(E->getArg(1));
 +    llvm::Value *Strict;
@@ -54,12 +54,12 @@ index 667c6508040a..eab83b3eb893 100644
 +    }
 +    Intrinsic::ID IID;
 +    switch (BuiltinID) {
-+    case AMDGPU::BI__builtin_amdgcn_schedule_vgpr:
-+      IID = Intrinsic::amdgcn_schedule_vgpr; break;
-+    case AMDGPU::BI__builtin_amdgcn_schedule_sgpr:
-+      IID = Intrinsic::amdgcn_schedule_sgpr; break;
-+    case AMDGPU::BI__builtin_amdgcn_schedule_agpr:
-+      IID = Intrinsic::amdgcn_schedule_agpr; break;
++    case AMDGPU::BI__builtin_amdgcn_sched_vgpr:
++      IID = Intrinsic::amdgcn_sched_vgpr; break;
++    case AMDGPU::BI__builtin_amdgcn_sched_sgpr:
++      IID = Intrinsic::amdgcn_sched_sgpr; break;
++    case AMDGPU::BI__builtin_amdgcn_sched_agpr:
++      IID = Intrinsic::amdgcn_sched_agpr; break;
 +    default: llvm_unreachable("unexpected builtin");
 +    }
 +    llvm::Function *F = CGM.getIntrinsic(IID, Val->getType());
@@ -69,14 +69,14 @@ index 667c6508040a..eab83b3eb893 100644
      return nullptr;
    }
 diff --git a/clang/lib/Sema/SemaAMDGPU.cpp b/clang/lib/Sema/SemaAMDGPU.cpp
-index 0bda851b0c1c..c1a138110c3e 100644
+index 0bda851b0c1c..a2c46878e723 100644
 --- a/clang/lib/Sema/SemaAMDGPU.cpp
 +++ b/clang/lib/Sema/SemaAMDGPU.cpp
 @@ -448,6 +448,53 @@ bool SemaAMDGPU::CheckAMDGCNBuiltinFunctionCall(unsigned BuiltinID,
                                             /*High=*/0) ||
             SemaRef.BuiltinConstantArgRange(TheCall, /*ArgNum=*/2, /*Low=*/0,
                                             /*High=*/0);
-+  case AMDGPU::BI__builtin_amdgcn_schedule_bank: {
++  case AMDGPU::BI__builtin_amdgcn_sched_bank: {
 +    if (SemaRef.checkArgCountRange(TheCall, 2, 3))
 +      return true;
 +    Expr *DataArg = TheCall->getArg(0);
@@ -95,9 +95,9 @@ index 0bda851b0c1c..c1a138110c3e 100644
 +    TheCall->setType(DataTy);
 +    return SemaRef.BuiltinConstantArgRange(TheCall, 1, 0, 3);
 +  }
-+  case AMDGPU::BI__builtin_amdgcn_schedule_vgpr:
-+  case AMDGPU::BI__builtin_amdgcn_schedule_sgpr:
-+  case AMDGPU::BI__builtin_amdgcn_schedule_agpr: {
++  case AMDGPU::BI__builtin_amdgcn_sched_vgpr:
++  case AMDGPU::BI__builtin_amdgcn_sched_sgpr:
++  case AMDGPU::BI__builtin_amdgcn_sched_agpr: {
 +    if (SemaRef.checkArgCountRange(TheCall, 2, 3))
 +      return true;
 +    Expr *DataArg = TheCall->getArg(0);
@@ -116,9 +116,9 @@ index 0bda851b0c1c..c1a138110c3e 100644
 +    TheCall->setType(DataTy);
 +    int MaxReg;
 +    switch (BuiltinID) {
-+    case AMDGPU::BI__builtin_amdgcn_schedule_vgpr: MaxReg = 1023; break;
-+    case AMDGPU::BI__builtin_amdgcn_schedule_sgpr: MaxReg = 105;  break;
-+    case AMDGPU::BI__builtin_amdgcn_schedule_agpr: MaxReg = 255;  break;
++    case AMDGPU::BI__builtin_amdgcn_sched_vgpr: MaxReg = 1023; break;
++    case AMDGPU::BI__builtin_amdgcn_sched_sgpr: MaxReg = 105;  break;
++    case AMDGPU::BI__builtin_amdgcn_sched_agpr: MaxReg = 255;  break;
 +    default: llvm_unreachable("unexpected builtin");
 +    }
 +    return SemaRef.BuiltinConstantArgRange(TheCall, 1, 0, MaxReg);
@@ -126,11 +126,11 @@ index 0bda851b0c1c..c1a138110c3e 100644
    default:
      return false;
    }
-diff --git a/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-schedule-bank.cl b/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-schedule-bank.cl
+diff --git a/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-sched-bank.cl b/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-sched-bank.cl
 new file mode 100644
-index 000000000000..17fc1f9c37f6
+index 000000000000..69ae4f7f0db8
 --- /dev/null
-+++ b/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-schedule-bank.cl
++++ b/clang/test/CodeGenOpenCL/builtins-amdgcn-gfx1250-sched-bank.cl
 @@ -0,0 +1,71 @@
 +// NOTE: Assertions have been autogenerated by utils/update_cc_test_checks.py
 +// RUN: %clang_cc1 -cl-std=CL2.0 -O0 -triple amdgcn-unknown-unknown -target-cpu gfx1250 -emit-llvm -o - %s | FileCheck %s
@@ -142,72 +142,72 @@ index 000000000000..17fc1f9c37f6
 +typedef float __attribute__((ext_vector_type(2))) float2;
 +typedef float __attribute__((ext_vector_type(4))) float4;
 +
-+// CHECK-LABEL: @test_schedule_bank_i32
-+// CHECK: call i32 @llvm.amdgcn.schedule.bank.i32(i32 %{{.*}}, i32 2)
-+void test_schedule_bank_i32(global int *out, int x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 2, false);
++// CHECK-LABEL: @test_sched_bank_i32
++// CHECK: call i32 @llvm.amdgcn.sched.bank.i32(i32 %{{.*}}, i32 2)
++void test_sched_bank_i32(global int *out, int x) {
++  *out = __builtin_amdgcn_sched_bank(x, 2, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_f32
-+// CHECK: call float @llvm.amdgcn.schedule.bank.f32(float %{{.*}}, i32 3)
-+void test_schedule_bank_f32(global float *out, float x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 3, false);
++// CHECK-LABEL: @test_sched_bank_f32
++// CHECK: call float @llvm.amdgcn.sched.bank.f32(float %{{.*}}, i32 3)
++void test_sched_bank_f32(global float *out, float x) {
++  *out = __builtin_amdgcn_sched_bank(x, 3, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_i64
-+// CHECK: call i64 @llvm.amdgcn.schedule.bank.i64(i64 %{{.*}}, i32 0)
-+void test_schedule_bank_i64(global long *out, long x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 0, false);
++// CHECK-LABEL: @test_sched_bank_i64
++// CHECK: call i64 @llvm.amdgcn.sched.bank.i64(i64 %{{.*}}, i32 0)
++void test_sched_bank_i64(global long *out, long x) {
++  *out = __builtin_amdgcn_sched_bank(x, 0, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_f64_strict
-+// CHECK: call double @llvm.amdgcn.schedule.bank.f64(double %{{.*}}, i32 7)
-+void test_schedule_bank_f64_strict(global double *out, double x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 3, true);
++// CHECK-LABEL: @test_sched_bank_f64_strict
++// CHECK: call double @llvm.amdgcn.sched.bank.f64(double %{{.*}}, i32 7)
++void test_sched_bank_f64_strict(global double *out, double x) {
++  *out = __builtin_amdgcn_sched_bank(x, 3, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_v2i32
-+// CHECK: call <2 x i32> @llvm.amdgcn.schedule.bank.v2i32(<2 x i32> %{{.*}}, i32 1)
-+void test_schedule_bank_v2i32(global int2 *out, int2 x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 1, false);
++// CHECK-LABEL: @test_sched_bank_v2i32
++// CHECK: call <2 x i32> @llvm.amdgcn.sched.bank.v2i32(<2 x i32> %{{.*}}, i32 1)
++void test_sched_bank_v2i32(global int2 *out, int2 x) {
++  *out = __builtin_amdgcn_sched_bank(x, 1, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_v4i32_strict
-+// CHECK: call <4 x i32> @llvm.amdgcn.schedule.bank.v4i32(<4 x i32> %{{.*}}, i32 5)
-+void test_schedule_bank_v4i32_strict(global int4 *out, int4 x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 1, true);
++// CHECK-LABEL: @test_sched_bank_v4i32_strict
++// CHECK: call <4 x i32> @llvm.amdgcn.sched.bank.v4i32(<4 x i32> %{{.*}}, i32 5)
++void test_sched_bank_v4i32_strict(global int4 *out, int4 x) {
++  *out = __builtin_amdgcn_sched_bank(x, 1, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_v8i32_strict
-+// CHECK: call <8 x i32> @llvm.amdgcn.schedule.bank.v8i32(<8 x i32> %{{.*}}, i32 6)
-+void test_schedule_bank_v8i32_strict(global int8 *out, int8 x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 2, true);
++// CHECK-LABEL: @test_sched_bank_v8i32_strict
++// CHECK: call <8 x i32> @llvm.amdgcn.sched.bank.v8i32(<8 x i32> %{{.*}}, i32 6)
++void test_sched_bank_v8i32_strict(global int8 *out, int8 x) {
++  *out = __builtin_amdgcn_sched_bank(x, 2, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_v4f32_strict
-+// CHECK: call <4 x float> @llvm.amdgcn.schedule.bank.v4f32(<4 x float> %{{.*}}, i32 4)
-+void test_schedule_bank_v4f32_strict(global float4 *out, float4 x) {
-+  *out = __builtin_amdgcn_schedule_bank(x, 0, true);
++// CHECK-LABEL: @test_sched_bank_v4f32_strict
++// CHECK: call <4 x float> @llvm.amdgcn.sched.bank.v4f32(<4 x float> %{{.*}}, i32 4)
++void test_sched_bank_v4f32_strict(global float4 *out, float4 x) {
++  *out = __builtin_amdgcn_sched_bank(x, 0, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_default_strict
-+// CHECK: call i32 @llvm.amdgcn.schedule.bank.i32(i32 %{{.*}}, i32 6)
-+void test_schedule_bank_default_strict(global int *out, int x) {
++// CHECK-LABEL: @test_sched_bank_default_strict
++// CHECK: call i32 @llvm.amdgcn.sched.bank.i32(i32 %{{.*}}, i32 6)
++void test_sched_bank_default_strict(global int *out, int x) {
 +  // 2 args: strict=true by default, bank 2 → encoded as 6
-+  *out = __builtin_amdgcn_schedule_bank(x, 2);
++  *out = __builtin_amdgcn_sched_bank(x, 2);
 +}
 +
-+// CHECK-LABEL: @test_schedule_bank_explicit_soft
-+// CHECK: call i32 @llvm.amdgcn.schedule.bank.i32(i32 %{{.*}}, i32 2)
-+void test_schedule_bank_explicit_soft(global int *out, int x) {
++// CHECK-LABEL: @test_sched_bank_explicit_soft
++// CHECK: call i32 @llvm.amdgcn.sched.bank.i32(i32 %{{.*}}, i32 2)
++void test_sched_bank_explicit_soft(global int *out, int x) {
 +  // 3 args: explicit soft, bank 2 → encoded as 2
-+  *out = __builtin_amdgcn_schedule_bank(x, 2, false);
++  *out = __builtin_amdgcn_sched_bank(x, 2, false);
 +}
-diff --git a/clang/test/CodeGenOpenCL/builtins-amdgcn-schedule-gpr.cl b/clang/test/CodeGenOpenCL/builtins-amdgcn-schedule-gpr.cl
+diff --git a/clang/test/CodeGenOpenCL/builtins-amdgcn-sched-gpr.cl b/clang/test/CodeGenOpenCL/builtins-amdgcn-sched-gpr.cl
 new file mode 100644
-index 000000000000..e8bef703f597
+index 000000000000..2d889f27f38a
 --- /dev/null
-+++ b/clang/test/CodeGenOpenCL/builtins-amdgcn-schedule-gpr.cl
++++ b/clang/test/CodeGenOpenCL/builtins-amdgcn-sched-gpr.cl
 @@ -0,0 +1,68 @@
 +// NOTE: Assertions have been autogenerated by utils/update_cc_test_checks.py
 +// RUN: %clang_cc1 -cl-std=CL2.0 -O0 -triple amdgcn-unknown-unknown -target-cpu gfx1250 -emit-llvm -o - %s | FileCheck %s
@@ -219,66 +219,66 @@ index 000000000000..e8bef703f597
 +typedef float __attribute__((ext_vector_type(2))) float2;
 +typedef float __attribute__((ext_vector_type(4))) float4;
 +
-+// === schedule_vgpr tests ===
++// === sched_vgpr tests ===
 +
-+// CHECK-LABEL: @test_schedule_vgpr_i32
-+// CHECK: call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %{{.*}}, i32 42, i32 0)
-+void test_schedule_vgpr_i32(global int *out, int x) {
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 42, false);
++// CHECK-LABEL: @test_sched_vgpr_i32
++// CHECK: call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %{{.*}}, i32 42, i32 0)
++void test_sched_vgpr_i32(global int *out, int x) {
++  *out = __builtin_amdgcn_sched_vgpr(x, 42, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_vgpr_f32_strict
-+// CHECK: call float @llvm.amdgcn.schedule.vgpr.f32(float %{{.*}}, i32 100, i32 1)
-+void test_schedule_vgpr_f32_strict(global float *out, float x) {
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 100, true);
++// CHECK-LABEL: @test_sched_vgpr_f32_strict
++// CHECK: call float @llvm.amdgcn.sched.vgpr.f32(float %{{.*}}, i32 100, i32 1)
++void test_sched_vgpr_f32_strict(global float *out, float x) {
++  *out = __builtin_amdgcn_sched_vgpr(x, 100, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_vgpr_i64
-+// CHECK: call i64 @llvm.amdgcn.schedule.vgpr.i64(i64 %{{.*}}, i32 200, i32 0)
-+void test_schedule_vgpr_i64(global long *out, long x) {
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 200, false);
++// CHECK-LABEL: @test_sched_vgpr_i64
++// CHECK: call i64 @llvm.amdgcn.sched.vgpr.i64(i64 %{{.*}}, i32 200, i32 0)
++void test_sched_vgpr_i64(global long *out, long x) {
++  *out = __builtin_amdgcn_sched_vgpr(x, 200, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_vgpr_v2i32
-+// CHECK: call <2 x i32> @llvm.amdgcn.schedule.vgpr.v2i32(<2 x i32> %{{.*}}, i32 50, i32 1)
-+void test_schedule_vgpr_v2i32(global int2 *out, int2 x) {
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 50, true);
++// CHECK-LABEL: @test_sched_vgpr_v2i32
++// CHECK: call <2 x i32> @llvm.amdgcn.sched.vgpr.v2i32(<2 x i32> %{{.*}}, i32 50, i32 1)
++void test_sched_vgpr_v2i32(global int2 *out, int2 x) {
++  *out = __builtin_amdgcn_sched_vgpr(x, 50, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_vgpr_v4i32
-+// CHECK: call <4 x i32> @llvm.amdgcn.schedule.vgpr.v4i32(<4 x i32> %{{.*}}, i32 512, i32 1)
-+void test_schedule_vgpr_v4i32(global int4 *out, int4 x) {
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 512, true);
++// CHECK-LABEL: @test_sched_vgpr_v4i32
++// CHECK: call <4 x i32> @llvm.amdgcn.sched.vgpr.v4i32(<4 x i32> %{{.*}}, i32 512, i32 1)
++void test_sched_vgpr_v4i32(global int4 *out, int4 x) {
++  *out = __builtin_amdgcn_sched_vgpr(x, 512, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_vgpr_default_strict
-+// CHECK: call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %{{.*}}, i32 42, i32 1)
-+void test_schedule_vgpr_default_strict(global int *out, int x) {
++// CHECK-LABEL: @test_sched_vgpr_default_strict
++// CHECK: call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %{{.*}}, i32 42, i32 1)
++void test_sched_vgpr_default_strict(global int *out, int x) {
 +  // 2 args: strict=true by default
-+  *out = __builtin_amdgcn_schedule_vgpr(x, 42);
++  *out = __builtin_amdgcn_sched_vgpr(x, 42);
 +}
 +
-+// === schedule_sgpr tests ===
++// === sched_sgpr tests ===
 +
-+// CHECK-LABEL: @test_schedule_sgpr_i32
-+// CHECK: call i32 @llvm.amdgcn.schedule.sgpr.i32(i32 %{{.*}}, i32 10, i32 0)
-+void test_schedule_sgpr_i32(global int *out, int x) {
-+  *out = __builtin_amdgcn_schedule_sgpr(x, 10, false);
++// CHECK-LABEL: @test_sched_sgpr_i32
++// CHECK: call i32 @llvm.amdgcn.sched.sgpr.i32(i32 %{{.*}}, i32 10, i32 0)
++void test_sched_sgpr_i32(global int *out, int x) {
++  *out = __builtin_amdgcn_sched_sgpr(x, 10, false);
 +}
 +
-+// CHECK-LABEL: @test_schedule_sgpr_i32_strict
-+// CHECK: call i32 @llvm.amdgcn.schedule.sgpr.i32(i32 %{{.*}}, i32 50, i32 1)
-+void test_schedule_sgpr_i32_strict(global int *out, int x) {
-+  *out = __builtin_amdgcn_schedule_sgpr(x, 50, true);
++// CHECK-LABEL: @test_sched_sgpr_i32_strict
++// CHECK: call i32 @llvm.amdgcn.sched.sgpr.i32(i32 %{{.*}}, i32 50, i32 1)
++void test_sched_sgpr_i32_strict(global int *out, int x) {
++  *out = __builtin_amdgcn_sched_sgpr(x, 50, true);
 +}
 +
-+// CHECK-LABEL: @test_schedule_sgpr_default_strict
-+// CHECK: call i32 @llvm.amdgcn.schedule.sgpr.i32(i32 %{{.*}}, i32 20, i32 1)
-+void test_schedule_sgpr_default_strict(global int *out, int x) {
-+  *out = __builtin_amdgcn_schedule_sgpr(x, 20);
++// CHECK-LABEL: @test_sched_sgpr_default_strict
++// CHECK: call i32 @llvm.amdgcn.sched.sgpr.i32(i32 %{{.*}}, i32 20, i32 1)
++void test_sched_sgpr_default_strict(global int *out, int x) {
++  *out = __builtin_amdgcn_sched_sgpr(x, 20);
 +}
 diff --git a/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250-param.cl b/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250-param.cl
-index 8c60b567ddc2..37bb03695745 100644
+index 8c60b567ddc2..3d5dc44eeed5 100644
 --- a/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250-param.cl
 +++ b/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250-param.cl
 @@ -216,3 +216,12 @@ void test_pk_add_min_max(global short2 *out, global ushort2 *uout, short2 a, sho
@@ -286,26 +286,26 @@ index 8c60b567ddc2..37bb03695745 100644
    *uout = __builtin_amdgcn_pk_add_min_u16(ua, ub, uc, clamp); // expected-error {{'__builtin_amdgcn_pk_add_min_u16' must be a constant integer}}
  }
 +
-+void test_schedule_bank_non_const(int x, int b) {
-+  __builtin_amdgcn_schedule_bank(x, b, false); // expected-error {{'__builtin_amdgcn_schedule_bank' must be a constant integer}}
++void test_sched_bank_non_const(int x, int b) {
++  __builtin_amdgcn_sched_bank(x, b, false); // expected-error {{'__builtin_amdgcn_sched_bank' must be a constant integer}}
 +}
 +
-+void test_schedule_bank_out_of_range(int x) {
-+  __builtin_amdgcn_schedule_bank(x, 4, false); // expected-error {{argument value 4 is outside the valid range [0, 3]}}
-+  __builtin_amdgcn_schedule_bank(x, -1, true); // expected-error {{argument value -1 is outside the valid range [0, 3]}}
++void test_sched_bank_out_of_range(int x) {
++  __builtin_amdgcn_sched_bank(x, 4, false); // expected-error {{argument value 4 is outside the valid range [0, 3]}}
++  __builtin_amdgcn_sched_bank(x, -1, true); // expected-error {{argument value -1 is outside the valid range [0, 3]}}
 +}
 diff --git a/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250.cl b/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250.cl
-index 87110d4d977d..01bb27927895 100644
+index 87110d4d977d..4a973d215919 100644
 --- a/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250.cl
 +++ b/clang/test/SemaOpenCL/builtins-amdgcn-error-gfx1250.cl
 @@ -20,4 +20,5 @@ void test(global int* out, global short2 *s2out, global ushort2 *us2out,
    *us2out = __builtin_amdgcn_pk_add_max_u16(us2a, us2b, us2c, true); // expected-error {{'__builtin_amdgcn_pk_add_max_u16' needs target feature pk-add-min-max-insts}}
    *s2out = __builtin_amdgcn_pk_add_min_i16(s2a, s2b, s2c, false); // expected-error {{'__builtin_amdgcn_pk_add_min_i16' needs target feature pk-add-min-max-insts}}
    *us2out = __builtin_amdgcn_pk_add_min_u16(us2a, us2b, us2c, true); // expected-error {{'__builtin_amdgcn_pk_add_min_u16' needs target feature pk-add-min-max-insts}}
-+  *out = __builtin_amdgcn_schedule_bank(a, 2, false); // expected-error {{'__builtin_amdgcn_schedule_bank' needs target feature gfx1250-insts}}
++  *out = __builtin_amdgcn_sched_bank(a, 2, false); // expected-error {{'__builtin_amdgcn_sched_bank' needs target feature gfx1250-insts}}
  }
 diff --git a/llvm/include/llvm/IR/IntrinsicsAMDGPU.td b/llvm/include/llvm/IR/IntrinsicsAMDGPU.td
-index b321b9155a19..805bdf5d9d86 100644
+index b321b9155a19..935ab09d09c5 100644
 --- a/llvm/include/llvm/IR/IntrinsicsAMDGPU.td
 +++ b/llvm/include/llvm/IR/IntrinsicsAMDGPU.td
 @@ -4379,4 +4379,38 @@ def int_amdgcn_addrspacecast_nonnull : DefaultAttrsIntrinsic<
@@ -318,58 +318,58 @@ index b321b9155a19..805bdf5d9d86 100644
 +// compile-time constant in [0, 3]:
 +//   bank 0 = v0-v255, bank 1 = v256-v511, bank 2 = v512-v767, bank 3 = v768-v1023.
 +// This is an identity function at the IR level; the bank argument is consumed by
-+// the pre-RA AMDGPUScheduleBank pass which attaches a register allocation hint.
++// the pre-RA AMDGPUSchedBank pass which attaches a register allocation hint.
 +// The hint is advisory: the allocator honors it only when the bank has free
 +// registers, and never spills to satisfy it.
-+def int_amdgcn_schedule_bank : DefaultAttrsIntrinsic<
++def int_amdgcn_sched_bank : DefaultAttrsIntrinsic<
 +  [llvm_any_ty], [LLVMMatchType<0>, llvm_i32_ty],
 +  [IntrNoMem, IntrSpeculatable, IntrWillReturn, ImmArg<ArgIndex<1>>]>;
 +
 +// Hint the register allocator to place the result in a specific VGPR/SGPR/AGPR
 +// register number. These are identity functions at the IR level; the register
-+// number and strict flag arguments are consumed by the pre-RA AMDGPUScheduleBank
++// number and strict flag arguments are consumed by the pre-RA AMDGPUSchedBank
 +// pass which attaches a register allocation hint.
 +//   regnum: the target HW register index (e.g., 42 means v42/s42/a42).
 +//   strict: 1 = allocator must obey if possible, 0 = advisory hint.
 +// For wide values (64/128/256 bit), regnum is the starting register index.
-+def int_amdgcn_schedule_vgpr : DefaultAttrsIntrinsic<
++def int_amdgcn_sched_vgpr : DefaultAttrsIntrinsic<
 +  [llvm_any_ty], [LLVMMatchType<0>, llvm_i32_ty, llvm_i32_ty],
 +  [IntrNoMem, IntrSpeculatable, IntrWillReturn,
 +   ImmArg<ArgIndex<1>>, ImmArg<ArgIndex<2>>]>;
 +
-+def int_amdgcn_schedule_sgpr : DefaultAttrsIntrinsic<
++def int_amdgcn_sched_sgpr : DefaultAttrsIntrinsic<
 +  [llvm_any_ty], [LLVMMatchType<0>, llvm_i32_ty, llvm_i32_ty],
 +  [IntrNoMem, IntrSpeculatable, IntrWillReturn,
 +   ImmArg<ArgIndex<1>>, ImmArg<ArgIndex<2>>]>;
 +
-+def int_amdgcn_schedule_agpr : DefaultAttrsIntrinsic<
++def int_amdgcn_sched_agpr : DefaultAttrsIntrinsic<
 +  [llvm_any_ty], [LLVMMatchType<0>, llvm_i32_ty, llvm_i32_ty],
 +  [IntrNoMem, IntrSpeculatable, IntrWillReturn,
 +   ImmArg<ArgIndex<1>>, ImmArg<ArgIndex<2>>]>;
  }
 diff --git a/llvm/lib/Target/AMDGPU/AMDGPU.h b/llvm/lib/Target/AMDGPU/AMDGPU.h
-index 9fe4123a27bb..1b2f7d2bce13 100644
+index 9fe4123a27bb..cfe671d8256e 100644
 --- a/llvm/lib/Target/AMDGPU/AMDGPU.h
 +++ b/llvm/lib/Target/AMDGPU/AMDGPU.h
 @@ -182,6 +182,9 @@ private:
  void initializeAMDGPUPrepareAGPRAllocLegacyPass(PassRegistry &);
  extern char &AMDGPUPrepareAGPRAllocLegacyID;
  
-+void initializeAMDGPUScheduleBankPass(PassRegistry &);
-+extern char &AMDGPUScheduleBankID;
++void initializeAMDGPUSchedBankPass(PassRegistry &);
++extern char &AMDGPUSchedBankID;
 +
  void initializeAMDGPUReserveWWMRegsLegacyPass(PassRegistry &);
  extern char &AMDGPUReserveWWMRegsLegacyID;
  
 diff --git a/llvm/lib/Target/AMDGPU/AMDGPUISelDAGToDAG.cpp b/llvm/lib/Target/AMDGPU/AMDGPUISelDAGToDAG.cpp
-index 744bde043e16..4d7f77d045ff 100644
+index 744bde043e16..257461ba3655 100644
 --- a/llvm/lib/Target/AMDGPU/AMDGPUISelDAGToDAG.cpp
 +++ b/llvm/lib/Target/AMDGPU/AMDGPUISelDAGToDAG.cpp
 @@ -3319,6 +3319,88 @@ void AMDGPUDAGToDAGISel::SelectINTRINSIC_WO_CHAIN(SDNode *N) {
    case Intrinsic::amdgcn_interp_p1_f16:
      SelectInterpP1F16(N);
      return;
-+  case Intrinsic::amdgcn_schedule_bank: {
++  case Intrinsic::amdgcn_sched_bank: {
 +    SDValue Src = N->getOperand(1);
 +    auto *BankC = dyn_cast<ConstantSDNode>(N->getOperand(2));
 +    // Bank must be a constant; fall back (and error) otherwise.
@@ -394,9 +394,9 @@ index 744bde043e16..4d7f77d045ff 100644
 +    CurDAG->SelectNodeTo(N, PseudoOpc, N->getVTList(), {Src, BankImm});
 +    return;
 +  }
-+  case Intrinsic::amdgcn_schedule_vgpr:
-+  case Intrinsic::amdgcn_schedule_sgpr:
-+  case Intrinsic::amdgcn_schedule_agpr: {
++  case Intrinsic::amdgcn_sched_vgpr:
++  case Intrinsic::amdgcn_sched_sgpr:
++  case Intrinsic::amdgcn_sched_agpr: {
 +    SDValue Src = N->getOperand(1);
 +    auto *RegNumC = dyn_cast<ConstantSDNode>(N->getOperand(2));
 +    auto *StrictC = dyn_cast<ConstantSDNode>(N->getOperand(3));
@@ -406,7 +406,7 @@ index 744bde043e16..4d7f77d045ff 100644
 +    }
 +    unsigned Bits = N->getValueType(0).getSizeInBits();
 +    unsigned PseudoOpc;
-+    if (IntrID == Intrinsic::amdgcn_schedule_vgpr) {
++    if (IntrID == Intrinsic::amdgcn_sched_vgpr) {
 +      switch (Bits) {
 +      case 32:  PseudoOpc = AMDGPU::V_SCHEDULE_VGPR_B32;  break;
 +      case 64:  PseudoOpc = AMDGPU::V_SCHEDULE_VGPR_B64;  break;
@@ -418,7 +418,7 @@ index 744bde043e16..4d7f77d045ff 100644
 +        CurDAG->RemoveDeadNode(N);
 +        return;
 +      }
-+    } else if (IntrID == Intrinsic::amdgcn_schedule_sgpr) {
++    } else if (IntrID == Intrinsic::amdgcn_sched_sgpr) {
 +      switch (Bits) {
 +      case 32:  PseudoOpc = AMDGPU::S_SCHEDULE_SGPR_B32;  break;
 +      case 64:  PseudoOpc = AMDGPU::S_SCHEDULE_SGPR_B64;  break;
@@ -455,24 +455,24 @@ index 744bde043e16..4d7f77d045ff 100644
    case Intrinsic::amdgcn_permlane32_swap: {
      if ((IntrID == Intrinsic::amdgcn_permlane16_swap &&
 diff --git a/llvm/lib/Target/AMDGPU/AMDGPUPassRegistry.def b/llvm/lib/Target/AMDGPU/AMDGPUPassRegistry.def
-index 6da139ea0b59..11231e499823 100644
+index 6da139ea0b59..bf861d8a6d64 100644
 --- a/llvm/lib/Target/AMDGPU/AMDGPUPassRegistry.def
 +++ b/llvm/lib/Target/AMDGPU/AMDGPUPassRegistry.def
 @@ -130,6 +130,7 @@ MACHINE_FUNCTION_PASS("amdgpu-set-wave-priority", AMDGPUSetWavePriorityPass())
  MACHINE_FUNCTION_PASS("amdgpu-pre-ra-optimizations", GCNPreRAOptimizationsPass())
  MACHINE_FUNCTION_PASS("amdgpu-preload-kern-arg-prolog", AMDGPUPreloadKernArgPrologPass())
  MACHINE_FUNCTION_PASS("amdgpu-prepare-agpr-alloc", AMDGPUPrepareAGPRAllocPass())
-+MACHINE_FUNCTION_PASS("amdgpu-schedule-bank", AMDGPUScheduleBankPass())
++MACHINE_FUNCTION_PASS("amdgpu-sched-bank", AMDGPUSchedBankPass())
  MACHINE_FUNCTION_PASS("amdgpu-nsa-reassign", GCNNSAReassignPass())
  MACHINE_FUNCTION_PASS("amdgpu-wait-sgpr-hazards", AMDGPUWaitSGPRHazardsPass())
  MACHINE_FUNCTION_PASS("gcn-create-vopd", GCNCreateVOPDPass())
-diff --git a/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.cpp b/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.cpp
+diff --git a/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.cpp b/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.cpp
 new file mode 100644
-index 000000000000..082d4ca9f4a8
+index 000000000000..de712d4569f8
 --- /dev/null
-+++ b/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.cpp
++++ b/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.cpp
 @@ -0,0 +1,266 @@
-+//===-- AMDGPUScheduleBank.cpp --------------------------------------------===//
++//===-- AMDGPUSchedBank.cpp --------------------------------------------===//
 +//
 +// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 +// See https://llvm.org/LICENSE.txt for license information.
@@ -481,7 +481,7 @@ index 000000000000..082d4ca9f4a8
 +//===----------------------------------------------------------------------===//
 +//
 +/// \file
-+/// Lower the V_SCHEDULE_BANK_B* pseudos produced from llvm.amdgcn.schedule.bank,
++/// Lower the V_SCHEDULE_BANK_B* pseudos produced from llvm.amdgcn.sched.bank,
 +/// and the V_SCHEDULE_VGPR_B*, S_SCHEDULE_SGPR_B*, A_SCHEDULE_AGPR_B* pseudos
 +/// from llvm.amdgcn.schedule.{vgpr,sgpr,agpr}.
 +///
@@ -499,7 +499,7 @@ index 000000000000..082d4ca9f4a8
 +//
 +//===----------------------------------------------------------------------===//
 +
-+#include "AMDGPUScheduleBank.h"
++#include "AMDGPUSchedBank.h"
 +#include "AMDGPU.h"
 +#include "GCNSubtarget.h"
 +#include "SIInstrInfo.h"
@@ -512,7 +512,7 @@ index 000000000000..082d4ca9f4a8
 +
 +using namespace llvm;
 +
-+#define DEBUG_TYPE "amdgpu-schedule-bank"
++#define DEBUG_TYPE "amdgpu-sched-bank"
 +
 +/// Classification of schedule-hint pseudos.
 +enum ScheduleHintKind { SHK_None, SHK_Bank, SHK_VGPR, SHK_SGPR, SHK_AGPR };
@@ -628,7 +628,7 @@ index 000000000000..082d4ca9f4a8
 +        HintKind = Strict ? AMDGPURI::StrictBankHint : AMDGPURI::BankHint;
 +        HintValue = Bank;
 +
-+        LLVM_DEBUG(dbgs() << "  schedule.bank: " << printReg(DstReg) << " <- "
++        LLVM_DEBUG(dbgs() << "  sched.bank: " << printReg(DstReg) << " <- "
 +                          << printReg(SrcReg) << " bank " << Bank
 +                          << " strict " << Strict << '\n');
 +      } else {
@@ -703,17 +703,17 @@ index 000000000000..082d4ca9f4a8
 +
 +namespace {
 +
-+class AMDGPUScheduleBank : public MachineFunctionPass {
++class AMDGPUSchedBank : public MachineFunctionPass {
 +public:
 +  static char ID;
 +
-+  AMDGPUScheduleBank() : MachineFunctionPass(ID) {}
++  AMDGPUSchedBank() : MachineFunctionPass(ID) {}
 +
 +  bool runOnMachineFunction(MachineFunction &MF) override {
 +    return runScheduleBank(MF);
 +  }
 +
-+  StringRef getPassName() const override { return "AMDGPU Schedule Bank"; }
++  StringRef getPassName() const override { return "AMDGPU Sched Bank"; }
 +
 +  void getAnalysisUsage(AnalysisUsage &AU) const override {
 +    AU.setPreservesCFG();
@@ -723,28 +723,28 @@ index 000000000000..082d4ca9f4a8
 +
 +} // end anonymous namespace
 +
-+INITIALIZE_PASS(AMDGPUScheduleBank, DEBUG_TYPE, "AMDGPU Schedule Bank",
++INITIALIZE_PASS(AMDGPUSchedBank, DEBUG_TYPE, "AMDGPU Sched Bank",
 +                false, false)
 +
-+char AMDGPUScheduleBank::ID = 0;
++char AMDGPUSchedBank::ID = 0;
 +
-+char &llvm::AMDGPUScheduleBankID = AMDGPUScheduleBank::ID;
++char &llvm::AMDGPUSchedBankID = AMDGPUSchedBank::ID;
 +
 +PreservedAnalyses
-+AMDGPUScheduleBankPass::run(MachineFunction &MF,
++AMDGPUSchedBankPass::run(MachineFunction &MF,
 +                           MachineFunctionAnalysisManager &MFAM) {
 +  if (!runScheduleBank(MF))
 +    return PreservedAnalyses::all();
 +
 +  return getMachineFunctionPassPreservedAnalyses().preserveSet<CFGAnalyses>();
 +}
-diff --git a/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.h b/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.h
+diff --git a/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.h b/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.h
 new file mode 100644
-index 000000000000..79d6bab6e055
+index 000000000000..3a34c7933d6a
 --- /dev/null
-+++ b/llvm/lib/Target/AMDGPU/AMDGPUScheduleBank.h
++++ b/llvm/lib/Target/AMDGPU/AMDGPUSchedBank.h
 @@ -0,0 +1,23 @@
-+//===- AMDGPUScheduleBank.h -------------------------------------*- C++- *-===//
++//===- AMDGPUSchedBank.h -------------------------------------*- C++- *-===//
 +//
 +// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
 +// See https://llvm.org/LICENSE.txt for license information.
@@ -758,8 +758,8 @@ index 000000000000..79d6bab6e055
 +#include "llvm/CodeGen/MachinePassManager.h"
 +
 +namespace llvm {
-+class AMDGPUScheduleBankPass
-+    : public OptionalPassInfoMixin<AMDGPUScheduleBankPass> {
++class AMDGPUSchedBankPass
++    : public OptionalPassInfoMixin<AMDGPUSchedBankPass> {
 +public:
 +  PreservedAnalyses run(MachineFunction &MF,
 +                        MachineFunctionAnalysisManager &MFAM);
@@ -768,14 +768,14 @@ index 000000000000..79d6bab6e055
 +
 +#endif // LLVM_LIB_TARGET_AMDGPU_AMDGPUSCHEDULEBANK_H
 diff --git a/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp b/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
-index 9176adff039d..b1d1ab68990c 100644
+index 9176adff039d..da9e48236702 100644
 --- a/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
 +++ b/llvm/lib/Target/AMDGPU/AMDGPUTargetMachine.cpp
 @@ -35,6 +35,7 @@
  #include "AMDGPURemoveIncompatibleFunctions.h"
  #include "AMDGPUReserveWWMRegs.h"
  #include "AMDGPUResourceUsageAnalysis.h"
-+#include "AMDGPUScheduleBank.h"
++#include "AMDGPUSchedBank.h"
  #include "AMDGPUSplitModule.h"
  #include "AMDGPUTargetObjectFile.h"
  #include "AMDGPUTargetTransformInfo.h"
@@ -1071,7 +1071,7 @@ index 9176adff039d..b1d1ab68990c 100644
    initializeAMDGPUAsmPrinterPass(*PR);
    initializeAMDGPUDAGToDAGISelLegacyPass(*PR);
    initializeAMDGPUPrepareAGPRAllocLegacyPass(*PR);
-+  initializeAMDGPUScheduleBankPass(*PR);
++  initializeAMDGPUSchedBankPass(*PR);
    initializeGCNDPPCombineLegacyPass(*PR);
    initializeSILowerI1CopiesLegacyPass(*PR);
    initializeAMDGPUGlobalISelDivergenceLoweringLegacyPass(*PR);
@@ -1119,7 +1119,7 @@ index 9176adff039d..b1d1ab68990c 100644
  }
  
  void GCNPassConfig::addPreRegAlloc() {
-+  addPass(&AMDGPUScheduleBankID);
++  addPass(&AMDGPUSchedBankID);
    if (getOptLevel() != CodeGenOptLevel::None)
      addPass(&AMDGPUPrepareAGPRAllocLegacyID);
  }
@@ -1161,24 +1161,24 @@ index 9176adff039d..b1d1ab68990c 100644
  
 -void AMDGPUCodeGenPassBuilder::addPreRegAlloc(PassManagerWrapper &PMW) {
 +void AMDGPUCodeGenPassBuilder::addPreRegAlloc(PassManagerWrapper &PMW) const {
-+  addMachineFunctionPass(AMDGPUScheduleBankPass(), PMW);
++  addMachineFunctionPass(AMDGPUSchedBankPass(), PMW);
    if (getOptLevel() != CodeGenOptLevel::None)
      addMachineFunctionPass(AMDGPUPrepareAGPRAllocPass(), PMW);
  }
 diff --git a/llvm/lib/Target/AMDGPU/CMakeLists.txt b/llvm/lib/Target/AMDGPU/CMakeLists.txt
-index b7e679a69a80..71c8611e7a72 100644
+index b7e679a69a80..c93c322eb785 100644
 --- a/llvm/lib/Target/AMDGPU/CMakeLists.txt
 +++ b/llvm/lib/Target/AMDGPU/CMakeLists.txt
 @@ -80,6 +80,7 @@ add_llvm_target(AMDGPUCodeGen
    AMDGPULowerKernelAttributes.cpp
    AMDGPULowerModuleLDSPass.cpp
    AMDGPUPrepareAGPRAlloc.cpp
-+  AMDGPUScheduleBank.cpp
++  AMDGPUSchedBank.cpp
    AMDGPULowerExecSync.cpp
    AMDGPUSwLowerLDS.cpp
    AMDGPUMachineFunctionInfo.cpp
 diff --git a/llvm/lib/Target/AMDGPU/SIInstructions.td b/llvm/lib/Target/AMDGPU/SIInstructions.td
-index c2fe75037152..41a919f5221f 100644
+index c2fe75037152..83803e126538 100644
 --- a/llvm/lib/Target/AMDGPU/SIInstructions.td
 +++ b/llvm/lib/Target/AMDGPU/SIInstructions.td
 @@ -129,6 +129,39 @@ def V_CNDMASK_B64_PSEUDO : VOP3Common <(outs VReg_64:$vdst),
@@ -1186,8 +1186,8 @@ index c2fe75037152..41a919f5221f 100644
  }
  
 +// VGPR bank hint pseudos carrying a target bank number in [0, 3]. These are
-+// identity copies produced by lowering llvm.amdgcn.schedule.bank. A pre-RA pass
-+// (AMDGPUScheduleBank) reads the bank operand, sets a register allocation hint
++// identity copies produced by lowering llvm.amdgcn.sched.bank. A pre-RA pass
++// (AMDGPUSchedBank) reads the bank operand, sets a register allocation hint
 +// on the destination vreg, and replaces the pseudo with a COPY.
 +let isAsCheapAsAMove = 1, isReMaterializable = 1, hasSideEffects = 0,
 +    mayLoad = 0, mayStore = 0, Size = 0 in {
@@ -1202,7 +1202,7 @@ index c2fe75037152..41a919f5221f 100644
 +}
 +
 +// Exact VGPR register hint pseudos. Identity copies carrying a target VGPR
-+// register number and strict flag. The pre-RA AMDGPUScheduleBank pass reads
++// register number and strict flag. The pre-RA AMDGPUSchedBank pass reads
 +// these operands, sets a register allocation hint, and replaces with COPY.
 +let isAsCheapAsAMove = 1, isReMaterializable = 1, hasSideEffects = 0,
 +    mayLoad = 0, mayStore = 0, Size = 0 in {
@@ -1260,7 +1260,7 @@ index c2fe75037152..41a919f5221f 100644
    (outs unknown:$dst), (ins unknown:$src)> {
    let hasSideEffects = 0;
 diff --git a/llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp b/llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp
-index 2b0d9fd38079..70b9d979fc74 100644
+index 2b0d9fd38079..7dee2c3ed7c7 100644
 --- a/llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp
 +++ b/llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp
 @@ -11,13 +11,13 @@
@@ -1300,7 +1300,7 @@ index 2b0d9fd38079..70b9d979fc74 100644
  
 +static cl::opt<bool> StrictVGPRBankHints(
 +    "amdgpu-strict-vgpr-bank-hints",
-+    cl::desc("Restrict schedule.bank values to the requested VGPR bank"),
++    cl::desc("Restrict sched.bank values to the requested VGPR bank"),
 +    cl::Hidden, cl::init(false));
 +
  std::array<std::vector<int16_t>, 32> SIRegisterInfo::RegSplitParts;
@@ -3655,7 +3655,7 @@ index 2b0d9fd38079..70b9d979fc74 100644
 +  }
 +  case AMDGPURI::BankHint:
 +  case AMDGPURI::StrictBankHint: {
-+    // Absolute bank preference from llvm.amdgcn.schedule.bank. The bank number
++    // Absolute bank preference from llvm.amdgcn.sched.bank. The bank number
 +    // (0-3) is carried in Hint.second. Prefer physregs whose HW index falls in
 +    // the requested 256-register bank. Advisory only: we return false so the
 +    // default order still applies when the bank is full.
@@ -3755,22 +3755,22 @@ index e464c9334ffe..f030019ef82f 100644
  
  } // end namespace AMDGPURI
  
-diff --git a/llvm/test/CodeGen/AMDGPU/schedule-bank-hints.mir b/llvm/test/CodeGen/AMDGPU/schedule-bank-hints.mir
+diff --git a/llvm/test/CodeGen/AMDGPU/sched-bank-hints.mir b/llvm/test/CodeGen/AMDGPU/sched-bank-hints.mir
 new file mode 100644
-index 000000000000..2ba66444e22d
+index 000000000000..b1b5b9bc054f
 --- /dev/null
-+++ b/llvm/test/CodeGen/AMDGPU/schedule-bank-hints.mir
++++ b/llvm/test/CodeGen/AMDGPU/sched-bank-hints.mir
 @@ -0,0 +1,35 @@
-+# RUN: llc -mtriple=amdgcn -mcpu=gfx1250 -run-pass=amdgpu-schedule-bank -o - %s | FileCheck %s
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1250 -run-pass=amdgpu-sched-bank -o - %s | FileCheck %s
 +
-+# The AMDGPUScheduleBank pass attaches a bank register-allocation hint (not
++# The AMDGPUSchedBank pass attaches a bank register-allocation hint (not
 +# printed in MIR) and lowers each V_SCHEDULE_BANK_B* pseudo to a plain COPY.
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_bank_b32
++# CHECK-LABEL: name: lower_sched_bank_b32
 +# CHECK: %1:vgpr_32 = COPY %0
 +# CHECK-NOT: V_SCHEDULE_BANK_B32
-+name: lower_schedule_bank_b32
++name: lower_sched_bank_b32
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3783,10 +3783,10 @@ index 000000000000..2ba66444e22d
 +...
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_bank_b64
++# CHECK-LABEL: name: lower_sched_bank_b64
 +# CHECK: %1:vreg_64_align2 = COPY %0
 +# CHECK-NOT: V_SCHEDULE_BANK_B64
-+name: lower_schedule_bank_b64
++name: lower_sched_bank_b64
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3796,20 +3796,20 @@ index 000000000000..2ba66444e22d
 +    $vgpr0_vgpr1 = COPY %1
 +    SI_RETURN_TO_EPILOG $vgpr0_vgpr1
 +...
-diff --git a/llvm/test/CodeGen/AMDGPU/schedule-bank.ll b/llvm/test/CodeGen/AMDGPU/schedule-bank.ll
+diff --git a/llvm/test/CodeGen/AMDGPU/sched-bank.ll b/llvm/test/CodeGen/AMDGPU/sched-bank.ll
 new file mode 100644
-index 000000000000..f40681b1c6f2
+index 000000000000..c60a73ff8c6f
 --- /dev/null
-+++ b/llvm/test/CodeGen/AMDGPU/schedule-bank.ll
++++ b/llvm/test/CodeGen/AMDGPU/sched-bank.ll
 @@ -0,0 +1,32 @@
 +; RUN: llc -mtriple=amdgcn -mcpu=gfx1250 < %s | FileCheck -check-prefix=GCN %s
 +
-+; Verify that llvm.amdgcn.schedule.bank steers register allocation into the
++; Verify that llvm.amdgcn.sched.bank steers register allocation into the
 +; requested 256-register bank. The kernel is pinned to occupancy 1
 +; (waves-per-eu=1,1 with a single-wave workgroup) so the whole 1024-VGPR file is
 +; addressable and the high banks are actually available to the allocator.
 +
-+declare i32 @llvm.amdgcn.schedule.bank.i32(i32, i32)
++declare i32 @llvm.amdgcn.sched.bank.i32(i32, i32)
 +
 +; A bank-2 hint places the value in v512-v767 and forces an s_set_vgpr_msb that
 +; latches bank 2 (src1=2) around its use.
@@ -3817,7 +3817,7 @@ index 000000000000..f40681b1c6f2
 +; GCN: v_mov_b32_e32 v0 /*v512*/, s2
 +; GCN: s_set_vgpr_msb 0x8008
 +define amdgpu_kernel void @bank2(ptr addrspace(1) %out, i32 %x) #0 {
-+  %h = call i32 @llvm.amdgcn.schedule.bank.i32(i32 %x, i32 2)
++  %h = call i32 @llvm.amdgcn.sched.bank.i32(i32 %x, i32 2)
 +  %y = add i32 %h, 1
 +  store i32 %y, ptr addrspace(1) %out
 +  ret void
@@ -3834,22 +3834,22 @@ index 000000000000..f40681b1c6f2
 +}
 +
 +attributes #0 = { "amdgpu-flat-work-group-size"="32,32" "amdgpu-waves-per-eu"="1,1" }
-diff --git a/llvm/test/CodeGen/AMDGPU/schedule-gpr-hints.mir b/llvm/test/CodeGen/AMDGPU/schedule-gpr-hints.mir
+diff --git a/llvm/test/CodeGen/AMDGPU/sched-gpr-hints.mir b/llvm/test/CodeGen/AMDGPU/sched-gpr-hints.mir
 new file mode 100644
-index 000000000000..d9b0b28ceaa3
+index 000000000000..d480eea0ce59
 --- /dev/null
-+++ b/llvm/test/CodeGen/AMDGPU/schedule-gpr-hints.mir
++++ b/llvm/test/CodeGen/AMDGPU/sched-gpr-hints.mir
 @@ -0,0 +1,66 @@
-+# RUN: llc -mtriple=amdgcn -mcpu=gfx1250 -run-pass=amdgpu-schedule-bank -o - %s | FileCheck %s
++# RUN: llc -mtriple=amdgcn -mcpu=gfx1250 -run-pass=amdgpu-sched-bank -o - %s | FileCheck %s
 +
-+# The AMDGPUScheduleBank pass attaches exact register allocation hints (not
++# The AMDGPUSchedBank pass attaches exact register allocation hints (not
 +# printed in MIR) and lowers each schedule pseudo to a plain COPY.
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_vgpr_b32
++# CHECK-LABEL: name: lower_sched_vgpr_b32
 +# CHECK: %1:vgpr_32 = COPY %0
 +# CHECK-NOT: V_SCHEDULE_VGPR_B32
-+name: lower_schedule_vgpr_b32
++name: lower_sched_vgpr_b32
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3862,10 +3862,10 @@ index 000000000000..d9b0b28ceaa3
 +...
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_vgpr_b64
++# CHECK-LABEL: name: lower_sched_vgpr_b64
 +# CHECK: %1:vreg_64_align2 = COPY %0
 +# CHECK-NOT: V_SCHEDULE_VGPR_B64
-+name: lower_schedule_vgpr_b64
++name: lower_sched_vgpr_b64
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3877,10 +3877,10 @@ index 000000000000..d9b0b28ceaa3
 +...
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_sgpr_b32
++# CHECK-LABEL: name: lower_sched_sgpr_b32
 +# CHECK: %1:sgpr_32 = COPY %0
 +# CHECK-NOT: S_SCHEDULE_SGPR_B32
-+name: lower_schedule_sgpr_b32
++name: lower_sched_sgpr_b32
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3893,10 +3893,10 @@ index 000000000000..d9b0b28ceaa3
 +...
 +
 +---
-+# CHECK-LABEL: name: lower_schedule_sgpr_b64
++# CHECK-LABEL: name: lower_sched_sgpr_b64
 +# CHECK: %1:sgpr_64 = COPY %0
 +# CHECK-NOT: S_SCHEDULE_SGPR_B64
-+name: lower_schedule_sgpr_b64
++name: lower_sched_sgpr_b64
 +tracksRegLiveness: true
 +body: |
 +  bb.0:
@@ -3906,11 +3906,11 @@ index 000000000000..d9b0b28ceaa3
 +    $sgpr0_sgpr1 = COPY %1
 +    SI_RETURN_TO_EPILOG $sgpr0_sgpr1
 +...
-diff --git a/llvm/test/CodeGen/AMDGPU/schedule-gpr.ll b/llvm/test/CodeGen/AMDGPU/schedule-gpr.ll
+diff --git a/llvm/test/CodeGen/AMDGPU/sched-gpr.ll b/llvm/test/CodeGen/AMDGPU/sched-gpr.ll
 new file mode 100644
-index 000000000000..d4e2da452682
+index 000000000000..ed048ba35ff0
 --- /dev/null
-+++ b/llvm/test/CodeGen/AMDGPU/schedule-gpr.ll
++++ b/llvm/test/CodeGen/AMDGPU/sched-gpr.ll
 @@ -0,0 +1,99 @@
 +; RUN: llc -mtriple=amdgcn -mcpu=gfx1250 < %s | FileCheck -check-prefix=GCN %s
 +
@@ -3919,78 +3919,78 @@ index 000000000000..d4e2da452682
 +; (waves-per-eu=1,1 with a single-wave workgroup) so the whole 1024-VGPR file
 +; is addressable and high-numbered registers are available to the allocator.
 +
-+declare i32 @llvm.amdgcn.schedule.vgpr.i32(i32, i32, i32)
-+declare i64 @llvm.amdgcn.schedule.vgpr.i64(i64, i32, i32)
-+declare <16 x float> @llvm.amdgcn.schedule.vgpr.v16f32(<16 x float>, i32, i32)
++declare i32 @llvm.amdgcn.sched.vgpr.i32(i32, i32, i32)
++declare i64 @llvm.amdgcn.sched.vgpr.i64(i64, i32, i32)
++declare <16 x float> @llvm.amdgcn.sched.vgpr.v16f32(<16 x float>, i32, i32)
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: strict hint to v42
++; sched_vgpr: strict hint to v42
 +
 +; GCN-LABEL: {{^}}vgpr42:
 +; GCN: v42
 +define amdgpu_kernel void @vgpr42(ptr addrspace(1) %out, i32 %x) #0 {
-+  %h = call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %x, i32 42, i32 1)
++  %h = call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %x, i32 42, i32 1)
 +  %y = add i32 %h, 1
 +  store i32 %y, ptr addrspace(1) %out
 +  ret void
 +}
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: strict hint to v100
++; sched_vgpr: strict hint to v100
 +
 +; GCN-LABEL: {{^}}vgpr100:
 +; GCN: v100
 +define amdgpu_kernel void @vgpr100(ptr addrspace(1) %out, i32 %x) #0 {
-+  %h = call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %x, i32 100, i32 1)
++  %h = call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %x, i32 100, i32 1)
 +  %y = add i32 %h, 1
 +  store i32 %y, ptr addrspace(1) %out
 +  ret void
 +}
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: strict hint to v0
++; sched_vgpr: strict hint to v0
 +
 +; GCN-LABEL: {{^}}vgpr0:
 +; GCN: v0,
 +define amdgpu_kernel void @vgpr0(ptr addrspace(1) %out, i32 %x) #0 {
-+  %h = call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %x, i32 0, i32 1)
++  %h = call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %x, i32 0, i32 1)
 +  %y = add i32 %h, 1
 +  store i32 %y, ptr addrspace(1) %out
 +  ret void
 +}
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: strict hint to v512 (bank 2 territory)
++; sched_vgpr: strict hint to v512 (bank 2 territory)
 +
 +; GCN-LABEL: {{^}}vgpr512:
 +; GCN: v512
 +define amdgpu_kernel void @vgpr512(ptr addrspace(1) %out, i32 %x) #0 {
-+  %h = call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %x, i32 512, i32 1)
++  %h = call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %x, i32 512, i32 1)
 +  %y = add i32 %h, 1
 +  store i32 %y, ptr addrspace(1) %out
 +  ret void
 +}
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: 64-bit value, strict hint to v[200:201]
++; sched_vgpr: 64-bit value, strict hint to v[200:201]
 +
 +; GCN-LABEL: {{^}}vgpr200_64:
 +; GCN: v[200:201]
 +define amdgpu_kernel void @vgpr200_64(ptr addrspace(1) %out, i64 %x) #0 {
-+  %h = call i64 @llvm.amdgcn.schedule.vgpr.i64(i64 %x, i32 200, i32 1)
++  %h = call i64 @llvm.amdgcn.sched.vgpr.i64(i64 %x, i32 200, i32 1)
 +  %y = add i64 %h, 1
 +  store i64 %y, ptr addrspace(1) %out
 +  ret void
 +}
 +
 +; --------------------------------------------------------------------------
-+; schedule_vgpr: 512-bit value (v16f32), strict hint to v[512:527]
++; sched_vgpr: 512-bit value (v16f32), strict hint to v[512:527]
 +
 +; GCN-LABEL: {{^}}vgpr512_v16f32:
 +; GCN: v[512:527]
 +define amdgpu_kernel void @vgpr512_v16f32(ptr addrspace(1) %out, ptr addrspace(1) %in) #0 {
 +  %x = load <16 x float>, ptr addrspace(1) %in
-+  %h = call <16 x float> @llvm.amdgcn.schedule.vgpr.v16f32(<16 x float> %x, i32 512, i32 1)
++  %h = call <16 x float> @llvm.amdgcn.sched.vgpr.v16f32(<16 x float> %x, i32 512, i32 1)
 +  store <16 x float> %h, ptr addrspace(1) %out
 +  ret void
 +}
@@ -4012,14 +4012,14 @@ index 000000000000..d4e2da452682
 +
 +attributes #0 = { "amdgpu-flat-work-group-size"="32,32" "amdgpu-waves-per-eu"="1,1" }
 diff --git a/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td b/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
-index c7330dd36af9..3be5736c1187 100644
+index c7330dd36af9..15db8e490ab4 100644
 --- a/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
 +++ b/mlir/include/mlir/Dialect/LLVMIR/ROCDLOps.td
 @@ -812,6 +812,115 @@ def ROCDL_IglpOpt : ROCDL_ConcreteNonMemIntrOp<"iglp.opt", [], 0, [0], ["variant
    }];
  }
  
-+def ROCDL_ScheduleBankOp : ROCDL_IntrOp<"schedule.bank", [], [0],
++def ROCDL_ScheduleBankOp : ROCDL_IntrOp<"sched.bank", [], [0],
 +    [AllTypesMatch<["res", "value"]>], 1, 0, 0, 0, [], []>,
 +  Arguments<(ins LLVM_Type:$value, I32Attr:$bank,
 +             OptionalAttr<UnitAttr>:$soft)> {
@@ -4034,7 +4034,7 @@ index c7330dd36af9..3be5736c1187 100644
 +    int32_t encodedBank = schedOp.getSoftAttr() ? bank : (bank | 4);
 +    auto *fn = llvm::Intrinsic::getOrInsertDeclaration(
 +        moduleTranslation.getLLVMModule(),
-+        llvm::Intrinsic::amdgcn_schedule_bank,
++        llvm::Intrinsic::amdgcn_sched_bank,
 +        {value->getType()});
 +    auto *inst = builder.CreateCall(fn,
 +        {value, builder.getInt32(encodedBank)});
@@ -4049,8 +4049,8 @@ index c7330dd36af9..3be5736c1187 100644
 +
 +    Example:
 +    ```mlir
-+    %0 = rocdl.schedule.bank %val, 2 : f32        // strict bank 2 (default)
-+    %1 = rocdl.schedule.bank %val, 1 soft : f32   // soft bank 1
++    %0 = rocdl.sched.bank %val, 2 : f32        // strict bank 2 (default)
++    %1 = rocdl.sched.bank %val, 1 soft : f32   // soft bank 1
 +    ```
 +  }];
 +}
@@ -4079,7 +4079,7 @@ index c7330dd36af9..3be5736c1187 100644
 +  }];
 +}
 +
-+def ROCDL_ScheduleVGPROp : ROCDL_ScheduleGPROp<"schedule.vgpr", "vgpr", "VGPR"> {
++def ROCDL_ScheduleVGPROp : ROCDL_ScheduleGPROp<"sched.vgpr", "vgpr", "VGPR"> {
 +  let description = [{
 +    VGPR register scheduling hint. Identity at runtime; guides the register
 +    allocator to place `value` in the specified VGPR register number.
@@ -4089,13 +4089,13 @@ index c7330dd36af9..3be5736c1187 100644
 +
 +    Example:
 +    ```mlir
-+    %0 = rocdl.schedule.vgpr %val, 42 : f32        // strict: allocate to v42
-+    %1 = rocdl.schedule.vgpr %val, 10 soft : f32   // soft: prefer v10
++    %0 = rocdl.sched.vgpr %val, 42 : f32        // strict: allocate to v42
++    %1 = rocdl.sched.vgpr %val, 10 soft : f32   // soft: prefer v10
 +    ```
 +  }];
 +}
 +
-+def ROCDL_ScheduleSGPROp : ROCDL_ScheduleGPROp<"schedule.sgpr", "sgpr", "SGPR"> {
++def ROCDL_ScheduleSGPROp : ROCDL_ScheduleGPROp<"sched.sgpr", "sgpr", "SGPR"> {
 +  let description = [{
 +    SGPR register scheduling hint. Identity at runtime; guides the register
 +    allocator to place `value` in the specified SGPR register number.
@@ -4105,13 +4105,13 @@ index c7330dd36af9..3be5736c1187 100644
 +
 +    Example:
 +    ```mlir
-+    %0 = rocdl.schedule.sgpr %val, 10 : i32        // strict: allocate to s10
-+    %1 = rocdl.schedule.sgpr %val, 4 soft : i32    // soft: prefer s4
++    %0 = rocdl.sched.sgpr %val, 10 : i32        // strict: allocate to s10
++    %1 = rocdl.sched.sgpr %val, 4 soft : i32    // soft: prefer s4
 +    ```
 +  }];
 +}
 +
-+def ROCDL_ScheduleAGPROp : ROCDL_ScheduleGPROp<"schedule.agpr", "agpr", "AGPR"> {
++def ROCDL_ScheduleAGPROp : ROCDL_ScheduleGPROp<"sched.agpr", "agpr", "AGPR"> {
 +  let description = [{
 +    AGPR register scheduling hint. Identity at runtime; guides the register
 +    allocator to place `value` in the specified AGPR register number.
@@ -4122,8 +4122,8 @@ index c7330dd36af9..3be5736c1187 100644
 +
 +    Example:
 +    ```mlir
-+    %0 = rocdl.schedule.agpr %val, 8 : f32         // strict: allocate to a8
-+    %1 = rocdl.schedule.agpr %val, 0 soft : f32    // soft: prefer a0
++    %0 = rocdl.sched.agpr %val, 8 : f32         // strict: allocate to a8
++    %1 = rocdl.sched.agpr %val, 0 soft : f32    // soft: prefer a0
 +    ```
 +  }];
 +}
@@ -4132,42 +4132,42 @@ index c7330dd36af9..3be5736c1187 100644
  // Xdlops intrinsics
  
 diff --git a/mlir/test/Dialect/LLVMIR/rocdl.mlir b/mlir/test/Dialect/LLVMIR/rocdl.mlir
-index addb03600afc..16cab91e8420 100644
+index addb03600afc..d4d6c751bae4 100644
 --- a/mlir/test/Dialect/LLVMIR/rocdl.mlir
 +++ b/mlir/test/Dialect/LLVMIR/rocdl.mlir
 @@ -168,6 +168,38 @@ func.func @rocdl_iglp_opt() {
    llvm.return
  }
  
-+func.func @rocdl_schedule_bank(%val : f32, %ival : i32) -> f32 {
-+  // CHECK: rocdl.schedule.bank %{{.*}}, 2 : f32
-+  %0 = rocdl.schedule.bank %val, 2 : f32
-+  // CHECK: rocdl.schedule.bank %{{.*}}, 1 soft : i32
-+  %1 = rocdl.schedule.bank %ival, 1 soft : i32
++func.func @rocdl_sched_bank(%val : f32, %ival : i32) -> f32 {
++  // CHECK: rocdl.sched.bank %{{.*}}, 2 : f32
++  %0 = rocdl.sched.bank %val, 2 : f32
++  // CHECK: rocdl.sched.bank %{{.*}}, 1 soft : i32
++  %1 = rocdl.sched.bank %ival, 1 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+func.func @rocdl_schedule_vgpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK: rocdl.schedule.vgpr %{{.*}}, 42 : f32
-+  %0 = rocdl.schedule.vgpr %val, 42 : f32
-+  // CHECK: rocdl.schedule.vgpr %{{.*}}, 10 soft : i32
-+  %1 = rocdl.schedule.vgpr %ival, 10 soft : i32
++func.func @rocdl_sched_vgpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK: rocdl.sched.vgpr %{{.*}}, 42 : f32
++  %0 = rocdl.sched.vgpr %val, 42 : f32
++  // CHECK: rocdl.sched.vgpr %{{.*}}, 10 soft : i32
++  %1 = rocdl.sched.vgpr %ival, 10 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+func.func @rocdl_schedule_sgpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK: rocdl.schedule.sgpr %{{.*}}, 20 : f32
-+  %0 = rocdl.schedule.sgpr %val, 20 : f32
-+  // CHECK: rocdl.schedule.sgpr %{{.*}}, 5 soft : i32
-+  %1 = rocdl.schedule.sgpr %ival, 5 soft : i32
++func.func @rocdl_sched_sgpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK: rocdl.sched.sgpr %{{.*}}, 20 : f32
++  %0 = rocdl.sched.sgpr %val, 20 : f32
++  // CHECK: rocdl.sched.sgpr %{{.*}}, 5 soft : i32
++  %1 = rocdl.sched.sgpr %ival, 5 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+func.func @rocdl_schedule_agpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK: rocdl.schedule.agpr %{{.*}}, 8 : f32
-+  %0 = rocdl.schedule.agpr %val, 8 : f32
-+  // CHECK: rocdl.schedule.agpr %{{.*}}, 0 soft : i32
-+  %1 = rocdl.schedule.agpr %ival, 0 soft : i32
++func.func @rocdl_sched_agpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK: rocdl.sched.agpr %{{.*}}, 8 : f32
++  %0 = rocdl.sched.agpr %val, 8 : f32
++  // CHECK: rocdl.sched.agpr %{{.*}}, 0 soft : i32
++  %1 = rocdl.sched.agpr %ival, 0 soft : i32
 +  llvm.return %0 : f32
 +}
 +
@@ -4175,50 +4175,50 @@ index addb03600afc..16cab91e8420 100644
    // CHECK: rocdl.s.setprio
    rocdl.s.setprio 0
 diff --git a/mlir/test/Target/LLVMIR/rocdl.mlir b/mlir/test/Target/LLVMIR/rocdl.mlir
-index c6c4d173039f..823d9b97ff12 100644
+index c6c4d173039f..d397a59c110c 100644
 --- a/mlir/test/Target/LLVMIR/rocdl.mlir
 +++ b/mlir/test/Target/LLVMIR/rocdl.mlir
 @@ -444,6 +444,46 @@ llvm.func @rocdl.iglp.opt() {
    llvm.return
  }
  
-+llvm.func @rocdl.schedule.bank(%val : f32, %ival : i32) -> f32 {
-+  // CHECK-LABEL: rocdl.schedule.bank
++llvm.func @rocdl.sched.bank(%val : f32, %ival : i32) -> f32 {
++  // CHECK-LABEL: rocdl.sched.bank
 +  // strict (default): bank 2 → encoded as 6 (2 | 4)
-+  // CHECK: call float @llvm.amdgcn.schedule.bank.f32(float %{{.*}}, i32 6)
-+  %0 = rocdl.schedule.bank %val, 2 : f32
++  // CHECK: call float @llvm.amdgcn.sched.bank.f32(float %{{.*}}, i32 6)
++  %0 = rocdl.sched.bank %val, 2 : f32
 +  // soft: bank 1 → encoded as 1
-+  // CHECK: call i32 @llvm.amdgcn.schedule.bank.i32(i32 %{{.*}}, i32 1)
-+  %1 = rocdl.schedule.bank %ival, 1 soft : i32
++  // CHECK: call i32 @llvm.amdgcn.sched.bank.i32(i32 %{{.*}}, i32 1)
++  %1 = rocdl.sched.bank %ival, 1 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+llvm.func @rocdl.schedule.vgpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK-LABEL: rocdl.schedule.vgpr
++llvm.func @rocdl.sched.vgpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK-LABEL: rocdl.sched.vgpr
 +  // strict (default): regnum 42, strict 1
-+  // CHECK: call float @llvm.amdgcn.schedule.vgpr.f32(float %{{.*}}, i32 42, i32 1)
-+  %0 = rocdl.schedule.vgpr %val, 42 : f32
++  // CHECK: call float @llvm.amdgcn.sched.vgpr.f32(float %{{.*}}, i32 42, i32 1)
++  %0 = rocdl.sched.vgpr %val, 42 : f32
 +  // soft: regnum 10, strict 0
-+  // CHECK: call i32 @llvm.amdgcn.schedule.vgpr.i32(i32 %{{.*}}, i32 10, i32 0)
-+  %1 = rocdl.schedule.vgpr %ival, 10 soft : i32
++  // CHECK: call i32 @llvm.amdgcn.sched.vgpr.i32(i32 %{{.*}}, i32 10, i32 0)
++  %1 = rocdl.sched.vgpr %ival, 10 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+llvm.func @rocdl.schedule.sgpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK-LABEL: rocdl.schedule.sgpr
-+  // CHECK: call float @llvm.amdgcn.schedule.sgpr.f32(float %{{.*}}, i32 20, i32 1)
-+  %0 = rocdl.schedule.sgpr %val, 20 : f32
-+  // CHECK: call i32 @llvm.amdgcn.schedule.sgpr.i32(i32 %{{.*}}, i32 5, i32 0)
-+  %1 = rocdl.schedule.sgpr %ival, 5 soft : i32
++llvm.func @rocdl.sched.sgpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK-LABEL: rocdl.sched.sgpr
++  // CHECK: call float @llvm.amdgcn.sched.sgpr.f32(float %{{.*}}, i32 20, i32 1)
++  %0 = rocdl.sched.sgpr %val, 20 : f32
++  // CHECK: call i32 @llvm.amdgcn.sched.sgpr.i32(i32 %{{.*}}, i32 5, i32 0)
++  %1 = rocdl.sched.sgpr %ival, 5 soft : i32
 +  llvm.return %0 : f32
 +}
 +
-+llvm.func @rocdl.schedule.agpr(%val : f32, %ival : i32) -> f32 {
-+  // CHECK-LABEL: rocdl.schedule.agpr
-+  // CHECK: call float @llvm.amdgcn.schedule.agpr.f32(float %{{.*}}, i32 8, i32 1)
-+  %0 = rocdl.schedule.agpr %val, 8 : f32
-+  // CHECK: call i32 @llvm.amdgcn.schedule.agpr.i32(i32 %{{.*}}, i32 0, i32 0)
-+  %1 = rocdl.schedule.agpr %ival, 0 soft : i32
++llvm.func @rocdl.sched.agpr(%val : f32, %ival : i32) -> f32 {
++  // CHECK-LABEL: rocdl.sched.agpr
++  // CHECK: call float @llvm.amdgcn.sched.agpr.f32(float %{{.*}}, i32 8, i32 1)
++  %0 = rocdl.sched.agpr %val, 8 : f32
++  // CHECK: call i32 @llvm.amdgcn.sched.agpr.i32(i32 %{{.*}}, i32 0, i32 0)
++  %1 = rocdl.sched.agpr %ival, 0 soft : i32
 +  llvm.return %0 : f32
 +}
 +

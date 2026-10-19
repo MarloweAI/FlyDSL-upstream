@@ -64,10 +64,10 @@ __all__ = [
     "sched_vmem",
     "sched_dsrd",
     "sched_dswr",
-    "schedule_bank",
-    "schedule_vgpr",
-    "schedule_sgpr",
-    "schedule_agpr",
+    "sched_bank",
+    "sched_vgpr",
+    "sched_sgpr",
+    "sched_agpr",
 ]
 
 # Keep references to ODS-generated builders so we can wrap them without losing access.
@@ -109,10 +109,10 @@ mask_dswr = 0x200
 
 _ods_sched_barrier = globals().get("sched_barrier")
 _ods_sched_group_barrier = globals().get("sched_group_barrier")
-_ods_schedule_bank = globals().get("schedule_bank")
-_ods_schedule_vgpr = globals().get("schedule_vgpr")
-_ods_schedule_sgpr = globals().get("schedule_sgpr")
-_ods_schedule_agpr = globals().get("schedule_agpr")
+_ods_sched_bank = globals().get("schedule_bank")
+_ods_sched_vgpr = globals().get("schedule_vgpr")
+_ods_sched_sgpr = globals().get("schedule_sgpr")
+_ods_sched_agpr = globals().get("schedule_agpr")
 
 _SCHED_MASK_INT_TO_KW = {
     0x000: "none",
@@ -179,7 +179,7 @@ def sched_dswr(cnt):
 
 
 @dsl_loc_tracing
-def schedule_bank(value, bank, soft=False, **kw):
+def sched_bank(value, bank, soft=False, **kw):
     """VGPR bank scheduling hint (gfx1250).
 
     Returns *value* unchanged (identity at IR level).  Guides the register
@@ -187,11 +187,11 @@ def schedule_bank(value, bank, soft=False, **kw):
     Default is strict; pass ``soft=True`` for an advisory hint.
     """
     val_ir = _to_ir(value)
-    return _ods_schedule_bank(res=val_ir.type, value=val_ir, bank=bank, soft=soft or None, **kw)
+    return _ods_sched_bank(res=val_ir.type, value=val_ir, bank=bank, soft=soft or None, **kw)
 
 
 @dsl_loc_tracing
-def schedule_vgpr(value, regnum, soft=False, **kw):
+def sched_vgpr(value, regnum, soft=False, **kw):
     """VGPR exact-register scheduling hint.
 
     Returns *value* unchanged (identity at IR level).  Guides the register
@@ -200,11 +200,11 @@ def schedule_vgpr(value, regnum, soft=False, **kw):
     Default is strict; pass ``soft=True`` for an advisory hint.
     """
     val_ir = _to_ir(value)
-    return _ods_schedule_vgpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
+    return _ods_sched_vgpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
 
 
 @dsl_loc_tracing
-def schedule_sgpr(value, regnum, soft=False, **kw):
+def sched_sgpr(value, regnum, soft=False, **kw):
     """SGPR exact-register scheduling hint.
 
     Returns *value* unchanged (identity at IR level).  Guides the register
@@ -213,11 +213,11 @@ def schedule_sgpr(value, regnum, soft=False, **kw):
     Default is strict; pass ``soft=True`` for an advisory hint.
     """
     val_ir = _to_ir(value)
-    return _ods_schedule_sgpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
+    return _ods_sched_sgpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
 
 
 @dsl_loc_tracing
-def schedule_agpr(value, regnum, soft=False, **kw):
+def sched_agpr(value, regnum, soft=False, **kw):
     """AGPR exact-register scheduling hint (gfx90a/gfx940).
 
     Returns *value* unchanged (identity at IR level).  Guides the register
@@ -227,7 +227,7 @@ def schedule_agpr(value, regnum, soft=False, **kw):
     Only valid on targets with MAI instructions.
     """
     val_ir = _to_ir(value)
-    return _ods_schedule_agpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
+    return _ods_sched_agpr(res=val_ir.type, value=val_ir, regnum=regnum, soft=soft or None, **kw)
 
 
 def _unwrap_mfma_operand(v):
