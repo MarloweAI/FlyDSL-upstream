@@ -3,7 +3,7 @@
 
 import hashlib
 import os
-import subprocess
+import shutil
 import sys
 from pathlib import Path
 from typing import List, Tuple
@@ -19,13 +19,19 @@ def _ktrace_tracing_enabled(compile_hints: dict) -> bool:
     return bool(env.ktrace.enable)
 
 
-def _is_junction(path: Path) -> bool:
-    if hasattr(os.path, "isjunction"):
-        return os.path.isjunction(path)
+def _stage_file(src: Path, dst: Path) -> None:
+    """Make ``dst`` a current copy of ``src``: a hardlink where the volume allows, else a copy."""
+    if dst.is_file():
+        s, d = src.stat(), dst.stat()
+        if (s.st_size, s.st_mtime_ns) == (d.st_size, d.st_mtime_ns):
+            return
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dst.with_name(f"{dst.name}.{os.getpid()}.tmp")
     try:
-        return path.lstat().st_reparse_tag == 0xA0000003
-    except (AttributeError, OSError):
-        return False
+        os.link(src, tmp)
+    except OSError:
+        shutil.copy2(src, tmp)
+    os.replace(tmp, dst)
 
 
 def _windows_rocm_toolkit() -> str:
@@ -54,28 +60,15 @@ def _windows_rocm_toolkit() -> str:
         if not (llvm / "bin" / "ld.lld.exe").is_file() or not (llvm / "amdgcn" / "bitcode").is_dir():
             continue
 
-        stage_root = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "FlyDSL" / "rocm-toolkit"
+        # ROCDL wants <toolkit>/llvm/bin/ld.lld and <toolkit>/amdgcn/bitcode, which no root
+        # of TheRock's lib/llvm layout provides. Stage real files rather than junctions: processes
+        # started from OpenSSH refuse to traverse user-made junctions (WinError 448).
+        stage_root = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "FlyDSL" / "rocm-toolkit-files"
         stage = stage_root / hashlib.sha256(str(llvm).encode()).hexdigest()[:12]
-        stage.mkdir(parents=True, exist_ok=True)
-        links = ((stage / "llvm", llvm), (stage / "amdgcn", llvm / "amdgcn"))
-        for link, target in links:
-            if link.exists() or link.is_symlink() or _is_junction(link):
-                if not _is_junction(link) or link.resolve() != target.resolve():
-                    raise RuntimeError(f"Refusing to use unexpected ROCm toolkit junction: {link}")
-                continue
-            result = subprocess.run(
-                ["cmd.exe", "/d", "/c", "mklink", "/J", str(link), str(target)],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            if result.returncode and not _is_junction(link):
-                raise RuntimeError(f"Could not create ROCm toolkit junction {link}: {result.stderr.strip()}")
-            if not _is_junction(link) or link.resolve() != target.resolve():
-                raise RuntimeError(f"ROCm toolkit junction does not target the active SDK: {link}")
-
-        if not (stage / "llvm" / "bin" / "ld.lld.exe").is_file() or not (stage / "amdgcn" / "bitcode").is_dir():
-            raise RuntimeError(f"Incomplete staged ROCm toolkit: {stage}")
+        _stage_file(llvm / "bin" / "ld.lld.exe", stage / "llvm" / "bin" / "ld.lld.exe")
+        for bitcode in (llvm / "amdgcn" / "bitcode").iterdir():
+            if bitcode.is_file():
+                _stage_file(bitcode, stage / "amdgcn" / "bitcode" / bitcode.name)
         return stage.as_posix()
 
     raise RuntimeError("Could not find ld.lld.exe and AMDGPU bitcode in the active ROCm SDK")
