@@ -11,6 +11,7 @@ include "mlir/IR/OpBase.td"
 include "flydsl/Dialect/Fly/IR/FlyInterfaces.td"
 
 def FlyROCDL_Dialect : Dialect {
+  let useStrictPropertiesInAssemblyFormat = 0;
   let name = "fly_rocdl";
   let cppNamespace = "::mlir::fly_rocdl";
 

@@ -821,13 +821,13 @@ public:
 
       rewriter.replaceOpWithNewOp<gpu::LaunchFuncOp>(
           op, kernelRef, grid, block, adaptor.getDynamicSharedMemorySize(),
-          adaptor.getKernelOperands(), asyncObj, clusterSize);
+          adaptor.getKernelOperands(), Type{}, ValueRange{}, asyncObj, clusterSize);
       return success();
     }
 
     rewriter.replaceOpWithNewOp<gpu::LaunchFuncOp>(
         op, kernelRef, grid, block, adaptor.getDynamicSharedMemorySize(),
-        adaptor.getKernelOperands(), asyncTokenType, adaptor.getAsyncDependencies(), clusterSize);
+        adaptor.getKernelOperands(), asyncTokenType, adaptor.getAsyncDependencies(), Value{}, clusterSize);
     return success();
   }
 };

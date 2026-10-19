@@ -268,6 +268,9 @@ add_custom_target(CopyFlyPythonSources ALL
   COMMAND ${CMAKE_COMMAND} -E copy_if_different
     "$<TARGET_FILE:mlir_float16_utils>"
     "${_MLIR_LIBS_DIR}/$<TARGET_FILE_NAME:mlir_float16_utils>"
+  COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "$<TARGET_FILE:mlir_apfloat_wrappers>"
+    "${_MLIR_LIBS_DIR}/$<TARGET_FILE_NAME:mlir_apfloat_wrappers>"
   COMMAND bash -c "patchelf --set-rpath '\\$$ORIGIN' '${_MLIR_LIBS_DIR}/libmlir_c_runner_utils.so'"
   COMMAND bash -c "patchelf --set-rpath '\\$$ORIGIN' '${_MLIR_LIBS_DIR}/$<TARGET_FILE_NAME:mlir_float16_utils>'"
   COMMENT "Copying python/flydsl sources to build/python_packages/flydsl"

@@ -78,7 +78,7 @@ class RocmBackend(BaseBackend):
             "module": "",
             "triple": "amdgcn-amd-amdhsa",
             "unsafe-math": "true" if compile_hints.get("unsafe_fp_math") else "false",
-            "wave64": "true" if get_warp_size(chip) == 64 else "false",
+            "wavesize": get_warp_size(chip),
         }
 
         ktrace_fragments = []

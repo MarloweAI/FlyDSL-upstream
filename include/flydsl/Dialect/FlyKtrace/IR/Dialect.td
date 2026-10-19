@@ -8,6 +8,7 @@ include "mlir/IR/AttrTypeBase.td"
 include "mlir/IR/OpBase.td"
 
 def FlyKtrace_Dialect : Dialect {
+  let useStrictPropertiesInAssemblyFormat = 0;
   let name = "fly_ktrace";
   let cppNamespace = "::mlir::fly_ktrace";
 

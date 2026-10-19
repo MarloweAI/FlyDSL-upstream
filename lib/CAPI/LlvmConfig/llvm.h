@@ -16,6 +16,9 @@ MLIR_CAPI_EXPORTED int flydslSetLLVMOptionBool(const char *name, bool value, boo
 MLIR_CAPI_EXPORTED int flydslSetLLVMOptionInt(const char *name, int value, int *oldValue);
 MLIR_CAPI_EXPORTED int flydslSetLLVMOptionStr(const char *name, const char *value, char **oldValue);
 MLIR_CAPI_EXPORTED void flydslFreeLLVMOptionStr(char *str);
+// Optional unsigned library option; isSet=false restores the LLVM default.
+MLIR_CAPI_EXPORTED int flydslSetLLVMUnrollThreshold(bool isSet, unsigned value,
+                                                   bool *oldIsSet, unsigned *oldValue);
 
 #ifdef __cplusplus
 }

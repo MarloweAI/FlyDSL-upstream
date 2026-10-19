@@ -1094,6 +1094,21 @@ NB_MODULE(_mlirDialectsFly, m) {
       "name"_a, "value"_a, "Set an LLVM bool cl::opt at runtime; returns the previous value.");
 
   m.def(
+      "set_llvm_unroll_threshold",
+      [](nb::object value) -> nb::object {
+        bool isSet = !value.is_none();
+        unsigned threshold = isSet ? nb::cast<unsigned>(value) : 0;
+        bool oldIsSet = false;
+        unsigned oldValue = 0;
+        if (flydslSetLLVMUnrollThreshold(isSet, threshold, &oldIsSet, &oldValue))
+          throw std::runtime_error("LLVM optional unroll-threshold bridge unavailable");
+        if (oldIsSet)
+          return nb::cast(oldValue);
+        return nb::none();
+      },
+      "value"_a.none(), "Set LLVM 24 optional unroll threshold; None restores the default.");
+
+  m.def(
       "set_llvm_option_int",
       [](const std::string &name, int value) -> int {
         int oldValue = 0;

@@ -29,8 +29,14 @@ def llvm_options(opts: Dict[str, Union[bool, int, str]]):
                 old = _fly.set_llvm_option_bool(name, value)
                 saved.append(("bool", name, old))
             elif isinstance(value, int):
-                old = _fly.set_llvm_option_int(name, value)
-                saved.append(("int", name, old))
+                if name == "unroll-threshold":
+                    if value < 0 or value > 0xFFFFFFFF:
+                        raise ValueError("unroll-threshold must be an unsigned 32-bit integer")
+                    old = _fly.set_llvm_unroll_threshold(value)
+                    saved.append(("optional_unroll", name, old))
+                else:
+                    old = _fly.set_llvm_option_int(name, value)
+                    saved.append(("int", name, old))
             elif isinstance(value, str):
                 old = _fly.set_llvm_option_str(name, value)
                 saved.append(("str", name, old))
@@ -41,7 +47,9 @@ def llvm_options(opts: Dict[str, Union[bool, int, str]]):
         yield
     finally:
         for kind, name, old in reversed(saved):
-            if kind == "bool":
+            if kind == "optional_unroll":
+                _fly.set_llvm_unroll_threshold(old)
+            elif kind == "bool":
                 _fly.set_llvm_option_bool(name, old)
             elif kind == "int":
                 _fly.set_llvm_option_int(name, old)

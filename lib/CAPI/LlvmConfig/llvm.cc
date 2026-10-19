@@ -8,6 +8,9 @@
 #include "LlvmConfig/llvm.h"
 
 #include "llvm/Support/CommandLine.h"
+#ifdef FLYDSL_LLVM24_SCALAR_OPTIONS
+#include "ScalarOptions.h"
+#endif
 
 #include <cstdlib>
 #include <cstring>
@@ -37,6 +40,22 @@ bool isBoolOption(cl::Option *opt) { return opt->getValueExpectedFlag() != cl::V
 // ---------------------------------------------------------------------------
 
 extern "C" {
+
+__attribute__((visibility("default"))) int
+flydslSetLLVMUnrollThreshold(bool isSet, unsigned value, bool *oldIsSet,
+                             unsigned *oldValue) {
+#ifdef FLYDSL_LLVM24_SCALAR_OPTIONS
+  auto &threshold = ScalarOptions::Global.unroll_threshold;
+  if (oldIsSet)
+    *oldIsSet = threshold.has_value();
+  if (oldValue)
+    *oldValue = threshold.value_or(0);
+  threshold = isSet ? std::optional<unsigned>(value) : std::nullopt;
+  return 0;
+#else
+  return 1;
+#endif
+}
 
 __attribute__((visibility("default"))) int flydslSetLLVMOptionBool(const char *name, bool value,
                                                                    bool *oldValue) {

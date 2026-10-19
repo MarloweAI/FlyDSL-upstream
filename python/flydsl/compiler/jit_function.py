@@ -1280,7 +1280,39 @@ class JitFunction:
 
     def _effective_compile_hints(self):
         """Resolve persistent defaults and the current thread-local overlay."""
-        return merge_compile_hints(self.compile_hints, CompilationContext.get_compile_hints())
+        hints = merge_compile_hints(self.compile_hints, CompilationContext.get_compile_hints())
+        xnack = os.environ.get('FLYDSL_ENABLE_XNACK')
+        if xnack is not None:
+            if xnack not in ('0', '1'):
+                raise ValueError('FLYDSL_ENABLE_XNACK must be 0 or 1')
+            hints = {**hints, 'llvm_options': {
+                **hints.get('llvm_options', {}), 'amdgpu-xnack': xnack == '1'}}
+        codegen_mode = os.environ.get('LLVM_GFX1250_ANY_XNACK_CODEGEN')
+        if codegen_mode is not None:
+            if codegen_mode not in ('0', '1'):
+                raise ValueError('LLVM_GFX1250_ANY_XNACK_CODEGEN must be 0 or 1')
+            hints = {**hints, 'xnack_any_codegen': codegen_mode}
+        codegen_mode = os.environ.get('LLVM_GFX1250_ANY_XNACK_CODEGEN')
+        if codegen_mode is not None:
+            if codegen_mode not in ('0', '1'):
+                raise ValueError('LLVM_GFX1250_ANY_XNACK_CODEGEN must be 0 or 1')
+            hints = {**hints, 'xnack_any_codegen': codegen_mode}
+        codegen_mode = os.environ.get('LLVM_GFX1250_ANY_XNACK_CODEGEN')
+        if codegen_mode is not None:
+            if codegen_mode not in ('0', '1'):
+                raise ValueError('LLVM_GFX1250_ANY_XNACK_CODEGEN must be 0 or 1')
+            hints = {**hints, 'xnack_any_codegen': codegen_mode}
+        codegen_mode = os.environ.get('LLVM_GFX1250_ANY_XNACK_CODEGEN')
+        if codegen_mode is not None:
+            if codegen_mode not in ('0', '1'):
+                raise ValueError('LLVM_GFX1250_ANY_XNACK_CODEGEN must be 0 or 1')
+            hints = {**hints, 'xnack_any_codegen': codegen_mode}
+        codegen_mode = os.environ.get('LLVM_GFX1250_ANY_XNACK_CODEGEN')
+        if codegen_mode is not None:
+            if codegen_mode not in ('0', '1'):
+                raise ValueError('LLVM_GFX1250_ANY_XNACK_CODEGEN must be 0 or 1')
+            hints = {**hints, 'xnack_any_codegen': codegen_mode}
+        return hints
 
     def _get_global_refs(self, owner_cls=None) -> List[Tuple[str, str, dict]]:
         """Memoized global-ref discovery (see :func:`_discover_global_refs`)."""
