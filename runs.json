@@ -1,8 +1,109 @@
 {
  "schema": 1,
- "updated": "2026-10-19T12:44:25Z",
+ "updated": "2026-10-19T14:07:43Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39265690985,
+   "pr": 1310,
+   "commit": "3047b5c3e2a720aad6af7ee5648bdb39c16ca7a1",
+   "branch": "refactor/monokernel-flydsl-api-cleanup",
+   "event": "pull_request",
+   "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985",
+   "created_at": "2026-10-19T14:04:40Z",
+   "updated_at": "2026-10-19T14:05:53Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39261723911,
+   "pr": 1310,
+   "commit": "649bbe90656c0724c2552122e8b1ec135ba4e03e",
+   "branch": "refactor/monokernel-flydsl-api-cleanup",
+   "event": "pull_request",
+   "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39261723911",
+   "created_at": "2026-10-19T13:37:20Z",
+   "updated_at": "2026-10-19T14:05:53Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T13:49:47Z",
+     "completed_at": "2026-10-19T14:04:41Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39261723911/job/118096967322"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T13:50:24Z",
+     "completed_at": "2026-10-19T14:05:52Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39261723911/job/118096967361"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T13:54:52Z",
+     "completed_at": "2026-10-19T14:05:09Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39261723911/job/118096967506"
+    }
+   ]
+  },
+  {
+   "run_id": 39259461365,
+   "pr": 1309,
+   "commit": "542b9710147bd30858608bb0c4696de0b1bb7dfd",
+   "branch": "tdm-filler-contiguous-first",
+   "event": "pull_request",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365",
+   "created_at": "2026-10-19T13:21:31Z",
+   "updated_at": "2026-10-19T13:59:31Z",
+   "actor": "xudoyuan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T13:35:19Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480248"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T13:59:31Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480326"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T13:35:09Z",
+     "completed_at": "2026-10-19T13:54:37Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39259461365/job/118089480337"
+    }
+   ]
+  },
   {
    "run_id": 39252061918,
    "pr": 1308,
@@ -14,9 +115,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918",
    "created_at": "2026-10-19T12:26:23Z",
-   "updated_at": "2026-10-19T12:28:31Z",
+   "updated_at": "2026-10-19T13:35:22Z",
    "actor": "jli-melchior",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T13:00:16Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918/job/118072532380"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T13:35:22Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918/job/118072532455"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T13:04:24Z",
+     "completed_at": "2026-10-19T13:22:09Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918/job/118072532621"
+    }
+   ]
   },
   {
    "run_id": 39250722378,
@@ -24,14 +153,45 @@
    "commit": "a5abc5dcd447201d6b0d7a604216336594fdd584",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378",
    "created_at": "2026-10-19T12:16:05Z",
-   "updated_at": "2026-10-19T12:18:29Z",
+   "updated_at": "2026-10-19T12:59:52Z",
    "actor": "jli-melchior",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T12:46:46Z",
+     "completed_at": "2026-10-19T13:04:14Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799567"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T12:46:55Z",
+     "completed_at": "2026-10-19T13:34:33Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799720",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-19T12:59:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799859"
+    }
+   ]
   },
   {
    "run_id": 39247037829,
@@ -39,7 +199,7 @@
    "commit": "10a73859d0b78cbeef0bdba0166f20d9c2d96097",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39247037829",
@@ -54,7 +214,7 @@
    "commit": "c612b37998053b8cc618d4b83b8c369893808dd8",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39243667441",
@@ -84,7 +244,7 @@
    "commit": "7c9414eedaf1b7784bae994add20de21b4b6841b",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
@@ -99,7 +259,7 @@
    "commit": "28a3dc7ae54c86c16ed18c04d8ed6b586c777a50",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
@@ -114,7 +274,7 @@
    "commit": "8035a2478030c32a15e9be7b623a24b51e4a87bb",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240225131",
@@ -129,7 +289,7 @@
    "commit": "2ace59eb6411a2707720f65566dd3bc05ae7e7ea",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240003879",
@@ -144,7 +304,7 @@
    "commit": "a651c2c4e392575e703dc20c7fc3504b13809beb",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238662557",
@@ -160,11 +320,11 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229",
    "created_at": "2026-10-19T10:33:10Z",
-   "updated_at": "2026-10-19T11:00:13Z",
+   "updated_at": "2026-10-19T13:58:39Z",
    "actor": "james-huang09",
    "jobs": [
     {
@@ -191,10 +351,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-19T11:00:13Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-19T12:47:29Z",
+     "completed_at": "2026-10-19T13:58:38Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047578"
     }
    ]
@@ -205,7 +365,7 @@
    "commit": "d921a877d590ec34070652254920c6f668ea69a1",
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/apgr/spgr based flydsl llvm head",
+   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
    "status": "completed",
    "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238096433",
@@ -1826,51 +1986,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/38744674874",
    "created_at": "2026-10-15T13:40:16Z",
    "updated_at": "2026-10-15T13:40:16Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38744043034,
-   "pr": null,
-   "commit": "0519eb8069da213c77ca3c63212cf63a4b07ae9f",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38744043034",
-   "created_at": "2026-10-15T13:35:48Z",
-   "updated_at": "2026-10-15T13:35:48Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38742128815,
-   "pr": null,
-   "commit": "8a44323d5f984ad5ef6346e1cd33555025c08fb5",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38742128815",
-   "created_at": "2026-10-15T13:22:24Z",
-   "updated_at": "2026-10-15T13:22:24Z",
-   "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38740740416,
-   "pr": null,
-   "commit": "f2e620635ff98b2dfc62b77500337f8d093a29e6",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38740740416",
-   "created_at": "2026-10-15T13:12:28Z",
-   "updated_at": "2026-10-15T13:12:28Z",
    "actor": "dimitri91209",
    "jobs": []
   }
