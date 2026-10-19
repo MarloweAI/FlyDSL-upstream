@@ -18,8 +18,15 @@ $uninitializedSubmodules = @($submoduleStatus | Where-Object { $_ -match '^[-+U]
 if ($LASTEXITCODE -ne 0 -or $uninitializedSubmodules.Count -gt 0) {
     throw 'Required pinned submodules are not initialized at their recorded commits'
 }
-$sitePackages = (& $Python -c "import pathlib, sys; print(next(str(pathlib.Path(p)) for p in sys.path if (pathlib.Path(p) / '_rocm_sdk_devel').is_dir()))").Trim()
-if ($LASTEXITCODE -ne 0 -or -not $sitePackages) { throw 'Could not find the active Python ROCm SDK site-packages' }
+# TheRock's rocm-sdk-devel wheel ships the SDK, HIP CMake package included, as an
+# archive that `rocm-sdk init` expands; it returns at once when already expanded.
+& $Python -c "import importlib.util, sys; sys.exit(importlib.util.find_spec('rocm_sdk') is None)"
+if ($LASTEXITCODE -eq 0) {
+    & $Python -m rocm_sdk init
+    if ($LASTEXITCODE -ne 0) { throw 'rocm-sdk init failed to expand the ROCm devel SDK' }
+}
+$sitePackages = (& $Python -c "import pathlib, sys; print(next((str(pathlib.Path(p)) for p in sys.path if (pathlib.Path(p) / '_rocm_sdk_devel').is_dir()), ''))").Trim()
+if ($LASTEXITCODE -ne 0 -or -not $sitePackages) { throw 'No _rocm_sdk_devel in the active Python: install TheRock rocm[libraries,devel]' }
 $sdkDevel = Join-Path $sitePackages '_rocm_sdk_devel'
 $sdkCore = Join-Path $sitePackages '_rocm_sdk_core'
 if (-not (Test-Path -LiteralPath (Join-Path $MLIRPath 'lib\cmake\mlir\MLIRConfig.cmake'))) {
