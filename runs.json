@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T05:18:58Z",
+ "updated": "2026-10-19T05:58:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39207015269,
+   "pr": null,
+   "commit": "6245f9b57f2eff82b6dd0c611e33cf765079ffc1",
+   "branch": "main",
+   "event": "push",
+   "title": "[Fix] Bitcast small floats across converted ops in convert-fly-to-roc\u2026",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269",
+   "created_at": "2026-10-19T05:55:10Z",
+   "updated_at": "2026-10-19T05:56:25Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39203712321,
    "pr": null,
@@ -10,13 +25,41 @@
    "branch": "main",
    "event": "push",
    "title": "Tune bf16 implicit Conv3d (#1217)",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203712321",
    "created_at": "2026-10-19T05:16:46Z",
-   "updated_at": "2026-10-19T05:16:57Z",
+   "updated_at": "2026-10-19T05:55:56Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T05:50:24Z",
+     "completed_at": "2026-10-19T05:55:10Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203712321/job/117910702318"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T05:50:43Z",
+     "completed_at": "2026-10-19T05:55:55Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203712321/job/117910702324"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-19T05:51:20Z",
+     "completed_at": "2026-10-19T05:55:27Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39203712321/job/117910702405"
+    }
+   ]
   },
   {
    "run_id": 39203592851,
@@ -1956,49 +1999,6 @@
      "started_at": "2026-10-15T02:57:22Z",
      "completed_at": "2026-10-15T03:23:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38670643661/job/116222215482"
-    }
-   ]
-  },
-  {
-   "run_id": 38662552410,
-   "pr": 1289,
-   "commit": "379ad73e205796ceec34d8a41f5b465c85c28070",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410",
-   "created_at": "2026-10-15T00:53:07Z",
-   "updated_at": "2026-10-15T02:22:33Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T01:09:12Z",
-     "completed_at": "2026-10-15T02:01:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410/job/116191613270"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-15T01:08:30Z",
-     "completed_at": "2026-10-15T02:22:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410/job/116191613288"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T01:09:05Z",
-     "completed_at": "2026-10-15T01:35:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38662552410/job/116191613375"
     }
    ]
   }
