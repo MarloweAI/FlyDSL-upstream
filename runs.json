@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-19T10:51:11Z",
+ "updated": "2026-10-19T10:56:47Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39240748154,
+   "pr": 1307,
+   "commit": "28a3dc7ae54c86c16ed18c04d8ed6b586c777a50",
+   "branch": "jli/schedule-bank-gpr-llvm-head",
+   "event": "pull_request",
+   "title": "schedule bank gpr based llvm head",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
+   "created_at": "2026-10-19T10:54:04Z",
+   "updated_at": "2026-10-19T10:55:41Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39240225131,
    "pr": 1307,
@@ -10,11 +25,11 @@
    "branch": "jli/schedule-bank-gpr-llvm-head",
    "event": "pull_request",
    "title": "schedule bank gpr based llvm head",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240225131",
    "created_at": "2026-10-19T10:49:41Z",
-   "updated_at": "2026-10-19T10:50:07Z",
+   "updated_at": "2026-10-19T10:55:13Z",
    "actor": "jli-melchior",
    "jobs": []
   },
@@ -1881,49 +1896,6 @@
      "started_at": "2026-10-15T10:06:49Z",
      "completed_at": "2026-10-15T10:43:28Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38714180514/job/116364785556"
-    }
-   ]
-  },
-  {
-   "run_id": 38703759091,
-   "pr": 1291,
-   "commit": "2f2c50087d3438a22cc556531f9eb09805de1c41",
-   "branch": "xudong/aiterker-203",
-   "event": "pull_request",
-   "title": "[LayoutAlgebra] Drop layout modes beyond the tiler rank in composition",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38703759091",
-   "created_at": "2026-10-15T08:10:13Z",
-   "updated_at": "2026-10-15T10:31:00Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T08:29:14Z",
-     "completed_at": "2026-10-15T09:06:46Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38703759091/job/116325128692"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T08:29:06Z",
-     "completed_at": "2026-10-15T09:09:03Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38703759091/job/116325128919"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T10:07:09Z",
-     "completed_at": "2026-10-15T10:30:59Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38703759091/job/116325129100"
     }
    ]
   }
