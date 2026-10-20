@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-20T08:48:28Z",
+ "updated": "2026-10-20T09:02:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM (#1266)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501",
    "created_at": "2026-10-20T07:53:06Z",
-   "updated_at": "2026-10-20T08:15:22Z",
+   "updated_at": "2026-10-20T08:59:21Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -29,20 +29,23 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T08:15:22Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T08:57:29Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386718"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T08:12:14Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386776"
+     "completed_at": "2026-10-20T08:59:20Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386776",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
