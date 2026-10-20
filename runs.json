@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-19T21:30:01Z",
+ "updated": "2026-10-20T01:01:24Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39348414363,
+   "pr": null,
+   "commit": "57b1b7ed5e14ecc6958124b1319ac6b1594c80e0",
+   "branch": "main",
+   "event": "push",
+   "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels (#1310)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363",
+   "created_at": "2026-10-20T00:34:08Z",
+   "updated_at": "2026-10-20T00:48:34Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T00:49:01Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391137265"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T00:49:08Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391137278"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T00:48:34Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391138186"
+    }
+   ]
+  },
   {
    "run_id": 39265690985,
    "pr": 1310,
@@ -10,19 +53,19 @@
    "branch": "refactor/monokernel-flydsl-api-cleanup",
    "event": "pull_request",
    "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985",
    "created_at": "2026-10-19T14:04:40Z",
-   "updated_at": "2026-10-19T14:17:20Z",
+   "updated_at": "2026-10-20T00:49:20Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-19T14:17:20Z",
+     "started_at": "2026-10-20T00:49:19Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39265690985/job/118111128808"
     },
@@ -51,7 +94,7 @@
   },
   {
    "run_id": 39261723911,
-   "pr": 1310,
+   "pr": null,
    "commit": "649bbe90656c0724c2552122e8b1ec135ba4e03e",
    "branch": "refactor/monokernel-flydsl-api-cleanup",
    "event": "pull_request",
@@ -2009,21 +2052,6 @@
    "created_at": "2026-10-15T14:37:01Z",
    "updated_at": "2026-10-15T14:51:57Z",
    "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38744674874,
-   "pr": null,
-   "commit": "301c0879a40f271b98f4e6e5a676b2f969cfcbec",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38744674874",
-   "created_at": "2026-10-15T13:40:16Z",
-   "updated_at": "2026-10-15T13:40:16Z",
-   "actor": "dimitri91209",
    "jobs": []
   }
  ]
