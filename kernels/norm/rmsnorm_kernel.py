@@ -568,10 +568,10 @@ def _build_rmsnorm_small_n_module(
     PRELOAD_GAMMA = arch == "gfx1250"
     # Same reason as LOADS_FIRST in build_rmsnorm_module: from four vectors per lane on, each x vector is converted
     # before the next load issues, and a lane waits one memory latency per vector. With three or fewer the loads
-    # already issue together, and the barrier only costs 3-5%.
+    # already issue together without the barrier.
     LOADS_FIRST = arch == "gfx1250" and NUM_VEC_ROW_ITERS > 3
-    # Measured on a 256-CU gfx1250 for N <= 2048: one workgroup per row is faster up to M = 2048, and the multi-row
-    # kernel above that.
+    # Measured on a 256-CU gfx1250 for N <= 2048: from M = 2304 on the multi-row kernel is faster at every N in the
+    # sweep; up to M = 2048, one workgroup per row is faster in most rows.
     MULTI_ROW_MIN_M = 2048 if arch == "gfx1250" and USE_VEC_SMALL_N else FWD_MULTI_ROW_THRESHOLD
 
     @flyc.kernel(known_block_size=[BLOCK_THREADS_SPECIAL, 1, 1])
