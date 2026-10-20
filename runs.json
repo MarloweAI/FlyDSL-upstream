@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T09:56:45Z",
+ "updated": "2026-10-20T10:25:26Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39407507769,
+   "pr": 1313,
+   "commit": "03f123e0f02b637f4e0e4e220a93b9c683c16f61",
+   "branch": "pr/feat-core-layout-replacement",
+   "event": "pull_request",
+   "title": "[Core] Replace the Fly layout implementation with the Core library",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769",
+   "created_at": "2026-10-20T10:22:44Z",
+   "updated_at": "2026-10-20T10:23:40Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 39399629932,
    "pr": 1313,
@@ -10,38 +25,38 @@
    "branch": "pr/feat-core-layout-replacement",
    "event": "pull_request",
    "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932",
    "created_at": "2026-10-20T09:17:47Z",
-   "updated_at": "2026-10-20T09:36:02Z",
+   "updated_at": "2026-10-20T10:23:17Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T09:36:37Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T09:59:30Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239159"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T09:36:43Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T10:23:16Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239213"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T09:36:02Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T10:22:45Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239449"
     }
    ]
@@ -2097,49 +2112,6 @@
    "updated_at": "2026-10-16T08:34:44Z",
    "actor": "xudoyuan",
    "jobs": []
-  },
-  {
-   "run_id": 38871422983,
-   "pr": 1289,
-   "commit": "d75fc18b3eb48a1b6c900685b16904b395029efe",
-   "branch": "jli/gfx1250-strict",
-   "event": "pull_request",
-   "title": "[llvm] Bump LLVM hash and add gfx1250-strict support",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983",
-   "created_at": "2026-10-16T08:05:54Z",
-   "updated_at": "2026-10-16T11:08:39Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-16T10:30:58Z",
-     "completed_at": "2026-10-16T11:08:39Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116929227850"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T08:32:29Z",
-     "completed_at": "2026-10-16T08:53:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116929228793"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T09:08:52Z",
-     "completed_at": "2026-10-16T10:12:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38871422983/job/116929229269"
-    }
-   ]
   }
  ]
 }
