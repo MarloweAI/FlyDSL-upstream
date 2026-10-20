@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-20T07:55:13Z",
+ "updated": "2026-10-20T07:57:41Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM (#1266)",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501",
    "created_at": "2026-10-20T07:53:06Z",
-   "updated_at": "2026-10-20T07:53:37Z",
+   "updated_at": "2026-10-20T07:55:17Z",
    "actor": "coderfeli",
    "jobs": []
   },
