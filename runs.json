@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T13:26:23Z",
+ "updated": "2026-10-20T13:30:51Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39430463660,
+   "pr": 1309,
+   "commit": "5055f13b7743899117d02e77285064884ea785f2",
+   "branch": "tdm-filler-contiguous-first",
+   "event": "pull_request",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39430463660",
+   "created_at": "2026-10-20T13:26:54Z",
+   "updated_at": "2026-10-20T13:28:20Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
   {
    "run_id": 39426961995,
    "pr": 1256,
@@ -29,18 +44,18 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T13:23:59Z",
+     "started_at": "2026-10-20T13:24:32Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424976"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T13:23:59Z",
+     "started_at": "2026-10-20T13:24:27Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652425106"
     }
@@ -53,19 +68,19 @@
    "branch": "codex/kernel-llvm-coop-cleanup-20261020",
    "event": "pull_request",
    "title": "[Kernel] Replace raw memory glue and manual reductions with fx APIs",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004",
    "created_at": "2026-10-20T12:13:07Z",
-   "updated_at": "2026-10-20T12:37:03Z",
+   "updated_at": "2026-10-20T13:24:48Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T12:37:03Z",
+     "started_at": "2026-10-20T13:24:47Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004/job/118630594187"
     },
@@ -2148,52 +2163,6 @@
      "started_at": "2026-10-16T17:47:48Z",
      "completed_at": "2026-10-16T20:08:57Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939983197/job/117113115217"
-    }
-   ]
-  },
-  {
-   "run_id": 38939977098,
-   "pr": null,
-   "commit": "d2d44b7a2d87d60f1be3b3185557315b8cd9a60f",
-   "branch": "skills/evals-and-cards",
-   "event": "pull_request",
-   "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098",
-   "created_at": "2026-10-16T17:28:44Z",
-   "updated_at": "2026-10-16T17:30:59Z",
-   "actor": "danielholanda",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T17:30:54Z",
-     "completed_at": "2026-10-16T17:30:56Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668525"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T17:30:54Z",
-     "completed_at": "2026-10-16T17:30:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668670",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T17:30:54Z",
-     "completed_at": "2026-10-16T17:30:56Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38939977098/job/117105668784"
     }
    ]
   }
