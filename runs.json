@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-20T09:34:19Z",
+ "updated": "2026-10-20T09:39:05Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "pr/feat-core-layout-replacement",
    "event": "pull_request",
    "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932",
    "created_at": "2026-10-20T09:17:47Z",
-   "updated_at": "2026-10-20T09:20:04Z",
+   "updated_at": "2026-10-20T09:36:02Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T09:36:37Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239159"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T09:36:43Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239213"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T09:36:02Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239449"
+    }
+   ]
   },
   {
    "run_id": 39389495501,
@@ -175,11 +203,11 @@
    "branch": "skills/review-pr-bot",
    "event": "pull_request",
    "title": "[Skills] review-pr: review a PR when a maintainer adds the ai-review label",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39386788447",
    "created_at": "2026-10-20T07:28:57Z",
-   "updated_at": "2026-10-20T07:51:00Z",
+   "updated_at": "2026-10-20T09:36:43Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -206,10 +234,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T07:51:00Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T09:36:42Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39386788447/job/118514110308"
     }
    ]
