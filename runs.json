@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T02:05:04Z",
+ "updated": "2026-10-20T02:08:51Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39356987057,
+   "pr": 1306,
+   "commit": "938b72882e788e02727a54d3bddfb8da140ef4be",
+   "branch": "mxfp8_perf",
+   "event": "pull_request",
+   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057",
+   "created_at": "2026-10-20T02:05:08Z",
+   "updated_at": "2026-10-20T02:06:48Z",
+   "actor": "solinzby1",
+   "jobs": []
+  },
   {
    "run_id": 39356705296,
    "pr": 1306,
@@ -10,11 +25,11 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356705296",
    "created_at": "2026-10-20T02:02:06Z",
-   "updated_at": "2026-10-20T02:03:00Z",
+   "updated_at": "2026-10-20T02:06:25Z",
    "actor": "solinzby1",
    "jobs": []
   },
@@ -2041,21 +2056,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766/job/116562792101"
     }
    ]
-  },
-  {
-   "run_id": 38754974153,
-   "pr": null,
-   "commit": "35c56681d7ed8bc6c90fcb81a2e3226e044bfd77",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754974153",
-   "created_at": "2026-10-15T14:50:22Z",
-   "updated_at": "2026-10-15T14:50:22Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
