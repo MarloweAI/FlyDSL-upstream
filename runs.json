@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T02:08:51Z",
+ "updated": "2026-10-20T02:15:11Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39357628391,
+   "pr": 1256,
+   "commit": "cd335a8d908094e2296d68d052260624bf6a8465",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391",
+   "created_at": "2026-10-20T02:12:08Z",
+   "updated_at": "2026-10-20T02:13:10Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39356987057,
    "pr": 1306,
@@ -14,7 +29,7 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057",
    "created_at": "2026-10-20T02:05:08Z",
-   "updated_at": "2026-10-20T02:06:48Z",
+   "updated_at": "2026-10-20T02:07:22Z",
    "actor": "solinzby1",
    "jobs": []
   },
@@ -55,20 +70,20 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183",
    "created_at": "2026-10-20T01:13:00Z",
-   "updated_at": "2026-10-20T01:33:16Z",
+   "updated_at": "2026-10-20T02:12:43Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T01:33:55Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T02:12:42Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183/job/118404722301"
     },
     {
@@ -83,10 +98,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T01:33:16Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T02:12:08Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183/job/118404722384"
     }
    ]
@@ -2013,49 +2028,6 @@
    "updated_at": "2026-10-15T18:48:40Z",
    "actor": "dimitri91209",
    "jobs": []
-  },
-  {
-   "run_id": 38773529766,
-   "pr": 1245,
-   "commit": "b7936d1c8ca41b24855930321771b1e6e2e522a5",
-   "branch": "xinyazhang/file-aotriton-0.14.2-gfx950-port/pr1-shared-fixes",
-   "event": "pull_request",
-   "title": "[Kernel][FA] Fix ds_read_tr waitcnt hazard and stagger SCC clobber (1/8)",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766",
-   "created_at": "2026-10-15T16:59:11Z",
-   "updated_at": "2026-10-16T03:47:01Z",
-   "actor": "xinyazhang",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T17:15:41Z",
-     "completed_at": "2026-10-15T17:35:55Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766/job/116562761023"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T17:16:59Z",
-     "completed_at": "2026-10-15T18:01:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766/job/116562761130"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-16T03:00:58Z",
-     "completed_at": "2026-10-16T03:47:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38773529766/job/116562792101"
-    }
-   ]
   }
  ]
 }
