@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T14:13:30Z",
+ "updated": "2026-10-20T14:19:15Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39437505557,
+   "pr": 1256,
+   "commit": "032072c9406475cde47cf2017506f7c2604d5cce",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39437505557",
+   "created_at": "2026-10-20T14:15:05Z",
+   "updated_at": "2026-10-20T14:16:55Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39436516513,
    "pr": null,
@@ -40,38 +55,41 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995",
    "created_at": "2026-10-20T13:01:52Z",
-   "updated_at": "2026-10-20T13:23:59Z",
+   "updated_at": "2026-10-20T14:16:31Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T13:23:58Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T14:15:06Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424815"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T13:24:32Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424976"
+     "completed_at": "2026-10-20T14:12:43Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424976",
+     "machine": "cv350-1e707-c03-2",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T13:24:27Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T14:16:30Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652425106"
     }
    ]
@@ -2122,21 +2140,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38960115974/job/117173734005"
     }
    ]
-  },
-  {
-   "run_id": 38959042373,
-   "pr": null,
-   "commit": "b2f5b135c2ad8e35d1a1d6a266b0b7079c593d9e",
-   "branch": "skills/evals-and-cards",
-   "event": "pull_request",
-   "title": "[Skills] Add evals and skill cards for kernel authoring and trace analysis",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38959042373",
-   "created_at": "2026-10-16T20:00:17Z",
-   "updated_at": "2026-10-16T20:03:31Z",
-   "actor": "danielholanda",
-   "jobs": []
   }
  ]
 }
