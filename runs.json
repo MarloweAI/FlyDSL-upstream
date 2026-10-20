@@ -1,8 +1,66 @@
 {
  "schema": 1,
- "updated": "2026-10-20T10:28:38Z",
+ "updated": "2026-10-20T11:07:53Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39412277621,
+   "pr": null,
+   "commit": "6f73a6d8423f8dc5631c2ab51dd3d936e2dc76a7",
+   "branch": "main",
+   "event": "push",
+   "title": "[Kernel] Remove redundant scalar, vector, and IR wrappers (#1262)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621",
+   "created_at": "2026-10-20T11:03:41Z",
+   "updated_at": "2026-10-20T11:05:40Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 39409153675,
+   "pr": null,
+   "commit": "b5eb1d33405ecbc897578f137ce2fd7a65137f8a",
+   "branch": "main",
+   "event": "push",
+   "title": "fix(coop): preserve declared operator element types (#1185)",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675",
+   "created_at": "2026-10-20T10:36:39Z",
+   "updated_at": "2026-10-20T11:05:10Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-20T10:56:06Z",
+     "completed_at": "2026-10-20T11:04:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549399"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-20T10:55:29Z",
+     "completed_at": "2026-10-20T11:03:41Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549449"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-20T10:56:20Z",
+     "completed_at": "2026-10-20T11:05:09Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549476"
+    }
+   ]
+  },
   {
    "run_id": 39407507769,
    "pr": 1313,
@@ -10,13 +68,41 @@
    "branch": "pr/feat-core-layout-replacement",
    "event": "pull_request",
    "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "completed",
-   "conclusion": "failure",
+   "status": "queued",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769",
    "created_at": "2026-10-20T10:22:44Z",
-   "updated_at": "2026-10-20T10:26:25Z",
+   "updated_at": "2026-10-20T10:44:52Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T10:45:28Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585501979"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T10:44:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585502018"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-20T10:45:21Z",
+     "completed_at": "2026-10-20T11:04:32Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585502020"
+    }
+   ]
   },
   {
    "run_id": 39399629932,
@@ -442,30 +528,30 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "completed",
-   "conclusion": "failure",
+   "status": "in_progress",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391",
    "created_at": "2026-10-20T02:12:08Z",
-   "updated_at": "2026-10-20T04:28:02Z",
+   "updated_at": "2026-10-20T11:04:39Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-20T02:30:54Z",
-     "completed_at": "2026-10-20T03:09:43Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272497"
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T10:55:28Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589337259"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-20T02:38:44Z",
-     "completed_at": "2026-10-20T02:54:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272524"
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T11:04:38Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589337545"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -474,7 +560,7 @@
      "conclusion": "success",
      "started_at": "2026-10-20T03:10:03Z",
      "completed_at": "2026-10-20T04:28:01Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272588"
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589380002"
     }
    ]
   },
@@ -2051,67 +2137,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38884765543/job/116929997837"
     }
    ]
-  },
-  {
-   "run_id": 38874484030,
-   "pr": 1302,
-   "commit": "195d874b875b1137dd7729e87a725746a91d4482",
-   "branch": "tdm-relax-inner-span",
-   "event": "pull_request",
-   "title": "[ROCDL] Gate the TDM tile_dim0 span check on padding",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030",
-   "created_at": "2026-10-16T08:33:27Z",
-   "updated_at": "2026-10-16T11:31:43Z",
-   "actor": "xudoyuan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T09:08:35Z",
-     "completed_at": "2026-10-16T09:31:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898790943"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T10:26:14Z",
-     "completed_at": "2026-10-16T11:31:42Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898790980"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T09:09:26Z",
-     "completed_at": "2026-10-16T10:16:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874484030/job/116898791011",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 38874070008,
-   "pr": null,
-   "commit": "c72e75be9dc1c46890b7582bacf7ea29ed4d64e9",
-   "branch": "tdm-relax-inner-span",
-   "event": "pull_request",
-   "title": "[ROCDL] Gate the TDM tile_dim0 span check on padding",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38874070008",
-   "created_at": "2026-10-16T08:29:50Z",
-   "updated_at": "2026-10-16T08:34:44Z",
-   "actor": "xudoyuan",
-   "jobs": []
   }
  ]
 }
