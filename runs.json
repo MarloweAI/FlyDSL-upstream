@@ -1,8 +1,81 @@
 {
  "schema": 1,
- "updated": "2026-10-20T01:01:24Z",
+ "updated": "2026-10-20T02:05:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39356705296,
+   "pr": 1306,
+   "commit": "6fc2ca5bd8ef41f3e616392608511a4c06d63a1e",
+   "branch": "mxfp8_perf",
+   "event": "pull_request",
+   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356705296",
+   "created_at": "2026-10-20T02:02:06Z",
+   "updated_at": "2026-10-20T02:03:00Z",
+   "actor": "solinzby1",
+   "jobs": []
+  },
+  {
+   "run_id": 39356328860,
+   "pr": 1306,
+   "commit": "7b8b7db1422bbd969d431e38a7a2ecf880aa7d2d",
+   "branch": "mxfp8_perf",
+   "event": "pull_request",
+   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356328860",
+   "created_at": "2026-10-20T01:58:03Z",
+   "updated_at": "2026-10-20T02:02:33Z",
+   "actor": "solinzby1",
+   "jobs": []
+  },
+  {
+   "run_id": 39352183183,
+   "pr": 1256,
+   "commit": "315f97b3c06b394a6c733d6a2a417f75bafed001",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183",
+   "created_at": "2026-10-20T01:13:00Z",
+   "updated_at": "2026-10-20T01:33:16Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T01:33:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183/job/118404722301"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-20T01:33:37Z",
+     "completed_at": "2026-10-20T01:52:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183/job/118404722308"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T01:33:16Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39352183183/job/118404722384"
+    }
+   ]
+  },
   {
    "run_id": 39348414363,
    "pr": null,
@@ -10,37 +83,40 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels (#1310)",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363",
    "created_at": "2026-10-20T00:34:08Z",
-   "updated_at": "2026-10-20T00:48:34Z",
+   "updated_at": "2026-10-20T01:33:54Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T00:49:01Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T01:06:01Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391137265"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T00:49:08Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391137278"
+     "completed_at": "2026-10-20T01:44:39Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391137278",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T00:48:34Z",
+     "started_at": "2026-10-20T01:33:54Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391138186"
     }
@@ -399,7 +475,7 @@
    "commit": "79a6b9deabd79faabd9962b3035153f3bf93b8fa",
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
-   "title": "[Perf] Fuse GLM-5.2 TP4 indexer for MTP4 C1/C2",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
    "status": "completed",
    "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229",
@@ -1979,79 +2055,6 @@
    "created_at": "2026-10-15T14:50:22Z",
    "updated_at": "2026-10-15T14:50:22Z",
    "actor": "dimitri91209",
-   "jobs": []
-  },
-  {
-   "run_id": 38754964270,
-   "pr": 1298,
-   "commit": "99f77c35ad3f0b783eb3c89e9cdf87d534c57e81",
-   "branch": "skills/catalog-kernel-authoring",
-   "event": "pull_request",
-   "title": "Add catalog entry point for the existing kernel authoring skill",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270",
-   "created_at": "2026-10-15T14:50:18Z",
-   "updated_at": "2026-10-15T21:01:38Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T17:16:26Z",
-     "completed_at": "2026-10-15T21:01:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770527"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-15T15:04:12Z",
-     "completed_at": "2026-10-15T15:22:38Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770535"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-15T15:04:45Z",
-     "completed_at": "2026-10-15T15:49:06Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38754964270/job/116497770765"
-    }
-   ]
-  },
-  {
-   "run_id": 38753140638,
-   "pr": 1299,
-   "commit": "82d59dcde9a943747a58f714977324aab359d0b1",
-   "branch": "skills/catalog-kernel-trace-analysis",
-   "event": "pull_request",
-   "title": "Add catalog entry point for the existing kernel trace skill",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38753140638",
-   "created_at": "2026-10-15T14:38:04Z",
-   "updated_at": "2026-10-15T14:39:54Z",
-   "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 38752987573,
-   "pr": null,
-   "commit": "fa7925e69e0abc313aa483084c2c8a3a58adba0d",
-   "branch": "skills/catalog-kernel-authoring",
-   "event": "pull_request",
-   "title": "Add catalog entry point for the existing kernel authoring skill",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38752987573",
-   "created_at": "2026-10-15T14:37:01Z",
-   "updated_at": "2026-10-15T14:51:57Z",
-   "actor": "coderfeli",
    "jobs": []
   }
  ]
