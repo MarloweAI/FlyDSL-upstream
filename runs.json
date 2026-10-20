@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-20T03:16:26Z",
+ "updated": "2026-10-20T03:35:52Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501",
    "created_at": "2026-10-20T03:08:09Z",
-   "updated_at": "2026-10-20T03:14:18Z",
+   "updated_at": "2026-10-20T03:33:24Z",
    "actor": "solinzby1",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T03:33:23Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424479"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T03:33:55Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424499"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T03:33:46Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424556"
+    }
+   ]
   },
   {
    "run_id": 39357628391,
