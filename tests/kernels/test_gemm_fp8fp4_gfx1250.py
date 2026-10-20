@@ -33,6 +33,7 @@ from kernels.gemm.gemm_a8w4_gfx1250 import launch_gemm_a8w4  # noqa: E402
 from kernels.gemm.gemm_a8w8_256x256_gfx1250 import a8w8_kpair, launch_gemm_a8w8_256x256  # noqa: E402
 from kernels.gemm.gemm_a8w8_gfx1250 import launch_gemm_a8w8  # noqa: E402
 from kernels.gemm.gemm_a8w8_splitk_reduce_gfx1250 import compile_gemm_a8w8_splitk_reduce  # noqa: E402
+from kernels.gemm.gemm_common_gfx1250 import B_SCALE_BLOCKS  # noqa: E402
 from tests.kernels.utils import gemm_common_utils as utils  # noqa: E402
 from tests.test_common import run_perftest  # noqa: E402
 
@@ -48,10 +49,19 @@ class _Mode:
     launch: object
     tiles: tuple
     shape: tuple[int, int, int]
-    scale: int | str = 32
+    b_scale: str = "1x32"  # "ptpc", or the kernels' b_scale_block: "1x32" / "32x32" / "128x128"
     fp4_act: bool = False
     fp4_w: bool = False
     supports_out_dtype: bool = True
+
+    @property
+    def ptpc(self):
+        return self.b_scale == "ptpc"
+
+    @property
+    def b_block(self):
+        """(N rows, K) of one weight-scale block; the A scale is one per token per K block."""
+        return B_SCALE_BLOCKS[self.b_scale]
 
     @property
     def scheduled(self):
@@ -76,6 +86,7 @@ _A8W8_TILES = (
 _A8W4_TILES = tuple((m, n, 128, 2, 2, nb) for m in (256, 128) for n in (256, 128) for nb in (3, 4))
 _A4W4_TILES = tuple((m, n, k, 2, 2, 4) for m in (256, 128) for n in (256, 128) for k in (256, 128))
 _MX_TILES = ((128, 256, 128, 2, 2, 2), (256, 256, 128, 2, 2, 4), (128, 256, 128, 2, 2, 3))
+_DECODE_TILES = ((16, 256, 256, 1, 4, 4), (64, 256, 256, 2, 2, 3))
 _MODES = {
     "a4w4": _Mode(
         launch_gemm_a4w4,
@@ -101,14 +112,20 @@ _MODES = {
             (128, 128, 128, 1, 2, 2),
         ),
         (1024, 256, 512),
-        scale="ptpc",
+        b_scale="ptpc",
     ),
-    "blockscale_a8w8": _Mode(launch_gemm_a8w8, _MX_TILES, (1024, 512, 512), scale=128, supports_out_dtype=False),
+    "blockscale_a8w8": _Mode(
+        launch_gemm_a8w8, _MX_TILES, (1024, 512, 512), b_scale="128x128", supports_out_dtype=False
+    ),
     "mxscale_a8w8": _Mode(launch_gemm_a8w8, _MX_TILES, (1024, 512, 512), supports_out_dtype=False),
     "mxscale_a8w4_256x256": _Mode(launch_gemm_a8w4_256x256, _A8W4_TILES, (1024, 1024, 512), fp4_w=True),
     "mxscale_a4w4_256x256": _Mode(launch_gemm_a4w4_256x256, _A4W4_TILES, (1024, 1024, 1024), fp4_act=True, fp4_w=True),
     "mxscale_a8w8_256x256": _Mode(launch_gemm_a8w8_256x256, _A8W8_TILES, (1024, 1024, 1024)),
-    "blockscale_a8w8_256x256": _Mode(launch_gemm_a8w8_256x256, _A8W8_TILES, (1024, 1024, 1024), scale=128),
+    "b32x32_a8w8": _Mode(
+        launch_gemm_a8w8, _MX_TILES + _DECODE_TILES, (1024, 512, 512), b_scale="32x32", supports_out_dtype=False
+    ),
+    "b32x32_a8w8_256x256": _Mode(launch_gemm_a8w8_256x256, _A8W8_TILES, (1024, 1024, 1024), b_scale="32x32"),
+    "blockscale_a8w8_256x256": _Mode(launch_gemm_a8w8_256x256, _A8W8_TILES, (1024, 1024, 1024), b_scale="128x128"),
 }
 
 
@@ -162,7 +179,7 @@ def _preshuffle_scale(scale):
 def _scales_and_reference(cfg, a, b, out_dtype, const_val, scale_scale):
     M, K = a.shape
     N = b.shape[0]
-    if cfg.scale == "ptpc":
+    if cfg.ptpc:
 
         def scale(rows):
             values = (
@@ -176,7 +193,7 @@ def _scales_and_reference(cfg, a, b, out_dtype, const_val, scale_scale):
         ref = (a @ b.T) * sa[:, None] * sb[None, :]
         return sa, sb, ref, (2e-2, max(5e-2, 2e-2 * float(ref.abs().max()))), 0
 
-    block = cfg.scale
+    b_rows, block = cfg.b_block
     low, high = (
         (127, 127) if out_dtype == "f16" and block == 32 else ((127, 132) if cfg.fp4_w and block == 32 else (126, 129))
     )
@@ -190,11 +207,11 @@ def _scales_and_reference(cfg, a, b, out_dtype, const_val, scale_scale):
             return utils.random_e8m0(rows, groups, low_exp=low, high_exp=high, device="cuda")
         return torch.full((rows, groups), min(max(127, low), high), dtype=torch.uint8, device="cuda")
 
-    sa, sb = scale(M), scale(N if block == 32 else N // block)
+    sa, sb = scale(M), scale(N // b_rows)
     a_scale = utils.e8m0_to_f32(sa).repeat_interleave(block, dim=1)[:, :K]
     b_scale = utils.e8m0_to_f32(sb).repeat_interleave(block, dim=1)[:, :K]
-    if block == 128:
-        b_scale = b_scale.repeat_interleave(block, dim=0)
+    if b_rows > 1:
+        b_scale = b_scale.repeat_interleave(b_rows, dim=0)
     ref = (a * a_scale) @ (b * b_scale).T
     tol = (1e-2, 5e-2)
     if cfg.launch is launch_gemm_a4w4:
@@ -204,6 +221,8 @@ def _scales_and_reference(cfg, a, b, out_dtype, const_val, scale_scale):
         tol = (min(5e-2, 1e-2 + 3e-3 * peak_exp), max(5e-2, K * (0.6 + 1.5 * peak_exp)))
     if block == 32:
         sa = torch.nn.functional.pad(sa, (0, (-sa.shape[1]) % 4), value=127)
+        if b_rows == 32:  # the compact [N/32, K/32] array goes in as it is
+            return _preshuffle_scale(sa), sb.view(torch.uint8).contiguous(), ref, tol, 0
         sb = torch.nn.functional.pad(sb, (0, (-sb.shape[1]) % 4), value=127)
         return _preshuffle_scale(sa), _preshuffle_scale(sb), ref, tol, 0
     return sa.T.contiguous(), sb, ref, tol, M
@@ -304,7 +323,7 @@ def _execute(
         )
     else:
         partials = out
-    ptr = functools.partial(_pointer, unsigned=cfg.scale == "ptpc")
+    ptr = functools.partial(_pointer, unsigned=cfg.ptpc)
     tensor_args = cfg.launch is launch_gemm_a8w4
     bounded_m = (M % tm != 0 or m_tiles % cluster_m != 0) if bounded_m is None else bounded_m
     if general_a4w4 or tensor_args:
@@ -337,7 +356,7 @@ def _execute(
             nb,
             cluster_m,
             cluster_n,
-            *((cfg.scale != "ptpc", 128 if cfg.scale == "ptpc" else cfg.scale) if not cfg.fp4_w else ()),
+            *((not cfg.ptpc, "1x32" if cfg.ptpc else cfg.b_scale) if not cfg.fp4_w else ()),
             split_k,
             *tail,
         )
@@ -382,6 +401,7 @@ def _unsupported(cfg, shape, tile, options):
     cm, cn = options.get("cluster_m", 1), options.get("cluster_n", 1)
     sk, ps = options.get("split_k", 1), options.get("persistent_n_tiles", 1)
     general_a4w4 = cfg.launch is launch_gemm_a4w4
+    b_rows, k_block = (1, 1) if cfg.ptpc else cfg.b_block  # ptpc has no scale block
     if min(M, N, *tile, cm, cn, sk, ps) <= 0 or (K < 0 if general_a4w4 else K <= 0):
         return "shape, tiles, cluster and split counts must be positive"
     step, minimum = (32, 32) if cfg.launch is launch_gemm_a4w4 else (tk, tk * nb)
@@ -422,10 +442,13 @@ def _unsupported(cfg, shape, tile, options):
             f"K={K} needs multiples of {step} and at least {minimum} per split",
         ),
         (
-            not general_a4w4 and cfg.scale != "ptpc" and K % cfg.scale != 0,
-            f"K must be divisible by the scale block size {cfg.scale}",
+            not general_a4w4 and not cfg.ptpc and K % k_block != 0,
+            f"K must be divisible by the scale block size {k_block}",
         ),
-        (cfg.scale == 128 and N % 128 != 0, "blockscale N must be divisible by 128"),
+        (
+            N % b_rows != 0,
+            f"N must be divisible by the weight-scale block rows {b_rows}",
+        ),
         (
             options.get("a_preshuffle")
             and (
@@ -525,10 +548,22 @@ def _cases():
                 mode, f"stride-a{lda}-c{ldc}-sk{sk}", (1024, N, K * sk), lda_extra=lda, ldc_extra=ldc, split_k=sk
             )
         if cfg.supports_out_dtype:
-            yield _case(mode, "f16", out_dtype="f16", scale_scale=0.02 if cfg.scale == "ptpc" else 1.0)
+            yield _case(mode, "f16", out_dtype="f16", scale_scale=0.02 if cfg.ptpc else 1.0)
         yield _case(mode, "constant", const_val=0.5)
         if not cfg.fp4_act:  # FP4 random inputs already include both signs.
             yield _case(mode, "signed-operands", signed=True)
+        if cfg.b_scale == "32x32":
+            # K per split sizes the compact weight scale in LDS and the number of rounds that copy it there.
+            for k in (640, 1536, 4096, 4224):
+                yield _case(mode, f"k-{k}", (65, N, k))
+            # Long compact scale rows, with and without split-K.
+            if cfg.launch is launch_gemm_a8w8_256x256:
+                yield _case(mode, "long-k", (1024, 1024, 65536))
+                yield _case(mode, "long-k-split2", (1024, 1024, 65536), split_k=2)
+                yield _case(mode, "long-k-kpair2-split2", (1024, 1024, 131072), (128, 256, 128, 2, 2, 3), split_k=2)
+            else:
+                yield _case(mode, "long-k", (64, 512, 65536), (64, 256, 256, 2, 2, 3))
+                yield _case(mode, "long-k-split2", (17, 512, 65536), (16, 256, 256, 1, 4, 4), split_k=2)
         if mode == "mxscale_a8w8":
             for m in (16, 64):
                 tile = (m, 256, 256, 1 if m == 16 else 2, 4 if m == 16 else 2, 4 if m == 16 else 3)
@@ -693,13 +728,16 @@ def test_gemm(gemm, options):
     gemm.check(repeats=options.get("repeats", 0))
 
 
-@pytest.mark.parametrize("mode", ("mxscale_a8w8", "mxscale_a8w4", "a4w4"))
+@pytest.mark.parametrize("mode", ("mxscale_a8w8", "b32x32_a8w8", "b32x32_a8w8_256x256", "mxscale_a8w4", "a4w4"))
 @pytest.mark.parametrize("split_k", (1, 2))
 def test_rebind_gemm_buffers(mode, split_k):
     """Rotated inputs, scales, output and split-K scratch must all use the new allocations."""
     cfg = _MODES[mode]
     shape, tile = (64, 256, 1536), (64, 128, 256, 2, 2, 3)
     options = dict(b_preshuffle=False, cluster_n=2, split_k=split_k, c_guard_rows=16, ldc_extra=32)
+    if cfg.scheduled:
+        shape, tile = (512, 512, 1536), cfg.tiles[0]
+        options.update(b_preshuffle=True, cluster_m=2, c_guard_rows=256)
     assert _unsupported(cfg, shape, tile, options) is None
     run = _execute(cfg, shape, tile, **options)
     run.check()
@@ -734,6 +772,80 @@ def test_benchmark_rejects_stale_output(monkeypatch, rotate):
         run.launch = lambda: None
     with pytest.raises(AssertionError):
         (_bench_rotate_us if rotate else _bench_us)(run)
+
+
+@pytest.mark.parametrize("tile", _A8W8_TILES)
+def test_b32x32_drain(tile):
+    """Every scheduled profile covers short prologues and all final-revolution lengths."""
+    cfg = _MODES["b32x32_a8w8_256x256"]
+    tm, tn, tk, _, _, nb = tile
+    super_k = tk * a8w8_kpair(tn, nb)
+    for split_k in (1, 2):
+        for supers in range((512 + super_k - 1) // super_k, 2 * nb + 1):
+            _execute(
+                cfg,
+                (65, 512, supers * super_k * split_k),
+                tile,
+                cluster_m=2,
+                cluster_n=2,
+                split_k=split_k,
+                c_guard_rows=tm * 2,
+                ldc_extra=32,
+                signed=True,
+            ).check(repeats=8)
+
+
+@pytest.mark.parametrize(
+    "mode,tile,cluster",
+    (
+        ("b32x32_a8w8", (128, 256, 128, 2, 2, 2), (1, 1)),
+        ("b32x32_a8w8_256x256", (256, 256, 128, 2, 2, 4), (2, 2)),
+        ("b32x32_a8w8_256x256", (128, 256, 128, 2, 2, 3), (2, 2)),
+    ),
+)
+def test_b32x32_runtime_k(monkeypatch, mode, tile, cluster):
+    """Reuse one compiled launcher across growing and shrinking scale allocations."""
+    compile_original = flyc.compile
+    compiled = None
+    cache_key = None
+
+    def integer_operand(rows, K, fp4, const_val, out_dtype, signed=False):
+        # Keep long-K sums exact, including cancellation, while retaining the harness's
+        # nonconstant E8M0 scales. Arbitrary FP8 fractions lose precision for both the
+        # compact and expanded scale paths at K >= 65536.
+        values = torch.randint(-2, 3, (rows, K), device="cuda").float()
+        return values.to(torch.float8_e4m3fn).view(torch.uint8), values
+
+    def compile_once(launcher, *args):
+        nonlocal compiled, cache_key
+        launcher._ensure_sig()
+        bound = launcher._sig.bind(*args)
+        bound.apply_defaults()
+        key = launcher._resolve_and_make_cache_key(bound.arguments)
+        if compiled is None:
+            cache_key = key
+            compiled = compile_original(launcher, *args)
+        else:
+            assert key == cache_key, "changing runtime K created a new JIT specialization"
+            compiled(*args)
+        return compiled
+
+    monkeypatch.setattr(flyc, "compile", compile_once)
+    monkeypatch.setattr(sys.modules[__name__], "_operand", integer_operand)
+    # The 3-buffer 128x256 profile already uses 297 KiB for A/B. Its long-K
+    # split case above covers K=131072 without exceeding the device's 320 KiB LDS.
+    largest_k = 65536 if mode.endswith("256x256") and tile[5] == 3 else 131072
+    for k in (768, 8192, 4352, 1536, 65536, largest_k, 768):
+        _execute(
+            _MODES[mode],
+            (65, 512, k),
+            tile,
+            cluster_m=cluster[0],
+            cluster_n=cluster[1],
+            c_guard_rows=tile[0] * cluster[0],
+            ldc_extra=32,
+            signed=True,
+        ).check(repeats=4)
 
 
 def test_a8w8_row_major_rejects_small_k():
@@ -824,7 +936,7 @@ def _bench_rotate_us(run):
 def _bytes_moved(cfg, M, N, K):
     a_bytes = M * K // (2 if cfg.fp4_act else 1)
     b_bytes = N * K // (2 if cfg.fp4_w else 1)
-    scale_bytes = (M + N) * 4 if cfg.scale == "ptpc" else (M + (N if cfg.scale == 32 else N // 128)) * (K // cfg.scale)
+    scale_bytes = (M + N) * 4 if cfg.ptpc else (M + N // cfg.b_block[0]) * (K // cfg.b_block[1])
     return a_bytes + b_bytes + scale_bytes + M * N * 2
 
 

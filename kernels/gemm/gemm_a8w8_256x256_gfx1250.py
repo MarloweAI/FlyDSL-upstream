@@ -16,6 +16,7 @@ from kernels.common.gfx1250_cluster import compute_mcast_masks
 from kernels.common.kernels_common import format_kernel_name
 
 from .gemm_common_gfx1250 import (
+    b_scale_block_shape,
     make_gemm_grid,
     make_lds_copy_ops,
     pipeline_fence,
@@ -56,7 +57,7 @@ def launch_gemm_a8w8_256x256(
     cluster_m: Constexpr[int],
     cluster_n: Constexpr[int],
     is_mxscale: Constexpr[bool],
-    block_size: Constexpr[int],
+    b_scale_block: Constexpr[str] = "1x32",
     split_k: Constexpr[int] = 1,
     a_preshuffle: Constexpr[bool] = False,
     persistent_n_tiles: Constexpr[int] = 1,
@@ -93,8 +94,9 @@ def launch_gemm_a8w8_256x256(
     WAVE = fx.num_warp_threads()
     PACK_TK = tile_k  # B row bytes per K-tile (FP8, one byte per element)
     assert is_mxscale, "only the MX-scaled profiles are supported"
-    mx32 = block_size == 32
-    assert mx32 or block_size == 128, f"block_size must be 32 or 128, got {block_size}"
+    b_rows, k_block = b_scale_block_shape(b_scale_block)
+    mx32 = k_block == 32
+    compact_b = b_rows == 32  # "32x32": the weight scale is read as [N/32, K/32]
     SA_SUPERS = tile_m // 32
     SB_SUPERS = tile_n // 32
     K_WS = tile_k // WMMA_K
@@ -137,7 +139,8 @@ def launch_gemm_a8w8_256x256(
     PLANAR_A_BASE = PLANAR_B_BASE + num_buffers * STAGE_B
     PLANAR_SA_BASE = PLANAR_A_BASE + num_buffers * STAGE_A
     PLANAR_SB_BASE = PLANAR_SA_BASE + num_buffers * STAGE_SA
-    PLANAR_END = PLANAR_SB_BASE + num_buffers * STAGE_SB
+    # compact_b: the weight scale, [K/128][SB_SUPERS][4 B], sits behind the arena and is sized at launch.
+    PLANAR_END = PLANAR_SB_BASE + (0 if compact_b else num_buffers * STAGE_SB)
 
     partial_elem = fx.Float32 if split_k > 1 else (fx.Float16 if out_is_f16 else fx.BFloat16)
     partial_bytes = 4 if split_k > 1 else 2
@@ -147,12 +150,13 @@ def launch_gemm_a8w8_256x256(
     arch = get_rocm_arch().split(":", 1)[0]
     check_smem_capacity(ARENA_B, arch)
     kernel_name = format_kernel_name(
-        f"gemm_a8w8_mx{block_size}_compute_t{tile_m}x{tile_n}x{tile_k}"
+        f"gemm_a8w8_mx{k_block}_compute_t{tile_m}x{tile_n}x{tile_k}"
         f"_mw{m_warp}_nw{n_warp}_nb{num_buffers}_sk{split_k}"
         f"_cm{cluster_m}_cn{cluster_n}"
         + ("_apre" if a_preshuffle else "")
         + (f"_ps{persistent_n_tiles}" if persistent_n_tiles > 1 else "")
         + ("_fsk" if cluster_splitk else "")
+        + ("_wb32x32" if compact_b else "")
     )
 
     def _run_tile(
@@ -240,7 +244,7 @@ def launch_gemm_a8w8_256x256(
         b_off0 = (blk_n64 // 16) * Kp16 + k_elem0 * 16
         if const_expr(mx32):
             sa_off0 = (blk_m64 // 32) * k64 + k_elem0
-            sb_off0 = (blk_n64 // 32) * k64 + k_elem0
+            sb_off0 = (blk_n64 // 32) * (k64 // 32) + k_elem0 // 32 if compact_b else (blk_n64 // 32) * k64 + k_elem0
         else:
             scale_k0 = kt_base * K_WS
             sa_off0 = blk_m64 + scale_k0 * fx.Int64(i32_stride_ascale_k)
@@ -249,8 +253,8 @@ def launch_gemm_a8w8_256x256(
         gA = _gv(gA_base, a_off0, (A_LDS_ROWS, A_PAIR * tile_k), (A_PAIR * tile_k, 1))
         gB = _gv(gB_base, b_off0, (tile_n // 16, PACK_TK * 16), (PACK_TK * 16, 1))
         if const_expr(mx32):
-            sa_gstride, sb_gstride = i32_k, i32_k
-            sa_bound, sa_step, sb_step = sa_oob, SUPER_K, SUPER_K
+            sa_gstride, sb_gstride = i32_k, i32_k // 32 if compact_b else i32_k
+            sa_bound, sa_step, sb_step = sa_oob, SUPER_K, 0 if compact_b else SUPER_K
         else:
             sa_gstride, sb_gstride = i32_stride_ascale_k, i32_k // 128
             sa_bound = (mn_oob > 0).select(fx.Int32(SC_K), fx.Int32(0))
@@ -270,7 +274,7 @@ def launch_gemm_a8w8_256x256(
                 stride, mask, bound, step, pad = sa_gstride, a_mask, sa_bound, sa_step, 0
             else:
                 tensor, offset, shape, lds_stride = gSB, PLANAR_SB_BASE, SB_SHAPE, SB_LDS_STRIDE
-                stride, mask, bound, step, pad = sb_gstride, b_mask, None, sb_step, 0
+                stride, mask, bound, step, pad = sb_gstride, fx.Int32(0) if compact_b else b_mask, None, sb_step, 0
                 if const_expr(not mx32):
                     flat_wg = fx.Int32(local_x) + fx.Int32(local_y) * cluster_m + cluster_plane
                     mask = fx.Int32(1) << fx.Int32(rocdl.readfirstlane(T.i32, flat_wg))
@@ -304,6 +308,12 @@ def launch_gemm_a8w8_256x256(
         else:
             dgroup0, dgroup1, tdm_lds_step, tdm_global_step = _build_tdm_desc(3)
 
+        if const_expr(compact_b):
+            # The weight scale comes by per-lane DMA; the scale wave's TDMs are NOPs (tile_dim0 == 0) aimed at its own
+            # rows, which keeps every wave on one instruction stream.
+            elems = [dgroup1[i] for i in range_constexpr(8)]
+            elems[3] = (wave == 3).select(elems[3] & 0xFFFF, elems[3])
+            dgroup1 = Vec.from_elements(elems, fx.Int32)
         tdm_desc = tdm_ops.TDMDescriptor2D(as_ir_value(dgroup0), as_ir_value(dgroup1))
         tdm_base_lds, tdm_base_lo, tdm_base_hi = dgroup0[1], dgroup0[2], dgroup0[3]
 
@@ -390,6 +400,11 @@ def launch_gemm_a8w8_256x256(
             stage_sa_addr.append(_planar_base(PLANAR_SA_BASE, STAGE_SA, slot) + sa_byte + par * sa_par_step)
             stage_sb_addr.append(_planar_base(PLANAR_SB_BASE, STAGE_SB, slot) + sb_byte + par * sb_par_step)
 
+        if const_expr(compact_b):
+            # Only the base advances each revolution; row and stage displacements stay DS immediates.
+            SB_K_STEP = SB_SUPERS * 4
+            sb_wave_base = fx.Int32(_planar_base(ARENA_B, 0, 0)) + fx.Int32(wave_n * (N_SB * 4))
+
         lds_load_b32, _ = make_lds_copy_ops(32)
         lds_load_b128, _ = make_lds_copy_ops(128)
 
@@ -411,7 +426,9 @@ def launch_gemm_a8w8_256x256(
         def _stage_load_sa(stage, sm):
             return lds_load_b32(stage_sa_addr[stage], sm * SA_WORD_STEP)[0]
 
-        def _stage_load_sb(stage, sn):
+        def _stage_load_sb(stage, sn, sb_ptr=None, next_rev=False):
+            if const_expr(compact_b):
+                return lds_load_b32(sb_ptr, sn * 4 + (stage + (UNROLL if next_rev else 0)) * SB_K_STEP)[0]
             return lds_load_b32(stage_sb_addr[stage], sn * SUPER_K)[0]
 
         def _scale_of(word, sel):
@@ -423,13 +440,15 @@ def launch_gemm_a8w8_256x256(
         seed_sa = [fx.make_rmem_tensor(1, fx.Int32) for _ in range_constexpr(N_SA)]
         seed_sb = [fx.make_rmem_tensor(1, fx.Int32) for _ in range_constexpr(N_SB)]
 
-        def _seed_thunks(stage, parity=0):
+        def _seed_thunks(stage, parity=0, sb_ptr=None, next_rev=False):
             """Seed loads of the next stage, one producer per WMMA slot: (early, tail)."""
             head = [
                 lambda sm=sm: seed_sa[sm].store(Vec.from_elements([_stage_load_sa(stage, sm)], fx.Int32))
                 for sm in range_constexpr(N_SA)
             ] + [
-                lambda sn=sn: seed_sb[sn].store(Vec.from_elements([_stage_load_sb(stage, sn)], fx.Int32))
+                lambda sn=sn: seed_sb[sn].store(
+                    Vec.from_elements([_stage_load_sb(stage, sn, sb_ptr, next_rev)], fx.Int32)
+                )
                 for sn in range_constexpr(N_SB)
             ]
             a_thunks = [
@@ -446,7 +465,7 @@ def launch_gemm_a8w8_256x256(
                 head = [(lambda a=head[i], b=head[N_SA + i]: (a(), b())) for i in range_constexpr(N_SA)]
             return head + early, tail
 
-        def _compute_stage(stage, future_kt, fence_outstanding, has_next, parity=0):
+        def _compute_stage(stage, future_kt, fence_outstanding, has_next, parity=0, sb_ptr=None):
             """One K-tile, four 64x64 quadrants, at most three fragment groups live."""
             next_stage = (stage + 1) % UNROLL
             boundary = stage % KPAIR == KPAIR - 1
@@ -516,7 +535,9 @@ def launch_gemm_a8w8_256x256(
 
             # Q2 waits for READY after a quarter of its WMMAs; the next stage's seeds fill Q2 and Q3.
             slack = n_slots // 4
-            early, tail = _seed_thunks(next_stage, parity) if const_expr(has_next) else ([], [])
+            early, tail = (
+                _seed_thunks(next_stage, parity, sb_ptr, stage == UNROLL - 1) if const_expr(has_next) else ([], [])
+            )
             n_q2 = n_slots - slack
             assert len(early) - n_q2 <= n_slots - len(tail), "seed thunks overflow Q2 + Q3"
             q2 = {slack - 1: _wait_refill}
@@ -550,8 +571,20 @@ def launch_gemm_a8w8_256x256(
             seed_delta = fx.Int32(i) * tdm_global_step
             seed_delta = (seed_delta < last_delta).select(seed_delta, last_delta)
             tdm_ops.tensor_load_2d(_prepare_tdm(i, seed_delta))
+        if const_expr(compact_b):
+            # Transpose [n32, k128, 4 B] to [k128, n32, 4 B] while the A/B TDMs are in flight.
+            # A uniform 64-bit base plus 32-bit lane offsets selects the scalar-base GVS instruction.
+            n_dw = SB_SUPERS * (K_TILES * tile_k // 128)
+            src_base = fx.add_offset(arg_scale_b, (blk_n64 // 32) * (k64 // 32) + k_elem0 // 32)
+            for copy_idx in range(tid, n_dw, block):
+                idx = fx.Int32(copy_idx)
+                offset = (idx % SB_SUPERS) * (i32_k // 32) + (idx // SB_SUPERS) * 4
+                src = fx.add_offset(src_base, fx.Int64(fx.Uint32(offset)))
+                dst = fx.add_offset(base_ptr, ARENA_B + idx * 4)
+                rocdl.global_load_async_to_lds_b32(fx.to_llvm_ptr(src), fx.to_llvm_ptr(dst), 0)
+            rocdl.s_wait_asynccnt(0)
         pipeline_fence(outstanding=num_buffers - 1, use_cluster=False)
-        for group in _seed_thunks(0):
+        for group in _seed_thunks(0, 0, sb_wave_base if compact_b else None):
             for thunk in group:
                 thunk()
 
@@ -562,11 +595,12 @@ def launch_gemm_a8w8_256x256(
         def _run_steady(owner_parity):
             for rev in range(n_full):
                 rev_delta = (rev * num_buffers) * tdm_global_step
+                sb_ptr = sb_wave_base + fx.Int32(rev) * (UNROLL * SB_K_STEP) if const_expr(compact_b) else None
                 do_sync = (rev % cluster_sync_revs) == (cluster_sync_revs - 1)
                 for g in range_constexpr(UNROLL):
                     delta = rev_delta + slot_delta[g // KPAIR]
                     delta = (delta < last_delta).select(delta, last_delta)
-                    _compute_stage(g, delta, num_buffers - 2, True, owner_parity)
+                    _compute_stage(g, delta, num_buffers - 2, True, owner_parity, sb_ptr)
                 if do_sync:
                     cluster.cluster_barrier()
 
@@ -581,7 +615,19 @@ def launch_gemm_a8w8_256x256(
         rocdl.sched_barrier(0)
         for g in range_constexpr(UNROLL):
             if g < drain_s * KPAIR:
-                _compute_stage(g, None, num_buffers - 2 - g // KPAIR, g < UNROLL - 1)
+                sb_drain_ptr = None
+                if const_expr(compact_b):
+                    # A partial drain still issues an unused next-stage seed. Keep that read inside the scale array.
+                    next_kt = n_full * UNROLL + g + 1
+                    next_kt = (next_kt < K_TILES).select(next_kt, K_TILES - 1)
+                    sb_drain_ptr = sb_wave_base + (next_kt - g - 1) * SB_K_STEP
+                _compute_stage(
+                    g,
+                    None,
+                    num_buffers - 2 - g // KPAIR,
+                    g < UNROLL - 1,
+                    sb_ptr=sb_drain_ptr,
+                )
         accs = [c_frags[idx].load() for idx in range_constexpr(n_acc)]
 
         pipeline_fence(outstanding=0, use_cluster=True)
@@ -686,7 +732,13 @@ def launch_gemm_a8w8_256x256(
         i32_ldc,
         arg_out,
         value_attrs={"rocdl.cluster_dims": f"{cluster_m},{cluster_n},{cluster_k}"},
-    ).launch(grid=grid_arg, block=(block, 1, 1), stream=stream, cluster=(cluster_m, cluster_n, cluster_k))
+    ).launch(
+        grid=grid_arg,
+        block=(block, 1, 1),
+        smem=ARENA_B + K // split_k // 32 * SB_SUPERS if compact_b else None,
+        stream=stream,
+        cluster=(cluster_m, cluster_n, cluster_k),
+    )
 
 
 launch_gemm_a8w8_256x256.compile_hints["llvm_options"] = {

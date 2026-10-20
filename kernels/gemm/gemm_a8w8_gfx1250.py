@@ -9,7 +9,7 @@ import flydsl.compiler as flyc
 import flydsl.expr as fx
 from flydsl.expr import const_expr, range_constexpr, rocdl
 from flydsl.expr.rocdl import cluster, tdm_ops
-from flydsl.expr.typing import Constexpr, T
+from flydsl.expr.typing import Constexpr, T, as_ir_value
 from flydsl.expr.typing import Vector as Vec
 from flydsl.runtime.device import check_smem_capacity
 from flydsl.runtime.device import get_rocm_arch as get_hip_arch
@@ -17,6 +17,7 @@ from kernels.common.gfx1250_cluster import compute_mcast_masks
 from kernels.common.kernels_common import format_kernel_name
 
 from .gemm_common_gfx1250 import (
+    b_scale_block_shape,
     make_lds_copy_ops,
     pipeline_fence,
     workgroup_barrier,
@@ -47,7 +48,7 @@ def launch_gemm_a8w8(
     cluster_m: Constexpr[int],
     cluster_n: Constexpr[int],
     is_mxscale: Constexpr[bool],
-    block_size: Constexpr[int],
+    b_scale_block: Constexpr[str] = "1x32",
     split_k: Constexpr[int] = 1,
     a_preshuffle: Constexpr[bool] = False,
     b_preshuffle: Constexpr[bool] = True,
@@ -56,8 +57,10 @@ def launch_gemm_a8w8(
     # Keep it unavailable until its correctness issue has been resolved.
     if not b_preshuffle and tile_k < 256:
         raise ValueError("[FlyDSL gfx1250] row-major FP8 B requires tile_k >= 256")
-    mx32 = is_mxscale and block_size == 32
-    mx128 = is_mxscale and block_size == 128
+    b_rows, k_block = b_scale_block_shape(b_scale_block)
+    mx32 = is_mxscale and k_block == 32
+    mx128 = is_mxscale and k_block == 128
+    compact_b = mx32 and b_rows == 32  # "32x32": the weight scale is read as [N/32, K/32]
     A_PAIR = 2 if a_preshuffle else 1
     if a_preshuffle and tile_m % 2 != 0:
         raise ValueError(f"[FlyDSL gfx1250] a_preshuffle needs an even tile_m, got {tile_m}")
@@ -99,7 +102,7 @@ def launch_gemm_a8w8(
     SA_SHAPE = (max(1, tile_m // 32), tile_k) if mx32 else (K_WS, tile_m)
     SB_SHAPE = (tile_n // 32, tile_k) if mx32 else (N_BLOCKS, K_WS)
     STAGE_SA = ((SA_SHAPE[0] * SA_SHAPE[1] + 15) // 16) * 16
-    STAGE_SB = ((SB_SHAPE[0] * SB_SHAPE[1] + 15) // 16) * 16
+    STAGE_SB = 0 if compact_b else ((SB_SHAPE[0] * SB_SHAPE[1] + 15) // 16) * 16
     SA_OFF = STAGE_A + STAGE_B
     SB_OFF = SA_OFF + STAGE_SA
     AB_PITCH = ((STAGE_A + STAGE_B + 1023) // 1024) * 1024
@@ -110,13 +113,17 @@ def launch_gemm_a8w8(
     C_LDS_ROW = tile_n + C_PAD
     C_STORE_B = (tile_m * C_LDS_ROW * 2 + 127) // 128 * 128
     ARENA_B = max(num_buffers * PITCH, C_STORE_B)
+    SBC_ROWS = tile_n // 32
     check_smem_capacity(ARENA_B, str(get_hip_arch()))
     use_quadrant = (wmma_m_rep % 2 == 0) and (wmma_n_rep % 2 == 0) and (n_acc >= 8)
     scale_tag = "mx32" if mx32 else ("mx128" if mx128 else "ptpc")
     kernel_name = format_kernel_name(
         f"gemm_a8w8_{scale_tag}_t{tile_m}x{tile_n}x{tile_k}"
         f"_mw{m_warp}_nw{n_warp}_nb{num_buffers}_sk{split_k}"
-        f"_cm{cluster_m}_cn{cluster_n}" + ("_apre" if a_preshuffle else "") + ("_brow" if not b_preshuffle else "")
+        f"_cm{cluster_m}_cn{cluster_n}"
+        + ("_apre" if a_preshuffle else "")
+        + ("_brow" if not b_preshuffle else "")
+        + ("_wb32x32" if compact_b else "")
     )
 
     @flyc.kernel(name=kernel_name, known_block_size=[block, 1, 1])
@@ -134,6 +141,7 @@ def launch_gemm_a8w8(
         i32_ldc: fx.Int32,
     ):
         K_TILES = i32_k // (tile_k * split_k)
+        b_pitch = (i32_k // split_k + 4095) // 4096 * 128 if const_expr(compact_b) else 0
         k64 = fx.Int64(i32_k)
         lda64 = fx.Int64(i32_lda)
         ldc64 = fx.Int64(i32_ldc)
@@ -283,13 +291,14 @@ def launch_gemm_a8w8(
                     _lv(fx.add_offset(pa, SA_OFF), SA_SHAPE, (SA_SHAPE[1], 1)),
                     sa_imm(ktg),
                 )
-                _wcopy(
-                    W_SB,
-                    atomSB,
-                    gSB,
-                    _lv(fx.add_offset(pa, SB_OFF), SB_SHAPE, (SB_SHAPE[1], 1)),
-                    sb_imm(ktg),
-                )
+                if const_expr(not compact_b):
+                    _wcopy(
+                        W_SB,
+                        atomSB,
+                        gSB,
+                        _lv(fx.add_offset(pa, SB_OFF), SB_SHAPE, (SB_SHAPE[1], 1)),
+                        sb_imm(ktg),
+                    )
 
         wmb = wave_m * warp_tile_m
         wnb = wave_n * warp_tile_n
@@ -343,7 +352,13 @@ def launch_gemm_a8w8(
             word = (row // 32) * SC_WORDS + ks * 32 + (row % 32)
             return lds_load_b32(buf, SA_OFF + word * 4)[0]
 
-        def load_sb(buf, pbuf, wn, ks):
+        sbc_buf = _bidx(fx.add_offset(base_ptr, ARENA_B)) if const_expr(compact_b) else None
+
+        def load_sb(buf, pbuf, wn, ks, kt):
+            if const_expr(compact_b):
+                # One dword per (n32 row, K step), the same for every lane; a 16-column fragment stays in one row.
+                row = (wnb + wn * 16) // 32
+                return lds_load_b32(sbc_buf, row * b_pitch + (fx.Int32(kt) * K_WS + ks) * 4)[0]
             if const_expr(mx32):
                 col = wnb + wn * 16 + lane16
                 word = (col // 32) * SC_WORDS + ks * 32 + (col % 32)
@@ -406,15 +421,15 @@ def launch_gemm_a8w8(
 
         _BS_DS = wmma_n_rep * 4 + wmma_n_rep + wmma_m_rep if is_mxscale else wmma_n_rep * DS_B
 
-        def _load_state(buf, pbuf, ks):
+        def _load_state(buf, pbuf, ks, kt):
             wt = [_rmem(16, load_b(buf, wn, ks)) for wn in range_constexpr(wmma_n_rep)]
             if const_expr(is_mxscale):
-                sb_k = [load_sb(buf, pbuf, wn, ks) for wn in range_constexpr(wmma_n_rep)]
+                sb_k = [load_sb(buf, pbuf, wn, ks, kt) for wn in range_constexpr(wmma_n_rep)]
                 sa_k = [load_sa(buf, pbuf, wm, ks) for wm in range_constexpr(wmma_m_rep)]
                 return wt, sb_k, sa_k
             return wt, None, None
 
-        def _kstep(buf, pbuf, ks, state, nxt_ks, prefetch_kt=None):
+        def _kstep(buf, pbuf, ks, state, nxt_ks, kt, prefetch_kt=None):
             wt, sb_k, sa_k = state
             act_f = [_rmem(16, load_a(buf, wm, ks)) for wm in _FRONT]
             if const_expr(len(_BACK) > 0):
@@ -430,14 +445,14 @@ def launch_gemm_a8w8(
             if const_expr(len(_BACK) > 0):
                 rocdl.s_wait_dscnt(0)
                 _mma_rows(_BACK, act_b, wt, sa_k, sb_k)
-            return _load_state(buf, pbuf, nxt_ks) if const_expr(nxt_ks is not None) else None
+            return _load_state(buf, pbuf, nxt_ks, kt) if const_expr(nxt_ks is not None) else None
 
-        def compute_ktile_row(buf, pbuf, prefetch_kt):
-            state = _load_state(buf, pbuf, 0)
+        def compute_ktile_row(buf, pbuf, prefetch_kt, kt):
+            state = _load_state(buf, pbuf, 0, kt)
             for ks in range_constexpr(K_WS):
                 nxt_ks = ks + 1 if const_expr(ks + 1 < K_WS) else None
                 pk = prefetch_kt if const_expr(ks == 0) else None
-                state = _kstep(buf, pbuf, ks, state, nxt_ks, prefetch_kt=pk)
+                state = _kstep(buf, pbuf, ks, state, nxt_ks, kt, prefetch_kt=pk)
             _fr, _bk = front_wm * wmma_n_rep, len(_BACK) * wmma_n_rep
             for _ks in range_constexpr(K_WS):
                 rocdl.sched_dsrd((_BS_DS if _ks == 0 else 0) + front_wm * DS_A)
@@ -467,19 +482,19 @@ def launch_gemm_a8w8(
         def _load_b_half(buf, wn0, ks):
             return [_rmem(16, load_b(buf, wn0 + wn, ks)) for wn in range_constexpr(HALF_N)]
 
-        def _load_scales(buf, pbuf, ks):
+        def _load_scales(buf, pbuf, ks, kt):
             if const_expr(is_mxscale):
                 return (
-                    [load_sb(buf, pbuf, wn, ks) for wn in range_constexpr(wmma_n_rep)],
+                    [load_sb(buf, pbuf, wn, ks, kt) for wn in range_constexpr(wmma_n_rep)],
                     [load_sa(buf, pbuf, wm, ks) for wm in range_constexpr(wmma_m_rep)],
                 )
             return None, None
 
         QUAD_PREFETCH_EARLY = (not is_mxscale) and K_WS >= 2
 
-        def compute_ktile_quad(buf, pbuf, prefetch_kt):
+        def compute_ktile_quad(buf, pbuf, prefetch_kt, kt):
             b_left = _load_b_half(buf, 0, 0)
-            sb_k, sa_k = _load_scales(buf, pbuf, 0)
+            sb_k, sa_k = _load_scales(buf, pbuf, 0, kt)
             for ks in range_constexpr(K_WS):
                 nxt_ks = ks + 1 if const_expr(ks + 1 < K_WS) else None
                 pf = ks == 0 and prefetch_kt is not None
@@ -504,7 +519,7 @@ def launch_gemm_a8w8(
                     rocdl.sched_barrier(0)
                 if const_expr(nxt_ks is not None):
                     nxt_b_left = _load_b_half(buf, 0, nxt_ks)
-                    nxt_sb_k, nxt_sa_k = _load_scales(buf, pbuf, nxt_ks)
+                    nxt_sb_k, nxt_sa_k = _load_scales(buf, pbuf, nxt_ks, kt)
                 if const_expr(is_mxscale):
                     rocdl.s_wait_dscnt(DS_B * HALF_N if const_expr(nxt_ks is None) else _BS_DS)
                 _emit_block(0, HALF_N, a_top, b_right, sa_k, sb_k)
@@ -515,11 +530,11 @@ def launch_gemm_a8w8(
                 if const_expr(nxt_ks is not None):
                     b_left, sb_k, sa_k = nxt_b_left, nxt_sb_k, nxt_sa_k
 
-        def compute_ktile(buf, pbuf, prefetch_kt):
+        def compute_ktile(buf, pbuf, prefetch_kt, kt):
             if const_expr(use_quadrant):
-                compute_ktile_quad(buf, pbuf, prefetch_kt)
+                compute_ktile_quad(buf, pbuf, prefetch_kt, kt)
             else:
-                compute_ktile_row(buf, pbuf, prefetch_kt)
+                compute_ktile_row(buf, pbuf, prefetch_kt, kt)
 
         def issue_ptpc_scale_loads():
             gSA_base = fx.recast_iter(fx.Float32, arg_scale_a)
@@ -565,15 +580,44 @@ def launch_gemm_a8w8(
 
         if const_expr(use_cluster):
             cluster.cluster_barrier()
+        if const_expr(compact_b):
+            if wave == W_SB:
+                k0 = fx.Int64(0) if kt_base is None else kt_base * (tile_k // 32)
+                sb_off = blk_n64 // 32 * (k64 // 32) + k0
+                shape = (SBC_ROWS, 128)
+                gsb = _gv(arg_scale_b, sb_off, shape, (128, 1))
+                lsb = _lv(fx.add_offset(base_ptr, ARENA_B), shape, (128, 1))
+                desc = tdm_ops.make_tensor_descriptor_2d(
+                    global_ptr=gsb,
+                    lds_memref=lsb,
+                    global_offset=(0, 0),
+                    tensor_shape=shape,
+                    strides=(i32_k // 32, 1),
+                    tile_shape=shape,
+                    elem_bytes=1,
+                    num_warps=1,
+                    early_timeout=True,
+                    oob_inner_bound=i32_k // split_k // 32,
+                )
+                # Tile width also determines the packed LDS row stride. Keep 128-byte granularity
+                # for TDM direct-copy; tensor_dim0 bounds the final row padding independently.
+                dg1 = [Vec(desc.dgroup1)[i] for i in range_constexpr(8)]
+                dg1[3] = b_pitch << 16
+                tdm_ops.tensor_load_2d(
+                    tdm_ops.TDMDescriptor2D(desc.dgroup0, as_ir_value(Vec.from_elements(dg1, fx.Int32)))
+                )
         for i in range_constexpr(num_buffers - 1):
             issue(i, i)
+        if const_expr(compact_b):
+            if wave == W_SB:
+                tdm_ops.tensor_wait(0)  # the first stage fence publishes the compact scale
         n_steady = K_TILES - (num_buffers - 1)
         for kt in range(n_steady):
             s = kt % num_buffers
             pbuf = _buf_ptr(s)
             buf = _bidx(pbuf)
             pipeline_fence(outstanding=(num_buffers - 2), use_cluster=False)
-            compute_ktile(buf, pbuf, kt + (num_buffers - 1))
+            compute_ktile(buf, pbuf, kt + (num_buffers - 1), kt)
             if const_expr(use_cluster) and kt % num_buffers == num_buffers - 1:
                 cluster.cluster_barrier()
         scale_regs = None
@@ -585,7 +629,7 @@ def launch_gemm_a8w8(
             pipeline_fence(outstanding=(num_buffers - 2 - j), use_cluster=False)
             if const_expr(not is_mxscale and j == num_buffers - 2):
                 scale_regs = issue_ptpc_scale_loads()
-            compute_ktile(buf, pbuf, None)
+            compute_ktile(buf, pbuf, None, kt)
 
         accs = None
         if const_expr(is_mxscale):
@@ -636,7 +680,13 @@ def launch_gemm_a8w8(
         i32_lda,
         i32_ldc,
         value_attrs={"rocdl.cluster_dims": f"{cluster_m},{cluster_n},1" if use_cluster else None},
-    ).launch(grid=(gx, gy, split_k), block=(block, 1, 1), stream=stream, cluster=cluster_arg)
+    ).launch(
+        grid=(gx, gy, split_k),
+        block=(block, 1, 1),
+        smem=ARENA_B + (K // split_k + 4095) // 4096 * 128 * SBC_ROWS if compact_b else None,
+        stream=stream,
+        cluster=cluster_arg,
+    )
 
 
 launch_gemm_a8w8.compile_hints["llvm_options"] = {
