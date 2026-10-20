@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T02:25:25Z",
+ "updated": "2026-10-20T03:14:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39362683501,
+   "pr": 1306,
+   "commit": "fef01828b8d85069f0ea8932998bc7a0a61f80b5",
+   "branch": "mxfp8_perf",
+   "event": "pull_request",
+   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
+   "status": "pending",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501",
+   "created_at": "2026-10-20T03:08:09Z",
+   "updated_at": "2026-10-20T03:08:10Z",
+   "actor": "solinzby1",
+   "jobs": []
+  },
   {
    "run_id": 39357628391,
    "pr": 1256,
@@ -14,9 +29,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391",
    "created_at": "2026-10-20T02:12:08Z",
-   "updated_at": "2026-10-20T02:14:39Z",
+   "updated_at": "2026-10-20T03:10:03Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-20T02:30:54Z",
+     "completed_at": "2026-10-20T03:09:43Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272497"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-20T02:38:44Z",
+     "completed_at": "2026-10-20T02:54:34Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272524"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T03:10:03Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118421272588"
+    }
+   ]
   },
   {
    "run_id": 39356987057,
@@ -25,38 +68,38 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057",
    "created_at": "2026-10-20T02:05:08Z",
-   "updated_at": "2026-10-20T02:21:16Z",
+   "updated_at": "2026-10-20T02:30:49Z",
    "actor": "solinzby1",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T02:21:16Z",
+     "started_at": "2026-10-20T02:30:49Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418672966"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-20T02:21:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T03:09:24Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418672999"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T02:21:38Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T02:38:34Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418673032"
     }
    ]
@@ -141,11 +184,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel] Reuse typed APIs in GLM and Kimi-K3 monokernels (#1310)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363",
    "created_at": "2026-10-20T00:34:08Z",
-   "updated_at": "2026-10-20T01:33:54Z",
+   "updated_at": "2026-10-20T03:11:34Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -172,10 +215,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T01:33:54Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T03:11:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39348414363/job/118391138186"
     }
    ]
@@ -2041,21 +2084,6 @@
      "bench_skipped": "host MI350 != MI355"
     }
    ]
-  },
-  {
-   "run_id": 38788693633,
-   "pr": 1223,
-   "commit": "21a11efbce31456287f8b9dc03ab69ab817caa03",
-   "branch": "gfx120x-overhaul-ops-fa-etc",
-   "event": "pull_request",
-   "title": "[Kernel][Feature][Dialect][DSL][Perf][Doc][Test] Add gfx120x RDNA4 wave32 ops",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38788693633",
-   "created_at": "2026-10-15T18:48:40Z",
-   "updated_at": "2026-10-15T18:48:40Z",
-   "actor": "dimitri91209",
-   "jobs": []
   }
  ]
 }
