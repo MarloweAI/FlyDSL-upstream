@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-20T05:14:45Z",
+ "updated": "2026-10-20T06:47:13Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,28 +10,31 @@
    "branch": "codex/cleanup-kernel-ir-aiter-20261010",
    "event": "pull_request",
    "title": "[Kernel] Remove redundant scalar, vector, and IR wrappers",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141",
    "created_at": "2026-10-20T03:57:30Z",
-   "updated_at": "2026-10-20T04:18:13Z",
+   "updated_at": "2026-10-20T05:34:06Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T04:18:53Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141/job/118451873966"
+     "completed_at": "2026-10-20T05:18:04Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141/job/118451873966",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-20T04:18:13Z",
+     "started_at": "2026-10-20T05:34:05Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141/job/118451873984"
     },
@@ -53,21 +56,21 @@
    "branch": "mxfp8_perf",
    "event": "pull_request",
    "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "failure",
+   "status": "in_progress",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501",
    "created_at": "2026-10-20T03:08:09Z",
-   "updated_at": "2026-10-20T05:12:03Z",
+   "updated_at": "2026-10-20T06:00:36Z",
    "actor": "solinzby1",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-20T04:18:58Z",
-     "completed_at": "2026-10-20T05:12:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424479"
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T06:00:35Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118472678275"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
@@ -76,7 +79,7 @@
      "conclusion": "success",
      "started_at": "2026-10-20T03:33:55Z",
      "completed_at": "2026-10-20T04:28:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424499",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118472679358",
      "machine": "cv350-1e707-c03-2",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
@@ -88,7 +91,7 @@
      "conclusion": "success",
      "started_at": "2026-10-20T03:33:46Z",
      "completed_at": "2026-10-20T03:51:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118439424556"
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118472679485"
     }
    ]
   },
