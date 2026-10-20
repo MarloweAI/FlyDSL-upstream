@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T11:46:28Z",
+ "updated": "2026-10-20T12:35:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39420587004,
+   "pr": 1315,
+   "commit": "675c1553c9b57a5b4dbb026ada2a5cb50e88be5f",
+   "branch": "codex/kernel-llvm-coop-cleanup-20261020",
+   "event": "pull_request",
+   "title": "[Kernel] Replace raw memory glue and manual reductions with fx APIs",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004",
+   "created_at": "2026-10-20T12:13:07Z",
+   "updated_at": "2026-10-20T12:15:56Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 39416986551,
    "pr": 1256,
@@ -10,13 +25,41 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551",
    "created_at": "2026-10-20T11:43:26Z",
-   "updated_at": "2026-10-20T11:44:30Z",
+   "updated_at": "2026-10-20T12:11:39Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T12:12:13Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636238"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-20T12:11:39Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636265"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T12:12:28Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636349"
+    }
+   ]
   },
   {
    "run_id": 39415564336,
@@ -29,9 +72,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336",
    "created_at": "2026-10-20T11:31:30Z",
-   "updated_at": "2026-10-20T11:33:35Z",
+   "updated_at": "2026-10-20T12:12:26Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T11:50:42Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610568233"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-20T11:49:45Z",
+     "completed_at": "2026-10-20T12:05:46Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610568367"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-20T12:12:25Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610569225"
+    }
+   ]
   },
   {
    "run_id": 39412277621,
@@ -40,21 +111,24 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel] Remove redundant scalar, vector, and IR wrappers (#1262)",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621",
    "created_at": "2026-10-20T11:03:41Z",
-   "updated_at": "2026-10-20T11:22:00Z",
+   "updated_at": "2026-10-20T12:32:15Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T11:22:53Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865349"
+     "completed_at": "2026-10-20T12:20:10Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865349",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -68,10 +142,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-20T11:22:00Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-20T11:49:55Z",
+     "completed_at": "2026-10-20T12:32:14Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865469"
     }
    ]
@@ -2063,49 +2137,6 @@
    "updated_at": "2026-10-16T17:28:51Z",
    "actor": "danielholanda",
    "jobs": []
-  },
-  {
-   "run_id": 38887055548,
-   "pr": 1296,
-   "commit": "6acfa33f163576facbf64ae9cfd77ed160fd1728",
-   "branch": "jli/schedule-bank-upstream-oldllvm-waitalu-schedule-gpr",
-   "event": "pull_request",
-   "title": "[compiler] support schedule_bank/vgpr/apgr/sgpr",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548",
-   "created_at": "2026-10-16T10:24:46Z",
-   "updated_at": "2026-10-16T18:29:04Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-16T11:01:25Z",
-     "completed_at": "2026-10-16T11:39:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548/job/116939989136"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-16T17:48:52Z",
-     "completed_at": "2026-10-16T18:29:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548/job/116939989238"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-16T11:07:23Z",
-     "completed_at": "2026-10-16T11:23:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38887055548/job/116939989240"
-    }
-   ]
   }
  ]
 }
