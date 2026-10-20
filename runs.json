@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-20T06:47:13Z",
+ "updated": "2026-10-20T07:10:01Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39383932484,
+   "pr": null,
+   "commit": "16bffc9fd2383b6347b65220bcdbf2d595e1a33f",
+   "branch": "main",
+   "event": "push",
+   "title": "[Build] Add xnack-any codegen override patch for gfx1250 (#1308)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39383932484",
+   "created_at": "2026-10-20T07:02:09Z",
+   "updated_at": "2026-10-20T07:04:01Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39367003141,
    "pr": 1262,
@@ -10,11 +25,11 @@
    "branch": "codex/cleanup-kernel-ir-aiter-20261010",
    "event": "pull_request",
    "title": "[Kernel] Remove redundant scalar, vector, and IR wrappers",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141",
    "created_at": "2026-10-20T03:57:30Z",
-   "updated_at": "2026-10-20T05:34:06Z",
+   "updated_at": "2026-10-20T07:08:22Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -32,10 +47,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-20T05:34:05Z",
-     "completed_at": null,
+     "completed_at": "2026-10-20T07:08:21Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39367003141/job/118451873984"
     },
     {
@@ -559,7 +574,7 @@
   },
   {
    "run_id": 39242049327,
-   "pr": 1308,
+   "pr": null,
    "commit": "57e37b9ad922d368d4846beed1391cc41f8b899e",
    "branch": "jli/xnack-perf",
    "event": "pull_request",
@@ -2067,52 +2082,6 @@
      "started_at": "2026-10-16T06:46:53Z",
      "completed_at": "2026-10-16T07:53:06Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/38858976151/job/116842521962"
-    }
-   ]
-  },
-  {
-   "run_id": 38846212914,
-   "pr": 1301,
-   "commit": "9ee21501af03833af50f5621159e3f6f3fec9005",
-   "branch": "skills/copilot-code-review",
-   "event": "pull_request",
-   "title": "[Skills] Add code-review: run review-pr under Copilot code review",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914",
-   "created_at": "2026-10-16T03:34:40Z",
-   "updated_at": "2026-10-16T03:37:07Z",
-   "actor": "zhiding512",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T03:37:04Z",
-     "completed_at": "2026-10-16T03:37:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681630"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T03:37:04Z",
-     "completed_at": "2026-10-16T03:37:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681656"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-16T03:37:04Z",
-     "completed_at": "2026-10-16T03:37:06Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/38846212914/job/116797681946",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
     }
    ]
   }
