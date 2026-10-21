@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-21T13:58:00Z",
+ "updated": "2026-10-21T14:05:34Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39613093057,
+   "pr": 1319,
+   "commit": "d1e43b78fb4b0d7c3df9519b5c0c250b32b43bcb",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39613093057",
+   "created_at": "2026-10-21T14:01:08Z",
+   "updated_at": "2026-10-21T14:02:47Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39612038802,
    "pr": 1319,
@@ -2035,21 +2050,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571943"
     }
    ]
-  },
-  {
-   "run_id": 39225434997,
-   "pr": null,
-   "commit": "c8075ae66efcf65b4966f3d1b236a5c66236d4ba",
-   "branch": "main",
-   "event": "push",
-   "title": "[Core] Add four concrete layout categories (#1292)",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225434997",
-   "created_at": "2026-10-19T08:48:43Z",
-   "updated_at": "2026-10-19T08:49:48Z",
-   "actor": "coderfeli",
-   "jobs": []
   }
  ]
 }
