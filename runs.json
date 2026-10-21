@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-21T12:43:03Z",
+ "updated": "2026-10-21T13:56:12Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39612038802,
+   "pr": 1319,
+   "commit": "2d568db492025142aa729d125a8a30eb219eab35",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39612038802",
+   "created_at": "2026-10-21T13:53:59Z",
+   "updated_at": "2026-10-21T13:53:59Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 39611701985,
+   "pr": 1319,
+   "commit": "cb727aae6fac82c3f898960d5efebd1040d94441",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39611701985",
+   "created_at": "2026-10-21T13:51:42Z",
+   "updated_at": "2026-10-21T13:53:29Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39565595209,
    "pr": 1314,
@@ -2020,67 +2050,6 @@
    "updated_at": "2026-10-19T08:49:48Z",
    "actor": "coderfeli",
    "jobs": []
-  },
-  {
-   "run_id": 39225138654,
-   "pr": null,
-   "commit": "b4071f00bd8afd29a9d68d7247da464af4fb40ec",
-   "branch": "main",
-   "event": "push",
-   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM (#971)",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225138654",
-   "created_at": "2026-10-19T08:46:13Z",
-   "updated_at": "2026-10-19T08:49:32Z",
-   "actor": "coderfeli",
-   "jobs": []
-  },
-  {
-   "run_id": 39207015269,
-   "pr": null,
-   "commit": "6245f9b57f2eff82b6dd0c611e33cf765079ffc1",
-   "branch": "main",
-   "event": "push",
-   "title": "[Fix] Bitcast small floats across converted ops in convert-fly-to-roc\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269",
-   "created_at": "2026-10-19T05:55:10Z",
-   "updated_at": "2026-10-19T08:46:14Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T06:07:38Z",
-     "completed_at": "2026-10-19T06:29:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211160"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-19T06:07:20Z",
-     "completed_at": "2026-10-19T08:46:13Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211203"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T06:28:14Z",
-     "completed_at": "2026-10-19T07:32:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39207015269/job/117915211322",
-     "machine": "gbt350-odcdh1-b09-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
   }
  ]
 }
