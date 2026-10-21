@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-21T18:58:29Z",
+ "updated": "2026-10-21T21:22:17Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39677892202,
+   "pr": 1277,
+   "commit": "ca68702a2e47853698af680a66d2a41e336a99f8",
+   "branch": "test/vllm-kernel-coverage",
+   "event": "pull_request",
+   "title": "[Test] Cover the FlyDSL kernels vLLM depends on",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39677892202",
+   "created_at": "2026-10-21T21:19:52Z",
+   "updated_at": "2026-10-21T21:20:24Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
+  {
+   "run_id": 39677799403,
+   "pr": 1316,
+   "commit": "8509c42d2d7fe5d1e462ed91b73564f019fc0857",
+   "branch": "perf/softmax-refactor",
+   "event": "pull_request",
+   "title": "[Kernel][Refactor] Extract shared softmax row-copy helpers",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39677799403",
+   "created_at": "2026-10-21T21:19:09Z",
+   "updated_at": "2026-10-21T21:19:09Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
   {
    "run_id": 39626185884,
    "pr": 1319,
@@ -1981,36 +2011,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
    "created_at": "2026-10-19T10:54:04Z",
    "updated_at": "2026-10-19T10:57:39Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39240225131,
-   "pr": 1307,
-   "commit": "8035a2478030c32a15e9be7b623a24b51e4a87bb",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240225131",
-   "created_at": "2026-10-19T10:49:41Z",
-   "updated_at": "2026-10-19T10:55:13Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39240003879,
-   "pr": 1307,
-   "commit": "2ace59eb6411a2707720f65566dd3bc05ae7e7ea",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240003879",
-   "created_at": "2026-10-19T10:47:48Z",
-   "updated_at": "2026-10-19T10:49:42Z",
    "actor": "jli-melchior",
    "jobs": []
   }
