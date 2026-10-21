@@ -2,6 +2,7 @@
   "upstream": {
     "repository": "https://github.com/ROCm/llvm-project.git",
     "branch": "aweinrau/xnack_test",
+    "llvm_hash": "6b3143b076a5b94181ce845c4a9eb5330b64dc22",
     "required_patches": [],
     "extensions": []
   }
