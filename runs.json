@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-21T01:59:52Z",
+ "updated": "2026-10-21T02:42:10Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -99,10 +99,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-21T01:48:18Z",
-     "completed_at": null,
+     "completed_at": "2026-10-21T02:08:51Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808/job/118991507905"
     }
    ]
@@ -129,11 +129,11 @@
    "branch": "perf/gfx1250-rmsnorm-vector-tail",
    "event": "pull_request",
    "title": "[Kernel][Perf] Tune RMSNorm for gfx1250: BF16 hardware conversion, early loads, small-N kernel choice",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39513643247",
    "created_at": "2026-10-20T23:14:03Z",
-   "updated_at": "2026-10-21T01:48:30Z",
+   "updated_at": "2026-10-21T02:40:30Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -151,10 +151,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-21T01:48:29Z",
-     "completed_at": null,
+     "completed_at": "2026-10-21T02:40:29Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39513643247/job/118946943035"
     },
     {
