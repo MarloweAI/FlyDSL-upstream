@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-21T03:48:54Z",
+ "updated": "2026-10-21T04:43:01Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39545331854,
+   "pr": 1256,
+   "commit": "032072c9406475cde47cf2017506f7c2604d5cce",
+   "branch": "codex/glm5-tp4-fused-indexer",
+   "event": "pull_request",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39545331854",
+   "created_at": "2026-10-21T04:40:31Z",
+   "updated_at": "2026-10-21T04:41:05Z",
+   "actor": "zhiding512",
+   "jobs": []
+  },
+  {
+   "run_id": 39545318221,
+   "pr": 1210,
+   "commit": "a32b833d68e9925441df5baa646c22fff55eb5d2",
+   "branch": "codex/release-coop-full-ci",
+   "event": "pull_request",
+   "title": "[CI] Run full cooperative matrix before PyPI releases",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39545318221",
+   "created_at": "2026-10-21T04:40:22Z",
+   "updated_at": "2026-10-21T04:40:49Z",
+   "actor": "zhiding512",
+   "jobs": []
+  },
   {
    "run_id": 39539863201,
    "pr": 1269,
@@ -1521,7 +1551,7 @@
   },
   {
    "run_id": 39252061918,
-   "pr": 1308,
+   "pr": 1318,
    "commit": "d21d280cedda18c49745dc2750b2480c585ab0da",
    "branch": "jli/xnack-perf",
    "event": "pull_request",
@@ -1643,7 +1673,7 @@
   },
   {
    "run_id": 39242049327,
-   "pr": null,
+   "pr": 1318,
    "commit": "57e37b9ad922d368d4846beed1391cc41f8b899e",
    "branch": "jli/xnack-perf",
    "event": "pull_request",
@@ -2017,98 +2047,6 @@
    "updated_at": "2026-10-19T05:16:57Z",
    "actor": "jli-melchior",
    "jobs": []
-  },
-  {
-   "run_id": 39191399334,
-   "pr": 1243,
-   "commit": "fd2558cc108e7e912c98214ffdd06255be6e7249",
-   "branch": "jli/bump-llvm-0906",
-   "event": "pull_request",
-   "title": "[llvm] bump llvm to 1df311a6",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334",
-   "created_at": "2026-10-19T02:44:46Z",
-   "updated_at": "2026-10-19T04:40:45Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T03:51:07Z",
-     "completed_at": "2026-10-19T04:40:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334/job/117873226722"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T03:20:24Z",
-     "completed_at": "2026-10-19T04:15:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334/job/117873226765",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T03:20:15Z",
-     "completed_at": "2026-10-19T03:35:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39191399334/job/117873226893"
-    }
-   ]
-  },
-  {
-   "run_id": 39132469049,
-   "pr": 971,
-   "commit": "009581282ceec8de1afd0dc1d63419e1c8228912",
-   "branch": "gfx1250/gemm-opt-0805",
-   "event": "pull_request",
-   "title": "[gfx1250] Add A8W8/A8W4/A4W4 compute-bound GEMM",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049",
-   "created_at": "2026-10-18T13:38:59Z",
-   "updated_at": "2026-10-19T03:28:56Z",
-   "actor": "aoli26",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T02:44:14Z",
-     "completed_at": "2026-10-19T03:28:55Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592538"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-18T14:14:53Z",
-     "completed_at": "2026-10-18T15:43:52Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592549",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-18T14:13:30Z",
-     "completed_at": "2026-10-18T14:31:18Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39132469049/job/117697592565"
-    }
-   ]
   }
  ]
 }
