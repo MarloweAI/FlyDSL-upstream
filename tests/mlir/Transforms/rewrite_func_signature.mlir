@@ -14,7 +14,7 @@
 func.func @test_sink_static_int_tuple(%arg0: !fly.int_tuple<(4,8)>) {
   // CHECK: %[[V:.*]] = fly.static : !fly.int_tuple<(4,8)>
   // CHECK: fly.get(%[[V]])
-  %0 = fly.get(%arg0) {mode = array<i32: 0>} : (!fly.int_tuple<(4,8)>) -> !fly.int_tuple<4>
+  %0 = fly.get(%arg0) <{mode = array<i32: 0>}> : (!fly.int_tuple<(4,8)>) -> !fly.int_tuple<4>
   return
 }
 
@@ -65,7 +65,7 @@ func.func @test_dynamic_nested_int_tuple(%arg0: !fly.int_tuple<(?,?)>) {
   // CHECK: llvm.extractvalue %[[S]][0]
   // CHECK: llvm.extractvalue %[[S]][1]
   // CHECK: fly.make_int_tuple
-  %0 = fly.get(%arg0) {mode = array<i32: 0>} : (!fly.int_tuple<(?,?)>) -> !fly.int_tuple<?>
+  %0 = fly.get(%arg0) <{mode = array<i32: 0>}> : (!fly.int_tuple<(?,?)>) -> !fly.int_tuple<?>
   return
 }
 
@@ -297,7 +297,7 @@ gpu.module @kernel_mod_dynamic {
     // CHECK: fly.make_int_tuple
     // fly.get forces a use of %arg0 as the original DSL type, so source
     // materialization (extractvalue + make_int_tuple) fires.
-    %dummy = fly.get(%arg0) {mode = array<i32: 0>} : (!fly.int_tuple<(?,?)>) -> !fly.int_tuple<?>
+    %dummy = fly.get(%arg0) <{mode = array<i32: 0>}> : (!fly.int_tuple<(?,?)>) -> !fly.int_tuple<?>
     gpu.return
   }
 }
