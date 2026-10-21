@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-21T14:09:00Z",
+ "updated": "2026-10-21T14:12:08Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39614287089,
+   "pr": 1319,
+   "commit": "2b34f1bb049ad7c756ebf470ffa825aecd89beaa",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39614287089",
+   "created_at": "2026-10-21T14:08:56Z",
+   "updated_at": "2026-10-21T14:10:39Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39613665867,
    "pr": 1319,
@@ -10,11 +25,11 @@
    "branch": "jli/xnack-perf-v2",
    "event": "pull_request",
    "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39613665867",
    "created_at": "2026-10-21T14:04:57Z",
-   "updated_at": "2026-10-21T14:06:52Z",
+   "updated_at": "2026-10-21T14:10:13Z",
    "actor": "jli-melchior",
    "jobs": []
   },
@@ -1973,21 +1988,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238266229/job/118023047578"
     }
    ]
-  },
-  {
-   "run_id": 39238096433,
-   "pr": 1307,
-   "commit": "d921a877d590ec34070652254920c6f668ea69a1",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39238096433",
-   "created_at": "2026-10-19T10:31:44Z",
-   "updated_at": "2026-10-19T10:37:23Z",
-   "actor": "jli-melchior",
-   "jobs": []
   }
  ]
 }
