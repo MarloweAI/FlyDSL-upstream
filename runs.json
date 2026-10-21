@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-21T14:05:34Z",
+ "updated": "2026-10-21T14:09:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39613665867,
+   "pr": 1319,
+   "commit": "33d93e444077bbb53f988e2853fd9f21f7625d30",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39613665867",
+   "created_at": "2026-10-21T14:04:57Z",
+   "updated_at": "2026-10-21T14:06:52Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
+  {
+   "run_id": 39613575209,
+   "pr": 1319,
+   "commit": "cae0556134f865da3e5a14cb03eb2dda4940b081",
+   "branch": "jli/xnack-perf-v2",
+   "event": "pull_request",
+   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39613575209",
+   "created_at": "2026-10-21T14:04:21Z",
+   "updated_at": "2026-10-21T14:06:24Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 39613093057,
    "pr": 1319,
@@ -1958,98 +1988,6 @@
    "updated_at": "2026-10-19T10:37:23Z",
    "actor": "jli-melchior",
    "jobs": []
-  },
-  {
-   "run_id": 39226616827,
-   "pr": null,
-   "commit": "6fc2ca5bd8ef41f3e616392608511a4c06d63a1e",
-   "branch": "mxfp8_perf",
-   "event": "pull_request",
-   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827",
-   "created_at": "2026-10-19T08:58:37Z",
-   "updated_at": "2026-10-19T12:09:44Z",
-   "actor": "solinzby1",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T09:19:23Z",
-     "completed_at": "2026-10-19T09:30:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569942"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T11:00:54Z",
-     "completed_at": "2026-10-19T12:09:43Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982569975"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T09:20:08Z",
-     "completed_at": "2026-10-19T10:11:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39226616827/job/117982570095",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 39225557262,
-   "pr": null,
-   "commit": "2ede16ea3a3f5ecc38fd261689e173de89d2993e",
-   "branch": "main",
-   "event": "push",
-   "title": "fix(ci): repair the SGLang nightly setup after sgl-kernel moved (#1287)",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262",
-   "created_at": "2026-10-19T08:49:46Z",
-   "updated_at": "2026-10-19T11:17:48Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T09:25:11Z",
-     "completed_at": "2026-10-19T10:21:46Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571851",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T09:25:26Z",
-     "completed_at": "2026-10-19T11:17:47Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571913"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-19T09:30:36Z",
-     "completed_at": "2026-10-19T09:38:26Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39225557262/job/117984571943"
-    }
-   ]
   }
  ]
 }
