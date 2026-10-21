@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-21T13:56:12Z",
+ "updated": "2026-10-21T13:58:00Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "jli/xnack-perf-v2",
    "event": "pull_request",
    "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39612038802",
    "created_at": "2026-10-21T13:53:59Z",
-   "updated_at": "2026-10-21T13:53:59Z",
+   "updated_at": "2026-10-21T13:55:39Z",
    "actor": "jli-melchior",
    "jobs": []
   },
