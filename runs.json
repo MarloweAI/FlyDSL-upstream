@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-21T02:42:10Z",
+ "updated": "2026-10-21T03:26:30Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39538232826,
+   "pr": 1317,
+   "commit": "f1574f077d63d99a35f9b9d2a3a3c551ead39b7d",
+   "branch": "skills/review-pr-diagnostics",
+   "event": "pull_request",
+   "title": "[Skills] review-pr: strip the API key and show why model calls failed",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826",
+   "created_at": "2026-10-21T03:22:44Z",
+   "updated_at": "2026-10-21T03:23:47Z",
+   "actor": "jhinpan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-21T03:23:43Z",
+     "completed_at": "2026-10-21T03:23:46Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922219"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-21T03:23:42Z",
+     "completed_at": "2026-10-21T03:23:45Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922241"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-21T03:23:43Z",
+     "completed_at": "2026-10-21T03:23:46Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922290",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    }
+   ]
+  },
   {
    "run_id": 39530054355,
    "pr": 1317,
@@ -71,28 +117,31 @@
    "branch": "main",
    "event": "push",
    "title": "[Skills] review-pr: review a PR when a maintainer adds the ai-review \u2026",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808",
    "created_at": "2026-10-21T01:33:10Z",
-   "updated_at": "2026-10-21T01:47:57Z",
+   "updated_at": "2026-10-21T03:09:45Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-21T01:48:26Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808/job/118991507788"
+     "completed_at": "2026-10-21T02:42:05Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808/job/118991507788",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-21T01:47:57Z",
+     "started_at": "2026-10-21T03:09:44Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808/job/118991507871"
     },
@@ -2089,52 +2138,6 @@
      "started_at": "2026-10-18T11:26:41Z",
      "completed_at": "2026-10-18T11:44:49Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120242545/job/117656494471"
-    }
-   ]
-  },
-  {
-   "run_id": 39120076177,
-   "pr": null,
-   "commit": "9230ac28185f597a24ddfa5cd6034ad078ba8e49",
-   "branch": "main",
-   "event": "push",
-   "title": "[Skills] Split flydsl-kernel-authoring into reference files (#1305)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120076177",
-   "created_at": "2026-10-18T10:38:53Z",
-   "updated_at": "2026-10-18T10:40:42Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-18T10:40:38Z",
-     "completed_at": "2026-10-18T10:40:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120076177/job/117654002860"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-18T10:40:38Z",
-     "completed_at": "2026-10-18T10:40:41Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120076177/job/117654002910",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-18T10:40:38Z",
-     "completed_at": "2026-10-18T10:40:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39120076177/job/117654002915"
     }
    ]
   }
