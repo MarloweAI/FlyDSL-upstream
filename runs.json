@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-22T18:35:52Z",
+ "updated": "2026-10-22T21:29:26Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39849991543,
+   "pr": 1192,
+   "commit": "76484805a4a528cc722bd558dfbde1e7f396559b",
+   "branch": "add-security-scanning",
+   "event": "pull_request",
+   "title": "chore: add security scanning workflows",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543",
+   "created_at": "2026-10-22T20:34:11Z",
+   "updated_at": "2026-10-22T21:04:32Z",
+   "actor": "haribabug",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-22T21:04:31Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176240"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-22T21:05:00Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176353"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-22T21:05:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176438"
+    }
+   ]
+  },
   {
    "run_id": 39677892202,
    "pr": 1277,
@@ -1996,21 +2039,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
    "created_at": "2026-10-19T10:56:49Z",
    "updated_at": "2026-10-19T11:10:38Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39240748154,
-   "pr": 1307,
-   "commit": "28a3dc7ae54c86c16ed18c04d8ed6b586c777a50",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39240748154",
-   "created_at": "2026-10-19T10:54:04Z",
-   "updated_at": "2026-10-19T10:57:39Z",
    "actor": "jli-melchior",
    "jobs": []
   }
