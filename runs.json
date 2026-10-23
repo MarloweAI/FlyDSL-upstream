@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-23T04:18:57Z",
+ "updated": "2026-10-23T04:44:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -9,7 +9,7 @@
    "commit": "3b6b1577f3848facd57cfc4262aef400540b693e",
    "branch": "fix-kernel-trace-analysis-evals",
    "event": "pull_request",
-   "title": "kernel-trace-analysis: fix SKILL.md nits so the evals pass",
+   "title": "`kernel-trace-analysis`: fix SKILL.md nits so the evals pass",
    "status": "completed",
    "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39899318791",
@@ -132,20 +132,20 @@
    "branch": "add-security-scanning",
    "event": "pull_request",
    "title": "chore: add security scanning workflows",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543",
    "created_at": "2026-10-22T20:34:11Z",
-   "updated_at": "2026-10-23T03:04:48Z",
+   "updated_at": "2026-10-23T04:42:04Z",
    "actor": "haribabug",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-23T03:04:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-23T04:42:04Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176240"
     },
     {
