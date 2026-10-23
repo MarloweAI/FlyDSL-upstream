@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-22T21:29:26Z",
+ "updated": "2026-10-23T00:43:09Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 39879392054,
+   "pr": 1320,
+   "commit": "1a7d27c2b89d8479be93b80efbef4857bddab5f7",
+   "branch": "jiacao/kimi-mla-attention",
+   "event": "pull_request",
+   "title": "[Kernel] Add Kimi-K3 MLA decode/prefill kernels and fix MLA decode boundary mask",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39879392054",
+   "created_at": "2026-10-23T00:39:18Z",
+   "updated_at": "2026-10-23T00:40:45Z",
+   "actor": "jiacao-amd",
+   "jobs": []
+  },
+  {
+   "run_id": 39874842926,
+   "pr": null,
+   "commit": "37d19627ad6cffcb04eed6ce3a23edc587854417",
+   "branch": "jiacao/kimi-mla-attention",
+   "event": "pull_request",
+   "title": "[Kernel] Add Kimi-K3 MLA decode/prefill kernels and fix MLA decode boundary mask",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39874842926",
+   "created_at": "2026-10-22T23:54:50Z",
+   "updated_at": "2026-10-22T23:56:27Z",
+   "actor": "jiacao-amd",
+   "jobs": []
+  },
   {
    "run_id": 39849991543,
    "pr": 1192,
@@ -29,19 +59,19 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-22T21:05:00Z",
-     "completed_at": null,
+     "completed_at": "2026-10-22T21:42:08Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176353"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-22T21:05:51Z",
-     "completed_at": null,
+     "completed_at": "2026-10-22T21:53:09Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176438"
     }
    ]
@@ -2009,36 +2039,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39243667441",
    "created_at": "2026-10-19T11:18:16Z",
    "updated_at": "2026-10-19T11:32:51Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39242049327,
-   "pr": 1318,
-   "commit": "57e37b9ad922d368d4846beed1391cc41f8b899e",
-   "branch": "jli/xnack-perf",
-   "event": "pull_request",
-   "title": "[compiler] [llvm] xnack perf",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39242049327",
-   "created_at": "2026-10-19T11:05:05Z",
-   "updated_at": "2026-10-19T11:06:46Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39241077238,
-   "pr": 1307,
-   "commit": "7c9414eedaf1b7784bae994add20de21b4b6841b",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39241077238",
-   "created_at": "2026-10-19T10:56:49Z",
-   "updated_at": "2026-10-19T11:10:38Z",
    "actor": "jli-melchior",
    "jobs": []
   }
