@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-23T12:41:42Z",
+ "updated": "2026-10-23T13:15:17Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -533,7 +533,9 @@
      "started_at": "2026-10-21T03:45:50Z",
      "completed_at": "2026-10-21T03:45:53Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293202",
-     "log_fetch_failed": true
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
