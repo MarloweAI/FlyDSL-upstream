@@ -1,8 +1,54 @@
 {
  "schema": 1,
- "updated": "2026-10-25T06:44:11Z",
+ "updated": "2026-10-25T08:18:04Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40175798756,
+   "pr": null,
+   "commit": "b8b9a68ef5952d71998a1f2b010339b4325f41d9",
+   "branch": "main",
+   "event": "push",
+   "title": "kernel-trace-analysis: fix SKILL.md nits so the evals pass (#1322)",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40175798756",
+   "created_at": "2026-10-25T08:13:52Z",
+   "updated_at": "2026-10-25T08:15:34Z",
+   "actor": "coderfeli",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-25T08:15:30Z",
+     "completed_at": "2026-10-25T08:15:33Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40175798756/job/121116355444"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-25T08:15:30Z",
+     "completed_at": "2026-10-25T08:15:33Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40175798756/job/121116355621",
+     "machine": null,
+     "host_model": null,
+     "bench_skipped": "host unidentified != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-25T08:15:30Z",
+     "completed_at": "2026-10-25T08:15:33Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40175798756/job/121116355628"
+    }
+   ]
+  },
   {
    "run_id": 39899318791,
    "pr": 1322,
@@ -2055,52 +2101,6 @@
      "started_at": "2026-10-19T13:04:24Z",
      "completed_at": "2026-10-19T13:22:09Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39252061918/job/118072532621"
-    }
-   ]
-  },
-  {
-   "run_id": 39250722378,
-   "pr": 1307,
-   "commit": "a5abc5dcd447201d6b0d7a604216336594fdd584",
-   "branch": "jli/schedule-bank-gpr-llvm-head",
-   "event": "pull_request",
-   "title": "[compiler] add schedule bank and vgpr/agpr/sgpr based flydsl llvm head",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378",
-   "created_at": "2026-10-19T12:16:05Z",
-   "updated_at": "2026-10-19T14:13:08Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T12:46:46Z",
-     "completed_at": "2026-10-19T13:04:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799567"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T12:46:55Z",
-     "completed_at": "2026-10-19T13:34:33Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799720",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-19T12:59:51Z",
-     "completed_at": "2026-10-19T14:13:07Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39250722378/job/118066799859"
     }
    ]
   }
