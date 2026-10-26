@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-26T20:23:19Z",
+ "updated": "2026-10-26T21:30:47Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40402291556,
+   "pr": 1333,
+   "commit": "4a9d6dd4b3c554c25e1df986911d70af2f7623df",
+   "branch": "promote-regmem-keep-loop-attrs",
+   "event": "pull_request",
+   "title": "[Bugfix][Dialect] Don't drop range(..., unroll=N) hints in fly-promote-regmem-to-vectorssa",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40402291556",
+   "created_at": "2026-10-26T21:11:51Z",
+   "updated_at": "2026-10-26T21:14:10Z",
+   "actor": "RElbers",
+   "jobs": []
+  },
+  {
+   "run_id": 40395880271,
+   "pr": 1332,
+   "commit": "d6296731fed6e87355143c9aa0d013b8425a2cbd",
+   "branch": "fix/rocm-gpu-detection",
+   "event": "pull_request",
+   "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40395880271",
+   "created_at": "2026-10-26T20:28:02Z",
+   "updated_at": "2026-10-26T20:28:02Z",
+   "actor": "Qubitium",
+   "jobs": []
+  },
   {
    "run_id": 40362651138,
    "pr": 1321,
@@ -1971,95 +2001,6 @@
      "started_at": "2026-10-20T10:45:21Z",
      "completed_at": "2026-10-20T11:04:32Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585502020"
-    }
-   ]
-  },
-  {
-   "run_id": 39399629932,
-   "pr": 1313,
-   "commit": "ea8a53e574b985885aa52bd26a1e32b292305815",
-   "branch": "pr/feat-core-layout-replacement",
-   "event": "pull_request",
-   "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932",
-   "created_at": "2026-10-20T09:17:47Z",
-   "updated_at": "2026-10-20T10:23:17Z",
-   "actor": "sjfeng1999",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T09:36:37Z",
-     "completed_at": "2026-10-20T09:59:30Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239159"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T09:36:43Z",
-     "completed_at": "2026-10-20T10:23:16Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239213"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T09:36:02Z",
-     "completed_at": "2026-10-20T10:22:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39399629932/job/118558239449"
-    }
-   ]
-  },
-  {
-   "run_id": 39389495501,
-   "pr": null,
-   "commit": "de3a10ede33a83d3930e1e4218e7d31cb8eab773",
-   "branch": "main",
-   "event": "push",
-   "title": "[Dialect][ROCDL] Add gfx120 integer WMMA and an INT4 GEMM (#1266)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501",
-   "created_at": "2026-10-20T07:53:06Z",
-   "updated_at": "2026-10-20T08:59:21Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T08:12:08Z",
-     "completed_at": "2026-10-20T08:31:27Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386607"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T08:15:22Z",
-     "completed_at": "2026-10-20T08:57:29Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386718"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T08:12:14Z",
-     "completed_at": "2026-10-20T08:59:20Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389495501/job/118524386776",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
