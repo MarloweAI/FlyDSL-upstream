@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T15:03:27Z",
+ "updated": "2026-10-26T15:05:30Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "rocm-jit-fastpath",
    "event": "pull_request",
    "title": "[gfx1250] JitFunction.__call__ cached fast path",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40344961091",
    "created_at": "2026-10-26T15:00:00Z",
-   "updated_at": "2026-10-26T15:01:46Z",
+   "updated_at": "2026-10-26T15:01:55Z",
    "actor": "yhl-amd",
    "jobs": []
   },
