@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T14:10:57Z",
+ "updated": "2026-10-26T14:14:31Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -126,11 +126,11 @@
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "workflow_dispatch",
    "title": "Fly DSL test",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934",
    "created_at": "2026-10-26T10:47:06Z",
-   "updated_at": "2026-10-26T12:42:51Z",
+   "updated_at": "2026-10-26T14:12:16Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -175,10 +175,10 @@
     {
      "runner": "linux-flydsl-mi325-8",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T12:42:51Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T14:12:15Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572787189"
     }
    ]
@@ -481,11 +481,11 @@
    "branch": "fix/dlpack-layout-fill-retains-tensor",
    "event": "pull_request",
    "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303",
    "created_at": "2026-10-23T02:48:30Z",
-   "updated_at": "2026-10-26T13:56:22Z",
+   "updated_at": "2026-10-26T14:09:44Z",
    "actor": "josh-schell-amd",
    "jobs": [
     {
@@ -509,9 +509,9 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-26T14:09:44Z",
+     "started_at": "2026-10-26T14:10:45Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121621317497"
     }
