@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T06:16:20Z",
+ "updated": "2026-10-26T06:56:03Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "phil/compile-hints-copy",
    "event": "pull_request",
    "title": "[JIT] flyc.compile[hints] no longer leaves its hints on the function",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537",
    "created_at": "2026-10-26T02:28:57Z",
-   "updated_at": "2026-10-26T05:17:58Z",
+   "updated_at": "2026-10-26T06:54:03Z",
    "actor": "Phil-amd",
    "jobs": [
     {
@@ -32,10 +32,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T05:17:58Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T06:54:02Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128887"
     },
     {
