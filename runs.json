@@ -1,20 +1,136 @@
 {
  "schema": 1,
- "updated": "2026-10-26T12:44:15Z",
+ "updated": "2026-10-26T14:08:53Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
+   "run_id": 40336486481,
+   "pr": 1330,
+   "commit": "8096c614659adbe96f17485736d7649cc5b113e2",
+   "branch": "binding_mega_moe_tp_opt1",
+   "event": "pull_request",
+   "title": "mega_moe_tp: unified path and big-M optimizations",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40336486481",
+   "created_at": "2026-10-26T14:06:06Z",
+   "updated_at": "2026-10-26T14:06:19Z",
+   "actor": "binding7012",
+   "jobs": []
+  },
+  {
+   "run_id": 40331097337,
+   "pr": 1329,
+   "commit": "af15cf0e163b55c33c4f53a8599f541f35ff9522",
+   "branch": "xiaobingsuper/aot-export-metadata",
+   "event": "pull_request",
+   "title": "[AOT] Expose export metadata to build systems",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40331097337",
+   "created_at": "2026-10-26T13:30:02Z",
+   "updated_at": "2026-10-26T13:44:05Z",
+   "actor": "XiaobingSuper",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:44:31Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40331097337/job/121607658866"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:44:05Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40331097337/job/121607658932"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:44:19Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40331097337/job/121607658976"
+    }
+   ]
+  },
+  {
+   "run_id": 40329700150,
+   "pr": null,
+   "commit": "888d7d80528f0cf2abab8a86610d5ccca47f205d",
+   "branch": "main",
+   "event": "push",
+   "title": "[LLVM] Roll back to 941a04e and cherry-pick unclaused VMEM patches (#\u2026",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150",
+   "created_at": "2026-10-26T13:20:16Z",
+   "updated_at": "2026-10-26T13:53:51Z",
+   "actor": "jli-melchior",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:54:21Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798043"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:53:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798133"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-26T13:53:51Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798241"
+    }
+   ]
+  },
+  {
+   "run_id": 40325939178,
+   "pr": 1328,
+   "commit": "61132f8440ec77061d9e6f05fc2300c4ed44a1e6",
+   "branch": "fix/pin-python-interpreter",
+   "event": "pull_request",
+   "title": "[Bugfix] Pin both MLIR Python detection passes to one interpreter",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
+   "created_at": "2026-10-26T12:52:49Z",
+   "updated_at": "2026-10-26T12:52:49Z",
+   "actor": "Qubitium",
+   "jobs": []
+  },
+  {
    "run_id": 40310094934,
-   "pr": 1327,
+   "pr": null,
    "commit": "80d9c4e5d49d9110147395ce814fd11225276173",
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "workflow_dispatch",
    "title": "Fly DSL test",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934",
    "created_at": "2026-10-26T10:47:06Z",
-   "updated_at": "2026-10-26T12:30:49Z",
+   "updated_at": "2026-10-26T12:42:51Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -50,18 +166,18 @@
     {
      "runner": "linux-flydsl-mi355-8",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T12:31:15Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T13:30:45Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572786968"
     },
     {
      "runner": "linux-flydsl-mi325-8",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-26T12:30:49Z",
+     "started_at": "2026-10-26T12:42:51Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572787189"
     }
@@ -115,7 +231,7 @@
   },
   {
    "run_id": 40305652206,
-   "pr": 1327,
+   "pr": null,
    "commit": "02a8cc5f538cb27b4e6b958d58803d5a77b1a2a8",
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "pull_request",
@@ -365,44 +481,13 @@
    "branch": "fix/dlpack-layout-fill-retains-tensor",
    "event": "pull_request",
    "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills",
-   "status": "completed",
-   "conclusion": "failure",
+   "status": "in_progress",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303",
    "created_at": "2026-10-23T02:48:30Z",
-   "updated_at": "2026-10-26T11:10:16Z",
+   "updated_at": "2026-10-26T13:56:22Z",
    "actor": "josh-schell-amd",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-26T11:10:01Z",
-     "completed_at": "2026-10-26T11:10:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121527856910"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-23T03:04:39Z",
-     "completed_at": "2026-10-23T04:03:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121527858845",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-23T03:04:24Z",
-     "completed_at": "2026-10-23T03:29:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121527858895"
-    }
-   ]
+   "jobs": []
   },
   {
    "run_id": 39879392054,
@@ -1980,122 +2065,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39362683501/job/118472679485"
     }
    ]
-  },
-  {
-   "run_id": 39357628391,
-   "pr": 1256,
-   "commit": "cd335a8d908094e2296d68d052260624bf6a8465",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391",
-   "created_at": "2026-10-20T02:12:08Z",
-   "updated_at": "2026-10-20T11:44:03Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T10:55:28Z",
-     "completed_at": "2026-10-20T11:44:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589337259"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:04:38Z",
-     "completed_at": "2026-10-20T11:19:48Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589337545"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T03:10:03Z",
-     "completed_at": "2026-10-20T04:28:01Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39357628391/job/118589380002"
-    }
-   ]
-  },
-  {
-   "run_id": 39356987057,
-   "pr": null,
-   "commit": "938b72882e788e02727a54d3bddfb8da140ef4be",
-   "branch": "mxfp8_perf",
-   "event": "pull_request",
-   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057",
-   "created_at": "2026-10-20T02:05:08Z",
-   "updated_at": "2026-10-20T03:13:10Z",
-   "actor": "solinzby1",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T02:30:49Z",
-     "completed_at": "2026-10-20T03:13:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418672966"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T02:21:48Z",
-     "completed_at": "2026-10-20T03:09:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418672999"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T02:21:38Z",
-     "completed_at": "2026-10-20T02:38:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356987057/job/118418673032"
-    }
-   ]
-  },
-  {
-   "run_id": 39356705296,
-   "pr": null,
-   "commit": "6fc2ca5bd8ef41f3e616392608511a4c06d63a1e",
-   "branch": "mxfp8_perf",
-   "event": "pull_request",
-   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356705296",
-   "created_at": "2026-10-20T02:02:06Z",
-   "updated_at": "2026-10-20T02:06:25Z",
-   "actor": "solinzby1",
-   "jobs": []
-  },
-  {
-   "run_id": 39356328860,
-   "pr": null,
-   "commit": "7b8b7db1422bbd969d431e38a7a2ecf880aa7d2d",
-   "branch": "mxfp8_perf",
-   "event": "pull_request",
-   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39356328860",
-   "created_at": "2026-10-20T01:58:03Z",
-   "updated_at": "2026-10-20T02:02:33Z",
-   "actor": "solinzby1",
-   "jobs": []
   }
  ]
 }
