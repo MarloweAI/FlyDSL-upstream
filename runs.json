@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T15:05:30Z",
+ "updated": "2026-10-26T15:12:28Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -643,11 +643,11 @@
    "branch": "fix/dlpack-layout-fill-retains-tensor",
    "event": "pull_request",
    "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303",
    "created_at": "2026-10-23T02:48:30Z",
-   "updated_at": "2026-10-26T14:50:46Z",
+   "updated_at": "2026-10-26T15:10:04Z",
    "actor": "josh-schell-amd",
    "jobs": [
     {
@@ -671,11 +671,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T14:10:45Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121621317497"
+     "completed_at": "2026-10-26T15:10:03Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39891581303/job/121621317497",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
