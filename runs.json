@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T11:12:07Z",
+ "updated": "2026-10-26T12:01:02Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,19 +10,19 @@
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "workflow_dispatch",
    "title": "Fly DSL test",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934",
    "created_at": "2026-10-26T10:47:06Z",
-   "updated_at": "2026-10-26T11:09:22Z",
+   "updated_at": "2026-10-26T11:22:23Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-26T11:09:22Z",
+     "started_at": "2026-10-26T11:22:23Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276467"
     },
@@ -38,10 +38,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:09:44Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T11:33:12Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276487"
     }
    ]
@@ -57,9 +57,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517",
    "created_at": "2026-10-26T10:33:29Z",
-   "updated_at": "2026-10-26T10:58:52Z",
+   "updated_at": "2026-10-26T11:59:41Z",
    "actor": "jli-melchior",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T11:27:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970892"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T11:59:41Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970930"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T11:33:17Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970965"
+    }
+   ]
   },
   {
    "run_id": 40305652206,
@@ -83,11 +111,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Ext][Coop] Add more block-level primitives (#1314)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231",
    "created_at": "2026-10-26T08:02:25Z",
-   "updated_at": "2026-10-26T10:45:24Z",
+   "updated_at": "2026-10-26T11:59:14Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -105,10 +133,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T10:45:23Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T11:59:14Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231/job/121466564614"
     },
     {
