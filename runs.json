@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T03:41:44Z",
+ "updated": "2026-10-26T06:16:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,28 +10,31 @@
    "branch": "phil/compile-hints-copy",
    "event": "pull_request",
    "title": "[JIT] flyc.compile[hints] no longer leaves its hints on the function",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537",
    "created_at": "2026-10-26T02:28:57Z",
-   "updated_at": "2026-10-26T02:45:21Z",
+   "updated_at": "2026-10-26T05:17:58Z",
    "actor": "Phil-amd",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T02:48:00Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128884"
+     "completed_at": "2026-10-26T04:01:30Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128884",
+     "machine": "gbt350-odcdh1-b04-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-26T02:45:21Z",
+     "started_at": "2026-10-26T05:17:58Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128887"
     },
@@ -53,21 +56,24 @@
    "branch": "phil/rocdl-single-target",
    "event": "pull_request",
    "title": "[JIT] Assert a single ROCDL target source; test the wave32 object",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259298546",
    "created_at": "2026-10-26T02:28:54Z",
-   "updated_at": "2026-10-26T02:43:56Z",
+   "updated_at": "2026-10-26T06:14:12Z",
    "actor": "Phil-amd",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T02:46:14Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259298546/job/121371768411"
+     "completed_at": "2026-10-26T04:02:02Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259298546/job/121371768411",
+     "machine": "gbt350-odcdh1-b08-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -81,10 +87,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-26T02:43:56Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-26T05:17:57Z",
+     "completed_at": "2026-10-26T06:14:11Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259298546/job/121371768546"
     }
    ]
