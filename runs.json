@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-26T12:01:02Z",
+ "updated": "2026-10-26T12:44:15Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,30 +10,33 @@
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "workflow_dispatch",
    "title": "Fly DSL test",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934",
    "created_at": "2026-10-26T10:47:06Z",
-   "updated_at": "2026-10-26T11:22:23Z",
+   "updated_at": "2026-10-26T12:30:49Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:22:23Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T12:30:49Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276467"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:09:51Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276471"
+     "completed_at": "2026-10-26T12:05:02Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276471",
+     "machine": "smci350-rck-g03-f12-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -43,6 +46,24 @@
      "started_at": "2026-10-26T11:09:44Z",
      "completed_at": "2026-10-26T11:33:12Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276487"
+    },
+    {
+     "runner": "linux-flydsl-mi355-8",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-26T12:31:15Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572786968"
+    },
+    {
+     "runner": "linux-flydsl-mi325-8",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-26T12:30:49Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572787189"
     }
    ]
   },
@@ -53,38 +74,41 @@
    "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
    "event": "pull_request",
    "title": "[LLVM] Roll back to 941a04e and cherry-pick unclaused VMEM patches",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517",
    "created_at": "2026-10-26T10:33:29Z",
-   "updated_at": "2026-10-26T11:59:41Z",
+   "updated_at": "2026-10-26T12:41:54Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:27:52Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970892"
+     "completed_at": "2026-10-26T12:24:59Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970892",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:59:41Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T12:41:54Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970930"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-26T11:33:17Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T12:01:09Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970965"
     }
    ]
