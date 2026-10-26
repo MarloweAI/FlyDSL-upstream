@@ -1,8 +1,51 @@
 {
  "schema": 1,
- "updated": "2026-10-26T16:14:31Z",
+ "updated": "2026-10-26T18:46:37Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40362651138,
+   "pr": 1321,
+   "commit": "8fdabcb209990566e484b95c788921f6e6ce101a",
+   "branch": "fix/dlpack-layout-fill-retains-tensor",
+   "event": "pull_request",
+   "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40362651138",
+   "created_at": "2026-10-26T16:48:31Z",
+   "updated_at": "2026-10-26T17:11:40Z",
+   "actor": "josh-schell-amd",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-26T17:11:40Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40362651138/job/121724838483"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-26T17:12:47Z",
+     "completed_at": "2026-10-26T17:46:04Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40362651138/job/121724838600"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-26T17:12:00Z",
+     "completed_at": "2026-10-26T17:40:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40362651138/job/121724838707"
+    }
+   ]
+  },
   {
    "run_id": 40351239986,
    "pr": 1329,
@@ -29,19 +72,19 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-26T15:54:38Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T16:37:08Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40351239986/job/121680703308"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-26T15:54:01Z",
-     "completed_at": null,
+     "completed_at": "2026-10-26T16:18:57Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40351239986/job/121680703407"
     }
    ]
@@ -361,7 +404,7 @@
    "commit": "61132f8440ec77061d9e6f05fc2300c4ed44a1e6",
    "branch": "fix/pin-python-interpreter",
    "event": "pull_request",
-   "title": "[Bugfix] Pin both MLIR Python detection passes to one interpreter",
+   "title": "[FIX] Building from source can produce bindings for the wrong ABI and crash on import",
    "status": "completed",
    "conclusion": "action_required",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
@@ -727,7 +770,7 @@
   },
   {
    "run_id": 39891581303,
-   "pr": 1321,
+   "pr": null,
    "commit": "203d2c49925568d7e6ea98b62908934ed3f0d31e",
    "branch": "fix/dlpack-layout-fill-retains-tensor",
    "event": "pull_request",
@@ -1220,8 +1263,7 @@
      "conclusion": "success",
      "started_at": "2026-10-21T03:45:50Z",
      "completed_at": "2026-10-21T03:45:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293283",
-     "log_fetch_failed": true
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293283"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -1729,8 +1771,7 @@
      "conclusion": "success",
      "started_at": "2026-10-20T12:12:13Z",
      "completed_at": "2026-10-20T12:34:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636238",
-     "log_fetch_failed": true
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636238"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -2021,21 +2062,6 @@
      "bench_skipped": "host MI350 != MI355"
     }
    ]
-  },
-  {
-   "run_id": 39389403128,
-   "pr": null,
-   "commit": "b0bd6270ccf06e5669c3ef53014d63a7d6006e7e",
-   "branch": "main",
-   "event": "push",
-   "title": "1,Balance the prologue's extra wave_m == 1 barrier so both groups' ep\u2026",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39389403128",
-   "created_at": "2026-10-20T07:52:18Z",
-   "updated_at": "2026-10-20T07:53:08Z",
-   "actor": "coderfeli",
-   "jobs": []
   }
  ]
 }
