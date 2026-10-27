@@ -328,8 +328,13 @@ FailureOr<KernelTraceState> emitPrologue(gpu::GPUFuncOp kernel, int64_t eventsPe
       Value claimed = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, cursor,
                                                   i64Const(b, loc, eventsPerWave),
                                                   LLVM::AtomicOrdering::monotonic, "agent");
-      inBounds = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ule, claimed,
-                                         i64Const(b, loc, layout.partitionSlots - eventsPerWave));
+      // A partition smaller than one region holds no wave, and the bound below would wrap.
+      inBounds =
+          layout.partitionSlots < eventsPerWave
+              ? b.create<arith::ConstantOp>(loc, b.getBoolAttr(false)).getResult()
+              : b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ule, claimed,
+                                        i64Const(b, loc, layout.partitionSlots - eventsPerWave))
+                    .getResult();
       // Partitions interleave by wave region: the j-th claim of partition `key` owns region
       // j * partitions + key, so the claimed regions form one prefix the host reads at once.
       Value claimedSlots = b.create<LLVM::TruncOp>(loc, i32Ty, claimed);

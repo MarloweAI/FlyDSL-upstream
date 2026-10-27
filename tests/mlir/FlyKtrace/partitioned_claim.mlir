@@ -45,3 +45,23 @@ module attributes {gpu.container_module} {
     }
   }
 }
+
+// -----
+
+// A 4096-byte buffer holds no 256-slot region, so no claim is in bounds and no wave writes its
+// header. The cursor still advances, so the host reports the overflow.
+// CHECK-LABEL: gpu.func @smaller_than_one_wave
+// CHECK: llvm.atomicrmw add {{.*}} syncscope("agent") monotonic : !llvm.ptr<1>, i64
+// CHECK-NOT: arith.cmpi ule
+// CHECK: %[[NONE:.*]] = arith.constant false
+// CHECK: scf.if %[[NONE]] {
+// CHECK: arith.select %[[NONE]]
+module attributes {gpu.container_module, fly_ktrace.capacity_slots = 127 : i32,
+                   fly_ktrace.partitions = 1 : i32, fly_ktrace.partition_slots = 0 : i32} {
+  gpu.module @kernels [#rocdl.target<chip = "gfx950">] {
+    gpu.func @smaller_than_one_wave(%buf: !fly.ptr<i8, global>) kernel {
+      fly_ktrace.mark "tick"
+      gpu.return
+    }
+  }
+}
