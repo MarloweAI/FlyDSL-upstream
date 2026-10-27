@@ -9,13 +9,14 @@
 // CHECK: llvm.atomicrmw add {{.*}} syncscope("agent")
 // CHECK-NOT: llvm.atomicrmw
 // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
-// CHECK-COUNT-6: llvm.store
+// CHECK: llvm.inline_asm has_side_effects "s_store_dwordx4 $0, $2, 0x0\0A\09s_store_dwordx4 $1, $2, 0x10\0A\09s_waitcnt lgkmcnt(0)", "s,s,s"
 // CHECK-NOT: llvm.atomicrmw
 // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
-// CHECK-COUNT-6: llvm.store
+// CHECK: llvm.inline_asm has_side_effects "s_store_dwordx4 $0, $2, 0x0\0A\09s_store_dwordx4 $1, $2, 0x10\0A\09s_waitcnt lgkmcnt(0)", "s,s,s"
 // CHECK-NOT: llvm.atomicrmw
 // CHECK: llvm.store {{.*}} : i32, !llvm.ptr<1>
 // CHECK-NEXT: }
+// CHECK-NEXT: llvm.inline_asm has_side_effects "s_dcache_wb\0A\09s_waitcnt lgkmcnt(0)"
 // CHECK-NEXT: gpu.return
 module attributes {gpu.container_module} {
   gpu.module @kernels [#rocdl.target<chip = "gfx950">] {

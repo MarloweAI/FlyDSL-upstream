@@ -539,8 +539,8 @@ def test_range_start_yields_the_slot_its_record_occupies(monkeypatch):
     record_slots = {slot for _, slot, other in selects if consts.get(other) == "2"}
     tokens = [res for res, slot, other in selects if consts.get(other) == "-1" and slot in record_slots]
     assert any(
-        f"llvm.store {tok}," in text for tok in tokens
-    ), "range_start must yield the slot its record occupies, or the unpaired sentinel, and range_stop must store it"
+        f"llvm.insertelement {tok}," in text for tok in tokens
+    ), "range_start must yield the slot its record occupies, or the unpaired sentinel, and range_stop must record it"
 
 
 def test_reading_a_trace_re_arms_the_buffer(monkeypatch, tmp_path):

@@ -23,8 +23,9 @@ module attributes {gpu.container_module} {
       // CHECK: arith.select
       // CHECK: rocdl.readfirstlane
 
-      // The event is wave-uniform: no leader-lane branch, no atomic, and a record that does
-      // not fit is redirected by a select instead of a branch.
+      // The event is wave-uniform: no leader-lane branch, no atomic, a record that does not
+      // fit is redirected by a select instead of a branch, and scalar stores write it from
+      // SGPRs. The wave writes back its scalar cache before it returns.
       // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
       // CHECK-NOT: scf.if
       // CHECK-NOT: llvm.atomicrmw
@@ -34,7 +35,11 @@ module attributes {gpu.container_module} {
       // CHECK: llvm.mlir.constant(2 : i32)
       // CHECK: arith.select
       // CHECK-NOT: scf.if
-      // CHECK-COUNT-6: llvm.store
+      // CHECK: %[[RECORD:.*]] = llvm.shufflevector %{{.*}}, %{{.*}} [0, 1, 2, 3] : vector<2xi32>
+      // CHECK-COUNT-4: llvm.insertelement
+      // CHECK: llvm.inline_asm has_side_effects "s_store_dwordx4 $0, $2, 0x0\0A\09s_store_dwordx4 $1, $2, 0x10\0A\09s_waitcnt lgkmcnt(0)", "s,s,s" %[[RECORD]], %{{.*}}, %{{.*}} : (vector<4xi32>, vector<4xi32>, !llvm.ptr<1>) -> ()
+      // CHECK: llvm.inline_asm has_side_effects "s_dcache_wb\0A\09s_waitcnt lgkmcnt(0)"
+      // CHECK-NEXT: gpu.return
       fly_ktrace.mark "tick"
       gpu.return
     }

@@ -23,8 +23,7 @@ module attributes {gpu.container_module} {
       // CHECK: scf.for {{.*}} iter_args(%[[TOK:.*]] = %[[SEED]], %{{.*}} = %{{.*}}) -> (i32, i32)
       %out = scf.for %i = %c0 to %c4 step %c1
              iter_args(%tok = %init) -> (!fly_ktrace.token) {
-        // CHECK: llvm.mlir.constant(28 : i32)
-        // CHECK: llvm.store %[[TOK]]
+        // CHECK: llvm.insertelement %[[TOK]], %{{.*}} : vector<4xi32>
         fly_ktrace.range_stop %tok, "phase" : !fly_ktrace.token
         %next = fly_ktrace.range_start "phase" -> !fly_ktrace.token
         scf.yield %next : !fly_ktrace.token

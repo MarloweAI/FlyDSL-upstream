@@ -547,6 +547,15 @@ void storeAttemptedCount(gpu::ReturnOp ret, const KernelTraceState &st, Value co
   b.create<LLVM::StoreOp>(loc, count, gepBytes(b, loc, st.bufPtr, headerOff));
 }
 
+// Scalar record stores stay in the scalar cache until the wave writes it back.
+void writeBackScalarCache(gpu::ReturnOp ret) {
+  OpBuilder b(ret);
+  b.create<LLVM::InlineAsmOp>(ret.getLoc(), TypeRange{}, ValueRange{},
+                              "s_dcache_wb\n\ts_waitcnt lgkmcnt(0)", "", /*has_side_effects=*/true,
+                              /*is_align_stack=*/false, LLVM::tailcallkind::TailCallKind::None,
+                              LLVM::AsmDialectAttr(), ArrayAttr());
+}
+
 struct EventShape {
   uint32_t kind;
   uint32_t eventId;
@@ -600,20 +609,28 @@ Value expandUniformEvent(Operation *op, const EventShape &shape, const KernelTra
   Value startSlot = shape.startSlot ? shape.startSlot : i32Const(b, loc, 0);
   uint32_t packed = (shape.eventId & 0xFFFFFF) | ((shape.kind & 0x7) << 24) |
                     (shape.payloadType << 27) | (shape.payload ? (1u << 31) : 0);
-  struct Field {
-    int64_t offset;
-    Value value;
-  };
-  Field fields[] = {
-      {kOffTimestamp, ts},
-      {kOffPayload, payload},
-      {kOffHwId, st.hwId},
-      {kOffXccId, st.xccId},
-      {kOffPacked, i32Const(b, loc, static_cast<int64_t>(packed))},
-      {kOffStartSlot, startSlot},
-  };
-  for (const Field &f : fields)
-    b.create<LLVM::StoreOp>(loc, f.value, gepBytes(b, loc, recPtr, i32Const(b, loc, f.offset)));
+  // The record is wave-uniform, so scalar stores keep it out of VGPRs. A block holding inline
+  // asm keeps its exec-zero skip, so a branch that no lane runs stores nothing. A scalar store
+  // can read its SGPRs after it issues, and the compiler may reuse them right after the asm, so
+  // the asm waits for its stores.
+  auto pair = VectorType::get({2}, i32);
+  auto quad = VectorType::get({4}, i32);
+  Value timeWords = b.create<LLVM::BitcastOp>(loc, pair, ts);
+  Value payloadWords = b.create<LLVM::BitcastOp>(loc, pair, payload);
+  Value timePayload =
+      b.create<LLVM::ShuffleVectorOp>(loc, timeWords, payloadWords, ArrayRef<int32_t>{0, 1, 2, 3});
+  Value ids = b.create<LLVM::PoisonOp>(loc, quad);
+  Value idWords[] = {st.hwId, st.xccId, i32Const(b, loc, static_cast<int64_t>(packed)), startSlot};
+  for (auto [i, word] : llvm::enumerate(idWords))
+    ids = b.create<LLVM::InsertElementOp>(loc, ids, word, i32Const(b, loc, i));
+  static_assert(kOffTimestamp == 0 && kOffPayload == 8 && kOffHwId == 16 && kOffXccId == 20 &&
+                    kOffPacked == 24 && kOffStartSlot == 28,
+                "the scalar record stores write the record layout as two 16-byte halves");
+  b.create<LLVM::InlineAsmOp>(
+      loc, TypeRange{}, ValueRange{timePayload, ids, recPtr},
+      "s_store_dwordx4 $0, $2, 0x0\n\ts_store_dwordx4 $1, $2, 0x10\n\ts_waitcnt lgkmcnt(0)",
+      "s,s,s", /*has_side_effects=*/true, /*is_align_stack=*/false,
+      LLVM::tailcallkind::TailCallKind::None, LLVM::AsmDialectAttr(), ArrayAttr());
 
   Value result = token;
   if (recordingIf && shape.producesSlot) {
@@ -914,8 +931,9 @@ struct FlyKtraceToROCDLConversionPass
         OpBuilder b(&entry, entry.begin());
         CounterThreader threader(slotEvents, kernel.getContext());
         Value count = threader.thread(entry, i32Const(b, kernel.getLoc(), 0));
-        storeAttemptedCount(cast<gpu::ReturnOp>(entry.getTerminator()), *st, count,
-                            layout.capacitySlots);
+        auto ret = cast<gpu::ReturnOp>(entry.getTerminator());
+        storeAttemptedCount(ret, *st, count, layout.capacitySlots);
+        writeBackScalarCache(ret);
         counter = std::move(threader.local);
       }
 

@@ -12,11 +12,10 @@ module attributes {gpu.container_module} {
       %a = fly_ktrace.range_start "a" -> !fly_ktrace.token
       %b = fly_ktrace.range_start "b" -> !fly_ktrace.token
 
-      // CHECK: arith.select {{.*}} : i32
+      // CHECK: %[[SEL:.*]] = arith.select %arg0, %{{.*}}, %{{.*}} : i32
       %sel = arith.select %c, %a, %b : !fly_ktrace.token
 
-      // CHECK: llvm.mlir.constant(28 : i32)
-      // CHECK: llvm.store
+      // CHECK: llvm.insertelement %[[SEL]], %{{.*}} : vector<4xi32>
       fly_ktrace.range_stop %sel, "a" : !fly_ktrace.token
       gpu.return
     }
