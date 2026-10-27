@@ -3,6 +3,7 @@
 
 import ctypes
 import importlib
+import os
 import pickle
 import threading
 import zlib
@@ -69,6 +70,11 @@ def _resolve_runtime_libs() -> List[str]:
     for lib in libs:
         if not lib.exists():
             raise FileNotFoundError(f"Required JIT runtime library not found: {lib}\nPlease rebuild the project.")
+    if os.name == "nt":
+        # ExecutionEngine's LoadLibraryW ignores os.add_dll_directory paths, so the
+        # HIP dependencies would not resolve; load each library here first.
+        for lib in libs:
+            ctypes.CDLL(str(lib))
     return [str(p) for p in libs]
 
 

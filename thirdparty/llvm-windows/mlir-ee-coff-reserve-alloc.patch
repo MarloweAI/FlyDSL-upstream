@@ -1,0 +1,30 @@
+Windows-only LLVM fix. scripts/build_llvm.ps1 applies it after the series in
+thirdparty/llvm-build-info.json; build_llvm.sh and the CI MLIR cache key never
+read thirdparty/llvm-windows/, so Linux builds are unchanged.
+
+MLIR's ExecutionEngine reserves one contiguous block per JIT object
+(SectionMemoryManager's reserveAllocationSpace) only on AArch64. On COFF x86-64,
+RuntimeDyld aborts with "IMAGE_REL_AMD64_ADDR32NB relocation requires an ordered
+section layout" whenever an object's sections land more than 4GB apart, which
+happens at random once a process has loaded many kernels (llvm/llvm-project#55386,
+#65641).
+
+Upstream status: submitted as https://github.com/llvm/llvm-project/pull/233658.
+
+diff --git a/mlir/lib/ExecutionEngine/ExecutionEngine.cpp b/mlir/lib/ExecutionEngine/ExecutionEngine.cpp
+index 49a88e000..25b84ba12 100644
+--- a/mlir/lib/ExecutionEngine/ExecutionEngine.cpp
++++ b/mlir/lib/ExecutionEngine/ExecutionEngine.cpp
+@@ -315,8 +315,10 @@ ExecutionEngine::create(Operation *m, const ExecutionEngineOptions &options,
+                                        llvm::jitlink::JITLinkMemoryManager
+                                            &IgnoredMemMgr) {
+     // Needed to respect AArch64 ABI requirements on the distance between
+-    // TEXT and GOT sections.
+-    bool reserveAlloc = llvmModule->getTargetTriple().isAArch64();
++    // TEXT and GOT sections, and for COFF's image-relative (ADDR32NB)
++    // relocations in .pdata, which need code < rodata < rwdata within 4GB.
++    const llvm::Triple &hostTriple = llvmModule->getTargetTriple();
++    bool reserveAlloc = hostTriple.isAArch64() || hostTriple.isOSBinFormatCOFF();
+     auto objectLayer = std::make_unique<RTDyldObjectLinkingLayer>(
+         session, [sectionMemoryMapper = options.sectionMemoryMapper,
+                   reserveAlloc](const MemoryBuffer &) {

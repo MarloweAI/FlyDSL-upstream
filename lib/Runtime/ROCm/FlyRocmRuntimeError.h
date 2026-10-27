@@ -14,13 +14,20 @@
 
 #include "hip/hip_runtime.h"
 
+#if defined(_WIN32)
+// FlyJitRuntime exports everything (WINDOWS_EXPORT_ALL_SYMBOLS); there is no AOT runtime.
+#define FLYDSL_RUNTIME_API
+#define FLYDSL_RUNTIME_HIDDEN
+#else
 #if defined(FLYDSL_AOT_RUNTIME_EMBEDDED)
 #define FLYDSL_RUNTIME_API __attribute__((visibility("hidden")))
 #else
 #define FLYDSL_RUNTIME_API __attribute__((visibility("default")))
 #endif
+#define FLYDSL_RUNTIME_HIDDEN __attribute__((visibility("hidden")))
+#endif
 
-__attribute__((visibility("hidden"))) void flydslRecordRuntimeError(int32_t error);
+FLYDSL_RUNTIME_HIDDEN void flydslRecordRuntimeError(int32_t error);
 
 extern "C" FLYDSL_RUNTIME_API int32_t flydslRuntimeTakeError();
 

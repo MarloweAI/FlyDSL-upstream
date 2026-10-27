@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2025 FlyDSL Project Contributors
 
+import hashlib
+import os
+import shutil
+import sys
+from pathlib import Path
 from typing import List, Tuple
 
 from ...runtime.device import get_rocm_arch, get_warp_size
@@ -12,6 +17,61 @@ def _ktrace_tracing_enabled(compile_hints: dict) -> bool:
     if "ktrace" in compile_hints:
         return bool(compile_hints["ktrace"])
     return bool(env.ktrace.enable)
+
+
+def _stage_file(src: Path, dst: Path) -> None:
+    """Make ``dst`` a current copy of ``src``: a hardlink where the volume allows, else a copy."""
+    if dst.is_file():
+        s, d = src.stat(), dst.stat()
+        if (s.st_size, s.st_mtime_ns) == (d.st_size, d.st_mtime_ns):
+            return
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dst.with_name(f"{dst.name}.{os.getpid()}.tmp")
+    try:
+        os.link(src, tmp)
+    except OSError:
+        shutil.copy2(src, tmp)
+    os.replace(tmp, dst)
+
+
+def _windows_rocm_toolkit() -> str:
+    """Resolve the split TheRock SDK layout to the toolkit layout used by ROCDL."""
+    explicit = os.environ.get("FLYDSL_ROCM_TOOLKIT")
+    if explicit:
+        toolkit = Path(explicit).resolve()
+        if not (toolkit / "llvm" / "bin" / "ld.lld.exe").is_file() or not (toolkit / "amdgcn" / "bitcode").is_dir():
+            raise RuntimeError(f"Invalid FLYDSL_ROCM_TOOLKIT: {toolkit}")
+        return toolkit.as_posix()
+
+    candidates = []
+    for variable in ("ROCM_PATH", "HIP_PATH"):
+        if value := os.environ.get(variable):
+            candidates.append(Path(value))
+    for entry in sys.path:
+        for package in ("_rocm_sdk_devel", "_rocm_sdk_core"):
+            candidates.append(Path(entry) / package)
+
+    for candidate in candidates:
+        candidate = candidate.resolve()
+        if (candidate / "llvm" / "bin" / "ld.lld.exe").is_file() and (candidate / "amdgcn" / "bitcode").is_dir():
+            return candidate.as_posix()
+
+        llvm = candidate / "lib" / "llvm"
+        if not (llvm / "bin" / "ld.lld.exe").is_file() or not (llvm / "amdgcn" / "bitcode").is_dir():
+            continue
+
+        # ROCDL wants <toolkit>/llvm/bin/ld.lld and <toolkit>/amdgcn/bitcode, which no root
+        # of TheRock's lib/llvm layout provides. Stage real files rather than junctions: processes
+        # started from OpenSSH refuse to traverse user-made junctions (WinError 448).
+        stage_root = Path(os.environ.get("LOCALAPPDATA", Path.home())) / "FlyDSL" / "rocm-toolkit-files"
+        stage = stage_root / hashlib.sha256(str(llvm).encode()).hexdigest()[:12]
+        _stage_file(llvm / "bin" / "ld.lld.exe", stage / "llvm" / "bin" / "ld.lld.exe")
+        for bitcode in (llvm / "amdgcn" / "bitcode").iterdir():
+            if bitcode.is_file():
+                _stage_file(bitcode, stage / "amdgcn" / "bitcode" / bitcode.name)
+        return stage.as_posix()
+
+    raise RuntimeError("Could not find ld.lld.exe and AMDGPU bitcode in the active ROCm SDK")
 
 
 class RocmBackend(BaseBackend):
@@ -30,6 +90,12 @@ class RocmBackend(BaseBackend):
     @staticmethod
     def detect_target() -> GPUTarget:
         arch = env.compile.arch or get_rocm_arch()
+        if not arch:
+            # Only Windows detects nothing: it has no rocm_agent_enumerator to fall back on.
+            raise RuntimeError(
+                "Could not detect the GPU architecture: no rocm_agent_enumerator and no ROCm torch "
+                "that sees a GPU. Set ARCH to the compile target, for example ARCH=gfx1151."
+            )
         return GPUTarget(backend="rocm", arch=arch, warp_size=get_warp_size(arch))
 
     @classmethod
@@ -117,7 +183,8 @@ class RocmBackend(BaseBackend):
                 else []
             ),
         ]
-        binary_fragment = f'gpu-module-to-binary{{format=fatbin opts="{" ".join(bin_cli_opts)}"}}'
+        toolkit_opt = f' toolkit="{_windows_rocm_toolkit()}"' if os.name == "nt" else ""
+        binary_fragment = f'gpu-module-to-binary{{format=fatbin{toolkit_opt} opts="{" ".join(bin_cli_opts)}"}}'
         return [*pre_binary_fragments, *binary_prep_fragments], binary_fragment
 
     def pipeline_fragments(self, *, compile_hints: dict) -> List[str]:
@@ -169,6 +236,12 @@ class RocmBackend(BaseBackend):
     # -- cache / fingerprint ---------------------------------------------
 
     def native_lib_patterns(self) -> List[str]:
+        if sys.platform == "win32":
+            return [
+                "_mlirDialectsFly*.pyd",
+                "Fly*.dll",  # also fly_jit_runtime.dll: Windows globs ignore case
+                "_mlirRegisterEverything*.pyd",
+            ]
         return [
             "_mlirDialectsFly*.so",
             "libFly*.so",
@@ -179,6 +252,8 @@ class RocmBackend(BaseBackend):
         ]
 
     def jit_runtime_lib_basenames(self) -> List[str]:
+        if sys.platform == "win32":
+            return ["fly_jit_runtime.dll", "mlir_c_runner_utils.dll"]
         return [
             "libfly_jit_runtime.so",
             "libmlir_c_runner_utils.so",
@@ -186,6 +261,8 @@ class RocmBackend(BaseBackend):
 
     @classmethod
     def aot_runtime_config(cls) -> AOTRuntimeConfig:
+        if sys.platform == "win32":
+            raise NotImplementedError("ROCm AOT export is supported on Linux ELF hosts only")
         return AOTRuntimeConfig(
             archive_basename="libfly_rocm_aot_runtime.a",
             runtime_libraries=("libamdhip64.so",),

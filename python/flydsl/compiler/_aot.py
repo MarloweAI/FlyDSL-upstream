@@ -5,7 +5,6 @@
 
 import ctypes
 import dataclasses
-import fcntl
 import json
 import os
 import re
@@ -37,6 +36,9 @@ from .jit_argument import (
 )
 from .jit_function import _create_mlir_context
 from .protocol import c_abi_spec
+
+if os.name != "nt":
+    import fcntl
 
 _SCHEMA_VERSION = 2
 

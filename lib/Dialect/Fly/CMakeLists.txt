@@ -1,4 +1,6 @@
 add_mlir_dialect_library(MLIRFlyDialect
+  # Windows compiles obj.* into FlyPythonCAPI; Visual Studio makes it only on request.
+  OBJECT
   IR/FlyDialect.cpp
   IR/FlyOps.cpp
   IR/FlyTypeDefs.cpp
