@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-27T06:13:48Z",
+ "updated": "2026-10-27T06:48:50Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40462231178,
+   "pr": null,
+   "commit": "d4ff12d072cc54ee87d49f9c4aba819175ed142d",
+   "branch": "main",
+   "event": "push",
+   "title": "Keep region op attributes in fly-promote-regmem-to-vectorssa (#1333)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40462231178",
+   "created_at": "2026-10-27T06:37:42Z",
+   "updated_at": "2026-10-27T06:40:01Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 40459654153,
    "pr": 1335,
@@ -10,13 +25,41 @@
    "branch": "fix/ktrace-low-perturbation",
    "event": "pull_request",
    "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153",
    "created_at": "2026-10-27T06:11:49Z",
-   "updated_at": "2026-10-27T06:12:09Z",
+   "updated_at": "2026-10-27T06:33:00Z",
    "actor": "jhinpan",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T06:33:36Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153/job/122047788218"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-27T06:33:00Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153/job/122047788237"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T06:33:21Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153/job/122047788247"
+    }
+   ]
   },
   {
    "run_id": 40445723484,
@@ -1927,49 +1970,6 @@
      "started_at": "2026-10-20T12:37:39Z",
      "completed_at": "2026-10-20T13:16:39Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004/job/118630594294"
-    }
-   ]
-  },
-  {
-   "run_id": 39416986551,
-   "pr": 1256,
-   "commit": "36a8ec1575bbf8e8b93c8208a9fad7c20dc60b97",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551",
-   "created_at": "2026-10-20T11:43:26Z",
-   "updated_at": "2026-10-20T13:06:54Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T12:12:13Z",
-     "completed_at": "2026-10-20T12:34:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636238"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T12:37:54Z",
-     "completed_at": "2026-10-20T13:06:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636265"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T12:12:28Z",
-     "completed_at": "2026-10-20T13:03:20Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636349"
     }
    ]
   }
