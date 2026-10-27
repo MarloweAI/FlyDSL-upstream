@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-27T19:45:47Z",
+ "updated": "2026-10-27T20:14:12Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -113,11 +113,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM read\u2026",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40530869698",
    "created_at": "2026-10-27T15:25:43Z",
-   "updated_at": "2026-10-27T18:33:50Z",
+   "updated_at": "2026-10-27T20:12:10Z",
    "actor": "xytpai",
    "jobs": [
     {
@@ -144,10 +144,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T18:33:50Z",
-     "completed_at": null,
+     "completed_at": "2026-10-27T20:12:09Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40530869698/job/122310347725"
     }
    ]
@@ -655,7 +655,7 @@
   },
   {
    "run_id": 40445723484,
-   "pr": 1335,
+   "pr": null,
    "commit": "6904258260cf098522bca50efe3d69c801837d76",
    "branch": "fix/ktrace-low-perturbation",
    "event": "pull_request",
@@ -701,7 +701,7 @@
   },
   {
    "run_id": 40441116437,
-   "pr": 1335,
+   "pr": null,
    "commit": "3b3290739a9cea4c046848f09608ab68a949c245",
    "branch": "fix/ktrace-low-perturbation",
    "event": "pull_request",
@@ -716,7 +716,7 @@
   },
   {
    "run_id": 40435060404,
-   "pr": 1335,
+   "pr": null,
    "commit": "3b3290739a9cea4c046848f09608ab68a949c245",
    "branch": "fix/ktrace-low-perturbation",
    "event": "pull_request",
