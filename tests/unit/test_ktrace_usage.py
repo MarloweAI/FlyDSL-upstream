@@ -36,6 +36,19 @@ def _add(a: fx.Tensor, b: fx.Tensor, out: fx.Tensor, stream: fx.Stream = fx.Stre
 
 
 @flyc.kernel
+def _spread_kernel(out: fx.Tensor):
+    bid, _, _ = fx.block_idx
+    with ktrace.range("spread"):
+        out[bid, fx.thread_idx.x] = fx.Float32(1)
+
+
+@flyc.jit
+def _spread(out: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
+    groups, _ = out.shape.unpack()
+    _spread_kernel(out).launch(grid=(groups, 1, 1), block=(256, 1, 1), stream=stream)
+
+
+@flyc.kernel
 def _accumulate_kernel(a: fx.Tensor, out: fx.Tensor):
     row = fx.block_idx.x
     col = fx.thread_idx.x
@@ -193,6 +206,23 @@ def test_moe_and_attention_control_flow(causal):
         "attn.epilogue",
     } <= phases.keys()
     assert phases["attn.key"]["count"] == 8
+
+
+def test_waves_of_one_launch_spread_evenly_over_partitions():
+    from flydsl.expr.rocdl import ktrace_emit, ktrace_format
+
+    buf = ktrace_emit.ensure_buffer()
+    if buf.partitions < 2 or buf.partition_slots < 4 * ktrace_format.EVENTS_PER_WAVE:
+        pytest.skip("needs a buffer with several partitions of at least four waves")
+    out = torch.zeros(buf.partitions, 256, device="cuda")
+    with ktrace.capture("spread") as trace:
+        _spread(out)
+        torch.cuda.synchronize()
+        claims = buf.partition_claims()
+
+    assert claims == [4 * ktrace_format.EVENTS_PER_WAVE] * buf.partitions, "waves must not share a partition unevenly"
+    assert trace.summary()["phases"]["spread"]["count"] == 4 * buf.partitions
+    torch.testing.assert_close(out, torch.ones_like(out))
 
 
 def test_graph_replay_snapshots_accumulate_until_read():

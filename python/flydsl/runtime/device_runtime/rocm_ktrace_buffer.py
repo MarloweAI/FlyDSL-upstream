@@ -72,14 +72,27 @@ class TraceBuffer:
                 "separate processes."
             )
 
-    def claimed_slots(self) -> int:
+    @property
+    def partitions(self) -> int:
+        return _format.partition_layout(self.capacity_slots)[0]
+
+    @property
+    def partition_slots(self) -> int:
+        return _format.partition_layout(self.capacity_slots)[1]
+
+    def partition_claims(self) -> list[int]:
+        """Slots claimed in each partition since the last reset; a claim past ``partition_slots`` overflowed."""
         self._require_own_device()
-        out = ctypes.c_uint32(0)
+        stride = _format.CURSOR_STRIDE_BYTES
+        raw = (ctypes.c_char * (self.partitions * stride))()
         _check(
-            _runtime().mgpuTraceBufferRead(ctypes.byref(out), ctypes.c_void_p(self.device_ptr), 4),
-            "reading the trace cursor",
+            _runtime().mgpuTraceBufferRead(raw, ctypes.c_void_p(self.device_ptr + _format.RECORD_BYTES), len(raw)),
+            "reading the trace cursors",
         )
-        return int(out.value)
+        return [struct.unpack_from("<Q", raw, p * stride)[0] for p in range(self.partitions)]
+
+    def claimed_slots(self) -> int:
+        return sum(self.partition_claims())
 
     def launch_count(self) -> int:
         self._require_own_device()
@@ -91,24 +104,31 @@ class TraceBuffer:
         return int(out.value)
 
     def read_records(self) -> list[dict]:
-        claimed = self.claimed_slots()
-        if claimed > self.capacity_slots:
-            needed = (claimed + 1) * _format.RECORD_BYTES
+        claims = self.partition_claims()
+        size = self.partition_slots
+        worst = max(claims, default=0)
+        if worst > size:
+            needed = _format.buffer_bytes_for_partition_slots(worst)
             raise RuntimeError(
-                f"trace overflowed: waves claimed {claimed} slots, buffer holds "
-                f"{self.capacity_slots}. Re-run with FLYDSL_KTRACE_BUFFER_BYTES>={needed}, "
+                f"trace overflowed: waves claimed {worst} slots in one of the {len(claims)} partitions, each "
+                f"holds {size}. Re-run with FLYDSL_KTRACE_BUFFER_BYTES>={needed}, "
                 f"a block filter (capture(blocks=...) or FLYDSL_KTRACE_BLOCKS), or fewer launches between reads."
             )
 
-        nbytes = claimed * _format.RECORD_BYTES
+        # Partitions interleave by wave region (region j * partitions + p is the j-th claim of
+        # partition p), so the claimed regions form one prefix; unclaimed regions in it are zero.
+        nbytes = -(-worst // _format.EVENTS_PER_WAVE) * len(claims) * _format.EVENTS_PER_WAVE * _format.RECORD_BYTES
         if nbytes == 0:
             return []
+        first = _format.first_record_slot(len(claims))
         raw = (ctypes.c_char * nbytes)()
         _check(
-            _runtime().mgpuTraceBufferRead(raw, ctypes.c_void_p(self.device_ptr + _format.RECORD_BYTES), nbytes),
+            _runtime().mgpuTraceBufferRead(
+                raw, ctypes.c_void_p(self.device_ptr + first * _format.RECORD_BYTES), nbytes
+            ),
             "reading the trace records",
         )
-        records, overflowed = decode_records(bytes(raw))
+        records, overflowed = decode_records(bytes(raw), first_slot=first)
         if overflowed:
             worst = max(count for _, count in overflowed)
             raise RuntimeError(
@@ -140,7 +160,8 @@ def _decode_payload(bits: int, packed: int):
     raise ValueError(f"ktrace: unknown payload type {encoding}")
 
 
-def decode_records(raw: bytes) -> tuple[list[dict], list[tuple[int, int]]]:
+def decode_records(raw: bytes, first_slot: int = 1) -> tuple[list[dict], list[tuple[int, int]]]:
+    """Decode whole wave regions; ``raw`` starts at absolute slot ``first_slot`` with a wave header."""
     per_wave = _format.EVENTS_PER_WAVE
     out = []
     overflowed = []
@@ -149,8 +170,8 @@ def decode_records(raw: bytes) -> tuple[list[dict], list[tuple[int, int]]]:
     block = (0, 0, 0)
     wave_id = 0
     for off in range(0, len(raw) - _format.RECORD_BYTES + 1, _format.RECORD_BYTES):
-        abs_slot = off // _format.RECORD_BYTES + 1
-        if per_wave > 0 and (abs_slot - 1) % per_wave == 0:
+        abs_slot = off // _format.RECORD_BYTES + first_slot
+        if per_wave > 0 and (abs_slot - first_slot) % per_wave == 0:
             attempted, wave_word, dispatch_id, queue_id, block_x, block_y = struct.unpack_from("<IIQQII", raw, off)
             block = (block_x, block_y, wave_word >> 8)
             wave_id = wave_word & 0xFF

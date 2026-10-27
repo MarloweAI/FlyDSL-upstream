@@ -13,6 +13,9 @@ module attributes {gpu.container_module} {
 
       // CHECK-NOT: fly_ktrace.token
       // CHECK-NOT: unrealized_conversion_cast
+      // CHECK: rocdl.readfirstlane
+      // CHECK-NOT: fly_ktrace.token
+      // CHECK-NOT: unrealized_conversion_cast
 
       // CHECK: %[[SEED:.*]] = llvm.mlir.constant(-1 : i32)
       %init = fly_ktrace.inactive_token -> !fly_ktrace.token

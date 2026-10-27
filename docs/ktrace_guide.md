@@ -217,9 +217,13 @@ mode disabled.
   do not increase this limit. Overflow raises during collection because dropped
   range endpoints would make the timeline incomplete.
 - **Finite collection window.** Waves reserve 256 slots each, including a counter
-  slot. The default buffer holds 8191 waves. Use block filters and periodic reads
-  for large grids or repeated launches. The global reservation counter is 32-bit;
-  accumulating 2²⁴ waves without a read wraps it and invalidates overflow detection.
+  slot. The buffer is split into up to 256 partitions, each with its own 64-bit
+  cursor. A wave's workgroup and wave index select the partition, so waves that
+  start together do not contend for one cursor and the partitions fill about
+  evenly (exactly evenly for one-dimensional grids). The default buffer holds 31
+  waves per partition, 7936 waves in total. A read fails when any partition
+  overflowed. Use block filters and periodic reads for large grids or repeated
+  launches.
 - **One device per process.** Access from another device raises. Trace multiple
   devices in separate processes. Traced binaries cannot be exported to C.
 - **Synchronized collection.** Reading waits for device work and serializes with

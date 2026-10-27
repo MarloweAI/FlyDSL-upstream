@@ -15,11 +15,12 @@ module attributes {gpu.container_module} {
       // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.getreg"
       // CHECK: rocdl.ballot
       // CHECK: scf.if
-      // CHECK: llvm.load {{.*}} atomic monotonic
-      // CHECK: arith.cmpi ule
+      // CHECK-NOT: atomic monotonic
+      // CHECK: llvm.atomicrmw add {{.*}} syncscope("agent") monotonic : !llvm.ptr<1>, i64
+      // CHECK: arith.cmpi ule, {{.*}} : i64
       // CHECK: scf.if
-      // CHECK: llvm.atomicrmw add
       // CHECK: gpu.subgroup_id
+      // CHECK: arith.select
       // CHECK: rocdl.readfirstlane
 
       // CHECK: rocdl.ballot

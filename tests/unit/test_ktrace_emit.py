@@ -1319,18 +1319,51 @@ def test_importing_the_runtime_does_not_pull_in_expr():
 def test_overflow_message_suggests_a_size_that_actually_works():
     from flydsl.runtime.device_runtime import rocm_ktrace_buffer as ktrace_buffer
 
-    claimed = 256
-    buf = ktrace_buffer.TraceBuffer(device_ptr=0x1000, capacity_slots=claimed - 1, device_id=-1)
+    buf = ktrace_buffer.TraceBuffer(device_ptr=0x1000, capacity_slots=4095, device_id=-1)
+    claims = [0] * buf.partitions
+    claims[-1] = buf.partition_slots + ktrace_format.EVENTS_PER_WAVE
     with pytest.raises(RuntimeError, match="trace overflowed") as excinfo:
-        with mock.patch.object(type(buf), "claimed_slots", lambda self: claimed):
+        with mock.patch.object(type(buf), "partition_claims", lambda self: claims):
             buf.read_records()
 
     suggested = int(re.search(r"FLYDSL_KTRACE_BUFFER_BYTES>=(\d+)", str(excinfo.value)).group(1))
-    resulting_capacity = suggested // ktrace_format.RECORD_BYTES - 1
-    assert resulting_capacity >= claimed, (
-        f"suggested {suggested} bytes yields {resulting_capacity} slots for {claimed} claimed -- "
-        "the caller would hit the same error again"
+    _, resulting_slots = ktrace_format.partition_layout(suggested // ktrace_format.RECORD_BYTES - 1)
+    assert resulting_slots >= max(claims), (
+        f"suggested {suggested} bytes gives partitions of {resulting_slots} slots for {max(claims)} claimed in one "
+        "partition -- the caller would hit the same error again"
     )
+
+
+def test_cursor_stride_matches_the_pass_constant():
+    import pathlib
+
+    src = pathlib.Path(__file__).resolve().parents[2] / "lib/Conversion/FlyKtraceToROCDL/FlyKtraceToROCDL.cpp"
+    if not src.exists():
+        pytest.skip("C++ pass not present in this checkout")
+    m = re.search(r"kCursorStrideBytes\s*=\s*(\d+)", src.read_text())
+    assert m, "kCursorStrideBytes not found in the pass source"
+    assert int(m.group(1)) == ktrace_format.CURSOR_STRIDE_BYTES
+
+
+def test_partition_layout_fits_the_buffer():
+    for capacity in (255, 511, 4095, 65535, (64 << 20) // ktrace_format.RECORD_BYTES - 1, (2 << 30) // 32 - 1):
+        partitions, slots = ktrace_format.partition_layout(capacity)
+        assert 1 <= partitions <= ktrace_format.MAX_PARTITIONS and partitions & (partitions - 1) == 0
+        assert slots % ktrace_format.EVENTS_PER_WAVE == 0
+        assert ktrace_format.first_record_slot(partitions) + partitions * slots <= capacity + 1, capacity
+    assert ktrace_format.partition_layout((64 << 20) // ktrace_format.RECORD_BYTES - 1) == (256, 7936)
+
+
+def test_decode_numbers_slots_from_the_partition_start():
+    import struct
+
+    from flydsl.runtime.device_runtime import rocm_ktrace_buffer as ktrace_buffer
+
+    first = ktrace_format.first_record_slot(256)
+    raw = struct.pack("<IIQQII", 1, 2, 9, 7, 3, 4) + struct.pack("<QQIIII", 100, 0, 0, 0, 1, 0)
+    records, overflowed = ktrace_buffer.decode_records(raw, first_slot=first)
+    assert not overflowed
+    assert [(r["slot"], r["block"], r["wave_id"]) for r in records] == [(first + 1, (3, 4, 0), 2)]
 
 
 def test_a_rejected_name_merge_leaves_the_table_untouched():
