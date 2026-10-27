@@ -133,6 +133,124 @@ def _matmul(a: fx.Tensor, b: fx.Tensor, out: fx.Tensor, stream: fx.Stream = fx.S
     _matmul_kernel(a, b, out).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
 
 
+@flyc.kernel
+def _grid_kernel():
+    with ktrace.range("body"):
+        ktrace.mark("tick")
+
+
+@flyc.jit
+def _grid(blocks: fx.Constexpr[int]):
+    _grid_kernel().launch(grid=(blocks, 1, 1), block=(256, 1, 1))
+
+
+@flyc.kernel
+def _loop_kernel():
+    for i in fx.range(0, 8, 1):
+        ktrace.mark("iter", i)
+
+
+@flyc.jit
+def _loop():
+    _loop_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _divergent_kernel():
+    lane = fx.thread_idx.x % fx.Int32(64)
+    if lane >= fx.Int32(32):
+        ktrace.mark("upper")
+    ktrace.mark("after")
+
+
+@flyc.jit
+def _divergent():
+    _divergent_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _both_sides_kernel():
+    lane = fx.thread_idx.x % fx.Int32(64)
+    if lane >= fx.Int32(32):
+        ktrace.mark("upper")
+    else:
+        ktrace.mark("lower")
+    ktrace.mark("after")
+
+
+@flyc.jit
+def _both_sides():
+    _both_sides_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _loop_in_branch_kernel():
+    lane = fx.thread_idx.x % fx.Int32(64)
+    if lane >= fx.Int32(32):
+        for i in fx.range(0, 3, 1):
+            ktrace.mark("upper", i)
+    else:
+        ktrace.mark("lower")
+    ktrace.mark("after")
+
+
+@flyc.jit
+def _loop_in_branch():
+    _loop_in_branch_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _disjoint_ifs_kernel():
+    lane = fx.thread_idx.x % fx.Int32(64)
+    if lane >= fx.Int32(32):
+        ktrace.mark("upper")
+    if lane < fx.Int32(32):
+        ktrace.mark("lower")
+    ktrace.mark("after")
+
+
+@flyc.jit
+def _disjoint_ifs():
+    _disjoint_ifs_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _branch_in_loop_kernel():
+    lane = fx.thread_idx.x % fx.Int32(64)
+    for i in fx.range(0, 3, 1):
+        if lane >= fx.Int32(32):
+            ktrace.mark("upper", i)
+    if lane < fx.Int32(32):
+        ktrace.mark("lower")
+
+
+@flyc.jit
+def _branch_in_loop():
+    _branch_in_loop_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _inactive_kernel():
+    ktrace.range_stop(ktrace.inactive_token("never"))
+    ktrace.mark("only")
+
+
+@flyc.jit
+def _inactive():
+    _inactive_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
+@flyc.kernel
+def _long_kernel():
+    for _ in fx.range(0, 300, 1):
+        ktrace.mark("spin")
+
+
+@flyc.jit
+def _long():
+    _long_kernel().launch(grid=(1, 1, 1), block=(64, 1, 1))
+
+
 def test_capture_three_kernel_patterns(tmp_path):
     a = torch.randn(64, device="cuda")
     b = torch.randn(64, device="cuda")
@@ -378,3 +496,81 @@ def test_graph_replay_with_gemm_moe_and_attention():
         "attn.key",
         "attn.epilogue",
     } <= phases.keys()
+
+
+def test_every_wave_of_a_grid_is_recorded():
+    with ktrace.capture("grid") as trace:
+        _grid(1024)
+    records = trace._snapshot()
+    waves = {(r["block"], r["wave_id"]) for r in records}
+    assert len(waves) == 4096, f"{4096 - len(waves)} of 4096 waves left no records"
+    assert len(records) == 3 * 4096
+    assert len({r["slot"] for r in records}) == len(records), "two records share a slot"
+    assert trace.summary()["phases"]["body"]["count"] == 4096
+
+
+def test_loop_iterations_take_distinct_slots():
+    with ktrace.capture("loop") as trace:
+        _loop()
+    records = sorted(trace._snapshot(), key=lambda r: r["slot"])
+    assert [r["payload"] for r in records] == list(range(8))
+    assert len({r["slot"] for r in records}) == 8
+
+
+def test_a_lane_divergent_mark_keeps_its_slot():
+    with ktrace.capture("divergent") as trace:
+        _divergent()
+    records = sorted(trace._snapshot(), key=lambda r: r["slot"])
+    names = {v: k for k, v in trace._names.items()}
+    assert [names[r["event_id"]] for r in records] == ["upper", "after"], "the mark after the branch took its slot"
+
+
+@pytest.mark.parametrize(
+    "launch, expected",
+    [
+        (_both_sides, ["upper", "lower", "after"]),
+        (_loop_in_branch, ["upper", "upper", "upper", "lower", "after"]),
+        (_disjoint_ifs, ["upper", "lower", "after"]),
+        (_branch_in_loop, ["upper", "upper", "upper", "lower"]),
+    ],
+    ids=["both_sides", "loop_in_branch", "disjoint_ifs", "branch_in_loop"],
+)
+def test_lanes_that_record_apart_keep_their_records(launch, expected):
+    with ktrace.capture("apart") as trace:
+        launch()
+    records = sorted(trace._snapshot(), key=lambda r: r["slot"])
+    names = {v: k for k, v in trace._names.items()}
+    assert [names[r["event_id"]] for r in records] == expected, "one group of lanes overwrote the other's records"
+
+
+def test_an_inactive_token_stop_takes_no_slot():
+    from flydsl.expr.rocdl import ktrace_emit, ktrace_format
+
+    with ktrace.capture("inactive") as trace:
+        _inactive()
+    records = trace._snapshot()
+    assert [r["kind"] for r in records] == [ktrace.KIND_MARK]
+    layout = ktrace_emit.current_buffer().layout
+    offset = (records[0]["slot"] - layout.header_slots) % ktrace_format.EVENTS_PER_WAVE
+    assert offset == 1, "the stop of an inactive token used a slot"
+
+
+def test_repeated_small_launches_spread_over_partitions():
+    from flydsl.expr.rocdl import ktrace_emit, ktrace_format
+
+    a = torch.randn(64, device="cuda")
+    b = torch.randn(64, device="cuda")
+    out = torch.empty_like(a)
+    with ktrace.capture("repeated") as trace:
+        for _ in range(64):
+            _add(a, b, out)
+    layout = ktrace_emit.current_buffer().layout
+    regions = {(r["slot"] - layout.header_slots) // ktrace_format.EVENTS_PER_WAVE for r in trace._snapshot()}
+    partitions = {region % layout.partitions for region in regions}
+    assert len(partitions) >= 16, f"64 one-wave launches used only {len(partitions)} of {layout.partitions} partitions"
+
+
+def test_a_wave_past_its_event_limit_is_reported():
+    with pytest.raises(RuntimeError, match="trace truncated: 1 wave"):
+        with ktrace.capture("long"):
+            _long()

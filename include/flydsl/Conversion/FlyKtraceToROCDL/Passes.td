@@ -6,9 +6,14 @@ include "mlir/Pass/PassBase.td"
 def FlyKtraceToROCDLConversionPass : Pass<"convert-fly-ktrace-to-rocdl"> {
   let summary = "Expand fly_ktrace annotations into their record-writing form";
   let description = [{
-    Rewrites each `fly_ktrace.*` op into the slot claim, leader guard, timestamp
-    read and record stores that actually write a trace record, leaving behind only
-    `llvm.*`, `scf.*` and `arith.*` ops.
+    Rewrites each `fly_ktrace.*` op into the timestamp read and the record stores
+    that write a trace record, behind a prologue that claims the wave's slots from
+    its partition, leaving behind only `llvm.*`, `rocdl.*`, `scf.*` and `arith.*` ops.
+    Events carry no branch and no atomic: a wave's event count lives in a register,
+    and stores the wave may not make are dropped by its buffer descriptor's bound.
+    After every region that records, the wave agrees on its count, and an `scf.if`
+    whose branches both record becomes two `scf.if`s on its condition, so the lanes
+    of a divergent wave never share a slot.
 
     Runs before `convert-fly-to-rocdl` so it never has to reason about Fly's atom
     forms, and after the kernel signature is fixed -- the trailing trace-buffer
