@@ -1,8 +1,66 @@
 {
  "schema": 1,
- "updated": "2026-10-27T01:04:33Z",
+ "updated": "2026-10-27T02:57:41Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40441116437,
+   "pr": 1335,
+   "commit": "3b3290739a9cea4c046848f09608ab68a949c245",
+   "branch": "fix/ktrace-low-perturbation",
+   "event": "pull_request",
+   "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40441116437",
+   "created_at": "2026-10-27T02:54:16Z",
+   "updated_at": "2026-10-27T02:55:34Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
+  {
+   "run_id": 40435060404,
+   "pr": 1335,
+   "commit": "3b3290739a9cea4c046848f09608ab68a949c245",
+   "branch": "fix/ktrace-low-perturbation",
+   "event": "pull_request",
+   "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40435060404",
+   "created_at": "2026-10-27T01:51:52Z",
+   "updated_at": "2026-10-27T02:55:03Z",
+   "actor": "jhinpan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "failure",
+     "started_at": "2026-10-27T02:15:22Z",
+     "completed_at": "2026-10-27T02:45:38Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40435060404/job/121968945556"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-27T02:15:30Z",
+     "completed_at": "2026-10-27T02:55:02Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40435060404/job/121968945585"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-27T02:14:44Z",
+     "completed_at": "2026-10-27T02:54:17Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40435060404/job/121968945589"
+    }
+   ]
+  },
   {
    "run_id": 40402291556,
    "pr": 1333,
@@ -10,11 +68,11 @@
    "branch": "promote-regmem-keep-loop-attrs",
    "event": "pull_request",
    "title": "[Bugfix][Dialect] Don't drop range(..., unroll=N) hints in fly-promote-regmem-to-vectorssa",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40402291556",
    "created_at": "2026-10-26T21:11:51Z",
-   "updated_at": "2026-10-26T21:31:24Z",
+   "updated_at": "2026-10-27T02:15:38Z",
    "actor": "RElbers",
    "jobs": [
     {
@@ -32,9 +90,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-26T21:31:24Z",
+     "started_at": "2026-10-27T02:15:37Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40402291556/job/121860578671"
     },
@@ -1943,95 +2001,6 @@
      "started_at": "2026-10-20T11:49:55Z",
      "completed_at": "2026-10-20T12:32:14Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865469"
-    }
-   ]
-  },
-  {
-   "run_id": 39409153675,
-   "pr": null,
-   "commit": "b5eb1d33405ecbc897578f137ce2fd7a65137f8a",
-   "branch": "main",
-   "event": "push",
-   "title": "fix(coop): preserve declared operator element types (#1185)",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675",
-   "created_at": "2026-10-20T10:36:39Z",
-   "updated_at": "2026-10-20T11:05:10Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T10:56:06Z",
-     "completed_at": "2026-10-20T11:04:38Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549399"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T10:55:29Z",
-     "completed_at": "2026-10-20T11:03:41Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549449"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T10:56:20Z",
-     "completed_at": "2026-10-20T11:05:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39409153675/job/118589549476"
-    }
-   ]
-  },
-  {
-   "run_id": 39407507769,
-   "pr": 1313,
-   "commit": "03f123e0f02b637f4e0e4e220a93b9c683c16f61",
-   "branch": "pr/feat-core-layout-replacement",
-   "event": "pull_request",
-   "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769",
-   "created_at": "2026-10-20T10:22:44Z",
-   "updated_at": "2026-10-20T12:48:00Z",
-   "actor": "sjfeng1999",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T10:45:28Z",
-     "completed_at": "2026-10-20T11:32:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585501979",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:22:47Z",
-     "completed_at": "2026-10-20T12:48:00Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585502018"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T10:45:21Z",
-     "completed_at": "2026-10-20T11:04:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39407507769/job/118585502020"
     }
    ]
   }
