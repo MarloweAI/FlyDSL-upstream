@@ -274,6 +274,37 @@ def test_waves_of_one_launch_spread_evenly_over_partitions():
     torch.testing.assert_close(out, torch.ones_like(out))
 
 
+def test_static_slots_give_wave_i_of_a_launch_region_i():
+    from flydsl.expr.rocdl import ktrace_emit, ktrace_format
+
+    buf = ktrace_emit.ensure_buffer()
+    groups = 64
+    out = torch.zeros(groups, 256, device="cuda")
+    with ktrace.capture("spread_static", slots="static") as trace:
+        _spread(out)
+        torch.cuda.synchronize()
+        header = buf.header()
+        claims = buf.partition_claims()
+
+    assert header == (0, 1, groups * 4), "the first thread must store the launch's wave count"
+    assert not any(claims), "static slots must not claim from the partition cursors"
+    records = trace._snapshot()
+    assert len(records) == 2 * groups * 4
+    first = ktrace_format.first_record_slot(buf.partitions)
+    for record in records:
+        region = (record["slot"] - first) // ktrace_format.EVENTS_PER_WAVE
+        assert region == record["block"][0] * 4 + record["wave_id"], record
+    torch.testing.assert_close(out, torch.ones_like(out))
+
+
+def test_static_slots_refuse_a_second_launch_before_the_read():
+    out = torch.zeros(4, 256, device="cuda")
+    with pytest.raises(RuntimeError, match="one launch per read"):
+        with ktrace.capture("spread_static_twice", slots="static"):
+            _spread(out)
+            _spread(out)
+
+
 def test_graph_replay_snapshots_accumulate_until_read():
     a = torch.randn(64, device="cuda")
     b = torch.randn(64, device="cuda")

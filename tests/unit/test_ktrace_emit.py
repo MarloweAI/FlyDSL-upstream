@@ -1324,8 +1324,9 @@ def test_overflow_message_suggests_a_size_that_actually_works():
     claims = [0] * buf.partitions
     claims[-1] = buf.partition_slots + ktrace_format.EVENTS_PER_WAVE
     with pytest.raises(RuntimeError, match="trace overflowed") as excinfo:
-        with mock.patch.object(type(buf), "partition_claims", lambda self: claims):
-            buf.read_records()
+        with mock.patch.object(type(buf), "header", lambda self: (0, 1, 0)):
+            with mock.patch.object(type(buf), "partition_claims", lambda self: claims):
+                buf.read_records()
 
     suggested = int(re.search(r"FLYDSL_KTRACE_BUFFER_BYTES>=(\d+)", str(excinfo.value)).group(1))
     _, resulting_slots = ktrace_format.partition_layout(suggested // ktrace_format.RECORD_BYTES - 1)
@@ -1333,6 +1334,35 @@ def test_overflow_message_suggests_a_size_that_actually_works():
         f"suggested {suggested} bytes gives partitions of {resulting_slots} slots for {max(claims)} claimed in one "
         "partition -- the caller would hit the same error again"
     )
+
+
+def test_static_overflow_message_suggests_a_size_that_actually_works():
+    from flydsl.runtime.device_runtime import rocm_ktrace_buffer as ktrace_buffer
+
+    buf = ktrace_buffer.TraceBuffer(device_ptr=0x1000, capacity_slots=4095, device_id=-1)
+    waves = 100
+    with pytest.raises(RuntimeError, match="trace overflowed") as excinfo:
+        with mock.patch.object(type(buf), "header", lambda self: (waves - 10, 1, waves)):
+            with mock.patch.object(type(buf), "partition_claims", lambda self: [0] * buf.partitions):
+                buf.read_records()
+
+    suggested = int(re.search(r"FLYDSL_KTRACE_BUFFER_BYTES>=(\d+)", str(excinfo.value)).group(1))
+    capacity = suggested // ktrace_format.RECORD_BYTES - 1
+    partitions, _ = ktrace_format.partition_layout(capacity)
+    # The pass gives a static launch (capacity + 1 - first record slot) / EVENTS_PER_WAVE wave regions.
+    regions = (capacity + 1 - ktrace_format.first_record_slot(partitions)) // ktrace_format.EVENTS_PER_WAVE
+    assert regions >= waves, f"suggested {suggested} bytes holds {regions} static wave regions for {waves} waves"
+
+
+def test_a_read_refuses_static_and_partitioned_records_together():
+    from flydsl.runtime.device_runtime import rocm_ktrace_buffer as ktrace_buffer
+
+    buf = ktrace_buffer.TraceBuffer(device_ptr=0x1000, capacity_slots=4095, device_id=-1)
+    claims = [ktrace_format.EVENTS_PER_WAVE] + [0] * (buf.partitions - 1)
+    with mock.patch.object(type(buf), "header", lambda self: (0, 2, 4)):
+        with mock.patch.object(type(buf), "partition_claims", lambda self: claims):
+            with pytest.raises(RuntimeError, match="static and partitioned slots"):
+                buf.read_records()
 
 
 def test_cursor_stride_matches_the_pass_constant():

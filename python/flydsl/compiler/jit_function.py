@@ -143,6 +143,7 @@ _CACHE_INVALIDATING_ENV_VARS = (
     "FLYDSL_KTRACE_ENABLE",
     "FLYDSL_KTRACE_BLOCKS",
     "FLYDSL_KTRACE_BUFFER_BYTES",
+    "FLYDSL_KTRACE_SLOTS",
 )
 
 
@@ -1769,11 +1770,13 @@ def _attach_ktrace_config(module, traced: bool) -> None:
 
     hints = CompilationContext.get_compile_hints()
     blocks = (hints.get("ktrace_blocks", env.ktrace.blocks) or "").strip()
+    slots = (hints.get("ktrace_slots", env.ktrace.slots) or "partitioned").strip()
     get_ktrace_backend().configure_module(
         module,
         target_arch=get_backend().target.arch,
         known_names=name_table(),
         blocks=blocks,
+        slots=slots,
     )
 
 

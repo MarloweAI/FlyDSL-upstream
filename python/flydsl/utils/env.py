@@ -315,6 +315,11 @@ class KtraceEnvManager(EnvManager):
         "",
         description="Restrict recording to 'x,y,z' or 'xcc:N'; empty records every workgroup",
     )
+    slots = OptStr(
+        "partitioned",
+        description="'partitioned' claims wave slots from per-partition cursors; 'static' gives wave i of a launch "
+        "slot region i with no atomic and holds one launch per read",
+    )
     dump_dir = OptStr("", description="Directory for trace output; empty writes to the working directory")
 
 

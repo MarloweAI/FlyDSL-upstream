@@ -94,6 +94,29 @@ class TraceBuffer:
     def claimed_slots(self) -> int:
         return sum(self.partition_claims())
 
+    def header(self) -> tuple[int, int, int]:
+        """(waves dropped past the buffer, launches, waves of the launch) since the last reset.
+
+        The first and last are written only by kernels compiled with static slots."""
+        self._require_own_device()
+        raw = (ctypes.c_char * 12)()
+        _check(_runtime().mgpuTraceBufferRead(raw, ctypes.c_void_p(self.device_ptr), len(raw)), "reading the header")
+        return struct.unpack_from("<III", raw)
+
+    def _read_static(self, dropped: int, launches: int, waves: int) -> int:
+        if launches > 1:
+            raise RuntimeError(
+                f"ktrace: static slots hold one launch per read, but {launches} launches ran since the last read. "
+                "Read or clear after each launch, or use FLYDSL_KTRACE_SLOTS=partitioned."
+            )
+        if dropped:
+            needed = _format.first_record_slot(_format.MAX_PARTITIONS) + waves * _format.EVENTS_PER_WAVE
+            raise RuntimeError(
+                f"trace overflowed: {dropped} of {waves} waves did not fit the buffer with static slots. "
+                f"Re-run with FLYDSL_KTRACE_BUFFER_BYTES>={needed * _format.RECORD_BYTES} or a block filter."
+            )
+        return waves * _format.EVENTS_PER_WAVE * _format.RECORD_BYTES
+
     def launch_count(self) -> int:
         self._require_own_device()
         out = ctypes.c_uint32(0)
@@ -104,20 +127,28 @@ class TraceBuffer:
         return int(out.value)
 
     def read_records(self) -> list[dict]:
+        dropped, launches, static_waves = self.header()
         claims = self.partition_claims()
         size = self.partition_slots
         worst = max(claims, default=0)
-        if worst > size:
+        if static_waves and worst:
+            raise RuntimeError(
+                "ktrace: kernels with static and partitioned slots wrote the same trace between reads; "
+                "use one FLYDSL_KTRACE_SLOTS setting per read."
+            )
+        if static_waves:
+            nbytes = self._read_static(dropped, launches, static_waves)
+        elif worst > size:
             needed = _format.buffer_bytes_for_partition_slots(worst)
             raise RuntimeError(
                 f"trace overflowed: waves claimed {worst} slots in one of the {len(claims)} partitions, each "
                 f"holds {size}. Re-run with FLYDSL_KTRACE_BUFFER_BYTES>={needed}, "
                 f"a block filter (capture(blocks=...) or FLYDSL_KTRACE_BLOCKS), or fewer launches between reads."
             )
-
-        # Partitions interleave by wave region (region j * partitions + p is the j-th claim of
-        # partition p), so the claimed regions form one prefix; unclaimed regions in it are zero.
-        nbytes = -(-worst // _format.EVENTS_PER_WAVE) * len(claims) * _format.EVENTS_PER_WAVE * _format.RECORD_BYTES
+        else:
+            # Partitions interleave by wave region (region j * partitions + p is the j-th claim of
+            # partition p), so the claimed regions form one prefix; unclaimed regions in it are zero.
+            nbytes = -(-worst // _format.EVENTS_PER_WAVE) * len(claims) * _format.EVENTS_PER_WAVE * _format.RECORD_BYTES
         if nbytes == 0:
             return []
         first = _format.first_record_slot(len(claims))

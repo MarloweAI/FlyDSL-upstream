@@ -284,9 +284,10 @@ def _blocks_hint(blocks) -> str | None:
 
 class Capture:
 
-    def __init__(self, kernel: str = "kernel", *, blocks=None, out_dir=None):
+    def __init__(self, kernel: str = "kernel", *, blocks=None, slots=None, out_dir=None):
         self.kernel = kernel
         self.blocks = _blocks_hint(blocks)
+        self.slots = slots
         self.out_dir = out_dir
         self._backend = None
         self._scope = None
@@ -311,6 +312,8 @@ class Capture:
                 hints = {"ktrace": True}
                 if self.blocks is not None:
                     hints["ktrace_blocks"] = self.blocks
+                if self.slots is not None:
+                    hints["ktrace_slots"] = self.slots
                 self._scope = CompilationContext.compile_hints(hints)
                 self._scope.__enter__()
             except BaseException:
@@ -424,5 +427,5 @@ class Capture:
         return backend.write_trace(records, self._names, kernel=self.kernel, out_dir=self.out_dir or backend.dump_dir())
 
 
-def capture(kernel: str = "kernel", *, blocks=None, out_dir=None) -> Capture:
-    return Capture(kernel, blocks=blocks, out_dir=out_dir)
+def capture(kernel: str = "kernel", *, blocks=None, slots=None, out_dir=None) -> Capture:
+    return Capture(kernel, blocks=blocks, slots=slots, out_dir=out_dir)

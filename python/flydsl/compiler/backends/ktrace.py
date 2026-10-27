@@ -39,6 +39,7 @@ class KtraceBackend(Protocol):
         target_arch: str,
         known_names: dict[str, int],
         blocks: str,
+        slots: str = "partitioned",
     ) -> None: ...
 
     def check_outside_capture(self) -> None: ...

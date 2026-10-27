@@ -193,6 +193,7 @@ to the same kernel. Run the example with `--layers 3 --graph` to try this.
 | `FLYDSL_KTRACE_ENABLE` | `0` | Enable instrumentation |
 | `FLYDSL_KTRACE_BUFFER_BYTES` | `64 MiB` | Device buffer size; at most 2 GiB |
 | `FLYDSL_KTRACE_BLOCKS` | all | `x,y,z` selects one workgroup; `xcc:N` selects one XCD |
+| `FLYDSL_KTRACE_SLOTS` | `partitioned` | `static` gives each wave of a launch a fixed region with no claim atomic; see Limits |
 | `FLYDSL_KTRACE_DUMP_DIR` | current directory | Trace output directory |
 
 An explicit `ktrace` compile hint overrides the environment. To set a persistent
@@ -224,6 +225,14 @@ mode disabled.
   waves per partition, 7936 waves in total. A read fails when any partition
   overflowed. Use block filters and periodic reads for large grids or repeated
   launches.
+- **Static slots hold one launch per read.** With `FLYDSL_KTRACE_SLOTS=static`
+  or `ktrace.capture(..., slots="static")`, wave `i` of a launch, counted in
+  workgroup order, owns region `i`, so a wave records without any atomic. The
+  buffer must hold every wave of the grid, 8187 waves by default, even with a
+  block filter. A second launch would overwrite the first, so a read after two
+  launches raises; read or clear after each launch, and use the partitioned mode
+  for graph replays of several launches. A read also raises when waves did not
+  fit, and names a buffer size that holds them.
 - **One device per process.** Access from another device raises. Trace multiple
   devices in separate processes. Traced binaries cannot be exported to C.
 - **Synchronized collection.** Reading waits for device work and serializes with

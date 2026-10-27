@@ -61,6 +61,8 @@ struct BufferLayout {
   int64_t capacitySlots;
   int64_t partitions;
   int64_t partitionSlots;
+  // Static slots: wave i of a launch owns region i, with no claim atomic; one launch per read.
+  bool staticSlots = false;
 
   int64_t firstRecordSlot() const { return 1 + partitions * (kCursorStrideBytes / kRecordBytes); }
 };
@@ -123,6 +125,54 @@ Value partitionKey(OpBuilder &b, Location loc, gpu::GPUFuncOp kernel, const Buff
                                            i32Const(b, loc, static_cast<int32_t>(0x9E3779B1u)));
   key = b.create<arith::AddIOp>(loc, key, rotation);
   return b.create<arith::AndIOp>(loc, key, i32Const(b, loc, layout.partitions - 1));
+}
+
+struct LaunchShape {
+  Value groupsX, groupsY, groupsZ, wavesPerBlock;
+};
+
+// Workgroup counts of the launch from the hidden kernel arguments (code object v5+):
+// hidden_block_count_{x,y,z} at +0/+4/+8 and hidden_group_size_{x,y,z} at +12/+14/+16.
+LaunchShape launchShape(OpBuilder &b, Location loc, gpu::GPUFuncOp kernel) {
+  Type i32 = b.getI32Type();
+  auto argsTy = LLVM::LLVMPointerType::get(b.getContext(), 4);
+  Value hidden = callIntrinsic(b, loc, "llvm.amdgcn.implicitarg.ptr", argsTy);
+  auto hiddenArg = [&](int64_t offset, Type ty) -> Value {
+    Value ptr =
+        b.create<LLVM::GEPOp>(loc, argsTy, b.getI8Type(), hidden,
+                              ValueRange{i32Const(b, loc, offset)}, LLVM::GEPNoWrapFlags::none);
+    return b.create<LLVM::LoadOp>(loc, ty, ptr, /*alignment=*/ty.getIntOrFloatBitWidth() / 8,
+                                  /*isVolatile=*/false, /*isNonTemporal=*/false,
+                                  /*isInvariant=*/true);
+  };
+  LaunchShape shape{hiddenArg(0, i32), hiddenArg(4, i32), hiddenArg(8, i32), Value()};
+  if (std::optional<ArrayRef<int32_t>> known = kernel.getKnownBlockSize()) {
+    shape.wavesPerBlock =
+        i32Const(b, loc, llvm::divideCeil((*known)[0] * (*known)[1] * (*known)[2], kWaveSize));
+  } else {
+    Value threads = nullptr;
+    for (int64_t offset : {12, 14, 16}) {
+      Value dim = b.create<LLVM::ZExtOp>(loc, i32, hiddenArg(offset, b.getI16Type()));
+      threads = threads ? b.create<arith::MulIOp>(loc, threads, dim).getResult() : dim;
+    }
+    shape.wavesPerBlock = b.create<arith::CeilDivUIOp>(loc, threads, i32Const(b, loc, kWaveSize));
+  }
+  return shape;
+}
+
+// Index of this wave among all waves of its launch.
+Value linearWaveIndex(OpBuilder &b, Location loc, const LaunchShape &shape) {
+  Type i32 = b.getI32Type();
+  auto blockId = [&](gpu::Dimension dim) -> Value {
+    return b.create<arith::IndexCastOp>(loc, i32, b.create<gpu::BlockIdOp>(loc, dim));
+  };
+  Value block = b.create<arith::MulIOp>(loc, blockId(gpu::Dimension::z), shape.groupsY);
+  block = b.create<arith::AddIOp>(loc, block, blockId(gpu::Dimension::y));
+  block = b.create<arith::MulIOp>(loc, block, shape.groupsX);
+  block = b.create<arith::AddIOp>(loc, block, blockId(gpu::Dimension::x));
+  block = b.create<arith::MulIOp>(loc, block, shape.wavesPerBlock);
+  Value wave = b.create<arith::IndexCastOp>(loc, i32, b.create<gpu::SubgroupIdOp>(loc, nullptr));
+  return b.create<arith::AddIOp>(loc, block, wave);
 }
 
 Value firstActiveLane(OpBuilder &b, Location loc) {
@@ -205,8 +255,14 @@ FailureOr<KernelTraceState> emitPrologue(gpu::GPUFuncOp kernel, int64_t eventsPe
   // Waves that start together claim from different partition cursors: one shared cursor
   // serializes every wave's claim.
   Value key = i32Const(b, loc, 0);
-  if (layout.partitions > 1)
+  LaunchShape shape;
+  Value waveIndex;
+  if (layout.staticSlots) {
+    shape = launchShape(b, loc, kernel);
+    waveIndex = linearWaveIndex(b, loc, shape);
+  } else if (layout.partitions > 1) {
     key = partitionKey(b, loc, kernel, layout, dispatchId);
+  }
 
   Value firstThread;
   for (gpu::Dimension dim : {gpu::Dimension::x, gpu::Dimension::y, gpu::Dimension::z}) {
@@ -225,6 +281,13 @@ FailureOr<KernelTraceState> emitPrologue(gpu::GPUFuncOp kernel, int64_t eventsPe
   Value launchPtr = gepBytes(b, loc, st.bufPtr, i32Const(b, loc, 4));
   b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, launchPtr, i32Const(b, loc, 1),
                               LLVM::AtomicOrdering::monotonic);
+  if (layout.staticSlots) {
+    // The host decodes exactly this many wave regions.
+    Value waves = b.create<arith::MulIOp>(loc, shape.groupsX, shape.groupsY);
+    waves = b.create<arith::MulIOp>(loc, waves, shape.groupsZ);
+    waves = b.create<arith::MulIOp>(loc, waves, shape.wavesPerBlock);
+    b.create<LLVM::StoreOp>(loc, waves, gepBytes(b, loc, st.bufPtr, i32Const(b, loc, 8)));
+  }
   b.setInsertionPointAfter(launchIf);
 
   auto queuePtrTy = LLVM::LLVMPointerType::get(b.getContext(), 4);
@@ -242,23 +305,38 @@ FailureOr<KernelTraceState> emitPrologue(gpu::GPUFuncOp kernel, int64_t eventsPe
         b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::eq, lane, firstActiveLane(b, loc));
     auto claimIf = b.create<scf::IfOp>(loc, TypeRange{i32Ty}, isLeader, true);
     b.setInsertionPointToStart(claimIf.thenBlock());
-    Value cursorOff = b.create<arith::MulIOp>(loc, key, i32Const(b, loc, kCursorStrideBytes));
-    cursorOff = b.create<arith::AddIOp>(loc, cursorOff, i32Const(b, loc, kRecordBytes));
-    Value cursor = gepBytes(b, loc, st.bufPtr, cursorOff);
-    // The cursor is 64-bit so long captures cannot wrap it back into range. A claim past the
-    // partition still advances it, so the host sees the overflow.
-    Value claimed = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, cursor,
-                                                i64Const(b, loc, eventsPerWave),
-                                                LLVM::AtomicOrdering::monotonic, "agent");
-    Value inBounds =
-        b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ule, claimed,
-                                i64Const(b, loc, layout.partitionSlots - eventsPerWave));
-    // Partitions interleave by wave region: the j-th claim of partition `key` owns region
-    // j * partitions + key, so the claimed regions form one prefix the host reads at once.
-    Value claimedSlots = b.create<LLVM::TruncOp>(loc, i32Ty, claimed);
-    Value base = b.create<arith::MulIOp>(loc, claimedSlots, i32Const(b, loc, layout.partitions));
-    Value keySlots = b.create<arith::MulIOp>(loc, key, i32Const(b, loc, eventsPerWave));
-    base = b.create<arith::AddIOp>(loc, base, keySlots);
+    Value inBounds, base;
+    if (layout.staticSlots) {
+      int64_t regions = (layout.capacitySlots + 1 - layout.firstRecordSlot()) / eventsPerWave;
+      inBounds = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, waveIndex,
+                                         i32Const(b, loc, regions));
+      base = b.create<arith::MulIOp>(loc, waveIndex, i32Const(b, loc, eventsPerWave));
+      // A wave past the buffer records nothing; the header counts it for the overflow report.
+      Value dropped = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::uge, waveIndex,
+                                              i32Const(b, loc, regions));
+      auto droppedIf = b.create<scf::IfOp>(loc, dropped, false);
+      b.setInsertionPointToStart(droppedIf.thenBlock());
+      b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, st.bufPtr, i32Const(b, loc, 1),
+                                  LLVM::AtomicOrdering::monotonic, "agent");
+      b.setInsertionPointAfter(droppedIf);
+    } else {
+      Value cursorOff = b.create<arith::MulIOp>(loc, key, i32Const(b, loc, kCursorStrideBytes));
+      cursorOff = b.create<arith::AddIOp>(loc, cursorOff, i32Const(b, loc, kRecordBytes));
+      Value cursor = gepBytes(b, loc, st.bufPtr, cursorOff);
+      // The cursor is 64-bit so long captures cannot wrap it back into range. A claim past the
+      // partition still advances it, so the host sees the overflow.
+      Value claimed = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, cursor,
+                                                  i64Const(b, loc, eventsPerWave),
+                                                  LLVM::AtomicOrdering::monotonic, "agent");
+      inBounds = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ule, claimed,
+                                         i64Const(b, loc, layout.partitionSlots - eventsPerWave));
+      // Partitions interleave by wave region: the j-th claim of partition `key` owns region
+      // j * partitions + key, so the claimed regions form one prefix the host reads at once.
+      Value claimedSlots = b.create<LLVM::TruncOp>(loc, i32Ty, claimed);
+      base = b.create<arith::MulIOp>(loc, claimedSlots, i32Const(b, loc, layout.partitions));
+      Value keySlots = b.create<arith::MulIOp>(loc, key, i32Const(b, loc, eventsPerWave));
+      base = b.create<arith::AddIOp>(loc, base, keySlots);
+    }
     base = b.create<arith::AddIOp>(loc, base, i32Const(b, loc, layout.firstRecordSlot()));
     auto metadataIf = b.create<scf::IfOp>(loc, inBounds, false);
     b.setInsertionPointToStart(metadataIf.thenBlock());
@@ -789,6 +867,8 @@ struct FlyKtraceToROCDLConversionPass
       else
         layout.partitionSlots = (layout.capacitySlots + 1 - layout.firstRecordSlot()) /
                                 layout.partitions / kEventsPerWave * kEventsPerWave;
+      if (auto attr = root->getAttrOfType<StringAttr>("fly_ktrace.slots"))
+        layout.staticSlots = attr.getValue() == "static";
       if (layout.partitions < 1 || !llvm::isPowerOf2_64(layout.partitions) ||
           layout.partitionSlots < 0 || layout.partitionSlots % kEventsPerWave != 0 ||
           layout.firstRecordSlot() + layout.partitions * layout.partitionSlots >

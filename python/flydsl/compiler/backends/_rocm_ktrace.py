@@ -37,8 +37,11 @@ class RocmKtraceBackend:
                 "against the buffer in use."
             )
 
-    def configure_module(self, module, *, target_arch, known_names, blocks) -> None:
+    def configure_module(self, module, *, target_arch, known_names, blocks, slots="partitioned") -> None:
         from ..._mlir import ir
+
+        if slots not in ("partitioned", "static"):
+            raise ValueError(f"ktrace slots must be 'partitioned' or 'static', got {slots!r}")
 
         i32 = ir.IntegerType.get_signless(32)
         attrs = module.operation.attributes
@@ -54,6 +57,8 @@ class RocmKtraceBackend:
             )
         if blocks:
             attrs["fly_ktrace.blocks"] = ir.StringAttr.get(blocks)
+        if slots == "static":
+            attrs["fly_ktrace.slots"] = ir.StringAttr.get(slots)
 
     def check_outside_capture(self) -> None:
         torch = sys.modules.get("torch")
