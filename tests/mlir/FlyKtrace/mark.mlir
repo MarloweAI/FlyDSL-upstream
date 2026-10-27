@@ -30,7 +30,7 @@ module attributes {gpu.container_module} {
       // CHECK: arith.cmpi ult
       // CHECK: scf.if
       // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
-      // CHECK: llvm.atomicrmw add
+      // CHECK-NOT: llvm.atomicrmw
 
       // CHECK: arith.cmpi ult
       // CHECK: arith.cmpi ult

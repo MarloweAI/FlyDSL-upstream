@@ -95,7 +95,7 @@ def test_slot_reservation_atomic_is_hoisted_to_the_prologue(monkeypatch):
 
     text = _expanded(launch)
     assert text.count('llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"') == 3, "each event needs its own timestamp"
-    assert text.count("atomicrmw") == 5
+    assert text.count("atomicrmw") == 2, "only the launch counter and the slot claim are atomics; events count in SSA"
     assert text.count("llvm.mlir.global") == 0
 
 
@@ -453,8 +453,10 @@ def test_loop_call_site_records_every_iteration(monkeypatch):
     def launch():
         annotated().launch(grid=(1, 1, 1), block=(64, 1, 1))
 
-    body = _expanded(launch).split("scf.for", 1)[1]
-    assert "atomicrmw" in body, "slot index is compile-time; loop iterations will collide"
+    loop, after = _expanded(launch).split("scf.for", 1)[1].split("scf.yield", 1)
+    assert "iter_args" in loop.splitlines()[0] and "-> (i32)" in loop.splitlines()[0], "the loop must carry the count"
+    assert "atomicrmw" not in loop
+    assert "llvm.amdgcn.wave.reduce.umax" in after, "a divergent loop leaves lanes with different counts"
 
 
 def test_decode_skips_each_waves_counter_word():

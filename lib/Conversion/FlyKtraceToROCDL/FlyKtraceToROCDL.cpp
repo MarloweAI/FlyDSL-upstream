@@ -9,8 +9,10 @@
 #include "mlir/Dialect/SCF/Transforms/Patterns.h"
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/BuiltinOps.h"
+#include "mlir/IR/PatternMatch.h"
 #include "mlir/Pass/Pass.h"
 #include "mlir/Transforms/DialectConversion.h"
+#include "llvm/ADT/DenseSet.h"
 #include "llvm/ADT/StringSwitch.h"
 #include "llvm/Support/MathExtras.h"
 
@@ -304,6 +306,149 @@ FailureOr<KernelTraceState> emitPrologue(gpu::GPUFuncOp kernel, int64_t eventsPe
   return st;
 }
 
+// The per-wave event counter lives in SSA values instead of the wave's header word, so events
+// need no returning atomic. It is threaded through scf.for, scf.while and scf.if. An scf.if
+// gives each branch a static index range, so it cannot hold a loop with events. Kernels with
+// events anywhere else keep the memory counter.
+bool canThreadCounter(gpu::GPUFuncOp kernel, ArrayRef<Operation *> events) {
+  if (!kernel.getBody().hasOneBlock() ||
+      !isa<gpu::ReturnOp>(kernel.getBody().front().getTerminator()))
+    return false;
+  for (Operation *op : events) {
+    bool inLoop = false;
+    for (Operation *p = op->getParentOp(); p != kernel.getOperation(); p = p->getParentOp()) {
+      if (isa<scf::ForOp, scf::WhileOp>(p))
+        inLoop = true;
+      else if (!isa<scf::IfOp>(p) || inLoop)
+        return false;
+    }
+  }
+  return true;
+}
+
+// Lanes that left a divergent loop early carry a smaller count; the wave consumed the largest.
+Value waveMaxCount(OpBuilder &b, Location loc, Value count) {
+  return callIntrinsic(b, loc, "llvm.amdgcn.wave.reduce.umax", b.getI32Type(),
+                       {count, i32Const(b, loc, 0)});
+}
+
+class CounterThreader {
+public:
+  CounterThreader(ArrayRef<Operation *> events, MLIRContext *ctx)
+      : events(events.begin(), events.end()), rewriter(ctx) {}
+
+  // Event op -> its index among the wave's events.
+  DenseMap<Operation *, Value> local;
+
+  // Threads `count` through `block` and returns the count at its end.
+  Value thread(Block &block, Value count) {
+    for (Operation &op : llvm::make_early_inc_range(block)) {
+      if (events.contains(&op)) {
+        local[&op] = count;
+        OpBuilder b(op.getContext());
+        b.setInsertionPointAfter(&op);
+        count = b.create<arith::AddIOp>(op.getLoc(), count, i32Const(b, op.getLoc(), 1));
+      } else if (auto loop = dyn_cast<scf::ForOp>(op); loop && hasEvent(loop)) {
+        count = threadFor(loop, count);
+      } else if (auto loop = dyn_cast<scf::WhileOp>(op); loop && hasEvent(loop)) {
+        count = threadWhile(loop, count);
+      } else if (auto branch = dyn_cast<scf::IfOp>(op); branch && hasEvent(branch)) {
+        count = threadIf(branch, count);
+      }
+    }
+    return count;
+  }
+
+private:
+  bool hasEvent(Operation *root) { return countEvents(root->getRegions()) > 0; }
+
+  int64_t countEvents(MutableArrayRef<Region> regions) {
+    int64_t n = 0;
+    for (Region &region : regions)
+      region.walk([&](Operation *op) { n += events.contains(op); });
+    return n;
+  }
+
+  // Branches get disjoint index ranges, so the lanes of a divergent wave that run both branches
+  // never share a slot; a uniform branch leaves the other branch's slots unused.
+  Value threadIf(scf::IfOp branch, Value count) {
+    Location loc = branch.getLoc();
+    int64_t thenEvents = countEvents(branch.getThenRegion());
+    int64_t allEvents = thenEvents + countEvents(branch.getElseRegion());
+    OpBuilder b(branch);
+    Value elseStart = b.create<arith::AddIOp>(loc, count, i32Const(b, loc, thenEvents));
+    thread(*branch.thenBlock(), count);
+    if (Block *elseBlock = branch.elseBlock())
+      thread(*elseBlock, elseStart);
+    b.setInsertionPointAfter(branch);
+    return b.create<arith::AddIOp>(loc, count, i32Const(b, loc, allEvents));
+  }
+
+  Value threadFor(scf::ForOp loop, Value count) {
+    rewriter.setInsertionPoint(loop);
+    auto threaded = cast<scf::ForOp>(*loop.replaceWithAdditionalYields(
+        rewriter, ValueRange{count}, /*replaceInitOperandUsesInLoop=*/false,
+        [](OpBuilder &, Location, ArrayRef<BlockArgument> args) {
+          return SmallVector<Value>{args.front()};
+        }));
+    Value end = thread(*threaded.getBody(), threaded.getRegionIterArgs().back());
+    Operation *yield = threaded.getBody()->getTerminator();
+    yield->setOperand(yield->getNumOperands() - 1, end);
+    OpBuilder b(threaded->getContext());
+    b.setInsertionPointAfter(threaded);
+    return waveMaxCount(b, threaded.getLoc(), threaded.getResults().back());
+  }
+
+  Value threadWhile(scf::WhileOp loop, Value count) {
+    Location loc = loop.getLoc();
+    Type i32 = count.getType();
+    SmallVector<Value> inits(loop.getInits());
+    inits.push_back(count);
+    SmallVector<Type> types(loop.getResultTypes());
+    types.push_back(i32);
+    rewriter.setInsertionPoint(loop);
+    auto threaded = rewriter.create<scf::WhileOp>(loc, types, inits);
+    threaded.getBefore().takeBody(loop.getBefore());
+    threaded.getAfter().takeBody(loop.getAfter());
+
+    Block &before = threaded.getBefore().front();
+    Value beforeEnd = thread(before, before.addArgument(i32, loc));
+    threaded.getConditionOp().getArgsMutable().append(beforeEnd);
+    Block &after = threaded.getAfter().front();
+    Value afterEnd = thread(after, after.addArgument(i32, loc));
+    cast<scf::YieldOp>(after.getTerminator()).getResultsMutable().append(afterEnd);
+
+    rewriter.replaceOp(loop, threaded.getResults().drop_back());
+    OpBuilder b(threaded->getContext());
+    b.setInsertionPointAfter(threaded);
+    return waveMaxCount(b, loc, threaded.getResults().back());
+  }
+
+  DenseSet<Operation *> events;
+  IRRewriter rewriter;
+};
+
+// Stores the wave's attempted event count in its header word, which the host checks for
+// events dropped past the per-wave limit.
+void storeAttemptedCount(gpu::ReturnOp ret, const KernelTraceState &st, Value count,
+                         int64_t capacitySlots) {
+  OpBuilder b(ret);
+  Location loc = ret.getLoc();
+  Type i32 = b.getI32Type();
+  Value lane = b.create<arith::IndexCastOp>(loc, i32, b.create<gpu::LaneIdOp>(loc, nullptr));
+  Value write =
+      b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::eq, lane, firstActiveLane(b, loc));
+  if (st.recording)
+    write = b.create<arith::AndIOp>(loc, write, st.recording);
+  Value claimed = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, st.base,
+                                          i32Const(b, loc, capacitySlots));
+  write = b.create<arith::AndIOp>(loc, write, claimed);
+  auto writeIf = b.create<scf::IfOp>(loc, write, false);
+  b.setInsertionPointToStart(writeIf.thenBlock());
+  Value headerOff = b.create<arith::MulIOp>(loc, st.base, i32Const(b, loc, kRecordBytes));
+  b.create<LLVM::StoreOp>(loc, count, gepBytes(b, loc, st.bufPtr, headerOff));
+}
+
 struct EventShape {
   uint32_t kind;
   uint32_t eventId;
@@ -314,7 +459,7 @@ struct EventShape {
 };
 
 Value expandEvent(Operation *op, const EventShape &shape, const KernelTraceState &st,
-                  int64_t eventsPerWave, int64_t capacitySlots) {
+                  int64_t eventsPerWave, int64_t capacitySlots, Value counterLocal) {
   OpBuilder b(op);
   Location loc = op->getLoc();
   Type i32 = b.getI32Type();
@@ -338,10 +483,13 @@ Value expandEvent(Operation *op, const EventShape &shape, const KernelTraceState
 
   // Read the clock before the slot atomic so its latency does not skew the timestamp.
   Value ts = callIntrinsic(b, loc, "llvm.amdgcn.s.memrealtime", b.getI64Type());
-  Value ctrPtr = gepBytes(b, loc, st.bufPtr,
-                          b.create<arith::MulIOp>(loc, st.base, i32Const(b, loc, kRecordBytes)));
-  Value local = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, ctrPtr,
-                                            i32Const(b, loc, 1), LLVM::AtomicOrdering::monotonic);
+  Value local = counterLocal;
+  if (!local) {
+    Value ctrPtr = gepBytes(b, loc, st.bufPtr,
+                            b.create<arith::MulIOp>(loc, st.base, i32Const(b, loc, kRecordBytes)));
+    local = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, ctrPtr, i32Const(b, loc, 1),
+                                        LLVM::AtomicOrdering::monotonic);
+  }
   Value slot = b.create<arith::AddIOp>(loc, st.base, local);
 
   Value withinWave = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, local,
@@ -587,6 +735,21 @@ struct FlyKtraceToROCDLConversionPass
       if (failed(st))
         return WalkResult::interrupt();
 
+      SmallVector<Operation *> slotEvents;
+      for (Operation *op : events)
+        if (!isa<InactiveTokenOp>(op))
+          slotEvents.push_back(op);
+      DenseMap<Operation *, Value> counter;
+      if (canThreadCounter(kernel, slotEvents)) {
+        Block &entry = kernel.getBody().front();
+        OpBuilder b(&entry, entry.begin());
+        CounterThreader threader(slotEvents, kernel.getContext());
+        Value count = threader.thread(entry, i32Const(b, kernel.getLoc(), 0));
+        storeAttemptedCount(cast<gpu::ReturnOp>(entry.getTerminator()), *st, count,
+                            layout.capacitySlots);
+        counter = std::move(threader.local);
+      }
+
       for (Operation *op : events) {
         if (isa<InactiveTokenOp>(op)) {
           OpBuilder b(op);
@@ -628,7 +791,7 @@ struct FlyKtraceToROCDLConversionPass
           }
           shape.payloadType = encoding;
         }
-        expandEvent(op, shape, *st, kEventsPerWave, layout.capacitySlots);
+        expandEvent(op, shape, *st, kEventsPerWave, layout.capacitySlots, counter.lookup(op));
       }
       return WalkResult::advance();
     });

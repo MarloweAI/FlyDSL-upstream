@@ -20,7 +20,7 @@ module attributes {gpu.container_module} {
       // CHECK: %[[SEED:.*]] = llvm.mlir.constant(-1 : i32)
       %init = fly_ktrace.inactive_token -> !fly_ktrace.token
 
-      // CHECK: scf.for {{.*}} iter_args(%[[TOK:.*]] = %[[SEED]]) -> (i32)
+      // CHECK: scf.for {{.*}} iter_args(%[[TOK:.*]] = %[[SEED]], %{{.*}} = %{{.*}}) -> (i32, i32)
       %out = scf.for %i = %c0 to %c4 step %c1
              iter_args(%tok = %init) -> (!fly_ktrace.token) {
         // CHECK: llvm.mlir.constant(28 : i32)

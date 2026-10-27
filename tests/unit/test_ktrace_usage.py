@@ -36,6 +36,36 @@ def _add(a: fx.Tensor, b: fx.Tensor, out: fx.Tensor, stream: fx.Stream = fx.Stre
 
 
 @flyc.kernel
+def _divergent_kernel(out: fx.Tensor):
+    i = fx.thread_idx.x
+    for _ in fx.range(0, i % 4 + 1, 1):
+        with ktrace.range("lap"):
+            out[i] = out[i] + fx.Float32(1)
+    ktrace.mark("after")
+
+
+@flyc.jit
+def _divergent(out: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
+    _divergent_kernel(out).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
+
+
+@flyc.kernel
+def _split_kernel(out: fx.Tensor):
+    i = fx.thread_idx.x
+    if i < 32:
+        ktrace.mark("lo")
+        out[i] = fx.Float32(1)
+    else:
+        ktrace.mark("hi")
+        out[i] = fx.Float32(2)
+
+
+@flyc.jit
+def _split(out: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
+    _split_kernel(out).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
+
+
+@flyc.kernel
 def _spread_kernel(out: fx.Tensor):
     bid, _, _ = fx.block_idx
     with ktrace.range("spread"):
@@ -206,6 +236,25 @@ def test_moe_and_attention_control_flow(causal):
         "attn.epilogue",
     } <= phases.keys()
     assert phases["attn.key"]["count"] == 8
+
+
+def test_divergent_loop_records_every_iteration():
+    out = torch.zeros(64, device="cuda")
+    with ktrace.capture("divergent") as trace:
+        _divergent(out)
+    phases = trace.summary()["phases"]
+    assert phases["lap"]["count"] == 4, "the wave runs the loop as often as its longest lane"
+    assert phases["after"]["count"] == 1, "the event after the loop must not reuse a loop slot"
+    torch.testing.assert_close(out, (torch.arange(64, device="cuda") % 4 + 1).float())
+
+
+def test_divergent_branches_record_both_sides():
+    out = torch.zeros(64, device="cuda")
+    with ktrace.capture("split") as trace:
+        _split(out)
+    phases = trace.summary()["phases"]
+    assert phases["lo"]["count"] == 1 and phases["hi"]["count"] == 1, "both branches of one wave must keep a slot"
+    torch.testing.assert_close(out, (torch.arange(64, device="cuda") >= 32).float() + 1)
 
 
 def test_waves_of_one_launch_spread_evenly_over_partitions():
