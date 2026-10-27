@@ -248,17 +248,24 @@ mode disabled.
   drain outstanding LDS/SMEM traffic, and scheduling can move independent work
   across a timestamp. Use coarse phases and compare with an untraced baseline;
   subtracting a constant per-event cost does not undo these scheduling changes.
-  Coarse phases changed run time on MI355X by these amounts against untraced,
-  as medians of 20 ten-launch graph replays:
+  Coarse phases changed run time on MI355X by these amounts against untraced. A
+  value is the median of 20 ten-launch graph replays, and each GEMM row is the
+  median of three such runs. The MoE rows use FlyDSL's `moe_gemm_2stage` with
+  4096 tokens (64 for decode), model_dim 7168, inter_dim 2048, 32 experts, and
+  top-8:
 
   | Kernel | Slots | One mark | One range | All phases |
   |---|---|---|---|---|
-  | FP16 GEMM 4096³ | partitioned | −0.3% | −0.1% (K loop) | −0.1% |
-  | FP16 GEMM 4096³ | static | +0.6% | −0.3% (K loop) | +0.6% |
-  | FP8 GEMM 9728×8192×8320 | partitioned | +0.4% | +1.8% (epilogue) | +0.3% |
-  | FP8 GEMM 9728×8192×8320 | static | −0.7% | +1.1% (epilogue) | −0.2% |
+  | FP16 GEMM 4096³ | partitioned | 0.0% | −0.3% (K loop) | 0.0% |
+  | FP16 GEMM 4096³ | static | −0.9% | −0.4% (K loop) | −0.3% |
+  | FP8 GEMM 9728×8192×8320 | partitioned | −0.2% | +0.5% (epilogue) | +0.8% |
+  | FP8 GEMM 9728×8192×8320 | static | +1.2% | +1.8% (epilogue) | +1.1% |
+  | FP8 MoE gemm1, 64×128 tile | partitioned | +1.3% | +1.4% (K loop) | +1.5% |
+  | FP8 MoE gemm2, 64×128 tile | partitioned | +1.5% | +1.7% (K loop) | +2.2% |
+  | FP8 MoE gemm1 decode, 16×64 tile | partitioned | +5.6% | +6.1% (K loop) | +7.0% |
 
-  Separate processes of the same untraced FP8 kernel differ by about 3.5%.
+  Separate processes of the same untraced FP8 kernel differ by about 3.5%. The
+  waves of MoE decode are short, so it pays 5–7% even for one mark.
 - **Partial launch coverage.** The first and last annotations need not coincide
   with kernel entry and exit. Gaps between tracks do not measure host launch
   latency or complete kernel overlap. Use a runtime profiler for those questions.
