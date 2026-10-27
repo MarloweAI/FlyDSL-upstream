@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-27T02:59:59Z",
+ "updated": "2026-10-27T03:10:45Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -68,11 +68,11 @@
    "branch": "promote-regmem-keep-loop-attrs",
    "event": "pull_request",
    "title": "[Bugfix][Dialect] Don't drop range(..., unroll=N) hints in fly-promote-regmem-to-vectorssa",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40402291556",
    "created_at": "2026-10-26T21:11:51Z",
-   "updated_at": "2026-10-27T02:15:38Z",
+   "updated_at": "2026-10-27T03:09:06Z",
    "actor": "RElbers",
    "jobs": [
     {
@@ -90,10 +90,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T02:15:37Z",
-     "completed_at": null,
+     "completed_at": "2026-10-27T03:09:05Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40402291556/job/121860578671"
     },
     {
