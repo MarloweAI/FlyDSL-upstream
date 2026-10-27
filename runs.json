@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-27T15:17:06Z",
+ "updated": "2026-10-27T15:27:43Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40530869698,
+   "pr": null,
+   "commit": "3c6a1099c8f3e577d58e341fed213a547b8f668f",
+   "branch": "main",
+   "event": "push",
+   "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM read\u2026",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40530869698",
+   "created_at": "2026-10-27T15:25:43Z",
+   "updated_at": "2026-10-27T15:26:06Z",
+   "actor": "xytpai",
+   "jobs": []
+  },
   {
    "run_id": 40527981552,
    "pr": 1337,
@@ -25,11 +40,11 @@
    "branch": "main",
    "event": "push",
    "title": "[FIX] Building from source can produce bindings for the wrong ABI and\u2026",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40527653559",
    "created_at": "2026-10-27T15:06:18Z",
-   "updated_at": "2026-10-27T15:11:50Z",
+   "updated_at": "2026-10-27T15:25:45Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -55,13 +70,31 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "completed",
-   "conclusion": "cancelled",
+   "status": "queued",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803",
    "created_at": "2026-10-27T12:25:44Z",
-   "updated_at": "2026-10-27T15:13:19Z",
+   "updated_at": "2026-10-27T15:23:17Z",
    "actor": "RElbers",
    "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T15:23:40Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122281511043"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-27T15:23:18Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122281511064"
+    },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
@@ -69,28 +102,10 @@
      "conclusion": "success",
      "started_at": "2026-10-27T13:09:24Z",
      "completed_at": "2026-10-27T14:20:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207371481",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122281513319",
      "machine": "smci350-rck-g03-b17-12",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-27T14:14:34Z",
-     "completed_at": "2026-10-27T15:13:18Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207371666"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-27T13:09:19Z",
-     "completed_at": "2026-10-27T13:17:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207372001"
     }
    ]
   },
@@ -1914,7 +1929,7 @@
   },
   {
    "run_id": 39539863201,
-   "pr": 1269,
+   "pr": null,
    "commit": "c2465f27f6db737c7837aed5414750966436007a",
    "branch": "fix/gemm-a16w16-hti-wave-sync",
    "event": "pull_request",
@@ -1926,52 +1941,6 @@
    "updated_at": "2026-10-21T03:41:04Z",
    "actor": "jhinpan",
    "jobs": []
-  },
-  {
-   "run_id": 39539809615,
-   "pr": null,
-   "commit": "8bcefbc0563ec8627632dbc3322c99fb7f80ee30",
-   "branch": "main",
-   "event": "push",
-   "title": "fix(review-pr): strip the API key and show why model calls failed (#1\u2026",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615",
-   "created_at": "2026-10-21T03:39:53Z",
-   "updated_at": "2026-10-21T03:45:54Z",
-   "actor": "zhiding512",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:45:50Z",
-     "completed_at": "2026-10-21T03:45:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293202",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:45:50Z",
-     "completed_at": "2026-10-21T03:45:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293283"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:45:50Z",
-     "completed_at": "2026-10-21T03:45:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293291"
-    }
-   ]
   }
  ]
 }
