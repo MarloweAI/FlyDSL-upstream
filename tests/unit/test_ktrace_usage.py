@@ -66,6 +66,24 @@ def _split(out: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
 
 
 @flyc.kernel
+def _branchy_loop_kernel(out: fx.Tensor):
+    i = fx.thread_idx.x
+    for k in fx.range(0, 200, 1):
+        if k == 0:
+            ktrace.mark("first")
+        if k % 2 == 0:
+            ktrace.mark("even")
+        else:
+            ktrace.mark("odd")
+        out[i] = out[i] + fx.Float32(1)
+
+
+@flyc.jit
+def _branchy_loop(out: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
+    _branchy_loop_kernel(out).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
+
+
+@flyc.kernel
 def _spread_kernel(out: fx.Tensor):
     bid, _, _ = fx.block_idx
     with ktrace.range("spread"):
@@ -255,6 +273,16 @@ def test_divergent_branches_record_both_sides():
     phases = trace.summary()["phases"]
     assert phases["lo"]["count"] == 1 and phases["hi"]["count"] == 1, "both branches of one wave must keep a slot"
     torch.testing.assert_close(out, (torch.arange(64, device="cuda") >= 32).float() + 1)
+
+
+def test_branches_in_a_loop_take_slots_only_when_they_run():
+    out = torch.zeros(64, device="cuda")
+    with ktrace.capture("branchy_loop") as trace:
+        _branchy_loop(out)
+    phases = trace.summary()["phases"]
+    assert phases["first"]["count"] == 1, "a branch that runs once must take one slot, not one per iteration"
+    assert phases["even"]["count"] == 100 and phases["odd"]["count"] == 100
+    torch.testing.assert_close(out, torch.full_like(out, 200.0))
 
 
 def test_waves_of_one_launch_spread_evenly_over_partitions():

@@ -216,7 +216,9 @@ mode disabled.
 
 - **255 events per wave per launch.** Larger buffers and filtering other blocks
   do not increase this limit. Overflow raises during collection because dropped
-  range endpoints would make the timeline incomplete.
+  range endpoints would make the timeline incomplete. An event in a branch counts
+  each time a lane of its wave runs the branch. Under nested branches, every event
+  of the outermost branch counts when that branch runs.
 - **Finite collection window.** Waves reserve 256 slots each, including a counter
   slot. The buffer is split into up to 256 partitions, each with its own 64-bit
   cursor. A wave's workgroup and wave index select the partition, so waves that

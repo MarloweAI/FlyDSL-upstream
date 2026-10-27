@@ -83,14 +83,23 @@ module attributes {gpu.container_module} {
 
 // -----
 
-// An scf.if gives each branch a static range of indices: the then branch starts at the count,
-// the else branch after the then branch's events, and the count advances past both.
+// A branch takes indices only when a lane of the wave runs it: a ballot of the condition decides
+// whether the then branch's events come before the else branch's, and a ballot of its negation
+// whether the count advances past the else branch's events.
 // CHECK-LABEL: gpu.func @under_if
 // CHECK: llvm.atomicrmw add {{.*}} syncscope("agent")
 // CHECK: rocdl.readfirstlane
 // CHECK-NOT: llvm.atomicrmw
-// CHECK: %[[ELSE:.*]] = arith.addi %{{.*}}, %{{.*}} : i32
-// CHECK-NEXT: scf.if
+// CHECK: %[[THEN_LANES:.*]] = rocdl.ballot %[[COND:.*]] : i64
+// CHECK: %[[THEN_RUNS:.*]] = arith.cmpi ne, %[[THEN_LANES]]
+// CHECK: %[[THEN_USED:.*]] = arith.select %[[THEN_RUNS]]
+// CHECK: %[[ELSE:.*]] = arith.addi %{{.*}}, %[[THEN_USED]] : i32
+// CHECK: %[[NOT:.*]] = arith.xori %[[COND]]
+// CHECK: %[[ELSE_LANES:.*]] = rocdl.ballot %[[NOT]] : i64
+// CHECK: %[[ELSE_RUNS:.*]] = arith.cmpi ne, %[[ELSE_LANES]]
+// CHECK: %[[ELSE_USED:.*]] = arith.select %[[ELSE_RUNS]]
+// CHECK: arith.addi %[[ELSE]], %[[ELSE_USED]] : i32
+// CHECK: scf.if %[[COND]] {
 // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
 // CHECK: } else {
 // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"

@@ -455,19 +455,31 @@ private:
     return n;
   }
 
-  // Branches get disjoint index ranges, so the lanes of a divergent wave that run both branches
-  // never share a slot; a uniform branch leaves the other branch's slots unused.
+  // A branch takes indices only when some lane of the wave runs it, so a branch no lane runs
+  // costs no slot. The lanes of a divergent wave run both branches, which get disjoint ranges.
   Value threadIf(scf::IfOp branch, Value count) {
     Location loc = branch.getLoc();
-    int64_t thenEvents = countEvents(branch.getThenRegion());
-    int64_t allEvents = thenEvents + countEvents(branch.getElseRegion());
     OpBuilder b(branch);
-    Value elseStart = b.create<arith::AddIOp>(loc, count, i32Const(b, loc, thenEvents));
+    auto used = [&](Value cond, int64_t events) -> Value {
+      if (events == 0)
+        return i32Const(b, loc, 0);
+      Value lanes = b.create<ROCDL::BallotOp>(loc, b.getI64Type(), cond);
+      Value runs =
+          b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ne, lanes, i64Const(b, loc, 0));
+      return b.create<arith::SelectOp>(loc, runs, i32Const(b, loc, events), i32Const(b, loc, 0));
+    };
+    Value cond = branch.getCondition();
+    Value elseStart =
+        b.create<arith::AddIOp>(loc, count, used(cond, countEvents(branch.getThenRegion())));
     thread(*branch.thenBlock(), count);
-    if (Block *elseBlock = branch.elseBlock())
-      thread(*elseBlock, elseStart);
-    b.setInsertionPointAfter(branch);
-    return b.create<arith::AddIOp>(loc, count, i32Const(b, loc, allEvents));
+    Block *elseBlock = branch.elseBlock();
+    if (!elseBlock)
+      return elseStart;
+    thread(*elseBlock, elseStart);
+    Value notCond =
+        b.create<arith::XOrIOp>(loc, cond, b.create<arith::ConstantOp>(loc, b.getBoolAttr(true)));
+    return b.create<arith::AddIOp>(loc, elseStart,
+                                   used(notCond, countEvents(branch.getElseRegion())));
   }
 
   Value threadFor(scf::ForOp loop, Value count) {
