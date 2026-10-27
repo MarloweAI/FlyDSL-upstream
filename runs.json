@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-27T09:20:52Z",
+ "updated": "2026-10-27T09:36:19Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel]mega_moe_tp: unified path and big-M optimizations (#1330)",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382",
    "created_at": "2026-10-27T09:18:18Z",
-   "updated_at": "2026-10-27T09:18:36Z",
+   "updated_at": "2026-10-27T09:19:45Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -389,11 +389,11 @@
    "branch": "fix/rocm-gpu-detection",
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
-   "status": "completed",
-   "conclusion": "action_required",
+   "status": "queued",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40395880271",
    "created_at": "2026-10-26T20:28:02Z",
-   "updated_at": "2026-10-26T20:28:02Z",
+   "updated_at": "2026-10-27T09:27:53Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -799,11 +799,11 @@
    "branch": "fix/pin-python-interpreter",
    "event": "pull_request",
    "title": "[FIX] Building from source can produce bindings for the wrong ABI and crash on import",
-   "status": "completed",
-   "conclusion": "action_required",
+   "status": "queued",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
    "created_at": "2026-10-26T12:52:49Z",
-   "updated_at": "2026-10-26T12:52:49Z",
+   "updated_at": "2026-10-27T09:27:43Z",
    "actor": "Qubitium",
    "jobs": []
   },
