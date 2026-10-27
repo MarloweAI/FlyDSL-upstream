@@ -183,7 +183,7 @@ def test_block_filter_guards_the_store(monkeypatch):
 
     text = _expanded(launch)
     assert "block_id" in text or "block_dim" in text or "gpu.block_id" in text
-    assert text.count("arith.andi") >= 1, "filter is not combined with the leader predicate"
+    assert text.count("arith.andi") >= 1, "the block filter predicate is missing"
 
 
 def test_payload_rejects_a_token(monkeypatch):
@@ -529,9 +529,8 @@ def test_range_start_yields_the_slot_its_record_occupies(monkeypatch):
     def launch():
         annotated().launch(grid=(1, 1, 1), block=(64, 1, 1))
 
-    text = _expanded(launch)
-    assert text.count("scf.yield") >= 4, "slot must be yielded out of both guards"
-    assert "scf.if" in text
+    event = _expanded(launch).split('llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"', 1)[1]
+    assert "arith.select" in event.split("llvm.store", 1)[0], "the token must select the record slot or the sentinel"
 
 
 def test_reading_a_trace_re_arms_the_buffer(monkeypatch, tmp_path):

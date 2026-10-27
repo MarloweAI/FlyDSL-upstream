@@ -10,12 +10,11 @@ module attributes {gpu.container_module} {
       // CHECK-NOT: !fly_ktrace.token
 
       // CHECK: rocdl.readfirstlane
-      // CHECK: %[[SLOT:.*]] = scf.if {{.*}} -> (i32)
+      // CHECK-NOT: scf.if
+      // CHECK: llvm.mlir.constant(-1 : i32)
+      // CHECK: %[[SLOT:.*]] = arith.select {{.*}} : i32
 
       // CHECK: llvm.mlir.constant(50331649 : i32)
-
-      // CHECK: llvm.mlir.constant(-1 : i32)
-      // CHECK: llvm.mlir.constant(-1 : i32)
       %t = fly_ktrace.range_start "phase" -> !fly_ktrace.token
 
       // CHECK: llvm.mlir.constant(67108865 : i32)

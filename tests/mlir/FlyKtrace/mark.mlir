@@ -23,18 +23,17 @@ module attributes {gpu.container_module} {
       // CHECK: arith.select
       // CHECK: rocdl.readfirstlane
 
-      // CHECK: rocdl.ballot
-      // CHECK: llvm.intr.cttz
-      // CHECK: arith.cmpi eq
-      // CHECK: scf.if
-      // CHECK: arith.cmpi ult
-      // CHECK: scf.if
+      // The event is wave-uniform: no leader-lane branch, no atomic, and a record that does
+      // not fit is redirected by a select instead of a branch.
       // CHECK: llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"
+      // CHECK-NOT: scf.if
       // CHECK-NOT: llvm.atomicrmw
-
       // CHECK: arith.cmpi ult
       // CHECK: arith.cmpi ult
-      // CHECK: scf.if
+      // CHECK: arith.cmpi ult
+      // CHECK: llvm.mlir.constant(2 : i32)
+      // CHECK: arith.select
+      // CHECK-NOT: scf.if
       // CHECK-COUNT-6: llvm.store
       fly_ktrace.mark "tick"
       gpu.return

@@ -46,6 +46,9 @@ constexpr uint32_t kKindRangeStop = 4;
 
 constexpr int64_t kUnpairedSlot = 0xFFFFFFFF;
 
+// Slot 2 sits in the header line next to cursor 0 and is never decoded.
+constexpr int64_t kSinkSlot = 2;
+
 constexpr int64_t kDefaultCapacitySlots = (64 << 20) / kRecordBytes - 1;
 
 // Partition cursors are 64-bit, one per 128-byte line, starting at slot 1. Must match
@@ -458,8 +461,80 @@ struct EventShape {
   uint32_t payloadType = 0;
 };
 
+// Lowers an event whose index comes from the register counter. Every value is wave-uniform,
+// so all active lanes store the same record and the event adds no divergent branch; a record
+// that does not fit goes to a sink slot in the header line instead of being skipped.
+Value expandUniformEvent(Operation *op, const EventShape &shape, const KernelTraceState &st,
+                         int64_t eventsPerWave, int64_t capacitySlots, Value local) {
+  OpBuilder b(op);
+  Location loc = op->getLoc();
+  Type i32 = b.getI32Type();
+
+  scf::IfOp recordingIf;
+  if (st.recording) {
+    SmallVector<Type, 1> results;
+    if (shape.producesSlot)
+      results.push_back(i32);
+    recordingIf = b.create<scf::IfOp>(loc, results, st.recording, shape.producesSlot);
+    b.setInsertionPointToStart(recordingIf.thenBlock());
+  }
+
+  Value ts = callIntrinsic(b, loc, "llvm.amdgcn.s.memrealtime", b.getI64Type());
+  Value slot = b.create<arith::AddIOp>(loc, st.base, local);
+  Value capacity = i32Const(b, loc, capacitySlots);
+  Value ok = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, st.base, capacity);
+  Value withinWave = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, local,
+                                             i32Const(b, loc, eventsPerWave - 1));
+  ok = b.create<arith::AndIOp>(loc, ok, withinWave);
+  Value inBounds = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, slot, capacity);
+  ok = b.create<arith::AndIOp>(loc, ok, inBounds);
+  Value slot1 = b.create<arith::AddIOp>(loc, slot, i32Const(b, loc, 1));
+  Value token;
+  if (shape.producesSlot)
+    token = b.create<arith::SelectOp>(loc, ok, slot1, i32Const(b, loc, kUnpairedSlot));
+  Value recordSlot = b.create<arith::SelectOp>(loc, ok, slot1, i32Const(b, loc, kSinkSlot));
+  Value byteOff = b.create<arith::MulIOp>(loc, recordSlot, i32Const(b, loc, kRecordBytes));
+  Value recPtr = gepBytes(b, loc, st.bufPtr, byteOff);
+
+  // The documented payload is the first active lane's value.
+  Value payload =
+      shape.payload
+          ? b.create<ROCDL::ReadfirstlaneOp>(loc, shape.payload.getType(), shape.payload)
+                .getResult()
+          : b.create<LLVM::ConstantOp>(loc, b.getI64Type(), b.getI64IntegerAttr(0)).getResult();
+  Value startSlot = shape.startSlot ? shape.startSlot : i32Const(b, loc, 0);
+  uint32_t packed = (shape.eventId & 0xFFFFFF) | ((shape.kind & 0x7) << 24) |
+                    (shape.payloadType << 27) | (shape.payload ? (1u << 31) : 0);
+  struct Field {
+    int64_t offset;
+    Value value;
+  };
+  Field fields[] = {
+      {kOffTimestamp, ts},
+      {kOffPayload, payload},
+      {kOffHwId, st.hwId},
+      {kOffXccId, st.xccId},
+      {kOffPacked, i32Const(b, loc, static_cast<int64_t>(packed))},
+      {kOffStartSlot, startSlot},
+  };
+  for (const Field &f : fields)
+    b.create<LLVM::StoreOp>(loc, f.value, gepBytes(b, loc, recPtr, i32Const(b, loc, f.offset)));
+
+  Value result = token;
+  if (recordingIf && shape.producesSlot) {
+    b.create<scf::YieldOp>(loc, ValueRange{token});
+    b.setInsertionPointToStart(recordingIf.elseBlock());
+    b.create<scf::YieldOp>(loc, ValueRange{i32Const(b, loc, kUnpairedSlot)});
+    result = recordingIf.getResult(0);
+  }
+  if (result)
+    op->getResult(0).replaceAllUsesWith(result);
+  op->erase();
+  return result;
+}
+
 Value expandEvent(Operation *op, const EventShape &shape, const KernelTraceState &st,
-                  int64_t eventsPerWave, int64_t capacitySlots, Value counterLocal) {
+                  int64_t eventsPerWave, int64_t capacitySlots) {
   OpBuilder b(op);
   Location loc = op->getLoc();
   Type i32 = b.getI32Type();
@@ -483,13 +558,10 @@ Value expandEvent(Operation *op, const EventShape &shape, const KernelTraceState
 
   // Read the clock before the slot atomic so its latency does not skew the timestamp.
   Value ts = callIntrinsic(b, loc, "llvm.amdgcn.s.memrealtime", b.getI64Type());
-  Value local = counterLocal;
-  if (!local) {
-    Value ctrPtr = gepBytes(b, loc, st.bufPtr,
-                            b.create<arith::MulIOp>(loc, st.base, i32Const(b, loc, kRecordBytes)));
-    local = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, ctrPtr, i32Const(b, loc, 1),
-                                        LLVM::AtomicOrdering::monotonic);
-  }
+  Value ctrPtr = gepBytes(b, loc, st.bufPtr,
+                          b.create<arith::MulIOp>(loc, st.base, i32Const(b, loc, kRecordBytes)));
+  Value local = b.create<LLVM::AtomicRMWOp>(loc, LLVM::AtomicBinOp::add, ctrPtr,
+                                            i32Const(b, loc, 1), LLVM::AtomicOrdering::monotonic);
   Value slot = b.create<arith::AddIOp>(loc, st.base, local);
 
   Value withinWave = b.create<arith::CmpIOp>(loc, arith::CmpIPredicate::ult, local,
@@ -791,7 +863,10 @@ struct FlyKtraceToROCDLConversionPass
           }
           shape.payloadType = encoding;
         }
-        expandEvent(op, shape, *st, kEventsPerWave, layout.capacitySlots, counter.lookup(op));
+        if (Value local = counter.lookup(op))
+          expandUniformEvent(op, shape, *st, kEventsPerWave, layout.capacitySlots, local);
+        else
+          expandEvent(op, shape, *st, kEventsPerWave, layout.capacitySlots);
       }
       return WalkResult::advance();
     });
