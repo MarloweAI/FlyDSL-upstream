@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-27T14:28:11Z",
+ "updated": "2026-10-27T15:12:33Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40527981552,
+   "pr": 1337,
+   "commit": "8e3df813f740192ff06d16a27b6b026a769ed5b4",
+   "branch": "location-chain-typed-bindings",
+   "event": "pull_request",
+   "title": "[Bugfix] Show the user's source line in DSL compile errors",
+   "status": "pending",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40527981552",
+   "created_at": "2026-10-27T15:08:17Z",
+   "updated_at": "2026-10-27T15:08:18Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 40527653559,
+   "pr": null,
+   "commit": "4ccfbe375b375c0815401397df3e74e59b789fbe",
+   "branch": "main",
+   "event": "push",
+   "title": "[FIX] Building from source can produce bindings for the wrong ABI and\u2026",
+   "status": "pending",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40527653559",
+   "created_at": "2026-10-27T15:06:18Z",
+   "updated_at": "2026-10-27T15:06:19Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 40526163272,
+   "pr": 1321,
+   "commit": "e73c8f440e49009bee672c7219c1d258bd6baa65",
+   "branch": "fix/dlpack-layout-fill-retains-tensor",
+   "event": "pull_request",
+   "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40526163272",
+   "created_at": "2026-10-27T14:57:24Z",
+   "updated_at": "2026-10-27T14:59:22Z",
+   "actor": "josh-schell-amd",
+   "jobs": []
+  },
   {
    "run_id": 40503668803,
    "pr": 1337,
@@ -175,19 +220,19 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel]mega_moe_tp: unified path and big-M optimizations (#1330)",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382",
    "created_at": "2026-10-27T09:18:18Z",
-   "updated_at": "2026-10-27T11:25:06Z",
+   "updated_at": "2026-10-27T14:28:26Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T11:25:06Z",
+     "started_at": "2026-10-27T14:28:25Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435910"
     },
@@ -626,7 +671,7 @@
   },
   {
    "run_id": 40362651138,
-   "pr": 1321,
+   "pr": null,
    "commit": "8fdabcb209990566e484b95c788921f6e6ce101a",
    "branch": "fix/dlpack-layout-fill-retains-tensor",
    "event": "pull_request",
@@ -1026,11 +1071,11 @@
    "branch": "fix/pin-python-interpreter",
    "event": "pull_request",
    "title": "[FIX] Building from source can produce bindings for the wrong ABI and crash on import",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
    "created_at": "2026-10-26T12:52:49Z",
-   "updated_at": "2026-10-27T11:44:38Z",
+   "updated_at": "2026-10-27T15:10:13Z",
    "actor": "Qubitium",
    "jobs": [
     {
@@ -1045,10 +1090,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-27T11:44:38Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-27T14:24:59Z",
+     "completed_at": "2026-10-27T15:10:12Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178/job/122169672852"
     },
     {
@@ -1927,113 +1972,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39539809615/job/119026293291"
     }
    ]
-  },
-  {
-   "run_id": 39538232826,
-   "pr": 1317,
-   "commit": "f1574f077d63d99a35f9b9d2a3a3c551ead39b7d",
-   "branch": "skills/review-pr-diagnostics",
-   "event": "pull_request",
-   "title": "[Skills] review-pr: strip the API key and show why model calls failed",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826",
-   "created_at": "2026-10-21T03:22:44Z",
-   "updated_at": "2026-10-21T03:23:47Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:23:43Z",
-     "completed_at": "2026-10-21T03:23:46Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922219"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:23:42Z",
-     "completed_at": "2026-10-21T03:23:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922241"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T03:23:43Z",
-     "completed_at": "2026-10-21T03:23:46Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39538232826/job/119019922290",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 39530054355,
-   "pr": 1317,
-   "commit": "f1574f077d63d99a35f9b9d2a3a3c551ead39b7d",
-   "branch": "skills/review-pr-diagnostics",
-   "event": "pull_request",
-   "title": "[Skills] review-pr: strip the API key and show why model calls failed",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39530054355",
-   "created_at": "2026-10-21T01:55:07Z",
-   "updated_at": "2026-10-21T01:57:12Z",
-   "actor": "jhinpan",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T01:57:08Z",
-     "completed_at": "2026-10-21T01:57:12Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39530054355/job/118994085104",
-     "machine": null,
-     "host_model": null,
-     "bench_skipped": "host unidentified != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T01:57:07Z",
-     "completed_at": "2026-10-21T01:57:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39530054355/job/118994085127"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-21T01:57:08Z",
-     "completed_at": "2026-10-21T01:57:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39530054355/job/118994085137"
-    }
-   ]
-  },
-  {
-   "run_id": 39528226103,
-   "pr": 1316,
-   "commit": "8509c42d2d7fe5d1e462ed91b73564f019fc0857",
-   "branch": "perf/softmax-refactor",
-   "event": "pull_request",
-   "title": "[Kernel][Refactor] Extract shared softmax row-copy helpers",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39528226103",
-   "created_at": "2026-10-21T01:35:41Z",
-   "updated_at": "2026-10-21T01:35:41Z",
-   "actor": "jhinpan",
-   "jobs": []
   }
  ]
 }
