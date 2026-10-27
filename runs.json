@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-27T12:27:23Z",
+ "updated": "2026-10-27T12:44:06Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803",
    "created_at": "2026-10-27T12:25:44Z",
-   "updated_at": "2026-10-27T12:25:57Z",
+   "updated_at": "2026-10-27T12:27:10Z",
    "actor": "RElbers",
    "jobs": []
   },
@@ -117,9 +117,9 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T11:46:45Z",
+     "started_at": "2026-10-27T12:34:31Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40485665639/job/122170573210"
     },
@@ -160,11 +160,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T11:26:00Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435929"
+     "completed_at": "2026-10-27T12:34:15Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435929",
+     "machine": "cv350-odcdh2-a06-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -245,11 +248,11 @@
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
    "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40467037462",
    "created_at": "2026-10-27T07:25:31Z",
-   "updated_at": "2026-10-27T07:40:48Z",
+   "updated_at": "2026-10-27T12:31:17Z",
    "actor": "xudoyuan",
    "jobs": [
     {
@@ -276,9 +279,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T07:40:48Z",
+     "started_at": "2026-10-27T12:31:16Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40467037462/job/122069833072"
     }
@@ -352,11 +355,11 @@
    "branch": "fix/ktrace-low-perturbation",
    "event": "pull_request",
    "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153",
    "created_at": "2026-10-27T06:11:49Z",
-   "updated_at": "2026-10-27T06:33:00Z",
+   "updated_at": "2026-10-27T12:31:14Z",
    "actor": "jhinpan",
    "jobs": [
     {
@@ -374,9 +377,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T06:33:00Z",
+     "started_at": "2026-10-27T12:31:13Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153/job/122047788237"
     },
@@ -996,10 +999,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T12:08:40Z",
-     "completed_at": null,
+     "completed_at": "2026-10-27T12:34:21Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178/job/122169672842"
     },
     {
