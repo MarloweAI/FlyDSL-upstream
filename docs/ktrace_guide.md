@@ -246,6 +246,17 @@ mode disabled.
   drain outstanding LDS/SMEM traffic, and scheduling can move independent work
   across a timestamp. Use coarse phases and compare with an untraced baseline;
   subtracting a constant per-event cost does not undo these scheduling changes.
+  Coarse phases changed run time on MI355X by these amounts against untraced,
+  as medians of 20 ten-launch graph replays:
+
+  | Kernel | Slots | One mark | One range | All phases |
+  |---|---|---|---|---|
+  | FP16 GEMM 4096³ | partitioned | −0.3% | −0.1% (K loop) | −0.1% |
+  | FP16 GEMM 4096³ | static | +0.6% | −0.3% (K loop) | +0.6% |
+  | FP8 GEMM 9728×8192×8320 | partitioned | +0.4% | +1.8% (epilogue) | +0.3% |
+  | FP8 GEMM 9728×8192×8320 | static | −0.7% | +1.1% (epilogue) | −0.2% |
+
+  Separate processes of the same untraced FP8 kernel differ by about 3.5%.
 - **Partial launch coverage.** The first and last annotations need not coincide
   with kernel entry and exit. Gaps between tracks do not measure host launch
   latency or complete kernel overlap. Use a runtime profiler for those questions.
