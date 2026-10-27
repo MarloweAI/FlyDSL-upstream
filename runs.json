@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-27T11:19:36Z",
+ "updated": "2026-10-27T11:35:25Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40497026213,
+   "pr": 1337,
+   "commit": "e38779f31fe5d597b8f36ffc4521dea49de48d11",
+   "branch": "location-chain-typed-bindings",
+   "event": "pull_request",
+   "title": "[Bugfix] Show the user's source line in DSL compile errors",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40497026213",
+   "created_at": "2026-10-27T11:33:22Z",
+   "updated_at": "2026-10-27T11:33:41Z",
+   "actor": "RElbers",
+   "jobs": []
+  },
   {
    "run_id": 40495035870,
    "pr": 1337,
@@ -10,11 +25,11 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40495035870",
    "created_at": "2026-10-27T11:17:33Z",
-   "updated_at": "2026-10-27T11:17:52Z",
+   "updated_at": "2026-10-27T11:33:24Z",
    "actor": "RElbers",
    "jobs": []
   },
@@ -40,11 +55,11 @@
    "branch": "zhimding/ktrace_low_overhead_1027",
    "event": "pull_request",
    "title": "[DSL][Perf] Remove KTRACE's shared cursor and per-event atomics",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40485665639",
    "created_at": "2026-10-27T10:04:37Z",
-   "updated_at": "2026-10-27T10:06:06Z",
+   "updated_at": "2026-10-27T11:25:40Z",
    "actor": "zhiding512",
    "jobs": []
   },
@@ -55,13 +70,41 @@
    "branch": "main",
    "event": "push",
    "title": "[Kernel]mega_moe_tp: unified path and big-M optimizations (#1330)",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382",
    "created_at": "2026-10-27T09:18:18Z",
-   "updated_at": "2026-10-27T11:12:52Z",
+   "updated_at": "2026-10-27T11:25:06Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-27T11:25:06Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435910"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T11:26:00Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435929"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T11:25:26Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40479756382/job/122161435955"
+    }
+   ]
   },
   {
    "run_id": 40479188907,
@@ -434,11 +477,11 @@
    "branch": "fix/rocm-gpu-detection",
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40395880271",
    "created_at": "2026-10-26T20:28:02Z",
-   "updated_at": "2026-10-27T09:27:53Z",
+   "updated_at": "2026-10-27T11:21:48Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -844,11 +887,11 @@
    "branch": "fix/pin-python-interpreter",
    "event": "pull_request",
    "title": "[FIX] Building from source can produce bindings for the wrong ABI and crash on import",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
    "created_at": "2026-10-26T12:52:49Z",
-   "updated_at": "2026-10-27T09:27:43Z",
+   "updated_at": "2026-10-27T11:21:46Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -1867,21 +1910,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39527980808/job/118991507905"
     }
    ]
-  },
-  {
-   "run_id": 39526332710,
-   "pr": 1316,
-   "commit": "8509c42d2d7fe5d1e462ed91b73564f019fc0857",
-   "branch": "perf/softmax-refactor",
-   "event": "pull_request",
-   "title": "[Kernel][Refactor] Extract shared softmax row-copy helpers",
-   "status": "completed",
-   "conclusion": "action_required",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39526332710",
-   "created_at": "2026-10-21T01:16:17Z",
-   "updated_at": "2026-10-21T01:16:17Z",
-   "actor": "ppppqp",
-   "jobs": []
   }
  ]
 }
