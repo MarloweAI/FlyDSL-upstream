@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-27T13:47:22Z",
+ "updated": "2026-10-27T14:26:36Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,28 +10,31 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803",
    "created_at": "2026-10-27T12:25:44Z",
-   "updated_at": "2026-10-27T13:08:58Z",
+   "updated_at": "2026-10-27T14:14:37Z",
    "actor": "RElbers",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T13:09:24Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207371481"
+     "completed_at": "2026-10-27T14:20:57Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207371481",
+     "machine": "smci350-rck-g03-b17-12",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T13:08:58Z",
+     "started_at": "2026-10-27T14:14:34Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40503668803/job/122207371666"
     },
@@ -233,20 +236,20 @@
    "branch": "fix/gemm-a16w16-hti-wave-sync",
    "event": "pull_request",
    "title": "[Bugfix] Sync both wave groups before the gfx950 A16W16 HTI GEMM reads its first and last stages",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40467764858",
    "created_at": "2026-10-27T07:32:47Z",
-   "updated_at": "2026-10-27T13:41:01Z",
+   "updated_at": "2026-10-27T14:24:35Z",
    "actor": "jhinpan",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T13:41:00Z",
-     "completed_at": null,
+     "completed_at": "2026-10-27T14:24:34Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40467764858/job/122079553040"
     },
     {
@@ -582,11 +585,11 @@
    "branch": "fix/rocm-gpu-detection",
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40395880271",
    "created_at": "2026-10-26T20:28:02Z",
-   "updated_at": "2026-10-27T11:41:52Z",
+   "updated_at": "2026-10-27T13:46:02Z",
    "actor": "Qubitium",
    "jobs": [
     {
