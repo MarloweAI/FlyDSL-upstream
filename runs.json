@@ -1,8 +1,69 @@
 {
  "schema": 1,
- "updated": "2026-10-27T03:38:30Z",
+ "updated": "2026-10-27T06:13:48Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40459654153,
+   "pr": 1335,
+   "commit": "703c1253068606d3f0f79b175553331457fa39d7",
+   "branch": "fix/ktrace-low-perturbation",
+   "event": "pull_request",
+   "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153",
+   "created_at": "2026-10-27T06:11:49Z",
+   "updated_at": "2026-10-27T06:12:09Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
+  {
+   "run_id": 40445723484,
+   "pr": 1335,
+   "commit": "6904258260cf098522bca50efe3d69c801837d76",
+   "branch": "fix/ktrace-low-perturbation",
+   "event": "pull_request",
+   "title": "[DSL][Perf] Reduce KTRACE overhead from about 30% to under 2% on MI355X GEMMs",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40445723484",
+   "created_at": "2026-10-27T03:43:09Z",
+   "updated_at": "2026-10-27T06:11:50Z",
+   "actor": "jhinpan",
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-27T04:00:21Z",
+     "completed_at": "2026-10-27T05:08:54Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40445723484/job/122001289350",
+     "machine": "gbt350-odcdh2-b02-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-27T03:59:34Z",
+     "completed_at": "2026-10-27T06:11:49Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40445723484/job/122001289408"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-27T04:00:03Z",
+     "completed_at": "2026-10-27T04:30:35Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40445723484/job/122001289434"
+    }
+   ]
+  },
   {
    "run_id": 40441116437,
    "pr": 1335,
@@ -1909,98 +1970,6 @@
      "started_at": "2026-10-20T12:12:28Z",
      "completed_at": "2026-10-20T13:03:20Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39416986551/job/118619636349"
-    }
-   ]
-  },
-  {
-   "run_id": 39415564336,
-   "pr": null,
-   "commit": "b271fa7015b1c63a7579a074e28e3d22355c8856",
-   "branch": "pr/feat-coop-block-primitives",
-   "event": "pull_request",
-   "title": "[Ext][Coop] Add more block-level primitives",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336",
-   "created_at": "2026-10-20T11:31:30Z",
-   "updated_at": "2026-10-20T13:23:26Z",
-   "actor": "sjfeng1999",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:50:42Z",
-     "completed_at": "2026-10-20T12:57:55Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610568233",
-     "machine": "gbt350-odcdh1-b13-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:49:45Z",
-     "completed_at": "2026-10-20T12:05:46Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610568367"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T12:12:25Z",
-     "completed_at": "2026-10-20T13:23:25Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39415564336/job/118610569225"
-    }
-   ]
-  },
-  {
-   "run_id": 39412277621,
-   "pr": null,
-   "commit": "6f73a6d8423f8dc5631c2ab51dd3d936e2dc76a7",
-   "branch": "main",
-   "event": "push",
-   "title": "[Kernel] Remove redundant scalar, vector, and IR wrappers (#1262)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621",
-   "created_at": "2026-10-20T11:03:41Z",
-   "updated_at": "2026-10-20T12:32:15Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:22:53Z",
-     "completed_at": "2026-10-20T12:20:10Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865349",
-     "machine": "smci350-rck-g03-b17-12",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:22:34Z",
-     "completed_at": "2026-10-20T11:40:49Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865352"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T11:49:55Z",
-     "completed_at": "2026-10-20T12:32:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39412277621/job/118599865469"
     }
    ]
   }
