@@ -171,19 +171,23 @@ def test_prologue_is_emitted_at_kernel_entry(monkeypatch):
 
 
 def test_block_filter_guards_the_store(monkeypatch):
-    _frontend_only(monkeypatch, enable=True, blocks="0,0,0")
+    def lowered(**ktrace_env):
+        monkeypatch.delenv("FLYDSL_KTRACE_BLOCKS", raising=False)
+        _frontend_only(monkeypatch, enable=True, **ktrace_env)
 
-    @flyc.kernel
-    def annotated():
-        ktrace.mark("a")
+        @flyc.kernel
+        def annotated():
+            ktrace.mark("a")
 
-    @flyc.jit
-    def launch():
-        annotated().launch(grid=(4, 1, 1), block=(64, 1, 1))
+        @flyc.jit
+        def launch():
+            annotated().launch(grid=(4, 1, 1), block=(64, 1, 1))
 
-    text = _expanded(launch)
-    assert "block_id" in text or "block_dim" in text or "gpu.block_id" in text
-    assert text.count("arith.andi") >= 1, "the block filter predicate is missing"
+        return _expanded(launch)
+
+    filtered, unfiltered = lowered(blocks="0,0,0"), lowered()
+    assert filtered.count("gpu.block_id") > unfiltered.count("gpu.block_id"), "the filter must test the block id"
+    assert filtered.count("scf.if") > unfiltered.count("scf.if"), "the filter must guard the claim and the store"
 
 
 def test_payload_rejects_a_token(monkeypatch):
@@ -529,8 +533,14 @@ def test_range_start_yields_the_slot_its_record_occupies(monkeypatch):
     def launch():
         annotated().launch(grid=(1, 1, 1), block=(64, 1, 1))
 
-    event = _expanded(launch).split('llvm.call_intrinsic "llvm.amdgcn.s.memrealtime"', 1)[1]
-    assert "arith.select" in event.split("llvm.store", 1)[0], "the token must select the record slot or the sentinel"
+    text = _expanded(launch)
+    consts = dict(re.findall(r"(%\S+) = llvm\.mlir\.constant\((-?\d+) : i32\)", text))
+    selects = re.findall(r"(%\S+) = arith\.select %\S+, (%\S+), (%\S+) : i32", text)
+    record_slots = {slot for _, slot, other in selects if consts.get(other) == "2"}
+    tokens = [res for res, slot, other in selects if consts.get(other) == "-1" and slot in record_slots]
+    assert any(
+        f"llvm.store {tok}," in text for tok in tokens
+    ), "range_start must yield the slot its record occupies, or the unpaired sentinel, and range_stop must store it"
 
 
 def test_reading_a_trace_re_arms_the_buffer(monkeypatch, tmp_path):
@@ -837,6 +847,7 @@ def test_buffer_bytes_invalidates_the_cache(monkeypatch):
         "FLYDSL_KTRACE_ENABLE": "tracing on/off changes the whole kernel body",
         "FLYDSL_KTRACE_BLOCKS": "block-filter predicate",
         "FLYDSL_KTRACE_BUFFER_BYTES": "store-bounds capacity constant",
+        "FLYDSL_KTRACE_SLOTS": "static or partitioned slot claim",
     }
     missing = [var for var in baked if var not in jit_function._CACHE_INVALIDATING_ENV_VARS]
     assert not missing, (
