@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-27T06:48:50Z",
+ "updated": "2026-10-27T07:27:56Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40467037462,
+   "pr": 1309,
+   "commit": "b95df7730f34e48c2e466b2a207ea6efa69f6ab1",
+   "branch": "tdm-filler-contiguous-first",
+   "event": "pull_request",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40467037462",
+   "created_at": "2026-10-27T07:25:31Z",
+   "updated_at": "2026-10-27T07:26:37Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
+  {
+   "run_id": 40466948139,
+   "pr": 1309,
+   "commit": "0f0edb72cdf487b8a827878d2f4ae95d0c8adea5",
+   "branch": "tdm-filler-contiguous-first",
+   "event": "pull_request",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
+   "status": "completed",
+   "conclusion": "cancelled",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40466948139",
+   "created_at": "2026-10-27T07:24:39Z",
+   "updated_at": "2026-10-27T07:26:15Z",
+   "actor": "xudoyuan",
+   "jobs": []
+  },
   {
    "run_id": 40462231178,
    "pr": null,
@@ -10,13 +40,41 @@
    "branch": "main",
    "event": "push",
    "title": "Keep region op attributes in fly-promote-regmem-to-vectorssa (#1333)",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40462231178",
    "created_at": "2026-10-27T06:37:42Z",
-   "updated_at": "2026-10-27T06:40:01Z",
+   "updated_at": "2026-10-27T06:55:53Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T07:02:26Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40462231178/job/122055049326"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-27T06:56:44Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40462231178/job/122055049393"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-27T06:55:53Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40462231178/job/122055049418"
+    }
+   ]
   },
   {
    "run_id": 40459654153,
@@ -53,10 +111,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-27T06:33:21Z",
-     "completed_at": null,
+     "completed_at": "2026-10-27T07:02:18Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40459654153/job/122047788247"
     }
    ]
@@ -1880,98 +1938,6 @@
    "updated_at": "2026-10-20T13:28:20Z",
    "actor": "xudoyuan",
    "jobs": []
-  },
-  {
-   "run_id": 39426961995,
-   "pr": 1256,
-   "commit": "7f2a310612e14484a04a3fd9daf9c5e97bebe34b",
-   "branch": "codex/glm5-tp4-fused-indexer",
-   "event": "pull_request",
-   "title": "[Perf] Share GLM TP4/TP8 indexed decode and native MXFP4 paths",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995",
-   "created_at": "2026-10-20T13:01:52Z",
-   "updated_at": "2026-10-20T14:16:31Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T13:23:58Z",
-     "completed_at": "2026-10-20T14:15:06Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424815"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T13:24:32Z",
-     "completed_at": "2026-10-20T14:12:43Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652424976",
-     "machine": "cv350-1e707-c03-2",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-20T13:24:27Z",
-     "completed_at": "2026-10-20T14:16:30Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39426961995/job/118652425106"
-    }
-   ]
-  },
-  {
-   "run_id": 39420587004,
-   "pr": 1315,
-   "commit": "675c1553c9b57a5b4dbb026ada2a5cb50e88be5f",
-   "branch": "codex/kernel-llvm-coop-cleanup-20261020",
-   "event": "pull_request",
-   "title": "[Kernel] Replace raw memory glue and manual reductions with fx APIs",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004",
-   "created_at": "2026-10-20T12:13:07Z",
-   "updated_at": "2026-10-20T14:10:25Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T13:24:47Z",
-     "completed_at": "2026-10-20T14:10:24Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004/job/118630594187"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T12:37:44Z",
-     "completed_at": "2026-10-20T13:31:11Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004/job/118630594200",
-     "machine": "smci350-rck-g03-b20-03",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-20T12:37:39Z",
-     "completed_at": "2026-10-20T13:16:39Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39420587004/job/118630594294"
-    }
-   ]
   }
  ]
 }
