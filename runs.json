@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T03:28:52Z",
+ "updated": "2026-10-28T04:11:57Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,13 +10,41 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661",
    "created_at": "2026-10-28T03:21:13Z",
-   "updated_at": "2026-10-28T03:23:35Z",
+   "updated_at": "2026-10-28T03:37:25Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T03:37:25Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661/job/122616618523"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T03:38:19Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661/job/122616618598"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-28T03:37:53Z",
+     "completed_at": "2026-10-28T04:00:09Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661/job/122616618627"
+    }
+   ]
   },
   {
    "run_id": 40558614237,
@@ -25,20 +53,20 @@
    "branch": "pr/fix-jit-ir-cache-key",
    "event": "pull_request",
    "title": "[JIT] Key compiled artifacts by the traced MLIR",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40558614237",
    "created_at": "2026-10-27T18:17:42Z",
-   "updated_at": "2026-10-28T03:05:13Z",
+   "updated_at": "2026-10-28T04:09:59Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T03:05:12Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T04:09:58Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40558614237/job/122389611063"
     },
     {
