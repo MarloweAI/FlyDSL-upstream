@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T09:27:20Z",
+ "updated": "2026-10-28T09:30:01Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40664354616,
+   "pr": 1340,
+   "commit": "80571ba51234012ecd8ceb6c0d94ec876123388f",
+   "branch": "jli/gpu-asan",
+   "event": "pull_request",
+   "title": "[WIP][feat] support gpu asan feature ",
+   "status": "completed",
+   "conclusion": "failure",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40664354616",
+   "created_at": "2026-10-28T09:27:17Z",
+   "updated_at": "2026-10-28T09:28:48Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 40662456457,
    "pr": 1313,
@@ -31,7 +46,35 @@
    "created_at": "2026-10-28T09:09:54Z",
    "updated_at": "2026-10-28T09:16:22Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:28:56Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686843"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:28:56Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686853"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:28:56Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686921"
+    }
+   ]
   },
   {
    "run_id": 40654866172,
@@ -172,20 +215,20 @@
    "branch": "location-chain-typed-bindings",
    "event": "pull_request",
    "title": "[Bugfix] Show the user's source line in DSL compile errors",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661",
    "created_at": "2026-10-28T03:21:13Z",
-   "updated_at": "2026-10-28T07:18:55Z",
+   "updated_at": "2026-10-28T09:28:27Z",
    "actor": "coderfeli",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T07:18:55Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T09:28:26Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661/job/122616618523"
     },
     {
@@ -2044,21 +2087,6 @@
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/39626185884/job/119331695442"
     }
    ]
-  },
-  {
-   "run_id": 39625405924,
-   "pr": 1319,
-   "commit": "f88785a5284be4752fcee5aec585bce9e0aed905",
-   "branch": "jli/xnack-perf-v2",
-   "event": "pull_request",
-   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39625405924",
-   "created_at": "2026-10-21T15:24:39Z",
-   "updated_at": "2026-10-21T15:29:38Z",
-   "actor": "jli-melchior",
-   "jobs": []
   }
  ]
 }
