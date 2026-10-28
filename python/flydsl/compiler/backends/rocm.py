@@ -87,10 +87,7 @@ class RocmBackend(BaseBackend):
             "correct-sqrt": "true",
             "daz": "false",
             "fast": "true" if compile_hints.get("fast_fp_math") else "false",
-            "features": "+xnack,+sramecc" if asan_enabled else "",
-            # xnack/sramecc are translated to LLVM module flags by the
-            # patched ROCDL Target.cpp (handleModulePreLink) and stripped
-            # from the feature string before createTargetMachine.
+            "features": "",
             "finite-only": "false",
             "module": "",
             "triple": "amdgcn-amd-amdhsa",
@@ -148,7 +145,7 @@ class RocmBackend(BaseBackend):
         """Return device bitcode paths needed for GPU ASAN, or empty if disabled."""
         if not env.compile.enable_asan:
             return []
-        return _get_asan_bitcode_paths()
+        return _get_asan_bitcode_paths(self.target.arch)
 
     def lower_compile_hints(self, module, *, compile_hints: dict) -> None:
         """Materialize a scalar waves-per-EU override on kernel entries."""
@@ -306,9 +303,7 @@ def _set_xnack_module_flag(module) -> None:
             continue
         block = top.regions[0].blocks[0]
         ip = ir.InsertionPoint.at_block_begin(block)
-        flag_attr = ir.Attribute.parse(
-            '#llvm.mlir.module_flag<error, "amdgpu.xnack", 1 : i32>'
-        )
+        flag_attr = ir.Attribute.parse('#llvm.mlir.module_flag<error, "amdgpu.xnack", 1 : i32>')
         flags_attr = ir.ArrayAttr.get([flag_attr])
         loc = ir.Location.unknown()
         llvm_dialect.ModuleFlagsOp(flags=flags_attr, ip=ip, loc=loc)
@@ -350,10 +345,19 @@ def _find_rocm_bitcode_dir() -> Path:
     )
 
 
-def _get_asan_bitcode_paths() -> List[str]:
-    """Return the three device bitcode paths needed for GPU ASAN."""
+def _get_asan_bitcode_paths(chip: str = "gfx942") -> List[str]:
+    """Return device bitcode paths needed for GPU ASAN."""
     bc_dir = _find_rocm_bitcode_dir()
-    libs = ["asanrtl.bc", "ocml.bc", "ockl.bc"]
+    isa_ver = chip.replace("gfx", "")
+    wave64 = get_warp_size(chip) == 64
+    libs = [
+        "asanrtl.bc",
+        "ocml.bc",
+        "ockl.bc",
+        f"oclc_isa_version_{isa_ver}.bc",
+        "oclc_wavefrontsize64_on.bc" if wave64 else "oclc_wavefrontsize64_off.bc",
+        "oclc_abi_version_600.bc",
+    ]
     paths = []
     for lib in libs:
         p = bc_dir / lib

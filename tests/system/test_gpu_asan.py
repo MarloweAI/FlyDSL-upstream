@@ -77,9 +77,9 @@ class TestGpuAsan:
             pytest.skip("examples/01-vectorAdd.py not found")
         script = Path(example).read_text() + "\nprint('ASAN_COMPILE_PASS')\n"
         result = _run_script(script)
-        assert result.returncode == 0, (
-            f"ASAN kernel compilation failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
-        )
+        assert (
+            result.returncode == 0
+        ), f"ASAN kernel compilation failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
         assert "ASAN_COMPILE_PASS" in result.stdout
 
     def test_asan_detects_oob_access(self):
