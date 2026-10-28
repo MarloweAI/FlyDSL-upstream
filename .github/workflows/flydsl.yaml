@@ -10,10 +10,6 @@ on:
     types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
     inputs:
-      compare_latest_tag:
-        description: 'Also benchmark the latest PyPI tag (adds a full benchmark sweep)'
-        type: boolean
-        default: false
       prepare_runner:
         description: 'Runner for prepare-mlir (compile-only; no GPU needed)'
         type: choice
@@ -511,7 +507,7 @@ jobs:
           docker rm flydsl_mlir_cache || true
 
   # ---------------------------------------------------------------------------
-  # Single-GPU tests: kernels, unit, examples, MLIR FileCheck, benchmarks.
+  # Single-GPU correctness: kernels, unit, examples and MLIR FileCheck.
   # Runs on 1-GPU and Navi runners only.
   # ---------------------------------------------------------------------------
   test:
@@ -672,10 +668,157 @@ jobs:
             echo "logs.tgz not found; skipping log extraction"
           fi
 
+      - name: Clean up
+        if: always()
+        run: |
+          docker stop flydsl_test
+          docker rm flydsl_test
+
+  # ---------------------------------------------------------------------------
+  # Single-GPU performance: current benchmark and exact-base/latest-tag
+  # comparisons. Depends on wheel preparation, so it can run alongside test.
+  # Separate checkout, wheels and container keep both jobs isolated.
+  # ---------------------------------------------------------------------------
+  benchmark:
+    needs: [check-signal, detect-changes, prepare-mlir]
+    # Run only when check-signal passed AND the change touched code. Docs-only
+    # changes (code_changed == 'false') skip this job entirely, so no GPU runner
+    # is used; a detect-changes failure falls back to running.
+    if: >-
+      ${{ !cancelled()
+          && needs.check-signal.result == 'success'
+          && needs.prepare-mlir.result == 'success'
+          && (needs.detect-changes.result != 'success'
+              || needs.detect-changes.outputs.code_changed == 'true') }}
+    env:
+      # Some self-hosted runners configure a GitHub -> git-cache URL rewrite.
+      # If that cache is unavailable, checkout fails before the tests start.
+      GIT_CONFIG_GLOBAL: /dev/null
+      GIT_CONFIG_NOSYSTEM: "1"
+      # Temporary quarantine for linux-flydsl-navi-2 GPU 1; see #858.
+      CI_HIP_VISIBLE_DEVICES: ${{ contains(matrix.runners, 'navi') && '3' || '' }}
+    strategy:
+      # Match correctness coverage; each runner benchmarks current, exact base
+      # and latest tag on the same GPU, independently of the correctness job.
+      matrix:
+        runners: [
+          'linux-flydsl-mi325-1',
+          'linux-flydsl-mi35x-1',
+          'linux-flydsl-navi-2',
+        ]
+      fail-fast: false
+    runs-on: ${{ matrix.runners }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        env:
+          # Some self-hosted runners configure a GitHub -> git-cache URL rewrite.
+          # If that cache is unavailable, checkout fails before the tests start.
+          GIT_CONFIG_GLOBAL: ${{ runner.temp }}/flydsl-gitconfig
+          GIT_CONFIG_NOSYSTEM: "1"
+        with:
+          repository: ${{ env.GITHUB_REPO_NAME }}
+          ref: ${{ env.GITHUB_COMMIT_SHA }}
+          path: flydsl-benchmark
+
+      # download-artifact overlays its destination. Self-hosted workspaces are
+      # persistent, so remove wheels left by an older package version first.
+      - name: Remove stale FlyDSL CI wheels
+        run: rm -rf "${GITHUB_WORKSPACE:?}/flydsl-benchmark-wheels"
+
+      - name: Download FlyDSL CI wheels
+        uses: actions/download-artifact@v4
+        with:
+          name: flydsl-ci-wheels-${{ github.run_id }}
+          path: flydsl-benchmark-wheels
+
+      - name: Verify FlyDSL CI wheels
+        run: |
+          shopt -s nullglob
+          pr_wheels=(flydsl-benchmark-wheels/pr/*.whl)
+          if [ "${#pr_wheels[@]}" -ne 1 ]; then
+            printf 'Expected exactly one PR wheel, found %s:\n' "${#pr_wheels[@]}" >&2
+            printf '  %s\n' "${pr_wheels[@]}" >&2
+            exit 1
+          fi
+          (cd flydsl-benchmark-wheels/pr && sha256sum -c SHA256SUMS)
+          if [ -d flydsl-benchmark-wheels/base ]; then
+            base_wheels=(flydsl-benchmark-wheels/base/*.whl)
+            if [ "${#base_wheels[@]}" -ne 1 ]; then
+              printf 'Expected exactly one base wheel, found %s:\n' "${#base_wheels[@]}" >&2
+              printf '  %s\n' "${base_wheels[@]}" >&2
+              exit 1
+            fi
+            (cd flydsl-benchmark-wheels/base && sha256sum -c SHA256SUMS)
+          else
+            echo "::warning title=Baseline wheel unavailable::Exact base benchmark will be skipped."
+          fi
+          (cd flydsl-benchmark-wheels/tools && sha256sum -c SHA256SUMS)
+
+      - name: Start CI container
+        run: |
+          echo "Clean up containers..."
+          docker ps -aq -f name=flydsl_benchmark | xargs -r docker stop | xargs -r docker rm || true
+
+          echo "Start CI container..."
+          if [ -f "/etc/podinfo/gha-render-devices" ]; then
+            DEVICE_FLAG=$(cat /etc/podinfo/gha-render-devices)
+          else
+            DEVICE_FLAG="--device /dev/dri"
+          fi
+
+          GPU_ENV_ARGS=()
+          if [ -n "${CI_HIP_VISIBLE_DEVICES}" ]; then
+            GPU_ENV_ARGS=(--env "HIP_VISIBLE_DEVICES=${CI_HIP_VISIBLE_DEVICES}")
+          fi
+
+          echo "Starting container: flydsl_benchmark:ci"
+          docker run -dt --network=host --user root --device=/dev/kfd $DEVICE_FLAG "${GPU_ENV_ARGS[@]}" \
+          -v "${GITHUB_WORKSPACE:-$PWD}/flydsl-benchmark:/flydsl-test" \
+          -v "${GITHUB_WORKSPACE:-$PWD}/flydsl-benchmark-wheels:/flydsl-ci-wheels:ro" \
+          --ipc=host --group-add video \
+          --shm-size 16g \
+          --cap-add=SYS_PTRACE \
+          --security-opt seccomp=unconfined \
+          -w /flydsl-test \
+          --name flydsl_benchmark \
+          ${{ env.DOCKER_IMAGE }}
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
+      - name: Install dependencies
+        run: |
+          docker exec flydsl_benchmark bash -c "apt-get update && apt-get install -y cmake build-essential patchelf"
+          docker exec flydsl_benchmark bash -c "python3 -m pip install -U pip setuptools wheel"
+          docker exec flydsl_benchmark bash -c "python3 -m pip install ninja>=1.11.1"
+          docker exec flydsl_benchmark bash -c "if command -v rocm-sdk >/dev/null 2>&1; then rocm-sdk init; fi"
+          docker exec flydsl_benchmark bash -c "python3 -m pip install -U 'hypothesis>=6.82.0'"
+          docker exec flydsl_benchmark bash -c "git config --global --add safe.directory /flydsl-test && cd /flydsl-test && git log"
+          sdk_root="$(docker exec flydsl_benchmark bash -c 'if command -v rocm-sdk >/dev/null 2>&1; then rocm-sdk path --root; elif [ -d /opt/rocm ]; then printf "/opt/rocm\n"; fi')"
+          test -n "${sdk_root}"
+          docker exec flydsl_benchmark test -d "${sdk_root}"
+          printf 'ROCM_PATH=%s\n' "${sdk_root}" >>"${GITHUB_ENV}"
+
+      - name: Install FlyDSL CI wheel
+        run: |
+          docker exec flydsl_benchmark bash -c "python3 -m pip install --force-reinstall --no-deps /flydsl-ci-wheels/pr/*.whl"
+          docker exec flydsl_benchmark bash -c "mkdir -p /flydsl-test/build-fly/bin && cp /flydsl-ci-wheels/pr/fly-opt /flydsl-test/build-fly/bin/fly-opt && chmod +x /flydsl-test/build-fly/bin/fly-opt"
+          docker exec flydsl_benchmark bash -c "cp /flydsl-ci-wheels/tools/FileCheck /usr/local/bin/FileCheck && chmod +x /usr/local/bin/FileCheck"
+          docker exec -e ROCM_PATH flydsl_benchmark bash -c "/flydsl-test/build-fly/bin/fly-opt --version"
+          docker exec -e ROCM_PATH flydsl_benchmark bash -c 'python3 -c "import flydsl; from flydsl._mlir.ir import Context; print(\"Installed FlyDSL CI wheel\")"'
+
+      - name: Prepare aiter
+        if: ${{ !contains(matrix.runners, 'navi') }}
+        run: |
+          docker exec flydsl_benchmark bash -c "rm -rf /tmp/aiter && git clone --depth 1 --recursive --shallow-submodules https://github.com/ROCm/aiter.git /tmp/aiter"
+          docker exec flydsl_benchmark bash -c "python3 -c \"from pathlib import Path; src = Path('/tmp/aiter/requirements.txt'); dst = Path('/tmp/aiter/requirements-flydsl-ci.txt'); lines = [line for line in src.read_text().splitlines() if line.strip() and not line.strip().startswith('flydsl==')]; dst.write_text('\\n'.join(lines) + '\\n')\" && python3 -m pip install -r /tmp/aiter/requirements-flydsl-ci.txt"
+          docker exec flydsl_benchmark bash -c "cd /tmp/aiter && bash .github/scripts/install_triton.sh"
+          docker exec flydsl_benchmark bash -c "python3 -c 'import torch; import triton; assert tuple(map(int, triton.__version__.split(\"+\", 1)[0].split(\".\")[:3])) >= (3, 6, 0), triton.__version__; print(\"Using image Triton\", triton.__version__, \"with PyTorch\", torch.__version__)'"
+
       - name: Run benchmarks
         id: benchmarks
         run: |
-          docker exec -i -e ROCM_PATH flydsl_test bash <<'BASH'
+          docker exec -i -e ROCM_PATH flydsl_benchmark bash <<'BASH'
           set -e -o pipefail
           export PYTHONPATH=/tmp/aiter:${PYTHONPATH:-}
           export AITER_REPO=/tmp/aiter
@@ -693,7 +836,7 @@ jobs:
             -e BASE_REPO_NAME \
             -e BASE_COMMIT_SHA \
             -e ROCM_PATH \
-            flydsl_test bash <<'BASH'
+            flydsl_benchmark bash <<'BASH'
           set -u
           cd /flydsl-test
           rm -rf /tmp/flydsl-bench-main /tmp/flydsl-bench-tag
@@ -751,14 +894,6 @@ jobs:
             echo "::warning title=Benchmark baseline unavailable::No usable exact main baseline found; skipping main comparison."
           fi
 
-          # The exact base above is the per-change performance gate. A release
-          # comparison costs another full sweep (6-8 minutes on MI350), so make
-          # it available on manual dispatch without repeating it on every PR/push.
-          if [ "${{ inputs.compare_latest_tag || false }}" != "true" ]; then
-            echo "Latest-tag benchmark not requested; exact-base comparison remains enabled."
-            exit 0
-          fi
-
           if git fetch "${base_repo_url}" 'refs/tags/v*:refs/tags/v*' --force --depth=1; then
             latest_tag="$(git tag --list 'v*' --sort=-v:refname | sed -n '1p')"
             if [ -n "${latest_tag}" ]; then
@@ -801,7 +936,7 @@ jobs:
         if: steps.bench-baselines.outcome != 'skipped'
         timeout-minutes: 5
         run: |
-          docker exec flydsl_test bash -c "
+          docker exec flydsl_benchmark bash -c "
             if [ ! -f /tmp/bench_main.csv ]; then
               echo '::warning title=Benchmark comparison skipped::No usable main benchmark baseline found.'
               exit 0
@@ -813,10 +948,10 @@ jobs:
           "
 
       - name: Check benchmark performance (current vs latest tag)
-        if: inputs.compare_latest_tag && steps.bench-baselines.outcome != 'skipped'
+        if: steps.bench-baselines.outcome != 'skipped'
         timeout-minutes: 5
         run: |
-          docker exec flydsl_test bash -c "
+          docker exec flydsl_benchmark bash -c "
             if [ ! -f /tmp/bench_latest_tag.csv ]; then
               echo '::warning title=Benchmark comparison skipped::No usable latest-tag benchmark baseline found.'
               exit 0
@@ -831,8 +966,8 @@ jobs:
         if: failure()
         run: |
           log_dir="$(mktemp -d "${RUNNER_TEMP}/flydsl-benchmark-logs.XXXXXX")"
-          docker exec flydsl_test bash -c 'cd /tmp && tar czf /tmp/flydsl_bench_logs.tgz flydsl_bench* bench_*.csv 2>/dev/null || echo "no logs"'
-          if docker cp flydsl_test:/tmp/flydsl_bench_logs.tgz "${log_dir}/logs.tgz"; then
+          docker exec flydsl_benchmark bash -c 'cd /tmp && tar czf /tmp/flydsl_bench_logs.tgz flydsl_bench* bench_*.csv 2>/dev/null || echo "no logs"'
+          if docker cp flydsl_benchmark:/tmp/flydsl_bench_logs.tgz "${log_dir}/logs.tgz"; then
             tar -xzf "${log_dir}/logs.tgz" -C "${log_dir}" || true
             find "${log_dir}" -type f -name '*.log' -print -exec cat {} \;
             find "${log_dir}" -maxdepth 1 -type f -name 'bench_*.csv' -print -exec cat {} \;
@@ -843,8 +978,8 @@ jobs:
       - name: Clean up
         if: always()
         run: |
-          docker stop flydsl_test
-          docker rm flydsl_test
+          docker stop flydsl_benchmark
+          docker rm flydsl_benchmark
 
   # ---------------------------------------------------------------------------
   # Multi-GPU communication operator tests: ONLY for 8-GPU runners.

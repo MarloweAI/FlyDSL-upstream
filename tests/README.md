@@ -36,9 +36,12 @@ or rotating benchmark buffers; all shapes and layout combinations remain in the
 suite. Their CLI harnesses and `scripts/run_benchmark.sh` still measure performance.
 The test script reports the 20 slowest tests to help track runtime regressions.
 
-The `Fly DSL test` workflow compares benchmarks against the exact PR base (or
-the previous commit on main pushes). An additional full comparison against the
-latest PyPI tag is available through the `compare_latest_tag` manual input.
+The `Fly DSL test` workflow runs correctness and benchmarks in separate jobs
+after the shared wheel build. The `test` job runs pytest, examples and MLIR
+FileCheck. The `benchmark` job runs the current benchmark and comparisons
+against the exact PR base (or the previous commit on main pushes) and the latest
+PyPI tag. Both jobs cover the same single-GPU runners and can run in parallel
+when runner capacity is available; benchmarks do not wait for correctness.
 
 ### Rollout status
 
