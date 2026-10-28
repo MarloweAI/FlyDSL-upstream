@@ -51,7 +51,7 @@ def _as_u8(t: torch.Tensor) -> torch.Tensor:
     return t if t.dtype in (torch.uint8, torch.int8) else t.view(torch.uint8)
 
 
-def _bench_fp4_gemm(M, N, K, num_warmups=10, num_iters=100, *, bench=True):
+def _bench_fp4_gemm(M, N, K, num_warmups=10, num_iters=100):
     if ARCH != "gfx950":
         pytest.skip(f"FP4 4-wave GEMM requires gfx950, got {ARCH}")
     # The kernel is hardcoded to a 256x256 block and an all-in-bounds epilogue.
@@ -103,27 +103,20 @@ def _bench_fp4_gemm(M, N, K, num_warmups=10, num_iters=100, *, bench=True):
     def _launch(c, a, b, sa, sb):
         compiled(*_args(c, a, b, sa, sb))
 
-    if bench:
-        num_iters = max(2, int(num_iters))
-        _, us = run_perftest(
-            _launch,
-            c_out,
-            a_q,
-            b_shuffled,
-            scale_a,
-            scale_b,
-            num_iters=num_iters,
-            num_warmup=num_warmups,
-        )
-    else:
-        for _ in range(2):
-            _launch(c_out, a_q, b_shuffled, scale_a, scale_b)
+    num_iters = max(2, int(num_iters))
+    _, us = run_perftest(
+        _launch,
+        c_out,
+        a_q,
+        b_shuffled,
+        scale_a,
+        scale_b,
+        num_iters=num_iters,
+        num_warmup=num_warmups,
+    )
     torch.cuda.synchronize()
 
     assert verify_output(c_out.to(torch.float32), c_ref, rtol=0.1, atol=0.1)
-
-    if not bench:
-        return None
 
     flops = 2 * M * N * K
     size_a = (M * K) // 2
@@ -143,7 +136,7 @@ def _bench_fp4_gemm(M, N, K, num_warmups=10, num_iters=100, *, bench=True):
     ],
 )
 def test_fp4_gemm_4wave(M, N, K):
-    _bench_fp4_gemm(M=M, N=N, K=K, bench=False)
+    _bench_fp4_gemm(M=M, N=N, K=K)
 
 
 # ---------------------------------------------------------------------------

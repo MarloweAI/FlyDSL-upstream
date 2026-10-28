@@ -250,17 +250,18 @@ def test_runner_of_matches_known_box_and_rejects_unknown():
 
 @pytest.mark.parametrize("benchmark_first", [False, True])
 @pytest.mark.parametrize("status,conclusion", [("completed", "success"), ("completed", "failure"), ("queued", None)])
-def test_split_run_uses_benchmark_logs_and_status(monkeypatch, benchmark_first, status, conclusion):
+@pytest.mark.parametrize("runner", ["linux-flydsl-mi325-1", "linux-flydsl-mi35x-1", "linux-flydsl-navi-2"])
+def test_split_run_uses_benchmark_logs_and_status(monkeypatch, benchmark_first, status, conclusion, runner):
     correctness = {
         "id": 1,
-        "name": "test (linux-flydsl-mi325-1)",
+        "name": f"test ({runner})",
         "status": "completed",
         "conclusion": "success",
         "html_url": "https://example.com/correctness",
     }
     benchmark = {
         "id": 2,
-        "name": "benchmark (linux-flydsl-mi325-1)",
+        "name": f"benchmark ({runner})",
         "status": status,
         "conclusion": conclusion,
         "html_url": "https://example.com/benchmark",
@@ -270,7 +271,7 @@ def test_split_run_uses_benchmark_logs_and_status(monkeypatch, benchmark_first, 
 
     def fetch_log(path):
         fetched.append(path)
-        return "benchmark output"
+        return SETUP_BANNER.format(machine="gbt355-odcdh1-b13-1") + "benchmark output"
 
     monkeypatch.setattr(ingest, "run_jobs", lambda repo, run_id: jobs)
     monkeypatch.setattr(ingest, "resolve_pr", lambda repo, run: None)
@@ -286,12 +287,14 @@ def test_split_run_uses_benchmark_logs_and_status(monkeypatch, benchmark_first, 
 
     records, summary = ingest.ingest_run("ROCm/FlyDSL", {"id": 10, "head_sha": "abc"}, regression_pct=-3.0)
     assert len(summary["jobs"]) == 1
+    assert summary["jobs"][0]["runner"] == runner
     assert summary["jobs"][0]["url"] == benchmark["html_url"]
     assert summary["jobs"][0]["status"] == status
     assert summary["jobs"][0]["conclusion"] == conclusion
     if status == "completed" and conclusion == "success":
         assert fetched == ["repos/ROCm/FlyDSL/actions/jobs/2/logs"]
         assert len(records) == 1
+        assert records[0]["runner"] == runner
     else:
         assert fetched == []
         assert records == []
@@ -421,6 +424,4 @@ def test_list_runs_explicit_branch_filters(monkeypatch):
 
 
 if __name__ == "__main__":
-    import pytest
-
     raise SystemExit(pytest.main([__file__, "-v"]))
