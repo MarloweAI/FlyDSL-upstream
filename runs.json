@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T09:30:01Z",
+ "updated": "2026-10-28T09:32:10Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40664560297,
+   "pr": 1340,
+   "commit": "80571ba51234012ecd8ceb6c0d94ec876123388f",
+   "branch": "jli/gpu-asan",
+   "event": "pull_request",
+   "title": "[WIP][feat] support gpu asan feature ",
+   "status": "completed",
+   "conclusion": "success",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40664560297",
+   "created_at": "2026-10-28T09:28:54Z",
+   "updated_at": "2026-10-28T09:29:27Z",
+   "actor": "jli-melchior",
+   "jobs": []
+  },
   {
    "run_id": 40664354616,
    "pr": 1340,
@@ -40,11 +55,11 @@
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
    "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460",
    "created_at": "2026-10-28T09:09:54Z",
-   "updated_at": "2026-10-28T09:16:22Z",
+   "updated_at": "2026-10-28T09:28:56Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
@@ -59,9 +74,9 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T09:28:56Z",
+     "started_at": "2026-10-28T09:29:29Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686853"
     },
@@ -83,11 +98,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Fix] Don't retain the last tensor in layout-dynamic DLPack fills (#1\u2026",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172",
    "created_at": "2026-10-28T08:10:09Z",
-   "updated_at": "2026-10-28T09:20:27Z",
+   "updated_at": "2026-10-28T09:29:45Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
@@ -111,9 +126,9 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T09:20:27Z",
+     "started_at": "2026-10-28T09:29:44Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172/job/122731975092"
     }
@@ -2044,49 +2059,6 @@
    "updated_at": "2026-10-21T21:19:09Z",
    "actor": "jhinpan",
    "jobs": []
-  },
-  {
-   "run_id": 39626185884,
-   "pr": 1319,
-   "commit": "3657d5248b768e146a1de8349d9e50f2985aeaaf",
-   "branch": "jli/xnack-perf-v2",
-   "event": "pull_request",
-   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39626185884",
-   "created_at": "2026-10-21T15:29:36Z",
-   "updated_at": "2026-10-21T18:56:15Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-21T16:07:12Z",
-     "completed_at": "2026-10-21T16:35:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39626185884/job/119331695150"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-21T16:26:59Z",
-     "completed_at": "2026-10-21T18:56:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39626185884/job/119331695280"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-21T16:07:19Z",
-     "completed_at": "2026-10-21T17:03:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39626185884/job/119331695442"
-    }
-   ]
   }
  ]
 }
