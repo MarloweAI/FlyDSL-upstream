@@ -36,9 +36,32 @@ def _asan_env():
     # Ensure the subprocess can find flydsl with the same PYTHONPATH
     repo = str(Path(__file__).resolve().parents[2])
     build_pkgs = os.path.join(repo, "build-fly", "python_packages")
+    mlir_libs = os.path.join(build_pkgs, "flydsl", "_mlir", "_mlir_libs")
     existing = e.get("PYTHONPATH", "")
     e["PYTHONPATH"] = os.pathsep.join(filter(None, [build_pkgs, repo, existing]))
+    existing_ld = e.get("LD_LIBRARY_PATH", "")
+    e["LD_LIBRARY_PATH"] = os.pathsep.join(filter(None, [mlir_libs, existing_ld]))
     return e
+
+
+def _run_script(script_text: str, *, timeout: int = 120):
+    """Write script to a temp file and run it (avoids inspect.getsource issues with -c)."""
+    import tempfile
+
+    env = _asan_env()
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".py", delete=False) as f:
+        f.write(script_text)
+        f.flush()
+        try:
+            return subprocess.run(
+                [sys.executable, f.name],
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+        finally:
+            os.unlink(f.name)
 
 
 @pytest.mark.l2_device
@@ -48,38 +71,12 @@ class TestGpuAsan:
 
     def test_asan_compile_simple_kernel(self):
         """A simple kernel compiles successfully with ASAN enabled."""
-        script = textwrap.dedent("""\
-            import torch
-            import flydsl.compiler as flyc
-            import flydsl.expr as fx
-
-            @flyc.kernel
-            def add_kernel(A: fx.Tensor, B: fx.Tensor, C: fx.Tensor):
-                tid = fx.thread_idx.x
-                a = A[tid]
-                b = B[tid]
-                C[tid] = a.load() + b.load()
-
-            @flyc.jit
-            def add_jit(A: fx.Tensor, B: fx.Tensor, C: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
-                add_kernel(A, B, C).launch(grid=(1, 1, 1), block=(64, 1, 1), stream=stream)
-
-            N = 64
-            A = torch.ones(N, dtype=torch.float32, device="cuda")
-            B = torch.ones(N, dtype=torch.float32, device="cuda")
-            C = torch.zeros(N, dtype=torch.float32, device="cuda")
-            add_jit(A, B, C)
-            torch.cuda.synchronize()
-            assert torch.allclose(C, A + B), f"Result mismatch: {C}"
-            print("ASAN_COMPILE_PASS")
-        """)
-        result = subprocess.run(
-            [sys.executable, "-c", script],
-            env=_asan_env(),
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
+        repo = str(Path(__file__).resolve().parents[2])
+        example = os.path.join(repo, "examples", "01-vectorAdd.py")
+        if not os.path.isfile(example):
+            pytest.skip("examples/01-vectorAdd.py not found")
+        script = Path(example).read_text() + "\nprint('ASAN_COMPILE_PASS')\n"
+        result = _run_script(script)
         assert result.returncode == 0, (
             f"ASAN kernel compilation failed.\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
         )
@@ -95,9 +92,8 @@ class TestGpuAsan:
             @flyc.kernel
             def oob_kernel(A: fx.Tensor, C: fx.Tensor):
                 tid = fx.thread_idx.x
-                # Intentional OOB: read past the end of A
-                a = A[tid + 1]
-                C[tid] = a.load()
+                # Intentional OOB: read past the end of A (tid+1 at boundary)
+                C[tid] = A[tid + 1]
 
             @flyc.jit
             def oob_jit(A: fx.Tensor, C: fx.Tensor, stream: fx.Stream = fx.Stream(None)):
@@ -110,13 +106,7 @@ class TestGpuAsan:
             torch.cuda.synchronize()
             print("OOB_NOT_DETECTED")
         """)
-        result = subprocess.run(
-            [sys.executable, "-c", script],
-            env=_asan_env(),
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
+        result = _run_script(script)
         combined = result.stdout + result.stderr
         detected = (
             "heap-buffer-overflow" in combined

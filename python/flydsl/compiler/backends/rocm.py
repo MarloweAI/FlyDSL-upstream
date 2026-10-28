@@ -87,7 +87,7 @@ class RocmBackend(BaseBackend):
             "correct-sqrt": "true",
             "daz": "false",
             "fast": "true" if compile_hints.get("fast_fp_math") else "false",
-            "features": "+xnack" if asan_enabled else "",
+            "features": "",
             "finite-only": "false",
             "module": "",
             "triple": "amdgcn-amd-amdhsa",
@@ -173,9 +173,9 @@ class RocmBackend(BaseBackend):
 
         if env.compile.enable_asan:
             with module.context:
+                _set_xnack_module_flag(module)
                 for func_op in _iter_gpu_kernel_funcs(module):
                     _add_passthrough_flag(func_op, "sanitize_address")
-                    _set_passthrough(func_op, "target-features", "+xnack")
 
     def gpu_module_targets(self) -> List[str]:
         # Intentionally empty: the ROCm pipeline attaches the authoritative
@@ -287,6 +287,29 @@ def _set_passthrough(func_op, key: str, value: str) -> None:
     existing = func_op.attributes["passthrough"] if "passthrough" in func_op.attributes else None
     kept = [entry for entry in existing if _entry_key(entry) != key] if existing is not None else []
     func_op.attributes["passthrough"] = ir.ArrayAttr.get([*kept, new_entry])
+
+
+def _set_xnack_module_flag(module) -> None:
+    """Insert ``llvm.module_flags`` with ``amdgpu.xnack = 1`` into each gpu.module.
+
+    LLVM 24+ requires xnack to be specified via LLVM module flags instead of
+    subtarget features. This adds the flag so the AMDGPU backend enables xnack+
+    mode, which is required for GPU Address Sanitizer.
+    """
+    from ..._mlir import ir
+    from ..._mlir.dialects import llvm as llvm_dialect
+
+    for top in module.body.operations:
+        if top.operation.name != "gpu.module":
+            continue
+        block = top.regions[0].blocks[0]
+        ip = ir.InsertionPoint.at_block_begin(block)
+        flag_attr = ir.Attribute.parse(
+            '#llvm.mlir.module_flag<error, "amdgpu.xnack", 1 : i32>'
+        )
+        flags_attr = ir.ArrayAttr.get([flag_attr])
+        loc = ir.Location.unknown()
+        llvm_dialect.ModuleFlagsOp(flags=flags_attr, ip=ip, loc=loc)
 
 
 def _add_passthrough_flag(func_op, name: str) -> None:
