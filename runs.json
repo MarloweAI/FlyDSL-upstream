@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-28T18:31:55Z",
+ "updated": "2026-10-28T21:24:05Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40770827893,
+   "pr": 1343,
+   "commit": "833b6d35e969267c27b34d2d7f5cd98564fc40f1",
+   "branch": "fix/debug-call-chain-scopes",
+   "event": "pull_request",
+   "title": "[Bugfix] Keep every frame of an op's call chain in debug info; skip the standard library",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40770827893",
+   "created_at": "2026-10-28T21:18:20Z",
+   "updated_at": "2026-10-28T21:18:20Z",
+   "actor": "jhinpan",
+   "jobs": []
+  },
+  {
+   "run_id": 40768243608,
+   "pr": 1343,
+   "commit": "833b6d35e969267c27b34d2d7f5cd98564fc40f1",
+   "branch": "fix/debug-call-chain-scopes",
+   "event": "pull_request",
+   "title": "[Bugfix] Keep every frame of an op's call chain in debug info; skip the standard library",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40768243608",
+   "created_at": "2026-10-28T21:00:24Z",
+   "updated_at": "2026-10-28T21:00:24Z",
+   "actor": "hanli0612",
+   "jobs": []
+  },
   {
    "run_id": 40705569863,
    "pr": 1342,
@@ -1979,98 +2009,6 @@
      "started_at": "2026-10-26T13:44:19Z",
      "completed_at": "2026-10-26T14:09:13Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40331097337/job/121607658976"
-    }
-   ]
-  },
-  {
-   "run_id": 40329700150,
-   "pr": null,
-   "commit": "888d7d80528f0cf2abab8a86610d5ccca47f205d",
-   "branch": "main",
-   "event": "push",
-   "title": "[LLVM] Roll back to 941a04e and cherry-pick unclaused VMEM patches (#\u2026",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150",
-   "created_at": "2026-10-26T13:20:16Z",
-   "updated_at": "2026-10-26T16:12:33Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T13:54:21Z",
-     "completed_at": "2026-10-26T14:58:34Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798043",
-     "machine": "smci350-rck-g03-b20-03",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T14:50:44Z",
-     "completed_at": "2026-10-26T16:12:32Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798133"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T14:09:21Z",
-     "completed_at": "2026-10-26T14:28:51Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40329700150/job/121612798241"
-    }
-   ]
-  },
-  {
-   "run_id": 40325939178,
-   "pr": 1328,
-   "commit": "61132f8440ec77061d9e6f05fc2300c4ed44a1e6",
-   "branch": "fix/pin-python-interpreter",
-   "event": "pull_request",
-   "title": "[FIX] Building from source can produce bindings for the wrong ABI and crash on import",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178",
-   "created_at": "2026-10-26T12:52:49Z",
-   "updated_at": "2026-10-27T15:10:13Z",
-   "actor": "Qubitium",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-27T12:08:40Z",
-     "completed_at": "2026-10-27T12:34:21Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178/job/122169672842"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-27T14:24:59Z",
-     "completed_at": "2026-10-27T15:10:12Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178/job/122169672852"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-27T11:45:18Z",
-     "completed_at": "2026-10-27T12:45:57Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40325939178/job/122169672917",
-     "machine": "smci350-rck-g03-f19-31",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
     }
    ]
   }
