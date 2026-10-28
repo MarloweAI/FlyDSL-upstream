@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T00:49:34Z",
+ "updated": "2026-10-28T03:28:52Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40626193661,
+   "pr": 1337,
+   "commit": "13176aad06bdc6e50254d37d351edb11dd280099",
+   "branch": "location-chain-typed-bindings",
+   "event": "pull_request",
+   "title": "[Bugfix] Show the user's source line in DSL compile errors",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40626193661",
+   "created_at": "2026-10-28T03:21:13Z",
+   "updated_at": "2026-10-28T03:23:35Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40558614237,
    "pr": 1338,
@@ -10,19 +25,19 @@
    "branch": "pr/fix-jit-ir-cache-key",
    "event": "pull_request",
    "title": "[JIT] Key compiled artifacts by the traced MLIR",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40558614237",
    "created_at": "2026-10-27T18:17:42Z",
-   "updated_at": "2026-10-27T18:32:54Z",
+   "updated_at": "2026-10-28T03:05:13Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-27T18:32:54Z",
+     "started_at": "2026-10-28T03:05:12Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40558614237/job/122389611063"
     },
@@ -1952,21 +1967,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39612038802",
    "created_at": "2026-10-21T13:53:59Z",
    "updated_at": "2026-10-21T13:55:39Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39611701985,
-   "pr": 1319,
-   "commit": "cb727aae6fac82c3f898960d5efebd1040d94441",
-   "branch": "jli/xnack-perf-v2",
-   "event": "pull_request",
-   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39611701985",
-   "created_at": "2026-10-21T13:51:42Z",
-   "updated_at": "2026-10-21T13:53:29Z",
    "actor": "jli-melchior",
    "jobs": []
   }
