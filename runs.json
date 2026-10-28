@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T14:17:46Z",
+ "updated": "2026-10-28T14:30:49Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40705569863,
+   "pr": 1342,
+   "commit": "90d8ec9ed67f14e249fc9bd7e87aac784bce4b4f",
+   "branch": "codex/ci-mi350-runtime",
+   "event": "pull_request",
+   "title": "[CI] Run correctness and benchmark comparisons in separate jobs",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863",
+   "created_at": "2026-10-28T14:24:12Z",
+   "updated_at": "2026-10-28T14:29:33Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40703867392,
    "pr": null,
@@ -70,11 +85,11 @@
    "branch": "codex/ci-mi350-runtime",
    "event": "pull_request",
    "title": "[CI] Run correctness and benchmark comparisons in separate jobs",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40698992908",
    "created_at": "2026-10-28T13:43:02Z",
-   "updated_at": "2026-10-28T13:44:24Z",
+   "updated_at": "2026-10-28T14:29:14Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -1964,70 +1979,6 @@
      "machine": "smci350-rck-g03-f19-31",
      "host_model": "MI350",
      "bench_skipped": "host MI350 != MI355"
-    }
-   ]
-  },
-  {
-   "run_id": 40310094934,
-   "pr": null,
-   "commit": "80d9c4e5d49d9110147395ce814fd11225276173",
-   "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
-   "event": "workflow_dispatch",
-   "title": "Fly DSL test",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934",
-   "created_at": "2026-10-26T10:47:06Z",
-   "updated_at": "2026-10-26T14:12:16Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:22:23Z",
-     "completed_at": "2026-10-26T12:30:49Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276467"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:09:51Z",
-     "completed_at": "2026-10-26T12:05:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276471",
-     "machine": "smci350-rck-g03-f12-31",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:09:44Z",
-     "completed_at": "2026-10-26T11:33:12Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121538276487"
-    },
-    {
-     "runner": "linux-flydsl-mi355-8",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T12:31:15Z",
-     "completed_at": "2026-10-26T13:30:45Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572786968"
-    },
-    {
-     "runner": "linux-flydsl-mi325-8",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T12:42:51Z",
-     "completed_at": "2026-10-26T14:12:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572787189"
     }
    ]
   }
