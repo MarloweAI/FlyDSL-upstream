@@ -38,7 +38,8 @@ fi
 # Remove only this job's container. Other runs and runner slots may share Docker.
 docker rm -f "${CI_CONTAINER}" >/dev/null 2>&1 || true
 if [ -f /etc/podinfo/gha-render-devices ]; then
-  read -r -a ci_device_args <<<"$(cat /etc/podinfo/gha-render-devices)"
+  ci_device_flags="$(</etc/podinfo/gha-render-devices)"
+  read -r -a ci_device_args <<<"${ci_device_flags//$'\n'/ }"
 else
   ci_device_args=(--device /dev/dri)
 fi
