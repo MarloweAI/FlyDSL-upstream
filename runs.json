@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T15:27:15Z",
+ "updated": "2026-10-28T15:42:38Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -20,9 +20,9 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T15:01:40Z",
+     "started_at": "2026-10-28T15:33:03Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898664918"
     },
@@ -99,10 +99,10 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T15:12:09Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T15:35:01Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40703867392/job/122892797416"
     },
     {
@@ -350,11 +350,11 @@
    "branch": "pr/fix-dump-asm",
    "event": "pull_request",
    "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934",
    "created_at": "2026-10-28T09:59:20Z",
-   "updated_at": "2026-10-28T14:43:16Z",
+   "updated_at": "2026-10-28T15:40:51Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
@@ -369,10 +369,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T14:43:16Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T15:40:50Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999136"
     },
     {
