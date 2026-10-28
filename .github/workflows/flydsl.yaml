@@ -10,6 +10,10 @@ on:
     types: [opened, synchronize, reopened, labeled]
   workflow_dispatch:
     inputs:
+      compare_latest_tag:
+        description: 'Also benchmark the latest PyPI tag (adds a full benchmark sweep)'
+        type: boolean
+        default: false
       prepare_runner:
         description: 'Runner for prepare-mlir (compile-only; no GPU needed)'
         type: choice
@@ -747,6 +751,14 @@ jobs:
             echo "::warning title=Benchmark baseline unavailable::No usable exact main baseline found; skipping main comparison."
           fi
 
+          # The exact base above is the per-change performance gate. A release
+          # comparison costs another full sweep (6-8 minutes on MI350), so make
+          # it available on manual dispatch without repeating it on every PR/push.
+          if [ "${{ inputs.compare_latest_tag || false }}" != "true" ]; then
+            echo "Latest-tag benchmark not requested; exact-base comparison remains enabled."
+            exit 0
+          fi
+
           if git fetch "${base_repo_url}" 'refs/tags/v*:refs/tags/v*' --force --depth=1; then
             latest_tag="$(git tag --list 'v*' --sort=-v:refname | sed -n '1p')"
             if [ -n "${latest_tag}" ]; then
@@ -801,7 +813,7 @@ jobs:
           "
 
       - name: Check benchmark performance (current vs latest tag)
-        if: steps.bench-baselines.outcome != 'skipped'
+        if: inputs.compare_latest_tag && steps.bench-baselines.outcome != 'skipped'
         timeout-minutes: 5
         run: |
           docker exec flydsl_test bash -c "

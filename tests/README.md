@@ -31,6 +31,15 @@ suite duplicates work (and can accidentally consume every GPU on a multi-GPU
 host). CI can still opt into the full suite, including `large_shape` tests, with
 `RUN_TESTS_FULL=1`; the exclusions apply in both modes.
 
+FP4, FP8 row-scale and MXFP8 GEMM correctness cases run twice without profiling
+or rotating benchmark buffers; all shapes and layout combinations remain in the
+suite. Their CLI harnesses and `scripts/run_benchmark.sh` still measure performance.
+The test script reports the 20 slowest tests to help track runtime regressions.
+
+The `Fly DSL test` workflow compares benchmarks against the exact PR base (or
+the previous commit on main pushes). An additional full comparison against the
+latest PyPI tag is available through the `compare_latest_tag` manual input.
+
 ### Rollout status
 
 First-pass annotations now cover `tests/unit` and `tests/kernels` for clearly classified files (L0/L1a/L1b/L2).

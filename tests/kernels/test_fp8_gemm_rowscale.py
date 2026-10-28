@@ -79,8 +79,9 @@ def _bench_fp8_gemm(
     vs_torch: bool = False,
     b_preshuffled: bool = False,
     static_weight_scale: bool = True,
+    bench: bool = True,
 ):
-    """Run + verify a single (M, N, K, tile) configuration. Returns TFLOPS."""
+    """Run + verify one configuration; return TFLOPS when benchmarking."""
     if "gfx95" not in ARCH:
         pytest.skip("FP8 row-scale GEMMs requires CDNA4 (gfx95*)")
 
@@ -150,21 +151,30 @@ def _bench_fp8_gemm(
     def _launch(c, a, b, sa, sb):
         compiled(*_args(c, a, b, sa, sb))
 
-    num_iters = max(2, int(num_iters))
-    _, us = run_perftest(
-        _launch,
-        c_out_raw,
-        a_q,
-        b_kernel,
-        scale_a,
-        scale_b,
-        num_iters=num_iters,
-        num_warmup=num_warmups,
-    )
+    if bench:
+        num_iters = max(2, int(num_iters))
+        _, us = run_perftest(
+            _launch,
+            c_out_raw,
+            a_q,
+            b_kernel,
+            scale_a,
+            scale_b,
+            num_iters=num_iters,
+            num_warmup=num_warmups,
+        )
+    else:
+        # The benchmark step measures throughput separately. Keep every shape,
+        # wave count and layout here without the profiler or rotating buffers.
+        for _ in range(2):
+            _launch(c_out_raw, a_q, b_kernel, scale_a, scale_b)
     torch.cuda.synchronize()
 
     c_out_f32 = c_out_raw.to(torch.float32)
     assert verify_output(c_out_f32, c_ref, rtol=0.1, atol=0.1)
+
+    if not bench:
+        return None
 
     flops = 2 * M * N * K
     bytes_moved = M * K + N * K + M * N * 2 + (M + N) * 4
@@ -254,6 +264,7 @@ def test_fp8_gemm_rowscale(use_8w, shape_index, M, N, K, tile_m, tile_n, preshuf
         tile_m=tile_m,
         tile_n=tile_n,
         b_preshuffled=preshuffle_b,
+        bench=False,
     )
 
 

@@ -58,6 +58,7 @@ def _run_mxfp8_gemm(
     num_warmups=10,
     num_iters=100,
     report=False,
+    bench=True,
 ):
     if ARCH != "gfx950":
         pytest.skip(f"MXFP8 8-wave GEMM requires gfx950, got {ARCH}")
@@ -100,10 +101,18 @@ def _run_mxfp8_gemm(
     def _launch(c, a, b, sa, sb):
         compiled(*_args(c, a, b, sa, sb))
 
-    _, us = run_perftest(_launch, c_out, a_q, b_in, a_scale_in, b_scale_in, num_iters=num_iters, num_warmup=num_warmups)
+    if bench:
+        _, us = run_perftest(
+            _launch, c_out, a_q, b_in, a_scale_in, b_scale_in, num_iters=num_iters, num_warmup=num_warmups
+        )
+    else:
+        # Correctness checks need execution and reuse, not rotating copies of
+        # large matrices and 100 profiled launches. CLI benchmarks keep both.
+        for _ in range(2):
+            _launch(c_out, a_q, b_in, a_scale_in, b_scale_in)
     torch.cuda.synchronize()
 
-    if report:
+    if report and bench:
         tflops = 2.0 * M * N * K / (us * 1e-6) / 1e12
         tag = f"B={'pre' if b_preshuffled else 'raw'} scale={'pre' if scale_preshuffled else 'raw'}"
         print(f"\n[mxfp8_gemm_8wave] M={M} N={N} K={K} {tag}: {us:.1f} us, {tflops:.1f} TFLOPS")
@@ -134,5 +143,5 @@ def test_mxfp8_gemm_8wave(M, N, K, xcd_swizzle, b_preshuffled, scale_preshuffled
         b_preshuffled=b_preshuffled,
         scale_preshuffled=scale_preshuffled,
         xcd_swizzle=xcd_swizzle,
-        report=True,
+        bench=False,
     )
