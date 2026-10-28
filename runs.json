@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T15:42:38Z",
+ "updated": "2026-10-28T16:12:18Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -20,11 +20,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T15:33:03Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898664918"
+     "completed_at": "2026-10-28T16:10:47Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898664918",
+     "machine": "gbt350-odcdh1-b09-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -38,11 +41,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T15:02:13Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898665079"
+     "completed_at": "2026-10-28T15:49:01Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898665079",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -56,18 +62,18 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-28T15:01:40Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-28T15:52:48Z",
+     "completed_at": "2026-10-28T16:09:20Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898665147"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T15:01:40Z",
+     "started_at": "2026-10-28T16:09:25Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40705569863/job/122898665216"
     }
