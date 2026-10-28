@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T12:04:33Z",
+ "updated": "2026-10-28T12:32:08Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -14,9 +14,64 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054",
    "created_at": "2026-10-28T11:58:10Z",
-   "updated_at": "2026-10-28T11:59:35Z",
+   "updated_at": "2026-10-28T12:30:52Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684591"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684671"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684704"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684759"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684769"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:30:52Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054/job/122816684791"
+    }
+   ]
   },
   {
    "run_id": 40681814050,
@@ -55,13 +110,41 @@
    "branch": "main",
    "event": "push",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and add native FP4 indexing (\u2026",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571",
    "created_at": "2026-10-28T10:56:51Z",
-   "updated_at": "2026-10-28T12:02:31Z",
+   "updated_at": "2026-10-28T12:19:48Z",
    "actor": "coderfeli",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:20:06Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571/job/122811483184"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:20:24Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571/job/122811483208"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T12:19:48Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571/job/122811483287"
+    }
+   ]
   },
   {
    "run_id": 40674075040,
@@ -113,11 +196,14 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T11:02:16Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999174"
+     "completed_at": "2026-10-28T12:15:15Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999174",
+     "machine": "gbt350-odcdh1-b08-1",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
