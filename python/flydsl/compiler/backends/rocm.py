@@ -1,11 +1,16 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (c) 2025 FlyDSL Project Contributors
 
+import logging
+import os
+from pathlib import Path
 from typing import List, Tuple
 
 from ...runtime.device import get_rocm_arch, get_warp_size
 from ...utils import env
 from .base import AOTRuntimeConfig, BaseBackend, GPUTarget
+
+log = logging.getLogger(__name__)
 
 
 def _ktrace_tracing_enabled(compile_hints: dict) -> bool:
@@ -66,6 +71,15 @@ class RocmBackend(BaseBackend):
         # routed through it.
         bin_cli_opts = []
 
+        asan_enabled = env.compile.enable_asan
+
+        if asan_enabled and os.environ.get("HSA_XNACK") != "1":
+            log.warning(
+                "FLYDSL_COMPILE_ENABLE_ASAN=1 but HSA_XNACK is not set to 1. "
+                "The compiled kernel requires xnack+ mode at runtime. "
+                "Set HSA_XNACK=1 and HSA_DISABLE_FRAGMENT_ALLOCATOR=1."
+            )
+
         rocdl_opts = {
             "O": 2,
             "abi": 600,
@@ -73,7 +87,7 @@ class RocmBackend(BaseBackend):
             "correct-sqrt": "true",
             "daz": "false",
             "fast": "true" if compile_hints.get("fast_fp_math") else "false",
-            "features": "",
+            "features": "+xnack" if asan_enabled else "",
             "finite-only": "false",
             "module": "",
             "triple": "amdgcn-amd-amdhsa",
@@ -127,6 +141,12 @@ class RocmBackend(BaseBackend):
     def external_binary_pipeline_fragments(self, *, compile_hints: dict) -> Tuple[List[str], str]:
         return self._pipeline_parts(compile_hints=compile_hints)
 
+    def asan_link_libs(self) -> List[str]:
+        """Return device bitcode paths needed for GPU ASAN, or empty if disabled."""
+        if not env.compile.enable_asan:
+            return []
+        return _get_asan_bitcode_paths()
+
     def lower_compile_hints(self, module, *, compile_hints: dict) -> None:
         """Materialize a scalar waves-per-EU override on kernel entries."""
         if compile_hints.get("maxnreg") is not None:
@@ -141,19 +161,21 @@ class RocmBackend(BaseBackend):
             )
 
         waves_per_eu = compile_hints.get("waves_per_eu")
-        if waves_per_eu is None:
-            return
+        if waves_per_eu is not None:
+            wpe_str = _normalize_waves_per_eu(waves_per_eu)
+            if wpe_str is not None:
+                with module.context:
+                    from ..._mlir import ir as _ir
 
-        wpe_str = _normalize_waves_per_eu(waves_per_eu)
-        if wpe_str is None:
-            return
+                    wpe_attr = _ir.StringAttr.get(wpe_str)
+                    for func_op in _iter_gpu_kernel_funcs(module):
+                        func_op.attributes["rocdl.waves_per_eu"] = wpe_attr
 
-        with module.context:
-            from ..._mlir import ir as _ir
-
-            wpe_attr = _ir.StringAttr.get(wpe_str)
-            for func_op in _iter_gpu_kernel_funcs(module):
-                func_op.attributes["rocdl.waves_per_eu"] = wpe_attr
+        if env.compile.enable_asan:
+            with module.context:
+                for func_op in _iter_gpu_kernel_funcs(module):
+                    _add_passthrough_flag(func_op, "sanitize_address")
+                    _set_passthrough(func_op, "target-features", "+xnack")
 
     def gpu_module_targets(self) -> List[str]:
         # Intentionally empty: the ROCm pipeline attaches the authoritative
@@ -265,3 +287,52 @@ def _set_passthrough(func_op, key: str, value: str) -> None:
     existing = func_op.attributes["passthrough"] if "passthrough" in func_op.attributes else None
     kept = [entry for entry in existing if _entry_key(entry) != key] if existing is not None else []
     func_op.attributes["passthrough"] = ir.ArrayAttr.get([*kept, new_entry])
+
+
+def _add_passthrough_flag(func_op, name: str) -> None:
+    """Append a bare boolean LLVM attribute (e.g. ``sanitize_address``) to passthrough."""
+    from ..._mlir import ir
+
+    flag = ir.StringAttr.get(name)
+    existing = func_op.attributes.get("passthrough")
+    entries = list(existing) if existing is not None else []
+    for entry in entries:
+        try:
+            if ir.StringAttr(entry).value == name:
+                return
+        except (TypeError, ValueError):
+            pass
+    entries.append(flag)
+    func_op.attributes["passthrough"] = ir.ArrayAttr.get(entries)
+
+
+def _find_rocm_bitcode_dir() -> Path:
+    """Locate the ROCm device bitcode directory."""
+    candidates = []
+    rocm_path = os.environ.get("ROCM_PATH") or os.environ.get("ROCM_HOME")
+    if rocm_path:
+        candidates.append(Path(rocm_path) / "amdgcn" / "bitcode")
+    candidates.append(Path("/opt/rocm/amdgcn/bitcode"))
+    for p in sorted(Path("/opt").glob("rocm-*/amdgcn/bitcode"), reverse=True):
+        candidates.append(p)
+
+    for candidate in candidates:
+        if candidate.is_dir() and (candidate / "asanrtl.bc").is_file():
+            return candidate
+    raise FileNotFoundError(
+        "GPU ASAN requires ROCm device bitcode (asanrtl.bc). "
+        "Set ROCM_PATH to a ROCm installation that contains amdgcn/bitcode/asanrtl.bc."
+    )
+
+
+def _get_asan_bitcode_paths() -> List[str]:
+    """Return the three device bitcode paths needed for GPU ASAN."""
+    bc_dir = _find_rocm_bitcode_dir()
+    libs = ["asanrtl.bc", "ocml.bc", "ockl.bc"]
+    paths = []
+    for lib in libs:
+        p = bc_dir / lib
+        if not p.is_file():
+            raise FileNotFoundError(f"GPU ASAN device library not found: {p}")
+        paths.append(str(p))
+    return paths
