@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T13:45:11Z",
+ "updated": "2026-10-28T13:47:30Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "codex/ci-mi350-runtime",
    "event": "pull_request",
    "title": "[CI] Run correctness and benchmark comparisons in separate jobs",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40698992908",
    "created_at": "2026-10-28T13:43:02Z",
-   "updated_at": "2026-10-28T13:43:16Z",
+   "updated_at": "2026-10-28T13:44:24Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -670,11 +670,11 @@
    "branch": "fix/rocm-gpu-detection",
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
-   "status": "completed",
-   "conclusion": "action_required",
+   "status": "in_progress",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40540351513",
    "created_at": "2026-10-27T16:22:58Z",
-   "updated_at": "2026-10-27T16:22:58Z",
+   "updated_at": "2026-10-28T13:45:22Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -701,10 +701,10 @@
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
    "status": "completed",
-   "conclusion": "action_required",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40539152186",
    "created_at": "2026-10-27T16:15:39Z",
-   "updated_at": "2026-10-27T16:15:39Z",
+   "updated_at": "2026-10-28T13:45:10Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -841,7 +841,8 @@
      "conclusion": "success",
      "started_at": "2026-10-27T15:54:54Z",
      "completed_at": "2026-10-27T16:21:21Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40526163272/job/122298620097"
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40526163272/job/122298620097",
+     "log_fetch_failed": true
     }
    ]
   },
