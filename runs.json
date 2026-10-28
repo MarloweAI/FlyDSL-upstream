@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T10:46:36Z",
+ "updated": "2026-10-28T10:59:10Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40676104571,
+   "pr": null,
+   "commit": "0de418adcc3210df0b6d33fbbce84304722e10fc",
+   "branch": "main",
+   "event": "push",
+   "title": "[Perf] Share GLM TP4/TP8 indexed decode and add native FP4 indexing (\u2026",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571",
+   "created_at": "2026-10-28T10:56:51Z",
+   "updated_at": "2026-10-28T10:57:08Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40674075040,
    "pr": null,
@@ -10,11 +25,11 @@
    "branch": "main",
    "event": "push",
    "title": "[ROCDL] Put the contiguous mode's filler dim at the front (#1309)",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40674075040",
    "created_at": "2026-10-28T10:41:10Z",
-   "updated_at": "2026-10-28T10:42:45Z",
+   "updated_at": "2026-10-28T10:56:52Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -25,13 +40,41 @@
    "branch": "pr/fix-dump-asm",
    "event": "pull_request",
    "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934",
    "created_at": "2026-10-28T09:59:20Z",
-   "updated_at": "2026-10-28T10:40:18Z",
+   "updated_at": "2026-10-28T10:57:20Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T10:57:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999070"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T10:57:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999136"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T10:57:20Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934/job/122774999174"
+    }
+   ]
   },
   {
    "run_id": 40667233058,
@@ -2109,21 +2152,6 @@
      "bench_skipped": "host MI350 != MI355"
     }
    ]
-  },
-  {
-   "run_id": 39879392054,
-   "pr": 1320,
-   "commit": "1a7d27c2b89d8479be93b80efbef4857bddab5f7",
-   "branch": "jiacao/kimi-mla-attention",
-   "event": "pull_request",
-   "title": "[Kernel] Add Kimi-K3 MLA decode/prefill kernels and fix MLA decode boundary mask",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39879392054",
-   "created_at": "2026-10-23T00:39:18Z",
-   "updated_at": "2026-10-23T00:40:45Z",
-   "actor": "jiacao-amd",
-   "jobs": []
   }
  ]
 }
