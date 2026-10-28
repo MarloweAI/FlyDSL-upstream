@@ -1,8 +1,53 @@
 {
  "schema": 1,
- "updated": "2026-10-28T13:49:47Z",
+ "updated": "2026-10-28T14:15:36Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40703867392,
+   "pr": null,
+   "commit": "f37f7a2b98f295902240f9f96612222003578b40",
+   "branch": "main",
+   "event": "push",
+   "title": "[Bugfix] Handle Numeric conversion recursively (#1294)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40703867392",
+   "created_at": "2026-10-28T14:13:45Z",
+   "updated_at": "2026-10-28T14:14:03Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 40700764529,
+   "pr": 1272,
+   "commit": "76f40e1c1fc502351ba51b40361d4a8c9ba2fd18",
+   "branch": "rdmma-benchmark",
+   "event": "pull_request",
+   "title": "[Benchmark] fix rdna gemm benchmark option",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40700764529",
+   "created_at": "2026-10-28T13:54:26Z",
+   "updated_at": "2026-10-28T13:54:26Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
+  {
+   "run_id": 40700114605,
+   "pr": 1332,
+   "commit": "6097da7bd423556daad45c1e4ab6aee290089d73",
+   "branch": "fix/rocm-gpu-detection",
+   "event": "pull_request",
+   "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
+   "status": "completed",
+   "conclusion": "action_required",
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40700114605",
+   "created_at": "2026-10-28T13:50:17Z",
+   "updated_at": "2026-10-28T13:50:17Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40699551857,
    "pr": null,
@@ -10,11 +55,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA (#1341)",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40699551857",
    "created_at": "2026-10-28T13:46:39Z",
-   "updated_at": "2026-10-28T13:46:56Z",
+   "updated_at": "2026-10-28T14:13:47Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -296,21 +341,21 @@
    "branch": "jli/gpu-asan",
    "event": "pull_request",
    "title": "[WIP][feat] support gpu asan feature ",
-   "status": "completed",
-   "conclusion": "failure",
+   "status": "in_progress",
+   "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636",
    "created_at": "2026-10-28T09:32:54Z",
-   "updated_at": "2026-10-28T11:59:16Z",
+   "updated_at": "2026-10-28T13:51:40Z",
    "actor": "jli-melchior",
    "jobs": [
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-28T09:53:56Z",
-     "completed_at": "2026-10-28T10:42:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339646"
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T13:51:40Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122857125651"
     },
     {
      "runner": "linux-flydsl-navi-2",
@@ -319,7 +364,7 @@
      "conclusion": "success",
      "started_at": "2026-10-28T10:36:46Z",
      "completed_at": "2026-10-28T11:02:37Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339764"
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122857127026"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -328,7 +373,7 @@
      "conclusion": "success",
      "started_at": "2026-10-28T10:58:00Z",
      "completed_at": "2026-10-28T11:59:15Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339776"
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122857127626"
     }
    ]
   },
@@ -1983,113 +2028,6 @@
      "started_at": "2026-10-26T12:42:51Z",
      "completed_at": "2026-10-26T14:12:15Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40310094934/job/121572787189"
-    }
-   ]
-  },
-  {
-   "run_id": 40308338517,
-   "pr": 1327,
-   "commit": "80d9c4e5d49d9110147395ce814fd11225276173",
-   "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
-   "event": "pull_request",
-   "title": "[LLVM] Roll back to 941a04e and cherry-pick unclaused VMEM patches",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517",
-   "created_at": "2026-10-26T10:33:29Z",
-   "updated_at": "2026-10-26T12:41:54Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:27:52Z",
-     "completed_at": "2026-10-26T12:24:59Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970892",
-     "machine": "smci350-rck-g03-b17-12",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:59:41Z",
-     "completed_at": "2026-10-26T12:41:54Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970930"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T11:33:17Z",
-     "completed_at": "2026-10-26T12:01:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40308338517/job/121545970965"
-    }
-   ]
-  },
-  {
-   "run_id": 40305652206,
-   "pr": null,
-   "commit": "02a8cc5f538cb27b4e6b958d58803d5a77b1a2a8",
-   "branch": "jli/gfx1250/amdgpu-unclaused-vmem-sequence",
-   "event": "pull_request",
-   "title": "[LLVM] Roll back to 941a04e and cherry-pick unclaused VMEM patches",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40305652206",
-   "created_at": "2026-10-26T10:13:01Z",
-   "updated_at": "2026-10-26T10:33:30Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 40289547231,
-   "pr": null,
-   "commit": "4c23ffcc180a424483901d0d55f0e1716cee3963",
-   "branch": "main",
-   "event": "push",
-   "title": "[Ext][Coop] Add more block-level primitives (#1314)",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231",
-   "created_at": "2026-10-26T08:02:25Z",
-   "updated_at": "2026-10-26T11:59:14Z",
-   "actor": "coderfeli",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T08:18:30Z",
-     "completed_at": "2026-10-26T09:15:53Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231/job/121466564561",
-     "machine": "cv350-odcdh2-a06-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T10:45:23Z",
-     "completed_at": "2026-10-26T11:59:14Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231/job/121466564614"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T08:17:54Z",
-     "completed_at": "2026-10-26T08:41:58Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231/job/121466564644"
     }
    ]
   }
