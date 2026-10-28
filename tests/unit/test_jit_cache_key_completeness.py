@@ -446,7 +446,6 @@ def test_shared_disk_cache_observes_cross_directory_nested_helper(tmp_path, gpu)
     env = {
         **os.environ,
         "PYTHONDONTWRITEBYTECODE": "1",
-        "ARCH": "gfx942",
         "FLYDSL_RUNTIME_ENABLE_CACHE": "1",
         "FLYDSL_RUNTIME_RUN_ONLY": "0",
         "FLYDSL_RUNTIME_CACHE_DIR": str(tmp_path / "cache"),
@@ -455,6 +454,8 @@ def test_shared_disk_cache_observes_cross_directory_nested_helper(tmp_path, gpu)
         "FLYDSL_DUMP_IR": "0",
         "FLYDSL_COMPILE_LLVM_DIR": "",
     }
+    if not gpu:
+        env["ARCH"] = "gfx942"  # Compile-only; a GPU run targets its own device.
     results = []
     for value in (1, 7, 7):
         child = subprocess.run(
