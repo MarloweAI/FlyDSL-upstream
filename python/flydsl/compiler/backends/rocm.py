@@ -87,7 +87,10 @@ class RocmBackend(BaseBackend):
             "correct-sqrt": "true",
             "daz": "false",
             "fast": "true" if compile_hints.get("fast_fp_math") else "false",
-            "features": "",
+            "features": "+xnack,+sramecc" if asan_enabled else "",
+            # xnack/sramecc are translated to LLVM module flags by the
+            # patched ROCDL Target.cpp (handleModulePreLink) and stripped
+            # from the feature string before createTargetMachine.
             "finite-only": "false",
             "module": "",
             "triple": "amdgcn-amd-amdhsa",
@@ -173,7 +176,6 @@ class RocmBackend(BaseBackend):
 
         if env.compile.enable_asan:
             with module.context:
-                _set_xnack_module_flag(module)
                 for func_op in _iter_gpu_kernel_funcs(module):
                     _add_passthrough_flag(func_op, "sanitize_address")
 
