@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "updated": "2026-10-28T12:00:29Z",
+ "updated": "2026-10-28T12:02:57Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
   {
@@ -10,11 +10,11 @@
    "branch": "codex/ci-mi350-runtime",
    "event": "pull_request",
    "title": "[CI] Run correctness and benchmark comparisons in separate jobs",
-   "status": "in_progress",
+   "status": "queued",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40684028054",
    "created_at": "2026-10-28T11:58:10Z",
-   "updated_at": "2026-10-28T11:58:27Z",
+   "updated_at": "2026-10-28T11:59:35Z",
    "actor": "coderfeli",
    "jobs": []
   },
@@ -171,11 +171,11 @@
    "branch": "jli/gpu-asan",
    "event": "pull_request",
    "title": "[WIP][feat] support gpu asan feature ",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636",
    "created_at": "2026-10-28T09:32:54Z",
-   "updated_at": "2026-10-28T10:58:01Z",
+   "updated_at": "2026-10-28T11:59:16Z",
    "actor": "jli-melchior",
    "jobs": [
     {
@@ -199,10 +199,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T10:58:00Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T11:59:15Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339776"
     }
    ]
