@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T10:09:19Z",
+ "updated": "2026-10-28T10:44:29Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40674075040,
+   "pr": null,
+   "commit": "f50e9c5e58eb47ae1067787e9be3611c63979478",
+   "branch": "main",
+   "event": "push",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front (#1309)",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40674075040",
+   "created_at": "2026-10-28T10:41:10Z",
+   "updated_at": "2026-10-28T10:42:45Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40668518934,
    "pr": 1341,
@@ -10,11 +25,11 @@
    "branch": "pr/fix-dump-asm",
    "event": "pull_request",
    "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934",
    "created_at": "2026-10-28T09:59:20Z",
-   "updated_at": "2026-10-28T10:00:46Z",
+   "updated_at": "2026-10-28T10:40:18Z",
    "actor": "sjfeng1999",
    "jobs": []
   },
@@ -25,13 +40,41 @@
    "branch": "main",
    "event": "push",
    "title": "Show the user's source line in DSL compile errors (#1337)",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40667233058",
    "created_at": "2026-10-28T09:49:17Z",
-   "updated_at": "2026-10-28T09:54:19Z",
+   "updated_at": "2026-10-28T10:42:16Z",
    "actor": "RElbers",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-28T10:39:34Z",
+     "completed_at": "2026-10-28T10:41:11Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40667233058/job/122767168176"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-28T10:41:07Z",
+     "completed_at": "2026-10-28T10:42:15Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40667233058/job/122767168274"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "cancelled",
+     "started_at": "2026-10-28T10:39:34Z",
+     "completed_at": "2026-10-28T10:41:11Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40667233058/job/122767168570"
+    }
+   ]
   },
   {
    "run_id": 40665089636,
@@ -50,18 +93,18 @@
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "failure",
      "started_at": "2026-10-28T09:53:56Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T10:42:35Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339646"
     },
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T09:53:00Z",
+     "started_at": "2026-10-28T10:36:46Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40665089636/job/122746339764"
     },
@@ -132,20 +175,23 @@
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T09:47:34Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T10:10:26Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457/job/122738829118"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T09:36:31Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457/job/122738829217"
+     "completed_at": "2026-10-28T10:36:36Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457/job/122738829217",
+     "machine": "smci350-rck-g03-b20-03",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     }
    ]
   },
@@ -156,30 +202,33 @@
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
    "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460",
    "created_at": "2026-10-28T09:09:54Z",
-   "updated_at": "2026-10-28T09:28:56Z",
+   "updated_at": "2026-10-28T10:10:41Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-navi-2",
      "arch": "gfx1201",
-     "status": "queued",
-     "conclusion": null,
-     "started_at": "2026-10-28T09:28:56Z",
-     "completed_at": null,
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-28T10:10:40Z",
+     "completed_at": "2026-10-28T10:36:30Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686843"
     },
     {
      "runner": "linux-flydsl-mi35x-1",
      "arch": "gfx950",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T09:29:29Z",
-     "completed_at": null,
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686853"
+     "completed_at": "2026-10-28T10:30:50Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460/job/122735686853",
+     "machine": "smci350-rck-g03-f19-31",
+     "host_model": "MI350",
+     "bench_skipped": "host MI350 != MI355"
     },
     {
      "runner": "linux-flydsl-mi325-1",
@@ -242,11 +291,11 @@
    "branch": "codex/glm5-tp4-fused-indexer",
    "event": "pull_request",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and add native FP4 indexing",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "success",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937",
    "created_at": "2026-10-28T07:54:44Z",
-   "updated_at": "2026-10-28T09:21:10Z",
+   "updated_at": "2026-10-28T10:42:34Z",
    "actor": "james-huang09",
    "jobs": [
     {
@@ -261,10 +310,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "in_progress",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "success",
      "started_at": "2026-10-28T09:21:09Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T10:42:33Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937/job/122714826942"
     },
     {
@@ -872,7 +921,7 @@
   },
   {
    "run_id": 40467037462,
-   "pr": 1309,
+   "pr": null,
    "commit": "b95df7730f34e48c2e466b2a207ea6efa69f6ab1",
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
@@ -918,7 +967,7 @@
   },
   {
    "run_id": 40466948139,
-   "pr": 1309,
+   "pr": null,
    "commit": "0f0edb72cdf487b8a827878d2f4ae95d0c8adea5",
    "branch": "tdm-filler-contiguous-first",
    "event": "pull_request",
@@ -2073,21 +2122,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39879392054",
    "created_at": "2026-10-23T00:39:18Z",
    "updated_at": "2026-10-23T00:40:45Z",
-   "actor": "jiacao-amd",
-   "jobs": []
-  },
-  {
-   "run_id": 39874842926,
-   "pr": null,
-   "commit": "37d19627ad6cffcb04eed6ce3a23edc587854417",
-   "branch": "jiacao/kimi-mla-attention",
-   "event": "pull_request",
-   "title": "[Kernel] Add Kimi-K3 MLA decode/prefill kernels and fix MLA decode boundary mask",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39874842926",
-   "created_at": "2026-10-22T23:54:50Z",
-   "updated_at": "2026-10-22T23:56:27Z",
    "actor": "jiacao-amd",
    "jobs": []
   }
