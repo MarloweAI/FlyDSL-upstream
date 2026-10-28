@@ -798,6 +798,21 @@ def _run_pipeline(module: ir.Module, fragments: list, *, verifier: bool, print_a
     _run_pass_manager(pm, module)
 
 
+def _run_binary_pass_on_copy(module: ir.Module, fragment: str, *, verifier: bool, print_after_all: bool) -> None:
+    """Run the ``gpu-module-to-binary`` *fragment* on a copy of *module* parsed from its text, then put
+    the copy's ``gpu.binary`` in place of *module*'s ``gpu.module``.
+
+    LLVM's code for one module can depend on where the process's heap places its objects (in the pinned
+    LLVM, through ReassociatePass), so the same kernel could build into different code objects from one
+    process to the next. Translated from a freshly parsed copy, repeated builds land on one code object.
+    """
+    from .external_llvm import _replace_gpu_module_with_binary_op
+
+    copy = ir.Module.parse(module.operation.get_asm(enable_debug_info=True), context=module.context)
+    _run_pipeline(copy, [fragment], verifier=verifier, print_after_all=print_after_all)
+    _replace_gpu_module_with_binary_op(module, copy)
+
+
 def _run_pass_manager(pm: PassManager, module: ir.Module) -> None:
     """Run *pm* on *module*, raising a failure as a DSLCompileError that points at the user's source."""
     with dsl_ir_diagnostics(module.context) as diags:
@@ -889,9 +904,14 @@ class MlirCompiler:
 
                     stage_num = stage_num_base + idx
                     stage_name = f"{stage_num:02d}_{_stage_label_from_fragment(frag)}"
-                    pm = PassManager.parse(f"builtin.module({frag})")
-                    pm.enable_verifier(env.debug.enable_verifier)
-                    _run_pass_manager(pm, module)
+                    if frag.strip().startswith("gpu-module-to-binary"):
+                        _run_binary_pass_on_copy(
+                            module, frag, verifier=env.debug.enable_verifier, print_after_all=False
+                        )
+                    else:
+                        pm = PassManager.parse(f"builtin.module({frag})")
+                        pm.enable_verifier(env.debug.enable_verifier)
+                        _run_pass_manager(pm, module)
 
                     stage_asm = module.operation.get_asm(enable_debug_info=True)
                     if dump_ir:
@@ -962,12 +982,22 @@ class MlirCompiler:
                     )
                     module.operation.verify()
                 else:
+                    *pre_binary, last = fragments
+                    if not last.strip().startswith("gpu-module-to-binary"):
+                        pre_binary, last = fragments, None
                     _run_pipeline(
                         module,
-                        fragments,
+                        pre_binary,
                         verifier=env.debug.enable_verifier,
                         print_after_all=env.debug.print_after_all,
                     )
+                    if last is not None:
+                        _run_binary_pass_on_copy(
+                            module,
+                            last,
+                            verifier=env.debug.enable_verifier,
+                            print_after_all=env.debug.print_after_all,
+                        )
 
         return module
 
