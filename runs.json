@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T09:56:36Z",
+ "updated": "2026-10-28T10:09:19Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40668518934,
+   "pr": 1341,
+   "commit": "fe64233cb2cbcaacef0df78b86f9d42c95404dbb",
+   "branch": "pr/fix-dump-asm",
+   "event": "pull_request",
+   "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA",
+   "status": "queued",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40668518934",
+   "created_at": "2026-10-28T09:59:20Z",
+   "updated_at": "2026-10-28T10:00:46Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 40667233058,
    "pr": null,
@@ -98,19 +113,19 @@
    "branch": "pr/feat-core-layout-replacement",
    "event": "pull_request",
    "title": "[Core] Replace the Fly layout implementation with the Core library",
-   "status": "queued",
+   "status": "in_progress",
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457",
    "created_at": "2026-10-28T09:12:36Z",
-   "updated_at": "2026-10-28T09:36:02Z",
+   "updated_at": "2026-10-28T09:55:28Z",
    "actor": "sjfeng1999",
    "jobs": [
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
+     "status": "in_progress",
      "conclusion": null,
-     "started_at": "2026-10-28T09:36:02Z",
+     "started_at": "2026-10-28T09:55:27Z",
      "completed_at": null,
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457/job/122738829110"
     },
@@ -2075,49 +2090,6 @@
    "updated_at": "2026-10-22T23:56:27Z",
    "actor": "jiacao-amd",
    "jobs": []
-  },
-  {
-   "run_id": 39849991543,
-   "pr": 1192,
-   "commit": "76484805a4a528cc722bd558dfbde1e7f396559b",
-   "branch": "add-security-scanning",
-   "event": "pull_request",
-   "title": "chore: add security scanning workflows",
-   "status": "completed",
-   "conclusion": "failure",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543",
-   "created_at": "2026-10-22T20:34:11Z",
-   "updated_at": "2026-10-23T04:42:04Z",
-   "actor": "haribabug",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-23T03:04:48Z",
-     "completed_at": "2026-10-23T04:42:04Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176240"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-22T21:05:00Z",
-     "completed_at": "2026-10-22T21:42:08Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176353"
-    },
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-22T21:05:51Z",
-     "completed_at": "2026-10-22T21:53:09Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39849991543/job/120088176438"
-    }
-   ]
   }
  ]
 }
