@@ -1,8 +1,38 @@
 {
  "schema": 1,
- "updated": "2026-10-28T08:32:40Z",
+ "updated": "2026-10-28T09:27:20Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40662456457,
+   "pr": 1313,
+   "commit": "ef87ade8d12bf14a23fb99c1694f77c415faf30b",
+   "branch": "pr/feat-core-layout-replacement",
+   "event": "pull_request",
+   "title": "[Core] Replace the Fly layout implementation with the Core library",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662456457",
+   "created_at": "2026-10-28T09:12:36Z",
+   "updated_at": "2026-10-28T09:20:57Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
+  {
+   "run_id": 40662104460,
+   "pr": 1309,
+   "commit": "82781308fd323c03e52335b38b5d96bb053dccdb",
+   "branch": "tdm-filler-contiguous-first",
+   "event": "pull_request",
+   "title": "[ROCDL] Put the contiguous mode's filler dim at the front",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40662104460",
+   "created_at": "2026-10-28T09:09:54Z",
+   "updated_at": "2026-10-28T09:16:22Z",
+   "actor": "sjfeng1999",
+   "jobs": []
+  },
   {
    "run_id": 40654866172,
    "pr": null,
@@ -14,9 +44,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172",
    "created_at": "2026-10-28T08:10:09Z",
-   "updated_at": "2026-10-28T08:11:36Z",
+   "updated_at": "2026-10-28T09:20:27Z",
    "actor": "sjfeng1999",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:22:28Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172/job/122731974825"
+    },
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:20:56Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172/job/122731974832"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "queued",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:20:27Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40654866172/job/122731975092"
+    }
+   ]
   },
   {
    "run_id": 40653131937,
@@ -29,9 +87,37 @@
    "conclusion": null,
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937",
    "created_at": "2026-10-28T07:54:44Z",
-   "updated_at": "2026-10-28T08:22:29Z",
+   "updated_at": "2026-10-28T09:21:10Z",
    "actor": "james-huang09",
-   "jobs": []
+   "jobs": [
+    {
+     "runner": "linux-flydsl-navi-2",
+     "arch": "gfx1201",
+     "status": "completed",
+     "conclusion": "success",
+     "started_at": "2026-10-28T08:39:41Z",
+     "completed_at": "2026-10-28T09:13:10Z",
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937/job/122714826928"
+    },
+    {
+     "runner": "linux-flydsl-mi325-1",
+     "arch": "gfx942",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T09:21:09Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937/job/122714826942"
+    },
+    {
+     "runner": "linux-flydsl-mi35x-1",
+     "arch": "gfx950",
+     "status": "in_progress",
+     "conclusion": null,
+     "started_at": "2026-10-28T08:39:57Z",
+     "completed_at": null,
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40653131937/job/122714827020"
+    }
+   ]
   },
   {
    "run_id": 40646920839,
@@ -1971,64 +2057,6 @@
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/39625405924",
    "created_at": "2026-10-21T15:24:39Z",
    "updated_at": "2026-10-21T15:29:38Z",
-   "actor": "jli-melchior",
-   "jobs": []
-  },
-  {
-   "run_id": 39614287089,
-   "pr": 1319,
-   "commit": "2b34f1bb049ad7c756ebf470ffa825aecd89beaa",
-   "branch": "jli/xnack-perf-v2",
-   "event": "pull_request",
-   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39614287089",
-   "created_at": "2026-10-21T14:08:56Z",
-   "updated_at": "2026-10-21T15:29:42Z",
-   "actor": "jli-melchior",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-21T15:14:47Z",
-     "completed_at": "2026-10-21T15:29:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39614287089/job/119288043119"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "cancelled",
-     "started_at": "2026-10-21T14:43:00Z",
-     "completed_at": "2026-10-21T15:24:40Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39614287089/job/119288043239"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "failure",
-     "started_at": "2026-10-21T14:43:25Z",
-     "completed_at": "2026-10-21T14:58:20Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/39614287089/job/119288043351"
-    }
-   ]
-  },
-  {
-   "run_id": 39613665867,
-   "pr": 1319,
-   "commit": "33d93e444077bbb53f988e2853fd9f21f7625d30",
-   "branch": "jli/xnack-perf-v2",
-   "event": "pull_request",
-   "title": "[Build] Switch to ROCm xnack_test branch for LLVM",
-   "status": "completed",
-   "conclusion": "cancelled",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/39613665867",
-   "created_at": "2026-10-21T14:04:57Z",
-   "updated_at": "2026-10-21T14:10:13Z",
    "actor": "jli-melchior",
    "jobs": []
   }
