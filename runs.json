@@ -1,8 +1,23 @@
 {
  "schema": 1,
- "updated": "2026-10-28T13:47:30Z",
+ "updated": "2026-10-28T13:49:47Z",
  "repo": "ROCm/FlyDSL",
  "runs": [
+  {
+   "run_id": 40699551857,
+   "pr": null,
+   "commit": "6e34b543b7cad67f7a8e12daa307f4b1893fc944",
+   "branch": "main",
+   "event": "push",
+   "title": "[Fix] Make FLYDSL_DEBUG_DUMP_ASM dump the final ISA (#1341)",
+   "status": "in_progress",
+   "conclusion": null,
+   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40699551857",
+   "created_at": "2026-10-28T13:46:39Z",
+   "updated_at": "2026-10-28T13:46:56Z",
+   "actor": "coderfeli",
+   "jobs": []
+  },
   {
    "run_id": 40698992908,
    "pr": 1342,
@@ -131,11 +146,11 @@
    "branch": "main",
    "event": "push",
    "title": "[Perf] Share GLM TP4/TP8 indexed decode and add native FP4 indexing (\u2026",
-   "status": "queued",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "cancelled",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571",
    "created_at": "2026-10-28T10:56:51Z",
-   "updated_at": "2026-10-28T12:19:48Z",
+   "updated_at": "2026-10-28T13:46:41Z",
    "actor": "coderfeli",
    "jobs": [
     {
@@ -162,10 +177,10 @@
     {
      "runner": "linux-flydsl-mi325-1",
      "arch": "gfx942",
-     "status": "queued",
-     "conclusion": null,
+     "status": "completed",
+     "conclusion": "cancelled",
      "started_at": "2026-10-28T12:19:48Z",
-     "completed_at": null,
+     "completed_at": "2026-10-28T13:46:39Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40676104571/job/122811483287"
     }
    ]
@@ -670,11 +685,11 @@
    "branch": "fix/rocm-gpu-detection",
    "event": "pull_request",
    "title": "[Bugfix] Fix ROCm GPU counting and architecture fallback",
-   "status": "in_progress",
-   "conclusion": null,
+   "status": "completed",
+   "conclusion": "failure",
    "url": "https://github.com/ROCm/FlyDSL/actions/runs/40540351513",
    "created_at": "2026-10-27T16:22:58Z",
-   "updated_at": "2026-10-28T13:45:22Z",
+   "updated_at": "2026-10-28T13:46:30Z",
    "actor": "Qubitium",
    "jobs": []
   },
@@ -841,8 +856,7 @@
      "conclusion": "success",
      "started_at": "2026-10-27T15:54:54Z",
      "completed_at": "2026-10-27T16:21:21Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40526163272/job/122298620097",
-     "log_fetch_failed": true
+     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40526163272/job/122298620097"
     }
    ]
   },
@@ -2076,52 +2090,6 @@
      "started_at": "2026-10-26T08:17:54Z",
      "completed_at": "2026-10-26T08:41:58Z",
      "url": "https://github.com/ROCm/FlyDSL/actions/runs/40289547231/job/121466564644"
-    }
-   ]
-  },
-  {
-   "run_id": 40259302537,
-   "pr": 1326,
-   "commit": "162484d093b7bcef7e669e3a28426dda65496f91",
-   "branch": "phil/compile-hints-copy",
-   "event": "pull_request",
-   "title": "[JIT] flyc.compile[hints] no longer leaves its hints on the function",
-   "status": "completed",
-   "conclusion": "success",
-   "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537",
-   "created_at": "2026-10-26T02:28:57Z",
-   "updated_at": "2026-10-26T06:54:03Z",
-   "actor": "Phil-amd",
-   "jobs": [
-    {
-     "runner": "linux-flydsl-mi35x-1",
-     "arch": "gfx950",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T02:48:00Z",
-     "completed_at": "2026-10-26T04:01:30Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128884",
-     "machine": "gbt350-odcdh1-b04-1",
-     "host_model": "MI350",
-     "bench_skipped": "host MI350 != MI355"
-    },
-    {
-     "runner": "linux-flydsl-mi325-1",
-     "arch": "gfx942",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T05:17:58Z",
-     "completed_at": "2026-10-26T06:54:02Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128887"
-    },
-    {
-     "runner": "linux-flydsl-navi-2",
-     "arch": "gfx1201",
-     "status": "completed",
-     "conclusion": "success",
-     "started_at": "2026-10-26T03:03:40Z",
-     "completed_at": "2026-10-26T03:32:35Z",
-     "url": "https://github.com/ROCm/FlyDSL/actions/runs/40259302537/job/121372128935"
     }
    ]
   }
