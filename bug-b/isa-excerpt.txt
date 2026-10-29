@@ -1,0 +1,16 @@
+repro.co (python3 mcdrv.py repro.mlir repro.co), llvm-objdump -d --mcpu=gfx950; offsets from the kernel's start.
+Kernarg pointer in s[0:1]; argument i is the 8 bytes at 8 * i.
+
++4176:  s_load_dwordx16 s[4:19], s[0:1], 0x40      ; args 8..15: s4 = arg8.lo, s5 = arg8.hi
++4184:  s_load_dwordx16 s[36:51], s[0:1], 0x80     ; args 16..23: s36 = arg16.lo
++4220:  v_writelane_b32 v129, s4, 42               ; a correct copy of arg 8 (lanes 42, 43)
++4240:  v_writelane_b32 v129, s5, 43
++4476:  s_mov_b32 s4, s36                          ; s4 now holds arg16.lo; s5 still arg8.hi
++4580:  v_writelane_b32 v128, s4, 4                ; spilled together as one value:
++4588:  v_writelane_b32 v128, s5, 5                ;   lane 4 = arg16.lo, lane 5 = arg8.hi
+  ...
++26456: v_readlane_b32 s13, v128, 5                ; restored from lanes 4 and 5
++26492: s_and_b32 s5, s13, 0xffff
++26704: v_readlane_b32 s12, v128, 4
++26740: s_mov_b32 s4, s12
++26812: buffer_load_dword v36, v2, s[4:7], 0 offen ; base = arg16.lo : arg8.hi
